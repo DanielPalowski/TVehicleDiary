@@ -1,0 +1,11 @@
+﻿@model IEnumerable<DBRepairsModel>
+
+<a asp-controller="repair" asp-action="Create" asp-route-vehicleIDRoute="@ViewBag.VehicleIDBag">Create website</a>
+@foreach(var entry in Model)
+{
+	@entry.RepairType
+	@entry.RepairCost
+	@entry.RepairMade
+	@entry.RepairDescription
+
+}

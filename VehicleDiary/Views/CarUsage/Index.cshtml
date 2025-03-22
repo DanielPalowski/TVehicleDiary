@@ -1,0 +1,17 @@
+﻿@model IEnumerable<DBPetrolModel>
+
+
+<a asp-controller="CarUsage" asp-action="Petrol" asp-route-vehicleIDRoute="@ViewBag.VehicleIDBag">Petrol</a>
+<h1>Tests2</h1>
+<div>
+	<h2>Petrol</h2>
+@foreach(var entry in Model)
+{
+	<div class="container">
+		<p>Price: @entry.PetrolPrice </p>
+		<p>Amount: @entry.PetrolAmount </p>
+		<p>Type: @entry.PetrolType </p>
+		<p>Date: @entry.PetrolDate </p>
+	</div>
+}
+</div>

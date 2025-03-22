@@ -1,0 +1,22 @@
+﻿@model IEnumerable<DBVehicleModel>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@foreach(var entry in Model)
+{
+<div class="container">
+    <div class="row">
+        <div class="col">
+            @entry.Name
+            @entry.Model
+            @entry.Power
+            @entry.MadeYear
+        </div>
+            <a asp-controller="Repair" asp-action="Index" asp-route-vehicleIDRoute="@entry.Id">Show Repairs</a>
+            <a asp-controller="CarUsage" asp-action="Index" asp-route-vehicleIDRoute="@entry.Id">Show CarUsage</a>
+    </div>
+</div>
+}
