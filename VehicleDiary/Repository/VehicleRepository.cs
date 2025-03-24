@@ -17,7 +17,7 @@ namespace VehicleDiary.Repository
 			_userManager = userManager;
 		}
 
-		public async Task<DBVehicleModel?> AddingTotalCostRepairAsync(int id, int cost)
+		public async Task<DBVehicleModel?> AddingTotalCostRepairAsync(int id, float cost)
 		{
 			
 			var vehicle = await _context.DBVehiclesSet.FirstOrDefaultAsync(x => x.Id == id);
@@ -30,7 +30,7 @@ namespace VehicleDiary.Repository
             return vehicle;
 		}
 
-		public async Task<int> CalculatingTotalCostRepairAsync(int id)
+		public async Task<float> CalculatingTotalCostRepairAsync(int id)
 		{
 			return await _context.DBRepairsSet.Where(find => find.VehicleId == id).SumAsync(calculate => calculate.RepairCost);
 		}

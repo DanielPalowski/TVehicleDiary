@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleDiary.Data;
 
@@ -11,9 +12,11 @@ using VehicleDiary.Data;
 namespace VehicleDiary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250324183439_AddingVignetteAndRepairingFromIntsToFloat")]
+    partial class AddingVignetteAndRepairingFromIntsToFloat
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -362,24 +365,21 @@ namespace VehicleDiary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<DateTime>("Created")
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("ValidFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ValidTo")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("VehicleId")
                         .HasColumnType("int");
-
-                    b.Property<string>("VignetteCountry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("VignettePrice")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("VignetteValidFrom")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("VignetteValidTo")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("ID");
 

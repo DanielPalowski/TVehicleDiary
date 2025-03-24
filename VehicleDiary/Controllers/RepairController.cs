@@ -36,7 +36,7 @@ namespace VehicleDiary.Controllers
         {
 			if (await _repositorySecurity.CheckUser(vehicleIDRoute, User) == null)
 			{
-				return Unauthorized();
+				return Redirect("/Identity/Account/AccessDenied");
 			}
 			ViewBag.vehicleIDBag = vehicleIDRoute;
  
@@ -54,7 +54,7 @@ namespace VehicleDiary.Controllers
         {
             if (await _repositorySecurity.CheckUser(vehicleIDRoute, User) == null)
 			{
-				return Unauthorized();
+				return Redirect("/Identity/Account/AccessDenied");
 			}
 
 			var model = new DBRepairModelVM { vehicleId = vehicleIDRoute };
@@ -65,7 +65,7 @@ namespace VehicleDiary.Controllers
         {
 			if (await _repositorySecurity.CheckUser(dBRepairModelVM.vehicleId, User) == null)
 			{
-				return Unauthorized();
+				return Redirect("/Identity/Account/AccessDenied");
 			}
 
 			if (ModelState.IsValid)

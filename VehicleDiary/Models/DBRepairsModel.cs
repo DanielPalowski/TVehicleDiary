@@ -12,7 +12,7 @@ namespace VehicleDiary.Models
         public string RepairType { get; set; }
         public string? RepairDescription { get; set; }
         [Required]
-        public int RepairCost {  get; set; }
+        public float RepairCost {  get; set; }
         [Required]
         public string RepairMade { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;

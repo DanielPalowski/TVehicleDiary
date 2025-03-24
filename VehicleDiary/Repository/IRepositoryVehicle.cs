@@ -3,7 +3,7 @@ using VehicleDiary.Models;
 
 	public interface IRepositoryVehicle : IRepositoryCrud<DBVehicleModel>
 	{
-		Task<int> CalculatingTotalCostRepairAsync(int id);
-		Task<DBVehicleModel?> AddingTotalCostRepairAsync(int id, int cost);
+		Task<float> CalculatingTotalCostRepairAsync(int id);
+		Task<DBVehicleModel?> AddingTotalCostRepairAsync(int id, float cost);
 	}
 

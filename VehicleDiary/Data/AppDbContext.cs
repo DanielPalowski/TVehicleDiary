@@ -16,5 +16,6 @@ namespace VehicleDiary.Data
         public DbSet<DBVehicleModel> DBVehiclesSet { get; set; }
         public DbSet<DBRepairsModel> DBRepairsSet { get; set;}
         public DbSet<DBPetrolModel> DBPetrolSet { get; set;}
+        public DbSet<DBVignetteModel> DBVignetteSet { get;set; }
     }
 }

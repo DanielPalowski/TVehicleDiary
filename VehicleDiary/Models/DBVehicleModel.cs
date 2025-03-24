@@ -19,7 +19,7 @@ namespace VehicleDiary.Models
         public int Power { get; set; }
         public string? Insurence { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
-        public int RepairCost { get; set; }
+        public float RepairCost { get; set; }
         [Required]
         public string UserId { get; set; }
         [ForeignKey(nameof(UserId))]

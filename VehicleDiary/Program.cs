@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using VehicleDiary.Data;
 using VehicleDiary.Models;
 using VehicleDiary.Repository;
+using VehicleDiary.Services;
 
 namespace VehicleDiary
 {
@@ -30,7 +31,7 @@ namespace VehicleDiary
             builder.Services.AddScoped(typeof(IRepositoryViews<>), typeof(ViewsRepository<>));
             builder.Services.AddScoped(typeof(IRepositorySecurity<>), typeof(SecurityRepository<>));
 
-
+            builder.Services.AddScoped<CountryService>();
 
 
 

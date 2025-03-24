@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleDiary.Data;
 
@@ -11,9 +12,11 @@ using VehicleDiary.Data;
 namespace VehicleDiary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250324182614_AddingVignette")]
+    partial class AddingVignette
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,8 +238,8 @@ namespace VehicleDiary.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("PetrolAmount")
-                        .HasColumnType("real");
+                    b.Property<decimal>("PetrolAmount")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PetrolDate")
                         .IsRequired()
@@ -245,11 +248,11 @@ namespace VehicleDiary.Migrations
                     b.Property<int?>("PetrolMileage")
                         .HasColumnType("int");
 
-                    b.Property<float>("PetrolPrice")
-                        .HasColumnType("real");
+                    b.Property<decimal>("PetrolPrice")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<float?>("PetrolPricePerLiter")
-                        .HasColumnType("real");
+                    b.Property<decimal?>("PetrolPricePerLiter")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("PetrolType")
                         .IsRequired()
@@ -276,8 +279,8 @@ namespace VehicleDiary.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("RepairCost")
-                        .HasColumnType("real");
+                    b.Property<int>("RepairCost")
+                        .HasColumnType("int");
 
                     b.Property<string>("RepairDescription")
                         .HasColumnType("nvarchar(max)");
@@ -337,8 +340,8 @@ namespace VehicleDiary.Migrations
                     b.Property<int>("Power")
                         .HasColumnType("int");
 
-                    b.Property<float>("RepairCost")
-                        .HasColumnType("real");
+                    b.Property<int>("RepairCost")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -362,24 +365,21 @@ namespace VehicleDiary.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<DateTime>("Created")
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("ValidFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ValidTo")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("VehicleId")
                         .HasColumnType("int");
-
-                    b.Property<string>("VignetteCountry")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("VignettePrice")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("VignetteValidFrom")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("VignetteValidTo")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("ID");
 

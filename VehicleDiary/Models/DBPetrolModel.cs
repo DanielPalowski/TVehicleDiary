@@ -14,10 +14,10 @@ namespace VehicleDiary.Models
         public string PetrolType { get; set; }
         public int? PetrolMileage { get; set; }
         [Required]
-        public int PetrolPrice { get; set; }
+        public float PetrolPrice { get; set; }
         [Required]
-        public int PetrolAmount { get; set; }
-        public int? PetrolPricePerLiter { get; set; }
+        public float PetrolAmount { get; set; }
+        public float? PetrolPricePerLiter { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         [Required]
         public int VehicleId { get; set; }
