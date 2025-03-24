@@ -65,11 +65,6 @@ namespace VehicleDiary.Repository
             throw new KeyNotFoundException();
         }
 
-		public async Task<int> SaveChangesAsync()
-		{
-            return  await _context.SaveChangesAsync() ;
-		}
-
 		public async Task UpdateAsync(T entity)
         {
             try
