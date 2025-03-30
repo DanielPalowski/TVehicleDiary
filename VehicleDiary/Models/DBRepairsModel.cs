@@ -19,7 +19,7 @@ namespace VehicleDiary.Models
         [Required]
         public int RepairMileage { get; set; }
         [Required]
-        public int VehicleId { get; set; }
+        public Guid VehicleId { get; set; }
         [ForeignKey(nameof(VehicleId))]
         public DBVehicleModel Vehicle {  get; set; }
 

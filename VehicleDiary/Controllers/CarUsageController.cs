@@ -14,51 +14,43 @@ namespace VehicleDiary.Controllers
     {
         private readonly IRepositoryCrud<DBPetrolModel> _repositoryPetrol;
         private readonly IRepositoryCrud<DBVignetteModel> _repositoryVignette;
-        private readonly IRepositorySecurity<DBVehicleModel> _repositorySecurity;
         private readonly IRepositoryViews<DBPetrolModel> _repositoryView;
         private readonly CountryService _countryService;
         public CarUsageController(IRepositoryCrud<DBPetrolModel> repository,
-            IRepositorySecurity<DBVehicleModel> repositorysecurity,
             IRepositoryViews<DBPetrolModel> repositoryView,
             CountryService countryService,
             IRepositoryCrud<DBVignetteModel> repositoryVignette)
 
         {
             _repositoryPetrol = repository;
-            _repositorySecurity = repositorysecurity;
             _repositoryView = repositoryView;
             _countryService = countryService;
             _repositoryVignette = repositoryVignette;
         }
-        public async Task<IActionResult> Index(int vehicleIDRoute)
+		public async Task<IActionResult> Index([FromQuery] Guid vehicleIDRoute)
         {
-            if (await _repositorySecurity.CheckUser(vehicleIDRoute, User) == null)
+            var CarUsage = await _repositoryView.GetDBByVehicle(vehicleIDRoute);
+            var ViewModelDB = new CarUsageModelVM
             {
-				return Redirect("/Identity/Account/AccessDenied");
+                vehicleID = vehicleIDRoute,
+                GettingViews = CarUsage
+            };
 
-			}
-
-            ViewBag.VehicleIDBag = vehicleIDRoute;
-            return View(await _repositoryView.GetDBByVehicle(vehicleIDRoute));
+			return View(ViewModelDB);
         }
-        public async Task<IActionResult> Petrol(int vehicleIDRoute)
-        {
-            if (await _repositorySecurity.CheckUser(vehicleIDRoute, User) == null)
-            {
-				return Redirect("/Identity/Account/AccessDenied"); ;
-            }
 
+
+
+
+        //---------------PETROL---------------
+		public async Task<IActionResult> Petrol([FromQuery] Guid vehicleIDRoute)
+        {
             var model = new DBPetrolModelVM { vehicleId = vehicleIDRoute };
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Petrol( DBPetrolModelVM dBPetrolModelVM)
+		public async Task<IActionResult> Petrol( DBPetrolModelVM dBPetrolModelVM)
         {
-            if (await _repositorySecurity.CheckUser(dBPetrolModelVM.vehicleId, User) == null)
-            {
-				return Redirect("/Identity/Account/AccessDenied");
-			}
-
             if (ModelState.IsValid) 
             {
                 var dbVM = new DBPetrolModel
@@ -76,13 +68,13 @@ namespace VehicleDiary.Controllers
             }
             return View(dBPetrolModelVM);
         }
-        public async Task<IActionResult> Vignette(int vehicleIDRoute)
+
+
+
+
+		//---------------VIGNETTE---------------
+		public async Task<IActionResult> Vignette([FromQuery] Guid vehicleIDRoute)
         {
-            if(await _repositorySecurity.CheckUser(vehicleIDRoute, User) == null)
-            {
-                Console.WriteLine($"{vehicleIDRoute} {User}");
-                return Redirect("/Identity/Account/AccessDenied");
-            }
             ViewBag.Countries = _countryService.GetCountries();
             var model = new DBVignetteModelVM { vehicleId = vehicleIDRoute };
             return View(model);
@@ -90,10 +82,6 @@ namespace VehicleDiary.Controllers
         [HttpPost]
         public async Task<IActionResult> Vignette(DBVignetteModelVM dBVignetteModelVM)
         {
-            if (await _repositorySecurity.CheckUser(dBVignetteModelVM.vehicleId, User) == null)
-            {
-                return Redirect("/Identity/Account/AccessDenied");
-            }
             if(ModelState.IsValid)
             {
                 var dbVM = new DBVignetteModel

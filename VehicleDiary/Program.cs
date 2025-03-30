@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using VehicleDiary.Data;
+using VehicleDiary.Middleware;
 using VehicleDiary.Models;
 using VehicleDiary.Repository;
 using VehicleDiary.Services;
@@ -25,12 +27,14 @@ namespace VehicleDiary
 				.AddRoles<IdentityRole>()
 				.AddEntityFrameworkStores<AppDbContext>();
 
-            //conn Repository
-            builder.Services.AddScoped(typeof(IRepositoryCrud<>), typeof(CrudRepository<>));
+			//http
+			builder.Services.AddHttpContextAccessor();
+
+
+			//conn Repository
+			builder.Services.AddScoped(typeof(IRepositoryCrud<>), typeof(CrudRepository<>));
 			builder.Services.AddScoped<IRepositoryVehicle, VehicleRepository>();
             builder.Services.AddScoped(typeof(IRepositoryViews<>), typeof(ViewsRepository<>));
-            builder.Services.AddScoped(typeof(IRepositorySecurity<>), typeof(SecurityRepository<>));
-
             builder.Services.AddScoped<CountryService>();
 
 
@@ -55,6 +59,8 @@ namespace VehicleDiary
 
 			}
 
+			//SecurityMiddleware
+			app.UseMiddleware<VehicleSecurityMiddleware>();
 
 
 

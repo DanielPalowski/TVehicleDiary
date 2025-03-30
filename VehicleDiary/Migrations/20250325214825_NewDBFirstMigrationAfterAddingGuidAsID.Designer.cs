@@ -12,8 +12,8 @@ using VehicleDiary.Data;
 namespace VehicleDiary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250320183840_AddingMileageToRepairTable")]
-    partial class AddingMileageToRepairTable
+    [Migration("20250325214825_NewDBFirstMigrationAfterAddingGuidAsID")]
+    partial class NewDBFirstMigrationAfterAddingGuidAsID
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -227,6 +227,47 @@ namespace VehicleDiary.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("VehicleDiary.Models.DBPetrolModel", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<float>("PetrolAmount")
+                        .HasColumnType("real");
+
+                    b.Property<string>("PetrolDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PetrolMileage")
+                        .HasColumnType("int");
+
+                    b.Property<float>("PetrolPrice")
+                        .HasColumnType("real");
+
+                    b.Property<float?>("PetrolPricePerLiter")
+                        .HasColumnType("real");
+
+                    b.Property<string>("PetrolType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("DBPetrolSet");
+                });
+
             modelBuilder.Entity("VehicleDiary.Models.DBRepairsModel", b =>
                 {
                     b.Property<int>("Id")
@@ -238,11 +279,10 @@ namespace VehicleDiary.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("RepairCost")
-                        .HasColumnType("int");
+                    b.Property<float>("RepairCost")
+                        .HasColumnType("real");
 
                     b.Property<string>("RepairDescription")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RepairMade")
@@ -256,8 +296,8 @@ namespace VehicleDiary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("VehicleId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -268,11 +308,9 @@ namespace VehicleDiary.Migrations
 
             modelBuilder.Entity("VehicleDiary.Models.DBVehicleModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -300,8 +338,8 @@ namespace VehicleDiary.Migrations
                     b.Property<int>("Power")
                         .HasColumnType("int");
 
-                    b.Property<int>("RepairCost")
-                        .HasColumnType("int");
+                    b.Property<float>("RepairCost")
+                        .HasColumnType("real");
 
                     b.Property<string>("UserId")
                         .IsRequired()
@@ -315,6 +353,40 @@ namespace VehicleDiary.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("DBVehiclesSet");
+                });
+
+            modelBuilder.Entity("VehicleDiary.Models.DBVignetteModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("VignetteCountry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("VignettePrice")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("VignetteValidFrom")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("VignetteValidTo")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("DBVignetteSet");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -368,6 +440,17 @@ namespace VehicleDiary.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("VehicleDiary.Models.DBPetrolModel", b =>
+                {
+                    b.HasOne("VehicleDiary.Models.DBVehicleModel", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
+                });
+
             modelBuilder.Entity("VehicleDiary.Models.DBRepairsModel", b =>
                 {
                     b.HasOne("VehicleDiary.Models.DBVehicleModel", "Vehicle")
@@ -388,6 +471,17 @@ namespace VehicleDiary.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("VehicleDiary.Models.DBVignetteModel", b =>
+                {
+                    b.HasOne("VehicleDiary.Models.DBVehicleModel", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
                 });
 #pragma warning restore 612, 618
         }

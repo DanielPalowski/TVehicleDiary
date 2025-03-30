@@ -12,7 +12,7 @@ namespace VehicleDiary.Repository
         {
             _context = context;
         }
-        public async Task<IEnumerable<T?>> GetDBByVehicle(int id)
+        public async Task<IEnumerable<T>>? GetDBByVehicle(Guid id)
         {
             return await _context.Set<T>().Where(x => x.VehicleId == id).ToListAsync();
         }

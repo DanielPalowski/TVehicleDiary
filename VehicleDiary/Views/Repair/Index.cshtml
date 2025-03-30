@@ -1,7 +1,7 @@
-﻿@model IEnumerable<DBRepairsModel>
+﻿@model VehicleDiary.ViewModel.DBRepairModelVM
 
-<a asp-controller="repair" asp-action="Create" asp-route-vehicleIDRoute="@ViewBag.VehicleIDBag">Create website</a>
-@foreach(var entry in Model)
+<a asp-controller="repair" asp-action="Create" asp-route-vehicleIDRoute="@Model.vehicleId">Create website</a>
+@foreach(var entry in Model.RepairsView)
 {
 	@entry.RepairType
 	@entry.RepairCost

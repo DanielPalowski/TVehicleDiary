@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VehicleDiary.Constants;
 using VehicleDiary.Data;
-using VehicleDiary.Migrations;
 using VehicleDiary.Models;
 using VehicleDiary.Repository;
 using VehicleDiary.ViewModel;
@@ -16,57 +15,43 @@ namespace VehicleDiary.Controllers
     public class RepairController : Controller
     {
         public readonly IRepositoryCrud<DBRepairsModel> _repositoryCrudRepair;
-        public readonly IRepositorySecurity<DBVehicleModel> _repositorySecurity;
         public readonly IRepositoryViews<DBRepairsModel> _repositoryViews;
         public readonly IRepositoryVehicle _repositoryVehicle;
 
 		public RepairController(IRepositoryCrud<DBRepairsModel> repository,  
             IRepositoryVehicle repositoryVehicle,
-            IRepositorySecurity<DBVehicleModel> repositorySecurity,
             IRepositoryViews<DBRepairsModel> repositoryViews)
 
         {
             _repositoryCrudRepair = repository;
             _repositoryVehicle = repositoryVehicle;
-            _repositorySecurity = repositorySecurity;
             _repositoryViews = repositoryViews;
 
         }
-        public async Task<IActionResult> Index(int vehicleIDRoute)
+		public async Task<IActionResult> Index([FromQuery] Guid vehicleIDRoute)
         {
-			if (await _repositorySecurity.CheckUser(vehicleIDRoute, User) == null)
-			{
-				return Redirect("/Identity/Account/AccessDenied");
-			}
-			ViewBag.vehicleIDBag = vehicleIDRoute;
- 
-            var total = await _repositoryVehicle.CalculatingTotalCostRepairAsync(vehicleIDRoute);
-            await _repositoryVehicle.AddingTotalCostRepairAsync(vehicleIDRoute, total);
+			var total = await _repositoryVehicle.CalculatingTotalCostRepairAsync(vehicleIDRoute);
+			await _repositoryVehicle.AddingTotalCostRepairAsync(vehicleIDRoute, total);
+            
+            var repairs = await _repositoryViews.GetDBByVehicle(vehicleIDRoute);
 
+			var ViewModelDB = new DBRepairModelVM
+            {
+                vehicleId = vehicleIDRoute,
+                RepairsView = repairs
+            };
 
-
-
-
-
-            return View(await _repositoryViews.GetDBByVehicle(vehicleIDRoute));
+            return View(ViewModelDB);
         }
-        public async Task<IActionResult> Create(int vehicleIDRoute)
+		public async Task<IActionResult> Create([FromQuery] Guid vehicleIDRoute)
         {
-            if (await _repositorySecurity.CheckUser(vehicleIDRoute, User) == null)
-			{
-				return Redirect("/Identity/Account/AccessDenied");
-			}
 
 			var model = new DBRepairModelVM { vehicleId = vehicleIDRoute };
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> Create(DBRepairModelVM dBRepairModelVM)
+		public async Task<IActionResult> Create(DBRepairModelVM dBRepairModelVM)
         {
-			if (await _repositorySecurity.CheckUser(dBRepairModelVM.vehicleId, User) == null)
-			{
-				return Redirect("/Identity/Account/AccessDenied");
-			}
 
 			if (ModelState.IsValid)
             {

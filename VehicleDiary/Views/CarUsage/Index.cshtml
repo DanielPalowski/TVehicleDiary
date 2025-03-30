@@ -1,12 +1,12 @@
-﻿@model IEnumerable<DBPetrolModel>
+﻿@model VehicleDiary.ViewModel.CarUsageModelVM
 
 
-<a asp-controller="CarUsage" asp-action="Petrol" asp-route-vehicleIDRoute="@ViewBag.VehicleIDBag">Petrol</a>
-<a asp-controller="CarUsage" asp-action="Vignette" asp-route-vehicleIDRoute="@ViewBag.VehicleIDBag">Vignette</a>
+<a asp-controller="CarUsage" asp-action="Petrol" asp-route-vehicleIDRoute="@Model.vehicleID">Petrol</a>
+<a asp-controller="CarUsage" asp-action="Vignette" asp-route-vehicleIDRoute="@Model.vehicleID">Vignette</a>
 <h1>Tests2</h1>
 <div>
 	<h2>Petrol</h2>
-@foreach(var entry in Model)
+@foreach(var entry in Model.GettingViews)
 {
 	<div class="container">
 		<p>Price: @entry.PetrolPrice </p>

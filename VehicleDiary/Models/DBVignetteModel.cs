@@ -18,7 +18,7 @@ namespace VehicleDiary.Models
 		public float VignettePrice { get; set; }
 		public DateTime Created {  get; set; } = DateTime.Now;
 		[Required]
-		public int VehicleId { get; set; }
+		public Guid VehicleId { get; set; }
 		[ForeignKey(nameof(VehicleId))]
 		public DBVehicleModel Vehicle { get; set; }
 	}

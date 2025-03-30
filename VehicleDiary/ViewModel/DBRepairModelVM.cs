@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using VehicleDiary.Models;
 
 namespace VehicleDiary.ViewModel
 {
@@ -19,7 +20,8 @@ namespace VehicleDiary.ViewModel
         [Required]
         public int RepairMileage { get; set; }
         [Required]
-        public int vehicleId { get; set; }
+        public Guid vehicleId { get; set; }
+        public IEnumerable<DBRepairsModel> RepairsView { get; set; }
         
     }
 }

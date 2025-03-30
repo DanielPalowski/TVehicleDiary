@@ -6,6 +6,6 @@
     // snažím se aby se kód co nejméně opakoval
     public interface IVehicleEntity
     {
-        int VehicleId { get; set; }
+        Guid VehicleId { get; set; }
     }
 }

@@ -7,7 +7,7 @@ namespace VehicleDiary.Models
 	public class DBVehicleModel 
 	{
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]

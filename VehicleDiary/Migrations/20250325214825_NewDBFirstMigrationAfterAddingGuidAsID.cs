@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VehicleDiary.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstDBVehicleAndIdentity : Migration
+    public partial class NewDBFirstMigrationAfterAddingGuidAsID : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -160,8 +160,7 @@ namespace VehicleDiary.Migrations
                 name: "DBVehiclesSet",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -171,6 +170,7 @@ namespace VehicleDiary.Migrations
                     Power = table.Column<int>(type: "int", nullable: false),
                     Insurence = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RepairCost = table.Column<float>(type: "real", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -180,6 +180,81 @@ namespace VehicleDiary.Migrations
                         name: "FK_DBVehiclesSet_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DBPetrolSet",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PetrolDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PetrolType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PetrolMileage = table.Column<int>(type: "int", nullable: true),
+                    PetrolPrice = table.Column<float>(type: "real", nullable: false),
+                    PetrolAmount = table.Column<float>(type: "real", nullable: false),
+                    PetrolPricePerLiter = table.Column<float>(type: "real", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DBPetrolSet", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_DBPetrolSet_DBVehiclesSet_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "DBVehiclesSet",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DBRepairsSet",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RepairType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RepairDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RepairCost = table.Column<float>(type: "real", nullable: false),
+                    RepairMade = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RepairMileage = table.Column<int>(type: "int", nullable: false),
+                    VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DBRepairsSet", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DBRepairsSet_DBVehiclesSet_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "DBVehiclesSet",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DBVignetteSet",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    VignetteCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    VignetteValidFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VignetteValidTo = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VignettePrice = table.Column<float>(type: "real", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DBVignetteSet", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_DBVignetteSet_DBVehiclesSet_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "DBVehiclesSet",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -224,9 +299,24 @@ namespace VehicleDiary.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DBPetrolSet_VehicleId",
+                table: "DBPetrolSet",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DBRepairsSet_VehicleId",
+                table: "DBRepairsSet",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DBVehiclesSet_UserId",
                 table: "DBVehiclesSet",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DBVignetteSet_VehicleId",
+                table: "DBVignetteSet",
+                column: "VehicleId");
         }
 
         /// <inheritdoc />
@@ -248,10 +338,19 @@ namespace VehicleDiary.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "DBVehiclesSet");
+                name: "DBPetrolSet");
+
+            migrationBuilder.DropTable(
+                name: "DBRepairsSet");
+
+            migrationBuilder.DropTable(
+                name: "DBVignetteSet");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "DBVehiclesSet");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -16,6 +16,6 @@ namespace VehicleDiary.ViewModel
         [Required]
         public int PetrolAmount { get; set; }
         [Required]
-        public int vehicleId { get; set; }
+        public Guid vehicleId { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace VehicleDiary.ViewModel
         [Required]
         public float Price { get; set; }
         [Required]
-        public int vehicleId { get; set; }
+        public Guid vehicleId { get; set; }
 
     }
 }
