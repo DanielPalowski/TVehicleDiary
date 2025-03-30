@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleDiary.Data;
 
@@ -11,9 +12,11 @@ using VehicleDiary.Data;
 namespace VehicleDiary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250330205038_AddingOilDB")]
+    partial class AddingOilDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -241,9 +244,6 @@ namespace VehicleDiary.Migrations
                     b.Property<DateTime>("OilDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("OilDescription")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("OilMileage")
                         .HasColumnType("int");
 
@@ -341,56 +341,6 @@ namespace VehicleDiary.Migrations
                     b.HasIndex("VehicleId");
 
                     b.ToTable("DBRepairsSet");
-                });
-
-            modelBuilder.Entity("VehicleDiary.Models.DBTiresModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("TireAmount")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TireBrand")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float?>("TireChangedPrice")
-                        .HasColumnType("real");
-
-                    b.Property<DateTime>("TireDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("TireDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<float>("TirePrice")
-                        .HasColumnType("real");
-
-                    b.Property<string>("TireShopWhereBought")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TireSize")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TireType")
-                        .HasColumnType("int");
-
-                    b.Property<Guid>("VehicleId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VehicleId");
-
-                    b.ToTable("DBTiresSet");
                 });
 
             modelBuilder.Entity("VehicleDiary.Models.DBVehicleModel", b =>
@@ -550,17 +500,6 @@ namespace VehicleDiary.Migrations
                 });
 
             modelBuilder.Entity("VehicleDiary.Models.DBRepairsModel", b =>
-                {
-                    b.HasOne("VehicleDiary.Models.DBVehicleModel", "Vehicle")
-                        .WithMany()
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Vehicle");
-                });
-
-            modelBuilder.Entity("VehicleDiary.Models.DBTiresModel", b =>
                 {
                     b.HasOne("VehicleDiary.Models.DBVehicleModel", "Vehicle")
                         .WithMany()

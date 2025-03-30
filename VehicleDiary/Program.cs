@@ -35,6 +35,8 @@ namespace VehicleDiary
 			builder.Services.AddScoped(typeof(IRepositoryCrud<>), typeof(CrudRepository<>));
 			builder.Services.AddScoped<IRepositoryVehicle, VehicleRepository>();
             builder.Services.AddScoped(typeof(IRepositoryViews<>), typeof(ViewsRepository<>));
+
+			//Services
             builder.Services.AddScoped<CountryService>();
 
 

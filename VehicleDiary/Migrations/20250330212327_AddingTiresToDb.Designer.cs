@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleDiary.Data;
 
@@ -11,9 +12,11 @@ using VehicleDiary.Data;
 namespace VehicleDiary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250330212327_AddingTiresToDb")]
+    partial class AddingTiresToDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -361,9 +364,6 @@ namespace VehicleDiary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float?>("TireChangedPrice")
-                        .HasColumnType("real");
-
                     b.Property<DateTime>("TireDate")
                         .HasColumnType("datetime2");
 
@@ -373,15 +373,12 @@ namespace VehicleDiary.Migrations
                     b.Property<float>("TirePrice")
                         .HasColumnType("real");
 
-                    b.Property<string>("TireShopWhereBought")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("TireSize")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("TireType")
-                        .HasColumnType("int");
+                    b.Property<bool>("TireType")
+                        .HasColumnType("bit");
 
                     b.Property<Guid>("VehicleId")
                         .HasColumnType("uniqueidentifier");

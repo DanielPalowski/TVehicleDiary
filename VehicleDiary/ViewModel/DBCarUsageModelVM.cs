@@ -2,7 +2,7 @@
 
 namespace VehicleDiary.ViewModel
 {
-	public class CarUsageModelVM
+	public class DBCarUsageModelVM
 	{
 		public Guid vehicleID { get; set; }
 		public IEnumerable<DBPetrolModel> GettingViews {  get; set; } 

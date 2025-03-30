@@ -14,23 +14,30 @@ namespace VehicleDiary.Controllers
     {
         private readonly IRepositoryCrud<DBPetrolModel> _repositoryPetrol;
         private readonly IRepositoryCrud<DBVignetteModel> _repositoryVignette;
+        private readonly IRepositoryCrud<DBOilModel> _repositoryOil;
+        private readonly IRepositoryCrud<DBTiresModel> _repositoryTires;
         private readonly IRepositoryViews<DBPetrolModel> _repositoryView;
         private readonly CountryService _countryService;
         public CarUsageController(IRepositoryCrud<DBPetrolModel> repository,
             IRepositoryViews<DBPetrolModel> repositoryView,
             CountryService countryService,
-            IRepositoryCrud<DBVignetteModel> repositoryVignette)
+            IRepositoryCrud<DBVignetteModel> repositoryVignette,
+            IRepositoryCrud<DBOilModel> repositoryOil,
+            IRepositoryCrud<DBTiresModel> repositoryTires)
 
         {
             _repositoryPetrol = repository;
             _repositoryView = repositoryView;
             _countryService = countryService;
             _repositoryVignette = repositoryVignette;
+            _repositoryOil = repositoryOil;
+            _repositoryTires = repositoryTires;
+
         }
 		public async Task<IActionResult> Index([FromQuery] Guid vehicleIDRoute)
         {
             var CarUsage = await _repositoryView.GetDBByVehicle(vehicleIDRoute);
-            var ViewModelDB = new CarUsageModelVM
+            var ViewModelDB = new DBCarUsageModelVM
             {
                 vehicleID = vehicleIDRoute,
                 GettingViews = CarUsage
@@ -98,5 +105,69 @@ namespace VehicleDiary.Controllers
             }
             return View(dBVignetteModelVM);
         }
-    }
+
+
+
+
+		//---------------OIL---------------
+        public async Task<IActionResult> Oil([FromQuery] Guid vehicleIDRoute)
+        {
+            var model = new DBOilModelVM { VehicleId = vehicleIDRoute };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Oil(DBOilModelVM dBOilModelVM)
+        {
+            if(ModelState.IsValid)
+            {
+                var dbVM = new DBOilModel
+                {
+                    OilAmount = dBOilModelVM.OilAmount,
+                    OilDate = dBOilModelVM.OilDate,
+                    OilMileage = dBOilModelVM.OilMileage,
+                    OilPrice = dBOilModelVM.OilPrice,
+                    OilType = dBOilModelVM.OilType,
+                    VehicleId = dBOilModelVM.VehicleId
+                };
+                await _repositoryOil.AddAsync(dbVM);
+                return RedirectToAction("Index", new { vehicleIDRoute = dBOilModelVM.VehicleId });
+
+            }
+            return View(dBOilModelVM);
+        }
+
+
+
+
+
+        //-----------------Tires-------------
+        public async Task<IActionResult> Tires([FromQuery] Guid vehicleIDRoute)
+        {
+            var model = new DBTiresModelVM { VehicleId = vehicleIDRoute };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Tires (DBTiresModelVM dBTiresModelVM)
+        {
+            if(ModelState.IsValid)
+            {
+                var dbVM = new DBTiresModel
+                {
+                    TireAmount = dBTiresModelVM.TireAmount,
+                    TireBrand = dBTiresModelVM.TireBrand,
+                    TireDate = dBTiresModelVM.TireDate,
+                    TireDescription = dBTiresModelVM.TireDescription,
+                    TirePrice = dBTiresModelVM.TirePrice,
+                    TireSize = dBTiresModelVM.TireSize,
+                    TireType = dBTiresModelVM.TireType,
+                    TireChangedPrice = dBTiresModelVM.TireChangedPrice,
+                    TireShopWhereBought = dBTiresModelVM.TireShopWhereBought,
+                    VehicleId = dBTiresModelVM.VehicleId
+                };
+                await _repositoryTires.AddAsync(dbVM);
+                return RedirectToAction("Index", new { vehicleIdRoute = dBTiresModelVM.VehicleId});
+            }
+            return View(dBTiresModelVM);
+        }
+	}
 }
