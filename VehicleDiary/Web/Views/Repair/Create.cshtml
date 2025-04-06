@@ -1,40 +1,78 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBRepairModelVM
 
-<form asp-action="Create" method="post">
-    <input type="hidden" asp-for="vehicleId" />
-    <div class="form-group">
-        <label asp-for="RepairType">Type of repair</label>
-        <input type="text" asp-for="RepairType" class="form-control"  placeholder="Enter name of the repair you have done">
-        <span asp-validation-for="RepairType" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="RepairCost">How much did it cost </label>
-        <input type="text" asp-for="RepairCost" class="form-control" maxlength="7" placeholder="Enter the cost of the repair">
-        <span asp-validation-for="RepairCost" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="RepairMade">When was this repair done</label>
-        <input type="date" asp-for="RepairMade" class="form-control" maxlength="10" placeholder="Enter the date the repair was done" value="@DateTime.Today.ToString()">
-        <span asp-validation-for="RepairMade" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="RepairMileage">Mileage when was the repair done</label>
-        <input type="text" asp-for="RepairMileage" class="form-control" placeholder="Enter mileage of the repair">
-        <span asp-validation-for="RepairMileage" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="RepairDescription">Description of the repair</label>
-        <input type="text" asp-for="RepairDescription" class="form-control" placeholder="Enter Repair Description">
-        <span asp-validation-for="RepairDescription" class="text-danger"></span>
-    </div>
-    <button class="btn btn-primary" type="submit">Submit</button>
-</form>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h3 class="card-title mb-0">New Repair Record</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post">
+                        <input type="hidden" asp-for="vehicleId" />
+                        <div class="row g-3">
+                            <!-- Repair Type -->
+                            <div class="col-12">
+                                <label asp-for="RepairType" class="form-label">Repair Type</label>
+                                <input type="text" asp-for="RepairType" class="form-control"
+                                       placeholder="e.g. Brake System Replacement">
+                                <span asp-validation-for="RepairType" class="text-danger small"></span>
+                            </div>
 
-@section Scripts
-{
-	@{
-		await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	}
+                            <!-- Cost & Date -->
+                            <div class="col-md-6">
+                                <label asp-for="RepairCost" class="form-label">Total Cost</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">€</span>
+                                    <input type="number" asp-for="RepairCost" class="form-control"
+                                           step="0.01" placeholder="0.00">
+                                </div>
+                                <span asp-validation-for="RepairCost" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="RepairMade" class="form-label">Service Date</label>
+                                <input type="date" asp-for="RepairMade" class="form-control"
+                                       value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                                <span asp-validation-for="RepairMade" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Mileage -->
+                            <div class="col-12">
+                                <label asp-for="RepairMileage" class="form-label">Mileage</label>
+                                <div class="input-group">
+                                    <input type="number" asp-for="RepairMileage" class="form-control"
+                                           placeholder="Current mileage">
+                                    <span class="input-group-text">km</span>
+                                </div>
+                                <span asp-validation-for="RepairMileage" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-12">
+                                <label asp-for="RepairDescription" class="form-label">Description</label>
+                                <textarea asp-for="RepairDescription" class="form-control" rows="3"
+                                          placeholder="Detailed repair description"></textarea>
+                                <span asp-validation-for="RepairDescription" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="col-12 mt-4">
+                                <button class="btn btn-primary w-100 py-2" type="submit">
+                                    <i class="fas fa-save me-2"></i>Save Repair
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
 

@@ -7,7 +7,8 @@ using NuGet.Protocol;
 using VehicleDiary.Application.Services;
 using VehicleDiary.Application.Services.MapperService;
 using VehicleDiary.Core.Entities;
-using VehicleDiary.Core.Interfaces;
+using VehicleDiary.Core.Interfaces.Repositories;
+using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
 
 namespace VehicleDiary.Web.Controllers
@@ -63,39 +64,6 @@ namespace VehicleDiary.Web.Controllers
 
             return View(ViewModelDB);
         }
-
-
-
-
-        //---------------PETROL---------------
-        public async Task<IActionResult> Petrol([FromQuery] Guid vehicleIDRoute)
-        {
-            var model = new DBPetrolModelVM { vehicleId = vehicleIDRoute };
-            return View(model);
-        }
-        [HttpPost]
-        public async Task<IActionResult> Petrol(DBPetrolModelVM dBPetrolModelVM)
-        {
-            if (ModelState.IsValid)
-            {
-                var dbVM = new DBPetrolModel
-                {
-                    PetrolAmount = dBPetrolModelVM.PetrolAmount,
-                    PetrolPrice = dBPetrolModelVM.PetrolPrice,
-                    PetrolType = dBPetrolModelVM.PetrolType,
-                    PetrolDate = dBPetrolModelVM.PetrolDate,
-                    PetrolMileage = dBPetrolModelVM?.PetrolMileage,
-                    VehicleId = dBPetrolModelVM.vehicleId
-                };
-                await _repositoryPetrol.AddAsync(dbVM);
-                //Musí být abych zpátky měl ID daného vozidla, jinak bych dostal Unauthorized
-                return RedirectToAction("Index", new { vehicleIDRoute = dBPetrolModelVM.vehicleId });
-            }
-            return View(dBPetrolModelVM);
-        }
-
-
-
 
 
         //-----------------Tires-------------

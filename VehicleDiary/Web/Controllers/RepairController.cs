@@ -7,7 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using VehicleDiary.Application.DTOs;
 using VehicleDiary.Core.Constants;
 using VehicleDiary.Core.Entities;
-using VehicleDiary.Core.Interfaces;
+using VehicleDiary.Core.Interfaces.Repositories;
+using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
 
 namespace VehicleDiary.Web.Controllers

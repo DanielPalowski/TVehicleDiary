@@ -1,71 +1,67 @@
 ﻿@using VehicleDiary.Web.ViewModels
-@model DBOilModelVM
+@model DBPetrolModelVM
 
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-xl-6">
             <div class="card shadow-sm mb-5">
                 <div class="card-body p-4">
-                    <h2 class="card-title mb-4">Oil Change Tracking</h2>
-                    <form asp-action="Oil" method="post">
-                        <input type="hidden" asp-for="VehicleId" />
+                    <h2 class="card-title mb-4">Fuel Tracking</h2>
+                    <form asp-action="Petrol" method="post">
+                        <input type="hidden" asp-for="vehicleId" />
 
                         <div class="row g-3">
-                            <!-- Amount & Type -->
+                            <!-- Amount & Price -->
                             <div class="col-md-6">
-                                <label asp-for="OilAmount" class="form-label">Oil Amount</label>
+                                <label asp-for="PetrolAmount" class="form-label">Fuel Amount (Liters)</label>
                                 <div class="input-group">
-                                    <input type="text" asp-for="OilAmount" class="form-control" placeholder="6.5">
+                                    <input type="text" asp-for="PetrolAmount" class="form-control"
+                                           placeholder="e.g. 40">
                                     <span class="input-group-text">L</span>
                                 </div>
-                                <span asp-validation-for="OilAmount" class="text-danger small"></span>
+                                <span asp-validation-for="PetrolAmount" class="text-danger small"></span>
                             </div>
 
                             <div class="col-md-6">
-                                <label asp-for="OilType" class="form-label">Oil Type</label>
-                                <input type="text" asp-for="OilType" class="form-control" placeholder="5w30">
-                                <span asp-validation-for="OilType" class="text-danger small"></span>
-                            </div>
-
-                            <!-- Price & Date -->
-                            <div class="col-md-6">
-                                <label asp-for="OilPrice" class="form-label">Total Price</label>
+                                <label asp-for="PetrolPrice" class="form-label">Total Price</label>
                                 <div class="input-group">
                                     <span class="input-group-text">€</span>
-                                    <input type="text" asp-for="OilPrice" class="form-control" placeholder="60">
+                                    <input type="text" asp-for="PetrolPrice" class="form-control"
+                                           placeholder="e.g. 500">
                                 </div>
-                                <span asp-validation-for="OilPrice" class="text-danger small"></span>
+                                <span asp-validation-for="PetrolPrice" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Type & Date -->
+                            <div class="col-md-6">
+                                <label asp-for="PetrolType" class="form-label">Fuel Type</label>
+                                <input type="text" asp-for="PetrolType" class="form-control"
+                                       placeholder="e.g. Diesel, 98 Octane">
+                                <span asp-validation-for="PetrolType" class="text-danger small"></span>
                             </div>
 
                             <div class="col-md-6">
-                                <label asp-for="OilDate" class="form-label">Change Date</label>
-                                <input type="date" asp-for="OilDate" class="form-control"
+                                <label asp-for="PetrolDate" class="form-label">Refuel Date</label>
+                                <input type="date" asp-for="PetrolDate" class="form-control"
                                        value="@DateTime.Today.ToString("yyyy-MM-dd")">
-                                <span asp-validation-for="OilDate" class="text-danger small"></span>
+                                <span asp-validation-for="PetrolDate" class="text-danger small"></span>
                             </div>
 
                             <!-- Mileage -->
                             <div class="col-12">
-                                <label asp-for="OilMileage" class="form-label">Mileage</label>
+                                <label asp-for="PetrolMileage" class="form-label">Mileage (Optional)</label>
                                 <div class="input-group">
-                                    <input type="text" asp-for="OilMileage" class="form-control" placeholder="85210">
+                                    <input type="text" asp-for="PetrolMileage" class="form-control"
+                                           placeholder="e.g. 157520">
                                     <span class="input-group-text">km</span>
                                 </div>
-                                <span asp-validation-for="OilMileage" class="text-danger small"></span>
-                            </div>
-
-                            <!-- Description -->
-                            <div class="col-12">
-                                <label asp-for="OilDescription" class="form-label">Description (Optional)</label>
-                                <input type="text" asp-for="OilDescription" class="form-control"
-                                       placeholder="Enter your description">
-                                <span asp-validation-for="OilDescription" class="text-danger small"></span>
+                                <span asp-validation-for="PetrolMileage" class="text-danger small"></span>
                             </div>
 
                             <!-- Submit Button -->
                             <div class="col-12 mt-4">
                                 <button class="btn btn-primary w-100" type="submit">
-                                    <i class="fas fa-oil-can me-2"></i>Save Oil Change
+                                    <i class="fas fa-gas-pump me-2"></i>Save Refuel
                                 </button>
                             </div>
                         </div>
@@ -73,12 +69,12 @@
                 </div>
             </div>
 
-            <!-- Oil Change History -->
-            <h3 class="h4 mb-4">Maintenance History</h3>
-            @if (Model.OilViews != null && Model.OilViews.Any())
+            <!-- Fuel Entries -->
+            <h3 class="h4 mb-4">Refuel History</h3>
+            @if (Model.PetrolViews != null && Model.PetrolViews.Any())
             {
                 <div class="row g-3">
-                    @foreach (var entry in Model.OilViews)
+                    @foreach (var entry in Model.PetrolViews)
                     {
                         <div class="col-12">
                             <div class="card shadow-sm mb-3">
@@ -88,7 +84,7 @@
                                         <div class="col-md-3 mb-2 mb-md-0">
                                             <div class="d-flex align-items-center">
                                                 <i class="fas fa-calendar text-primary me-2"></i>
-                                                <span class="small">@entry.OilDate.ToString("d MMM yyyy")</span>
+                                                <span class="small">@entry.PetrolDate.ToString("d MMM yyyy")</span>
                                             </div>
                                         </div>
 
@@ -96,17 +92,11 @@
                                         <div class="col-md-5">
                                             <div class="d-flex flex-wrap gap-2">
                                                 <span class="badge bg-info">
-                                                    <i class="fas fa-tint me-1"></i>@entry.OilType
+                                                    <i class="fas fa-tint me-1"></i>@entry.PetrolType
                                                 </span>
                                                 <span class="badge bg-secondary">
-                                                    <i class="fas fa-chart-line me-1"></i>@entry.OilMileage km
+                                                    <i class="fas fa-chart-line me-1"></i>@entry.PetrolMileage km
                                                 </span>
-                                                @if (!string.IsNullOrEmpty(entry.OilDescription))
-                                                {
-                                                    <span class="badge bg-light text-dark">
-                                                        <i class="fas fa-comment me-1"></i>@entry.OilDescription
-                                                    </span>
-                                                }
                                             </div>
                                         </div>
 
@@ -114,10 +104,10 @@
                                         <div class="col-md-4 text-end">
                                             <div class="d-flex flex-column">
                                                 <span class="text-success fw-bold">
-                                                    €@entry.OilPrice
+                                                    €@entry.PetrolPrice
                                                 </span>
                                                 <span class="text-muted small">
-                                                    @entry.OilAmount L
+                                                    @entry.PetrolAmount L
                                                 </span>
                                             </div>
                                         </div>
@@ -131,7 +121,7 @@
             else
             {
                 <div class="alert alert-info mb-0">
-                    <i class="fas fa-info-circle me-2"></i>No oil change records available
+                    <i class="fas fa-info-circle me-2"></i>No fuel records available
                 </div>
             }
         </div>

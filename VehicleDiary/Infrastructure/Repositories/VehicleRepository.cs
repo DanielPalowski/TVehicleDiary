@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
 using VehicleDiary.Core.Entities;
-using VehicleDiary.Core.Interfaces;
+using VehicleDiary.Core.Interfaces.Repositories;
 using VehicleDiary.Infrastructure.Data;
 
 namespace VehicleDiary.Infrastructure.Repositories

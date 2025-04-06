@@ -1,8 +1,7 @@
 ﻿using System.Security.Claims;
 using Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
-using VehicleDiary.Core.Interfaces;
 
-namespace VehicleDiary.Core.Interfaces
+namespace VehicleDiary.Core.Interfaces.Repositories
 {
     public interface IRepositoryCrud<T> where T : class
     {

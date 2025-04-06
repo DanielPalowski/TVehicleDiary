@@ -2,10 +2,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using VehicleDiary.Core.Interfaces;
 using VehicleDiary.Infrastructure.Data;
-using VehicleDiary.Core.Interfaces;
 using VehicleDiary.Core.Entities;
+using VehicleDiary.Core.Interfaces.Repositories;
 
 namespace VehicleDiary.Infrastructure.Repositories
 {

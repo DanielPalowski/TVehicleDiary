@@ -14,7 +14,6 @@ namespace VehicleDiary.Web.ViewModels
         [MaxLength(30), MinLength(2)]
         public string Model { get; set; }
 
-        [Required(ErrorMessage = "Description is required !")]
         [MaxLength(300), MinLength(2)]
         public string? Description { get; set; }
 
@@ -37,6 +36,7 @@ namespace VehicleDiary.Web.ViewModels
         [Required(ErrorMessage = "Insurence is required !")]
         [MaxLength(30), MinLength(2)]
         public string? Insurence { get; set; }
+        public DateTime? Bought { get; set; }
 
 
     }

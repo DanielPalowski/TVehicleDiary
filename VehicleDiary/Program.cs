@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using VehicleDiary.Application.Mappings;
 using VehicleDiary.Application.Services;
-using VehicleDiary.Core.Interfaces;
 using VehicleDiary.Infrastructure.Data;
 using VehicleDiary.Infrastructure.Middleware;
 using VehicleDiary.Infrastructure.Repositories;
@@ -11,6 +10,8 @@ using VehicleDiary.Core.Entities;
 using Microsoft.AspNetCore.Mvc.Razor;
 using VehicleDiary.Application.Services.Seeding;
 using VehicleDiary.Application.Services.MapperService;
+using VehicleDiary.Core.Interfaces.Services;
+using VehicleDiary.Core.Interfaces.Repositories;
 
 namespace VehicleDiary
 {
@@ -82,6 +83,7 @@ namespace VehicleDiary
             builder.Services.AddScoped<IRepairService, RepairService>();
             builder.Services.AddScoped<IVignetteService, VignetteService>();
             builder.Services.AddScoped<IOilService, OilService>();
+            builder.Services.AddScoped<IPetrolService, PetrolService>();
 
             //Mapper
             builder.Services.AddAutoMapper(typeof(Program));

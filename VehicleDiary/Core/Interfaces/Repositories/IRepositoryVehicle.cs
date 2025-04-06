@@ -1,4 +1,4 @@
-﻿namespace VehicleDiary.Core.Interfaces;
+﻿namespace VehicleDiary.Core.Interfaces.Repositories;
 
 using Microsoft.EntityFrameworkCore;
 using VehicleDiary.Core.Entities;

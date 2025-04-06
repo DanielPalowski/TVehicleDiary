@@ -14,7 +14,8 @@ namespace VehicleDiary.Application.DTOs
         public string? VIN { get; set; }
         public int Power { get; set; }
         public string? Insurence { get; set; }
-        public float RepairCost { get; set; }
+        public float? RepairCost { get; set; }
         public string UserId { get; set; }
+        public DateTime? Bought { get; set; }
     }
 }

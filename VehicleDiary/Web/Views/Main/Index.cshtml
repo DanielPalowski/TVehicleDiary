@@ -1,1 +1,112 @@
-﻿<h1>Ahoj</h1>
+﻿<div class="container-fluid px-0">
+    <!-- Hero Section -->
+    <div class="bg-light py-5">
+        <div class="container text-center py-5">
+            <h1 class="display-4 mb-4">Welcome to VehicleDiary 🚗</h1>
+            <p class="lead text-muted mb-4">
+                Your comprehensive vehicle management solution<br>
+                Track maintenance, repairs, fuel consumption, and costs all in one place
+            </p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <a asp-controller="Vehicle" asp-action="Create" class="btn btn-primary btn-lg px-4 gap-3">
+                    <i class="fas fa-plus-circle me-2"></i>Add New Vehicle
+                </a>
+                <a asp-controller="Home" asp-action="Features" class="btn btn-outline-secondary btn-lg px-4">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Grid -->
+    <div class="container py-5">
+        <div class="row g-4 py-5">
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100 border-0">
+                    <div class="card-body text-center">
+                        <div class="feature-icon bg-primary bg-gradient mb-3">
+                            <i class="fas fa-wrench fa-3x text-white"></i>
+                        </div>
+                        <h3>Maintenance Tracking</h3>
+                        <p class="text-muted">Record and monitor all vehicle services, repairs, and maintenance schedules</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100 border-0">
+                    <div class="card-body text-center">
+                        <div class="feature-icon bg-success bg-gradient mb-3">
+                            <i class="fas fa-gas-pump fa-3x text-white"></i>
+                        </div>
+                        <h3>Fuel Management</h3>
+                        <p class="text-muted">Track fuel consumption, costs, and analyze your vehicle's efficiency</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow-sm h-100 border-0">
+                    <div class="card-body text-center">
+                        <div class="feature-icon bg-info bg-gradient mb-3">
+                            <i class="fas fa-chart-line fa-3x text-white"></i>
+                        </div>
+                        <h3>Cost Analytics</h3>
+                        <p class="text-muted">Visualize and understand your vehicle's operational costs over time</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div class="bg-dark text-white py-5">
+        <div class="container text-center py-5">
+            <h2 class="mb-4">Ready to Get Started?</h2>
+            <p class="lead mb-4">Add your first vehicle and begin tracking its history today</p>
+            <a asp-controller="Vehicle" asp-action="Create" class="btn btn-light btn-lg">
+                <i class="fas fa-car me-2"></i>Add Your Vehicle Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="container py-5">
+        <div class="row text-center">
+            <div class="col-md-3">
+                <h3 class="text-primary">1M+</h3>
+                <p class="text-muted">Vehicles Tracked</p>
+            </div>
+            <div class="col-md-3">
+                <h3 class="text-success">€10M+</h3>
+                <p class="text-muted">In Maintenance Costs Analyzed</p>
+            </div>
+            <div class="col-md-3">
+                <h3 class="text-info">500K+</h3>
+                <p class="text-muted">Fuel Records</p>
+            </div>
+            <div class="col-md-3">
+                <h3 class="text-warning">24/7</h3>
+                <p class="text-muted">Vehicle Monitoring</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+</style>

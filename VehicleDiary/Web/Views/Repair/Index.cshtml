@@ -1,12 +1,57 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBRepairModelVM
 
-<a asp-controller="repair" asp-action="Create" asp-route-vehicleIDRoute="@Model.vehicleId">Create website</a>
-@foreach(var entry in Model.RepairsView)
-{
-	@entry.RepairType
-	@entry.RepairCost
-	@entry.RepairMade
-	@entry.RepairDescription
-	<br />
-}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3>Repair History</h3>
+        <a asp-controller="Repair" asp-action="Create" asp-route-vehicleIDRoute="@Model.vehicleId"
+           class="btn btn-primary">
+            <i class="fas fa-tools me-2"></i>New Repair
+        </a>
+    </div>
+
+    <div class="row g-3">
+        @if (Model.RepairsView != null && Model.RepairsView.Any())
+        {
+            @foreach (var entry in Model.RepairsView)
+            {
+                <div class="col-12">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <div class="row align-items-center">
+                                <div class="col-md-4">
+                                    <h5 class="mb-0">@entry.RepairType</h5>
+                                    <small class="text-muted">@entry.RepairMade.ToString("d MMM yyyy")</small>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex gap-2">
+                                        <span class="badge bg-primary">
+                                            @entry.RepairMileage km
+                                        </span>
+                                        @if (!string.IsNullOrEmpty(entry.RepairDescription))
+                                        {
+                                            <span class="badge bg-light text-dark">
+                                                <i class="fas fa-info-circle me-1"></i>@entry.RepairDescription
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-md-4 text-end">
+                                    <span class="h5 text-danger">€@entry.RepairCost</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>No repair history found
+                </div>
+            </div>
+        }
+    </div>
+</div>

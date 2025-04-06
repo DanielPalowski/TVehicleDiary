@@ -1,7 +1,7 @@
 ﻿using VehicleDiary.Application.DTOs;
 using VehicleDiary.Core.Entities;
 
-namespace VehicleDiary.Core.Interfaces
+namespace VehicleDiary.Core.Interfaces.Services
 {
     public interface IOilService
     {

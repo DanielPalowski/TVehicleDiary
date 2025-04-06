@@ -1,4 +1,4 @@
-﻿namespace VehicleDiary.Core.Interfaces
+﻿namespace VehicleDiary.Core.Interfaces.Repositories
 {
     public interface IRepositoryViews<T> where T : class
     {

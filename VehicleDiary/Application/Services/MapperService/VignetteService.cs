@@ -1,11 +1,12 @@
 ﻿using AutoMapper;
 using VehicleDiary.Application.DTOs;
 using VehicleDiary.Core.Entities;
-using VehicleDiary.Core.Interfaces;
+using VehicleDiary.Core.Interfaces.Repositories;
+using VehicleDiary.Core.Interfaces.Services;
 
 namespace VehicleDiary.Application.Services.MapperService
 {
-	public class VignetteService : IVignetteService
+    public class VignetteService : IVignetteService
 	{
 		private readonly IMapper _mapper;
 		private readonly IRepositoryVehicle _repositoryVehicle;

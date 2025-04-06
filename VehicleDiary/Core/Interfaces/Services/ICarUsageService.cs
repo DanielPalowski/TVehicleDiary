@@ -1,4 +1,4 @@
-﻿namespace VehicleDiary.Core.Interfaces
+﻿namespace VehicleDiary.Core.Interfaces.Services
 {
     public interface ICarUsageService
     {

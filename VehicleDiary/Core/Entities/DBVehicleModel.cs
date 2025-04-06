@@ -18,8 +18,9 @@ namespace VehicleDiary.Core.Entities
         public string? VIN { get; set; }
         public int Power { get; set; }
         public string? Insurence { get; set; }
+        public DateTime? Bought { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
-        public float RepairCost { get; set; }
+        public float? RepairCost { get; set; }
         [Required]
         public string UserId { get; set; }
         [ForeignKey(nameof(UserId))]

@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using VehicleDiary.Application.DTOs;
 using VehicleDiary.Core.Entities;
-using VehicleDiary.Core.Interfaces;
+using VehicleDiary.Core.Interfaces.Repositories;
+using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
 
 namespace VehicleDiary.Web.Controllers
@@ -13,16 +14,12 @@ namespace VehicleDiary.Web.Controllers
     [Authorize]
     public class VehicleController : Controller
     {
-        private readonly IRepositoryCrud<DBVehicleModel> _repository;
         private readonly IMapper _mapper;
-        private readonly IRepositoryVehicle _repositoryVehicle;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IVehicleService _vehicleService;
-        public VehicleController(IRepositoryCrud<DBVehicleModel> repository, UserManager<IdentityUser> userManager, IRepositoryVehicle repositoryVehicle, IVehicleService vehicleService, IMapper mapper)
+        public VehicleController(UserManager<IdentityUser> userManager, IVehicleService vehicleService, IMapper mapper)
         {
-            _repository = repository;
             _userManager = userManager;
-            _repositoryVehicle = repositoryVehicle;
             _vehicleService = vehicleService;
             _mapper = mapper;
 

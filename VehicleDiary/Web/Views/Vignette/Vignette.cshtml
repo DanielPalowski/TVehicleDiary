@@ -1,48 +1,96 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBVignetteModelVM
 
-<form asp-action="Vignette" method="post" >
-    <input type="hidden" asp-for="vehicleId" />
-    <div class="form-group">
-        <label asp-for="VignetteCountry">Choose your country</label>
-        <select asp-for="VignetteCountry" class="form-control">
-            @foreach (var entry in ViewBag.Countries)
-            {
-                <option value="@entry.Name">@entry.Name</option>
-            }
-        </select>
-        <span asp-validation-for="VignetteCountry" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="VignetteValidFrom">Valid From</label>
-        <input type="date" asp-for="VignetteValidFrom" class="form-control" placeholder="When is your vignette valid From" value="@DateTime.Today.ToString()">
-        <span asp-validation-for="VignetteValidFrom" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="VignetteValidTo">Valid To</label>
-        <input type="date" asp-for="VignetteValidTo" class="form-control" placeholder="When is your vignette valid To" value="@DateTime.Today.ToString()">
-        <span asp-validation-for="VignetteValidTo" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="VignettePrice">Price you paid</label>
-        <input type="text" asp-for="VignettePrice" class="form-control" placeholder="The price you bought it for">
-        <span asp-validation-for="VignettePrice" class="text-danger"></span>
-    </div>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+            <div class="card shadow-sm mb-5">
+                <div class="card-body p-4">
+                    <h2 class="card-title mb-4">Vignette Registration</h2>
+                    <form asp-action="Vignette" method="post">
+                        <input type="hidden" asp-for="vehicleId" />
 
-    <button class="btn btn-primary" type="submit">Submit</button>
-</form>
+                        <div class="row g-3">
+                            <!-- Country Select -->
+                            <div class="col-12">
+                                <label asp-for="VignetteCountry" class="form-label">Country</label>
+                                <select asp-for="VignetteCountry" class="form-select">
+                                    @foreach (var entry in ViewBag.Countries)
+                                    {
+                                        <option value="@entry.Name">@entry.Name</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="VignetteCountry" class="text-danger small"></span>
+                            </div>
 
-<h1>All Vignettes bought</h1>
-@foreach(var entry in Model.VignetteView)
-{
-    <p>Country : @entry.VignetteCountry</p>
-    <p>ValidFrom : @entry.VignetteValidFrom</p>
-    <p>ValidTo : @entry.VignetteValidTo</p>
-    <p>Price : @entry.VignettePrice</p>
-    <br />
-}
+                            <!-- Date Inputs -->
+                            <div class="col-md-6">
+                                <label asp-for="VignetteValidFrom" class="form-label">Valid From</label>
+                                <input type="date" asp-for="VignetteValidFrom" class="form-control"
+                                       value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                                <span asp-validation-for="VignetteValidFrom" class="text-danger small"></span>
+                            </div>
 
+                            <div class="col-md-6">
+                                <label asp-for="VignetteValidTo" class="form-label">Valid To</label>
+                                <input type="date" asp-for="VignetteValidTo" class="form-control"
+                                       value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                                <span asp-validation-for="VignetteValidTo" class="text-danger small"></span>
+                            </div>
 
+                            <!-- Price Input -->
+                            <div class="col-12">
+                                <label asp-for="VignettePrice" class="form-label">Price Paid</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">€</span>
+                                    <input type="text" asp-for="VignettePrice" class="form-control"
+                                           placeholder="Enter amount">
+                                </div>
+                                <span asp-validation-for="VignettePrice" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="col-12 mt-4">
+                                <button class="btn btn-primary w-100" type="submit">
+                                    <i class="fas fa-check me-2"></i>Submit Vignette
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Vignettes List -->
+            <h3 class="h4 mb-4">Vignette History</h3>
+            <div class="row g-3">
+                @foreach (var entry in Model.VignetteView)
+                {
+                    <div class="col-12">
+                        <div class="card shadow-sm mb-3">
+                            <div class="card-body p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4">
+                                        <div class="d-flex align-items-center">
+                                            <i class="fas fa-tag text-primary me-2"></i>
+                                            <strong>@entry.VignetteCountry</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 text-muted small">
+                                        @entry.VignetteValidFrom.ToString("d MMM yyyy") -
+                                        @entry.VignetteValidTo.ToString("d MMM yyyy")
+                                    </div>
+                                    <div class="col-md-4 text-end">
+                                        <span class="badge bg-success">€@entry.VignettePrice</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 
 @section Scripts {
     @{

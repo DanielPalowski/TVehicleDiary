@@ -8,7 +8,7 @@ namespace VehicleDiary.Core.Entities
     {
         public int id { get; set; }
         [Required]
-        public string PetrolDate { get; set; }
+        public DateTime PetrolDate { get; set; }
         [Required]
         public string PetrolType { get; set; }
         public int? PetrolMileage { get; set; }

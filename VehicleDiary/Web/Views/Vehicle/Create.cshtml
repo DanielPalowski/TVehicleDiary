@@ -1,57 +1,103 @@
-﻿@using VehicleDiary.Web.ViewModels
-@model DBVehicleModelVM
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model VehicleDiary.Web.ViewModels.DBVehicleModelVM
 
-<form asp-action="Create" method="post">
-    <div class="form-group">
-        <label asp-for="Name">Brand</label>
-        <input type="text" asp-for="Name" class="form-control" id="VehicleName" placeholder="Enter Vehicle Brand">
-        <span asp-validation-for="Name" class="text-danger"></span>
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-light">
+                    <h3 class="card-title mb-0">Add New Vehicle</h3>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post">
+                        <div class="row g-3">
+                            <!-- Brand & Model -->
+                            <div class="col-md-6">
+                                <label asp-for="Name" class="form-label">Brand</label>
+                                <input type="text" asp-for="Name" class="form-control"
+                                       placeholder="e.g. Toyota">
+                                <span asp-validation-for="Name" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Model" class="form-label">Model</label>
+                                <input type="text" asp-for="Model" class="form-control"
+                                       placeholder="e.g. Corolla">
+                                <span asp-validation-for="Model" class="text-danger small"></span>
+                            </div>
+
+                            <!-- License Plate & VIN -->
+                            <div class="col-md-6">
+                                <label asp-for="License_plate" class="form-label">License Plate</label>
+                                <input type="text" asp-for="License_plate" class="form-control"
+                                       placeholder="e.g. AB 123 CD">
+                                <span asp-validation-for="License_plate" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="VIN" class="form-label">VIN Number</label>
+                                <input type="text" asp-for="VIN" class="form-control"
+                                       placeholder="17-digit vehicle identification number">
+                                <span asp-validation-for="VIN" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Insurance & Purchase Date -->
+                            <div class="col-md-6">
+                                <label asp-for="Insurence" class="form-label">Insurance</label>
+                                <input type="text" asp-for="Insurence" class="form-control"
+                                       placeholder="Insurance policy number">
+                                <span asp-validation-for="Insurence" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Bought" class="form-label">Purchase Date</label>
+                                <input type="date" asp-for="Bought" class="form-control"
+                                       value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                                <span asp-validation-for="Bought" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Specifications -->
+                            <div class="col-md-6">
+                                <label asp-for="Power" class="form-label">Horsepower</label>
+                                <div class="input-group">
+                                    <input type="number" asp-for="Power" class="form-control"
+                                           placeholder="e.g. 150">
+                                    <span class="input-group-text">HP</span>
+                                </div>
+                                <span asp-validation-for="Power" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="MadeYear" class="form-label">Manufacture Year</label>
+                                <div class="input-group">
+                                    <input type="number" asp-for="MadeYear" class="form-control"
+                                           min="1900" max="@DateTime.Now.Year"
+                                           placeholder="e.g. 2020">
+                                    <span class="input-group-text">Year</span>
+                                </div>
+                                <span asp-validation-for="MadeYear" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-12">
+                                <label asp-for="Description" class="form-label">Description</label>
+                                <textarea asp-for="Description" class="form-control" rows="3"
+                                          placeholder="Additional vehicle details"></textarea>
+                                <span asp-validation-for="Description" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="col-12 mt-4">
+                                <button class="btn btn-primary w-100 py-2" type="submit">
+                                    <i class="fas fa-car me-2"></i>Add Vehicle
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Model">Model</label>
-        <input type="text" asp-for="Model" class="form-control" id="VehicleModel"  placeholder="Enter Vehicle Model">
-        <span asp-validation-for="Model" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="License_plate">License Plate</label>
-        <input type="text" asp-for="License_plate" class="form-control" id="VehicleLicensePlate"  placeholder="Enter Vehicle License Plate">
-        <span asp-validation-for="License_plate" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="VIN">VIN</label>
-        <input type="text" asp-for="VIN" class="form-control" id="exampleInputEmail1"  placeholder="Enter Vehicle VIN">
-        <span asp-validation-for="VIN" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Insurence">Insurence</label>
-        <input type="text" asp-for="Insurence" class="form-control" id="exampleInputEmail1"  placeholder="Enter Vehicle Insurence">
-        <span asp-validation-for="Insurence" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Power">Horsepower</label>
-        <input type="text" asp-for="Power" class="form-control" maxlength="6" id="exampleInputEmail1" placeholder="Enter Vehicle Horsepower">
-        <span asp-validation-for="Power" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="MadeYear">Year was made</label>
-        <input type="text" asp-for="MadeYear" maxlength="4" class="form-control" id="exampleInputEmail1" placeholder="Enter Vehicle Made Year">
-        <span asp-validation-for="MadeYear" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description">Description</label>
-        <input type="text" asp-for="Description" class="form-control" id="exampleInputEmail1"  placeholder="Enter Your Vehicle Description">
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
-    <button class="btn btn-primary" type="submit">Submit</button>
-</form>
-	@section Scripts{
-	   @{
-	         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-	     }
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
 

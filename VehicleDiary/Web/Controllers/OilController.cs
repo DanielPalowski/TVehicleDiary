@@ -4,7 +4,7 @@ using VehicleDiary.Application.DTOs;
 using VehicleDiary.Application.Services;
 using VehicleDiary.Application.Services.MapperService;
 using VehicleDiary.Core.Entities;
-using VehicleDiary.Core.Interfaces;
+using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
 
 namespace VehicleDiary.Web.Controllers
