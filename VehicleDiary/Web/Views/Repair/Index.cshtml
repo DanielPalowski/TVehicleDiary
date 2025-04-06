@@ -1,0 +1,12 @@
+﻿@using VehicleDiary.Web.ViewModels
+@model DBRepairModelVM
+
+<a asp-controller="repair" asp-action="Create" asp-route-vehicleIDRoute="@Model.vehicleId">Create website</a>
+@foreach(var entry in Model.RepairsView)
+{
+	@entry.RepairType
+	@entry.RepairCost
+	@entry.RepairMade
+	@entry.RepairDescription
+	<br />
+}

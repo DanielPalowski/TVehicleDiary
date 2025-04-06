@@ -1,0 +1,40 @@
+﻿@using VehicleDiary.Web.ViewModels
+@model DBRepairModelVM
+
+<form asp-action="Create" method="post">
+    <input type="hidden" asp-for="vehicleId" />
+    <div class="form-group">
+        <label asp-for="RepairType">Type of repair</label>
+        <input type="text" asp-for="RepairType" class="form-control"  placeholder="Enter name of the repair you have done">
+        <span asp-validation-for="RepairType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RepairCost">How much did it cost </label>
+        <input type="text" asp-for="RepairCost" class="form-control" maxlength="7" placeholder="Enter the cost of the repair">
+        <span asp-validation-for="RepairCost" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RepairMade">When was this repair done</label>
+        <input type="date" asp-for="RepairMade" class="form-control" maxlength="10" placeholder="Enter the date the repair was done" value="@DateTime.Today.ToString()">
+        <span asp-validation-for="RepairMade" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RepairMileage">Mileage when was the repair done</label>
+        <input type="text" asp-for="RepairMileage" class="form-control" placeholder="Enter mileage of the repair">
+        <span asp-validation-for="RepairMileage" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RepairDescription">Description of the repair</label>
+        <input type="text" asp-for="RepairDescription" class="form-control" placeholder="Enter Repair Description">
+        <span asp-validation-for="RepairDescription" class="text-danger"></span>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+@section Scripts
+{
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}
+

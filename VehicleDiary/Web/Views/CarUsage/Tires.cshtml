@@ -1,0 +1,62 @@
+﻿@using VehicleDiary.Web.ViewModels
+@model DBTiresModelVM
+@using VehicleDiary.Core.Constants
+
+<form asp-action="Tires" method="post">
+    <input type="hidden" asp-for="VehicleId" />
+    <div class="form-group">
+        <label asp-for="TirePrice">Price Of Set of Tires</label>
+        <input type="text" asp-for="TirePrice" class="form-control" placeholder="1200">
+        <span asp-validation-for="TirePrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TireSize">Tire Size</label>
+        <input type="text" asp-for="TireSize" class="form-control" placeholder="255/35 r18">
+        <span asp-validation-for="TireSize" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TireBrand">Tire Brand</label>
+        <input type="text" asp-for="TireBrand" class="form-control" placeholder="Michelin">
+        <span asp-validation-for="TireBrand" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TireAmount">Amount of Tires bought</label>
+        <input type="text" asp-for="TireAmount" class="form-control" placeholder="4">
+        <span asp-validation-for="TireAmount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TireType">Tire type</label>
+        <select asp-for="TireType" asp-items="Html.GetEnumSelectList<TireTypesEnum>()" class="form-control">
+            <option value="">-- Select Type --</option>
+        </select>
+        <span asp-validation-for="TireType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TireDate">When were Tires changed</label>
+        <input type="date" asp-for="TireDate" class="form-control" placeholder="Enter Repair Description" value="@DateTime.Today.ToString()">
+        <span asp-validation-for="TireDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TireChangedPrice">Optional : Price of changing the tires</label>
+        <input type="text" asp-for="TireChangedPrice" class="form-control" placeholder="120" />
+        <span asp-validation-for="TireChangedPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TireShopWhereBought">Optional : Shop where Tires were bought</label>
+        <input type="text" asp-for="TireShopWhereBought" class="form-control" placeholder="TireWorld" />
+        <span asp-validation-for="TireShopWhereBought" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="TireDescription">Optional : Description</label>
+        <input type="text" asp-for="TireDescription" class="form-control" placeholder="Enter your description" />
+        <span asp-validation-for="TireDescription" class="text-danger"></span>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

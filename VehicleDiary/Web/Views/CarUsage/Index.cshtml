@@ -1,0 +1,25 @@
+﻿@using VehicleDiary.Web.ViewModels
+@model DBCarUsageOverViewVM
+
+
+<a asp-controller="CarUsage" asp-action="Petrol" asp-route-vehicleIDRoute="@Model.VehicleId">Petrol</a>
+<a asp-controller="Vignette" asp-action="Vignette" asp-route-vehicleIDRoute="@Model.VehicleId">Vignette</a>
+<a asp-controller="Oil" asp-action="Oil" asp-route-vehicleIDRoute="@Model.VehicleId">Oil</a>
+<a asp-controller="CarUsage" asp-action="Tires" asp-route-vehicleIDRoute="@Model.VehicleId">Tires</a>
+<h1>Latest Car usage data</h1>
+<div>
+	<h2>Latest vignette bought</h2>
+		@if(Model.LatestVignettePrice != null)
+		{
+			<div class="container">
+				<p>Vignette from : @Model.LatestVignetteValidFrom</p>
+				<p>Vignette To : @Model.LatestVignetteValidTo</p>
+				<p>Vignette Price : @Model.LatestVignettePrice</p>
+				<p>Vignette Country : @Model.LatestVignetteCountry</p>
+			</div>
+		}
+		else
+		{
+			<h3>There is not latest bought vignette at the moment.</h3>
+		}
+</div>

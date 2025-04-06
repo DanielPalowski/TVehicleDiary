@@ -1,0 +1,63 @@
+﻿@using VehicleDiary.Web.ViewModels
+@model DBOilModelVM
+
+
+<form asp-action="Oil" method="post">
+    <input type="hidden" asp-for="VehicleId" />
+    <div class="form-group">
+        <label asp-for="OilAmount">Amount of Oil</label>
+        <input type="text" asp-for="OilAmount" class="form-control" placeholder="6.5">
+        <span asp-validation-for="OilAmount" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="OilType">Oil Type</label>
+        <input type="text" asp-for="OilType" class="form-control"  placeholder="5w30">
+        <span asp-validation-for="OilType" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="OilPrice">Oil Price</label>
+        <input type="text" asp-for="OilPrice" class="form-control"  placeholder="60">
+        <span asp-validation-for="OilPrice" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="OilMileage">Mileage when was the oil changed</label>
+        <input type="text" asp-for="OilMileage" class="form-control" placeholder="85210">
+        <span asp-validation-for="OilMileage" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="OilDate">When was the oil changed</label>
+        <input type="date" asp-for="OilDate" class="form-control" placeholder="Enter Repair Description" value="@DateTime.Today.ToString()">
+        <span asp-validation-for="OilDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="OilDescription">Optional : Description</label>
+        <input type="text" asp-for="OilDescription" class="form-control" placeholder="Enter your description" />
+        <span asp-validation-for="OilDescription" class="text-danger"></span>
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+@if (Model.OilViews != null && Model.OilViews.Any())
+{
+    foreach (var entry in Model.OilViews)
+    {
+        <p>Price : @entry.OilPrice</p>
+        <p>Amount : @entry.OilAmount</p>
+        <p>Type : @entry.OilType</p>
+        <p>Mileage : @entry.OilMileage</p>
+        <p>Date : @entry.OilDate</p>
+        <p>Description : @entry.OilDescription</p>
+    }
+}
+else
+{
+    <h3>There are no oil data available.</h3>
+}
+
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

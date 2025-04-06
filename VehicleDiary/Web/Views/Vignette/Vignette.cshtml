@@ -1,0 +1,51 @@
+﻿@using VehicleDiary.Web.ViewModels
+@model DBVignetteModelVM
+
+<form asp-action="Vignette" method="post" >
+    <input type="hidden" asp-for="vehicleId" />
+    <div class="form-group">
+        <label asp-for="VignetteCountry">Choose your country</label>
+        <select asp-for="VignetteCountry" class="form-control">
+            @foreach (var entry in ViewBag.Countries)
+            {
+                <option value="@entry.Name">@entry.Name</option>
+            }
+        </select>
+        <span asp-validation-for="VignetteCountry" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="VignetteValidFrom">Valid From</label>
+        <input type="date" asp-for="VignetteValidFrom" class="form-control" placeholder="When is your vignette valid From" value="@DateTime.Today.ToString()">
+        <span asp-validation-for="VignetteValidFrom" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="VignetteValidTo">Valid To</label>
+        <input type="date" asp-for="VignetteValidTo" class="form-control" placeholder="When is your vignette valid To" value="@DateTime.Today.ToString()">
+        <span asp-validation-for="VignetteValidTo" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="VignettePrice">Price you paid</label>
+        <input type="text" asp-for="VignettePrice" class="form-control" placeholder="The price you bought it for">
+        <span asp-validation-for="VignettePrice" class="text-danger"></span>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<h1>All Vignettes bought</h1>
+@foreach(var entry in Model.VignetteView)
+{
+    <p>Country : @entry.VignetteCountry</p>
+    <p>ValidFrom : @entry.VignetteValidFrom</p>
+    <p>ValidTo : @entry.VignetteValidTo</p>
+    <p>Price : @entry.VignettePrice</p>
+    <br />
+}
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
