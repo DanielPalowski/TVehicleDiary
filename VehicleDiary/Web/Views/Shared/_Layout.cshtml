@@ -7,39 +7,62 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/VehicleDiary.styles.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Main" asp-action="Index">VehicleDiary</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<body >
+    <header class="sticky-top">
+        <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom border-2 border-light py-3">
+            <div class="container">
+                <!-- Brand with modern typography -->
+                <a class="navbar-brand fw-bold fs-4 text-primary" asp-area="" asp-controller="Main" asp-action="Index">
+                    <span class="align-middle">VehicleDiary</span>
+                </a>
+
+                <!-- Responsive Toggler -->
+                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+                <!-- Navigation Items -->
+                <div class="collapse navbar-collapse" id="mainNav">
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <!-- Authenticated User Menu -->
+                        <!-- Authenticated Menu -->
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Vehicle" asp-action="Index">My Vehicles</a>
+                                <a class="nav-link text-dark px-3 py-2 rounded-3"
+                                   asp-controller="Vehicle"
+                                   asp-action="Index">
+                                    <i class="fas fa-car me-2"></i>My Garage
+                                </a>
                             </li>
                         </ul>
-                        <!-- Logout Form -->
-                        <form class="d-flex" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                            <button type="submit" class="btn btn-outline-danger">Logout</button>
+
+                        <!-- Logout Button -->
+                        <form class="d-flex ms-auto" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                            <button type="submit" class="btn btn-link text-dark text-decoration-none px-3 py-2">
+                                <i class="fas fa-sign-out-alt me-2"></i>Sign Out
+                            </button>
                         </form>
                     }
                     else
                     {
-                        <!-- Guest User Menu -->
+                        <!-- Guest Menu -->
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                                <a class="btn btn-outline-primary px-4 mx-2"
+                                   asp-area="Identity"
+                                   asp-page="/Account/Login">
+                                    Sign In
+                                </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                                <a class="btn btn-primary px-4 shadow-sm"
+                                   asp-area="Identity"
+                                   asp-page="/Account/Register">
+                                    Get Started
+                                </a>
                             </li>
                         </ul>
                     }
@@ -47,17 +70,28 @@
             </div>
         </nav>
     </header>
-    <div class="container">
+
+    <div >
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @if (ViewBag.IsFooter == true)
+    {
+    <footer class="bg-light border-top text-muted" id="IDFooter">
         <div class="container">
-            &copy; 2025 - VehicleDiary - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-12 text-center">
+                    &copy; 2025 VehicleDiary - Automotive Maintenance Solutions<br>
+                    <small>Crafted with precision for vehicle enthusiasts</small>
+                </div>
+            </div>
         </div>
     </footer>
+    }
+
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

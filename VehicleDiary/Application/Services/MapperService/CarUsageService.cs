@@ -1,36 +1,46 @@
 ﻿using AutoMapper;
+using VehicleDiary.Application.DTOs;
 using VehicleDiary.Core.Entities;
 using VehicleDiary.Core.Interfaces.Repositories;
 using VehicleDiary.Core.Interfaces.Services;
+using VehicleDiary.Web.ViewModels;
 
 namespace VehicleDiary.Application.Services.MapperService
 {
     public class CarUsageService : ICarUsageService
     {
         private readonly IMapper _mapper;
-        private readonly IRepositoryCrud<DBPetrolModel> _repositoryPetrol;
-        private readonly IRepositoryCrud<DBVignetteModel> _repositoryVignette;
-        private readonly IRepositoryCrud<DBOilModel> _repositoryOil;
-        private readonly IRepositoryCrud<DBTiresModel> _repositoryTires;
-        private readonly IRepositoryViews<DBPetrolModel> _repositoryView;
-        private readonly CountryService _countryService;
+        private readonly IRepositoryCarUsage _repositoryCarUsage;
         public CarUsageService(IMapper mapper,
-            IRepositoryCrud<DBPetrolModel> repository,
-            IRepositoryViews<DBPetrolModel> repositoryView,
-            CountryService countryService,
-            IRepositoryCrud<DBVignetteModel> repositoryVignette,
-            IRepositoryCrud<DBOilModel> repositoryOil,
-            IRepositoryCrud<DBTiresModel> repositoryTires)
+            IRepositoryCarUsage repositoryCarUsage)
 
         {
             _mapper = mapper;
-            _repositoryPetrol = repository;
-            _repositoryView = repositoryView;
-            _countryService = countryService;
-            _repositoryVignette = repositoryVignette;
-            _repositoryOil = repositoryOil;
-            _repositoryTires = repositoryTires;
-
+            _repositoryCarUsage = repositoryCarUsage;
+        }
+        public async Task<TireDto> LatestTireUsageAsync(Guid vehicleIDRoute)
+        {
+           var entity = await _repositoryCarUsage.GettingLatestTiresAsync(vehicleIDRoute);
+           var dto = _mapper.Map<TireDto>(entity);
+           return dto;
+        }
+        public async Task<PetrolDto> LatestPetrolUsageAsync(Guid vehicleIDRoute)
+        {
+            var entity = await _repositoryCarUsage.GettingLatestPetrolAsync(vehicleIDRoute);
+            var dto = _mapper.Map<PetrolDto>(entity);
+            return dto;
+        }
+        public async Task<OilDto> LatestOilUsageAsync(Guid vehicleIDRoute)
+        {
+            var entity = await _repositoryCarUsage.GettingLatestOilAsync(vehicleIDRoute);
+            var dto = _mapper.Map<OilDto>(entity);
+            return dto;
+        }
+        public async Task<VignetteDto> LatestVignetteUsageAsync(Guid vehicleIDRoute)
+        {
+            var entity = await _repositoryCarUsage.GettingLatestVignetteAsync(vehicleIDRoute);
+            var dto = _mapper.Map<VignetteDto>(entity);
+            return dto;
         }
     }
 }

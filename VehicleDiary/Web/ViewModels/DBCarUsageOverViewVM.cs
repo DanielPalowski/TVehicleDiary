@@ -1,13 +1,14 @@
-﻿using VehicleDiary.Core.Entities;
+﻿using VehicleDiary.Application.DTOs;
+using VehicleDiary.Core.Entities;
 
 namespace VehicleDiary.Web.ViewModels
 {
     public class DBCarUsageOverViewVM
     {
-        public Guid VehicleId { get; set; }
-        public string? LatestVignetteCountry { get; set; }
-        public DateTime? LatestVignetteValidFrom { get; set; }
-        public DateTime? LatestVignetteValidTo { get; set; }
-        public float? LatestVignettePrice { get; set; }
+        public Guid VehicleID { get; set; }
+        public TireDto LatestTireUsage { get; set; }
+        public OilDto LatestOilUsage { get; set; }
+        public PetrolDto LatestPetrolUsage { get; set; }
+        public VignetteDto LatestVignetteUsage { get; set; }
     }
 }

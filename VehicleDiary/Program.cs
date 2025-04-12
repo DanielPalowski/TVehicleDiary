@@ -36,14 +36,10 @@ namespace VehicleDiary
                     // MVC Area rote
                     options.AreaViewLocationFormats.Add("/Web/Views/{2}/{1}/{0}.cshtml");
 
-                    // Identity
-                    options.AreaPageViewLocationFormats.Add("/Web/Areas/Identity/Pages/{0}.cshtml");
-                    options.AreaPageViewLocationFormats.Add("/Web/Areas/Identity/Pages/Account/{0}.cshtml");
-                    options.AreaPageViewLocationFormats.Add("/Web/Areas/Identity/Pages/Shared/{0}.cshtml");
-
                     // Shared
                     options.AreaPageViewLocationFormats.Add("/Web/Views/Shared/{0}.cshtml"); 
                 });
+
 
 
 
@@ -60,6 +56,8 @@ namespace VehicleDiary
             // Connecting to DB
             builder.Services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(connectionString));
+
+
 
 
             //conn Identity ORM
@@ -84,6 +82,8 @@ namespace VehicleDiary
             builder.Services.AddScoped<IVignetteService, VignetteService>();
             builder.Services.AddScoped<IOilService, OilService>();
             builder.Services.AddScoped<IPetrolService, PetrolService>();
+            builder.Services.AddScoped<ITireService, TireService>();
+            builder.Services.AddScoped<ICarUsageService, CarUsageService>();
 
             //Mapper
             builder.Services.AddAutoMapper(typeof(Program));

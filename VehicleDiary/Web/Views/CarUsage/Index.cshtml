@@ -3,62 +3,158 @@
 
 <div class="container py-4">
     <!-- Navigation Links -->
-    <div class="d-flex gap-2 mb-4">
-        <a asp-controller="Petrol" asp-action="Petrol" asp-route-vehicleIDRoute="@Model.VehicleId"
-           class="btn btn-outline-primary">
+    <div class="d-flex flex-wrap gap-2 mb-4">
+        <a asp-controller="Petrol" asp-action="Petrol" asp-route-vehicleIDRoute="@Model.VehicleID"
+           class="btn btn-outline-primary d-flex align-items-center">
             <i class="fas fa-gas-pump me-2"></i>Petrol
         </a>
-        <a asp-controller="Vignette" asp-action="Vignette" asp-route-vehicleIDRoute="@Model.VehicleId"
-           class="btn btn-outline-primary">
+        <a asp-controller="Vignette" asp-action="Vignette" asp-route-vehicleIDRoute="@Model.VehicleID"
+           class="btn btn-outline-primary d-flex align-items-center">
             <i class="fas fa-road me-2"></i>Vignette
         </a>
-        <a asp-controller="Oil" asp-action="Oil" asp-route-vehicleIDRoute="@Model.VehicleId"
-           class="btn btn-outline-primary">
+        <a asp-controller="Oil" asp-action="Oil" asp-route-vehicleIDRoute="@Model.VehicleID"
+           class="btn btn-outline-primary d-flex align-items-center">
             <i class="fas fa-oil-can me-2"></i>Oil
         </a>
-        <a asp-controller="CarUsage" asp-action="Tires" asp-route-vehicleIDRoute="@Model.VehicleId"
-           class="btn btn-outline-primary">
-            <i class="fas fa-tire me-2"></i>Tires
+        <a asp-controller="Tire" asp-action="Tires" asp-route-vehicleIDRoute="@Model.VehicleID"
+           class="btn btn-outline-primary d-flex align-items-center">
+            <i class="fas fa-car-side me-2"></i>Tires
         </a>
     </div>
 
-    <!-- Latest Vignette Section -->
-    <h2 class="mb-4">Latest Car Usage Data</h2>
+    <h2 class="mb-4 fw-light">Latest Maintenance Overview</h2>
 
-    <div class="card shadow-sm mb-4">
-        <div class="card-header bg-light">
-            <h3 class="card-title mb-0">Latest Vignette</h3>
+    <div class="row g-4">
+        <!-- Vignette Card -->
+        <div class="col-12 col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0"><i class="fas fa-road me-2"></i>Vignette</h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.LatestVignetteUsage != null)
+                    {
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4">Valid From</dt>
+                            <dd class="col-sm-8">@Model.LatestVignetteUsage.VignetteValidFrom.ToString("d MMM yyyy")</dd>
+
+                            <dt class="col-sm-4">Valid To</dt>
+                            <dd class="col-sm-8">@Model.LatestVignetteUsage.VignetteValidTo.ToString("d MMM yyyy")</dd>
+
+                            <dt class="col-sm-4">Price</dt>
+                            <dd class="col-sm-8 text-success fw-bold">€@Model.LatestVignetteUsage.VignettePrice</dd>
+
+                            <dt class="col-sm-4">Country</dt>
+                            <dd class="col-sm-8">@Model.LatestVignetteUsage.VignetteCountry</dd>
+                        </dl>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle me-2"></i>No vignette records available
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-            @if (Model.LatestVignettePrice != null)
-            {
-                <div class="row">
-                    <div class="col-md-6">
-                        <dl class="row mb-0">
-                            <dt class="col-sm-5">Valid From</dt>
-                            <dd class="col-sm-7">@Model.LatestVignetteValidFrom?.ToString("d MMM yyyy")</dd>
 
-                            <dt class="col-sm-5">Valid To</dt>
-                            <dd class="col-sm-7">@Model.LatestVignetteValidTo?.ToString("d MMM yyyy")</dd>
-                        </dl>
-                    </div>
-                    <div class="col-md-6">
+        <!-- Petrol Card -->
+        <div class="col-12 col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-success text-white">
+                    <h3 class="card-title mb-0"><i class="fas fa-gas-pump me-2"></i>Petrol</h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.LatestPetrolUsage != null)
+                    {
                         <dl class="row mb-0">
-                            <dt class="col-sm-5">Price</dt>
-                            <dd class="col-sm-7 text-success fw-bold">€@Model.LatestVignettePrice</dd>
+                            <dt class="col-sm-4">Date</dt>
+                            <dd class="col-sm-8">@Model.LatestPetrolUsage.PetrolDate</dd>
 
-                            <dt class="col-sm-5">Country</dt>
-                            <dd class="col-sm-7">@Model.LatestVignetteCountry</dd>
+                            <dt class="col-sm-4">Type</dt>
+                            <dd class="col-sm-8">@Model.LatestPetrolUsage.PetrolType</dd>
+
+                            <dt class="col-sm-4">Price</dt>
+                            <dd class="col-sm-8 text-success fw-bold">€@Model.LatestPetrolUsage.PetrolPrice</dd>
+
+                            <dt class="col-sm-4">Amount</dt>
+                            <dd class="col-sm-8">@Model.LatestPetrolUsage.PetrolAmount L</dd>
                         </dl>
-                    </div>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle me-2"></i>No petrol records available
+                        </div>
+                    }
                 </div>
-            }
-            else
-            {
-                <div class="alert alert-info mb-0">
-                    <i class="fas fa-info-circle me-2"></i>No vignette records available
+            </div>
+        </div>
+
+        <!-- Oil Card -->
+        <div class="col-12 col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-warning text-dark">
+                    <h3 class="card-title mb-0"><i class="fas fa-oil-can me-2"></i>Oil</h3>
                 </div>
-            }
+                <div class="card-body">
+                    @if (Model.LatestOilUsage != null)
+                    {
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4">Date</dt>
+                            <dd class="col-sm-8">@Model.LatestOilUsage.OilDate.ToString("d MMM yyyy")</dd>
+
+                            <dt class="col-sm-4">Type</dt>
+                            <dd class="col-sm-8">@Model.LatestOilUsage.OilType</dd>
+
+                            <dt class="col-sm-4">Price</dt>
+                            <dd class="col-sm-8 text-success fw-bold">€@Model.LatestOilUsage.OilPrice</dd>
+
+                            <dt class="col-sm-4">Amount</dt>
+                            <dd class="col-sm-8">@Model.LatestOilUsage.OilAmount L</dd>
+                        </dl>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle me-2"></i>No oil records available
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Tires Card -->
+        <div class="col-12 col-lg-6">
+            <div class="card shadow-sm h-100">
+                <div class="card-header bg-info text-white">
+                    <h3 class="card-title mb-0"><i class="fas fa-car-side me-2"></i>Tires</h3>
+                </div>
+                <div class="card-body">
+                    @if (Model.LatestTireUsage != null)
+                    {
+                        <dl class="row mb-0">
+                            <dt class="col-sm-4">Date</dt>
+                            <dd class="col-sm-8">@Model.LatestTireUsage.TireDate.ToString("d MMM yyyy")</dd>
+
+                            <dt class="col-sm-4">Brand</dt>
+                            <dd class="col-sm-8">@Model.LatestTireUsage.TireBrand</dd>
+
+                            <dt class="col-sm-4">Price</dt>
+                            <dd class="col-sm-8 text-success fw-bold">€@Model.LatestTireUsage.TirePrice</dd>
+
+                            <dt class="col-sm-4">Size</dt>
+                            <dd class="col-sm-8">@Model.LatestTireUsage.TireSize</dd>
+                        </dl>
+                    }
+                    else
+                    {
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle me-2"></i>No tire records available
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,181 @@
+﻿@using VehicleDiary.Web.ViewModels
+@model DBTiresModelVM
+@using VehicleDiary.Core.Constants
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-6">
+            <div class="card shadow-sm mb-5">
+                <div class="card-body p-4">
+                    <h2 class="card-title mb-4">Tire Maintenance</h2>
+                    <form asp-action="Tires" method="post">
+                        <input type="hidden" asp-for="VehicleId" />
+
+                        <div class="row g-3">
+                            <!-- Price & Size -->
+                            <div class="col-md-6">
+                                <label asp-for="TirePrice" class="form-label">Set Price</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">€</span>
+                                    <input type="text" asp-for="TirePrice" class="form-control" placeholder="1200">
+                                </div>
+                                <span asp-validation-for="TirePrice" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="TireSize" class="form-label">Tire Size</label>
+                                <input type="text" asp-for="TireSize" class="form-control" placeholder="255/35 r18">
+                                <span asp-validation-for="TireSize" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Brand & Quantity -->
+                            <div class="col-md-6">
+                                <label asp-for="TireBrand" class="form-label">Brand</label>
+                                <input type="text" asp-for="TireBrand" class="form-control" placeholder="Michelin">
+                                <span asp-validation-for="TireBrand" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="TireAmount" class="form-label">Quantity</label>
+                                <div class="input-group">
+                                    <input type="text" asp-for="TireAmount" class="form-control" placeholder="4">
+                                    <span class="input-group-text">pcs</span>
+                                </div>
+                                <span asp-validation-for="TireAmount" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Type & Date -->
+                            <div class="col-md-6">
+                                <label asp-for="TireType" class="form-label">Tire Type</label>
+                                <select asp-for="TireType" asp-items="Html.GetEnumSelectList<TireTypesEnum>()"
+                                        class="form-select">
+                                    <option value="">Select Type</option>
+                                </select>
+                                <span asp-validation-for="TireType" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="TireDate" class="form-label">Change Date</label>
+                                <input type="date" asp-for="TireDate" class="form-control"
+                                       value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                                <span asp-validation-for="TireDate" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Optional Fields -->
+                            <div class="col-md-6">
+                                <label asp-for="TireChangedPrice" class="form-label">Installation Price (optional)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">€</span>
+                                    <input type="text" asp-for="TireChangedPrice" class="form-control" placeholder="120">
+                                </div>
+                                <span asp-validation-for="TireChangedPrice" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="TireShopWhereBought" class="form-label">Shop (optional)</label>
+                                <input type="text" asp-for="TireShopWhereBought" class="form-control" placeholder="TireWorld">
+                                <span asp-validation-for="TireShopWhereBought" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="col-12">
+                                <label asp-for="TireDescription" class="form-label">Notes (optional)</label>
+                                <input type="text" asp-for="TireDescription" class="form-control"
+                                       placeholder="Additional information">
+                                <span asp-validation-for="TireDescription" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="col-12 mt-4">
+                                <button class="btn btn-primary w-100" type="submit">
+                                    <i class="fas fa-tire me-2"></i>Save Record
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Maintenance History -->
+            <h3 class="h4 mb-4">Tire History</h3>
+            @if (Model.TireViews != null && Model.TireViews.Any())
+            {
+                <div class="row g-3">
+                    @foreach (var entry in Model.TireViews)
+                    {
+                        <div class="col-12">
+                            <div class="card shadow-sm mb-3">
+                                <div class="card-body p-3">
+                                    <div class="row align-items-center">
+                                        <!-- Date Column -->
+                                        <div class="col-md-3 mb-2 mb-md-0">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fas fa-calendar text-primary me-2"></i>
+                                                <span class="small">@entry.TireDate.ToString("d MMM yyyy")</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Details Column -->
+                                        <div class="col-md-5">
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <span class="badge bg-info">
+                                                    <i class="fas fa-tag me-1"></i>@entry.TireBrand
+                                                </span>
+                                                <span class="badge bg-secondary">
+                                                    <i class="fas fa-expand me-1"></i>@entry.TireSize
+                                                </span>
+                                                <span class="badge bg-success">
+                                                    <i class="fas fa-tire me-1"></i>@((TireTypesEnum)entry.TireType)
+                                                </span>
+                                                @if (!string.IsNullOrEmpty(entry.TireShopWhereBought))
+                                                {
+                                                    <span class="badge bg-warning text-dark">
+                                                        <i class="fas fa-store me-1"></i>@entry.TireShopWhereBought
+                                                    </span>
+                                                }
+                                            </div>
+                                        </div>
+
+                                        <!-- Price/Quantity Column -->
+                                        <div class="col-md-4 text-end">
+                                            <div class="d-flex flex-column">
+                                                <span class="text-success fw-bold">
+                                                    €@entry.TirePrice
+                                                </span>
+                                                <span class="text-muted small">
+                                                    @entry.TireAmount pcs
+                                                    @if (entry.TireChangedPrice > 0)
+                                                    {
+                                                        <span>+ €@entry.TireChangedPrice install</span>
+                                                    }
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @if (!string.IsNullOrEmpty(entry.TireDescription))
+                                    {
+                                        <div class="mt-3 pt-2 border-top">
+                                            <p class="mb-0 small text-muted">@entry.TireDescription</p>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info mb-0">
+                    <i class="fas fa-info-circle me-2"></i>No tire maintenance records found
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
