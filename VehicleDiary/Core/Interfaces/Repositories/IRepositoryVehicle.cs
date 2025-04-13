@@ -8,5 +8,6 @@ public interface IRepositoryVehicle : IRepositoryCrud<DBVehicleModel>
     Task<float> CalculatingTotalCostRepairAsync(Guid id);
     Task<DBVehicleModel?> AddingTotalCostRepairAsync(Guid id, float cost);
     Task<IEnumerable<DBVehicleModel>> GetDBByIDForUserAsync(string userID);
+    Task TryRemoveByIdAsync<TEntity>(DbSet<TEntity> dbSet, Guid id) where TEntity : class;
 }
 

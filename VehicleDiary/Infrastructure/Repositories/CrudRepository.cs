@@ -23,9 +23,9 @@ namespace VehicleDiary.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(Guid vehicleID)
         {
-            var user = await _context.Set<T>().FindAsync(id);
+            var user = await _context.Set<T>().FindAsync(vehicleID);
             if (user != null)
             {
                 _context.Set<T>().Remove(user);

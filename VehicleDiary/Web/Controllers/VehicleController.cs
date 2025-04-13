@@ -31,6 +31,12 @@ namespace VehicleDiary.Web.Controllers
             var returnView = _mapper.Map<IEnumerable<DBVehicleViewVM>>(vehicle);
             return View(returnView);
         }
+        [HttpDelete]
+        public async Task<IActionResult> Delete (Guid id)
+        {
+            await _vehicleService.DeleteVehicleAsync(id);
+            return Ok();
+        }
         public IActionResult Create()
         {
             return View();

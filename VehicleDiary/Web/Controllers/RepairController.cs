@@ -51,6 +51,11 @@ namespace VehicleDiary.Web.Controllers
 
             return View(ViewModelDB);
         }
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _repairService.RemovingAsync(id);
+            return Ok();
+        }
         public async Task<IActionResult> Create([FromQuery] Guid vehicleIDRoute)
         {
 

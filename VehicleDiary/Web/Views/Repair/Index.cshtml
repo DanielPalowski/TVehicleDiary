@@ -39,6 +39,9 @@
                                 <div class="col-md-4 text-end">
                                     <span class="h5 text-danger">€@entry.RepairCost</span>
                                 </div>
+                                <button onclick="deleteVehicle('@entry.Id')" class="btn btn-outline-danger">
+                                    <i class="fas fa-trash-alt me-2"></i>Delete
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -55,3 +58,21 @@
         }
     </div>
 </div>
+@section Scripts{
+    <script>
+        function deleteVehicle(vehicleID) {
+            if (confirm("Are you sure you want to delete this?")) {
+                $.ajax({
+                    url: "@Url.Action("Delete", "Repair")/" + vehicleID,
+                    type: "DELETE",
+                    success: function (result) {
+                        $("#vehicle-" + vehicleID).remove();
+                    },
+                    error: function (err) {
+                        alert("An error occurred.");
+                    }
+                });
+            }
+        }
+    </script>
+}

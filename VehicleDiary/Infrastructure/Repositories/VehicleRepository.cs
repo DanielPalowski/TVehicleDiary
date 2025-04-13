@@ -39,5 +39,17 @@ namespace VehicleDiary.Infrastructure.Repositories
         {
             return await _context.Set<DBVehicleModel>().Where(find => find.UserId == userID).ToListAsync();
         }
+        public async Task TryRemoveByIdAsync<TEntity>(DbSet<TEntity> dbSet, Guid vehicleID) where TEntity : class
+        {
+            // musí být volání stringu VehicleId protože to je generic type.
+            var entities = await dbSet
+                .Where(e => EF.Property<Guid>(e, "VehicleId") == vehicleID)
+                .ToListAsync();
+
+            if (entities.Any())
+            {
+                dbSet.RemoveRange(entities);
+            }
+        }
     }
 }

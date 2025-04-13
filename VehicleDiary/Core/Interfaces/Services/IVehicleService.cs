@@ -6,5 +6,6 @@ namespace VehicleDiary.Core.Interfaces.Services
     {
         Task AddVehicleAsync(VehicleDto vehicleDto);
         Task<IEnumerable<VehicleDto>> GettingVehiclesAsync(string userID);
+        Task DeleteVehicleAsync(Guid vehicleID);
     }
 }
