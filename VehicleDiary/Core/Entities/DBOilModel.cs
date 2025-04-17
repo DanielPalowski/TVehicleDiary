@@ -6,7 +6,8 @@ namespace VehicleDiary.Core.Entities
 {
     public class DBOilModel : IVehicleEntity
     {
-        public int Id { get; set; }
+        [Key]
+        public Guid Id { get; set; }
         [Required]
         public float OilAmount { get; set; }
         [Required]

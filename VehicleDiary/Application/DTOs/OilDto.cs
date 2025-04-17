@@ -2,6 +2,7 @@
 {
     public class OilDto
     {
+        public Guid Id { get; set; }
         public float OilAmount { get; set; }
         public DateTime OilDate { get; set; }
         public string OilType { get; set; }

@@ -6,7 +6,8 @@ namespace VehicleDiary.Core.Entities
 {
     public class DBPetrolModel : IVehicleEntity
     {
-        public int id { get; set; }
+        [Key]
+        public Guid id { get; set; }
         [Required]
         public DateTime PetrolDate { get; set; }
         [Required]

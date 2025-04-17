@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VehicleDiary.Application.DTOs;
+using VehicleDiary.Application.Services.MapperService;
 using VehicleDiary.Core.Entities;
 using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
@@ -37,6 +38,12 @@ namespace VehicleDiary.Web.Controllers
                 return RedirectToAction("Index", "CarUsage", new { vehicleIdRoute = dBTiresModelVM.VehicleId });
             }
             return View(dBTiresModelVM);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            await _service.RemovingAsync(Id);
+            return Ok();
         }
     }
 }

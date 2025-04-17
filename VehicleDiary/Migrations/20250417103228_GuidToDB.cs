@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VehicleDiary.Migrations
 {
     /// <inheritdoc />
-    public partial class NewDBFirstMigrationAfterAddingGuidAsID : Migration
+    public partial class GuidToDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -169,8 +169,9 @@ namespace VehicleDiary.Migrations
                     VIN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Power = table.Column<int>(type: "int", nullable: false),
                     Insurence = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Bought = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    RepairCost = table.Column<float>(type: "real", nullable: false),
+                    RepairCost = table.Column<float>(type: "real", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
@@ -185,12 +186,36 @@ namespace VehicleDiary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DBOilSet",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    OilAmount = table.Column<float>(type: "real", nullable: false),
+                    OilDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    OilType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OilMileage = table.Column<int>(type: "int", nullable: false),
+                    OilPrice = table.Column<float>(type: "real", nullable: false),
+                    OilDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DBOilSet", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DBOilSet_DBVehiclesSet_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "DBVehiclesSet",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DBPetrolSet",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PetrolDate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    PetrolDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     PetrolType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PetrolMileage = table.Column<int>(type: "int", nullable: true),
                     PetrolPrice = table.Column<float>(type: "real", nullable: false),
@@ -214,12 +239,11 @@ namespace VehicleDiary.Migrations
                 name: "DBRepairsSet",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RepairType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     RepairDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RepairCost = table.Column<float>(type: "real", nullable: false),
-                    RepairMade = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RepairMade = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RepairMileage = table.Column<int>(type: "int", nullable: false),
                     VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
@@ -236,11 +260,38 @@ namespace VehicleDiary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DBTiresSet",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    TirePrice = table.Column<float>(type: "real", nullable: false),
+                    TireAmount = table.Column<int>(type: "int", nullable: false),
+                    TireBrand = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TireType = table.Column<int>(type: "int", nullable: false),
+                    TireSize = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    TireDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TireChangedPrice = table.Column<float>(type: "real", nullable: true),
+                    TireShopWhereBought = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TireDescription = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DBTiresSet", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DBTiresSet_DBVehiclesSet_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "DBVehiclesSet",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DBVignetteSet",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     VignetteCountry = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VignetteValidFrom = table.Column<DateTime>(type: "datetime2", nullable: false),
                     VignetteValidTo = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -299,6 +350,11 @@ namespace VehicleDiary.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DBOilSet_VehicleId",
+                table: "DBOilSet",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DBPetrolSet_VehicleId",
                 table: "DBPetrolSet",
                 column: "VehicleId");
@@ -306,6 +362,11 @@ namespace VehicleDiary.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_DBRepairsSet_VehicleId",
                 table: "DBRepairsSet",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DBTiresSet_VehicleId",
+                table: "DBTiresSet",
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
@@ -338,10 +399,16 @@ namespace VehicleDiary.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "DBOilSet");
+
+            migrationBuilder.DropTable(
                 name: "DBPetrolSet");
 
             migrationBuilder.DropTable(
                 name: "DBRepairsSet");
+
+            migrationBuilder.DropTable(
+                name: "DBTiresSet");
 
             migrationBuilder.DropTable(
                 name: "DBVignetteSet");

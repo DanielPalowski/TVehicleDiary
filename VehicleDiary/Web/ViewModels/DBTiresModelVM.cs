@@ -6,6 +6,7 @@ namespace VehicleDiary.Web.ViewModels
 {
     public class DBTiresModelVM
     {
+        public Guid Id { get; set; }
         [Required]
         public float TirePrice { get; set; }
         [Required]

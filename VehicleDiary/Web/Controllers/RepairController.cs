@@ -51,6 +51,7 @@ namespace VehicleDiary.Web.Controllers
 
             return View(ViewModelDB);
         }
+        [HttpDelete]
         public async Task<IActionResult> Delete(Guid id)
         {
             await _repairService.RemovingAsync(id);

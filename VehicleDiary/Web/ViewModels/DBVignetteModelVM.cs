@@ -6,6 +6,7 @@ namespace VehicleDiary.Web.ViewModels
 {
     public class DBVignetteModelVM
     {
+        public Guid Id { get; set; }
         [Required]
         public string VignetteCountry { get; set; }
         [Required]

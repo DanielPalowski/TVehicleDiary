@@ -7,7 +7,8 @@ namespace VehicleDiary.Core.Entities
 {
     public class DBRepairsModel : IVehicleEntity
     {
-        public int Id { get; set; }
+        [Key]
+        public Guid Id { get; set; }
         [Required]
         public string RepairType { get; set; }
         public string? RepairDescription { get; set; }

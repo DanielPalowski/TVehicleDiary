@@ -6,6 +6,7 @@ namespace VehicleDiary.Web.ViewModels
 {
     public class DBPetrolModelVM
     {
+        public Guid Id { get; set; }
         [Required]
         public DateTime PetrolDate { get; set; }
         [Required]

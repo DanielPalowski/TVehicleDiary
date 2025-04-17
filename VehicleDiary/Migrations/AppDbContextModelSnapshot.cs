@@ -3,7 +3,6 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleDiary.Infrastructure.Data;
 
@@ -12,11 +11,9 @@ using VehicleDiary.Infrastructure.Data;
 namespace VehicleDiary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250330212241_AddingTiresAndDescriptionToOil")]
-    partial class AddingTiresAndDescriptionToOil
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,13 +224,11 @@ namespace VehicleDiary.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("VehicleDiary.Models.DBOilModel", b =>
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBOilModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -267,13 +262,11 @@ namespace VehicleDiary.Migrations
                     b.ToTable("DBOilSet");
                 });
 
-            modelBuilder.Entity("VehicleDiary.Models.DBPetrolModel", b =>
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBPetrolModel", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<Guid>("id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -281,9 +274,8 @@ namespace VehicleDiary.Migrations
                     b.Property<float>("PetrolAmount")
                         .HasColumnType("real");
 
-                    b.Property<string>("PetrolDate")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("PetrolDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("PetrolMileage")
                         .HasColumnType("int");
@@ -308,13 +300,11 @@ namespace VehicleDiary.Migrations
                     b.ToTable("DBPetrolSet");
                 });
 
-            modelBuilder.Entity("VehicleDiary.Models.DBRepairsModel", b =>
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBRepairsModel", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -325,9 +315,8 @@ namespace VehicleDiary.Migrations
                     b.Property<string>("RepairDescription")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RepairMade")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("RepairMade")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("RepairMileage")
                         .HasColumnType("int");
@@ -346,11 +335,62 @@ namespace VehicleDiary.Migrations
                     b.ToTable("DBRepairsSet");
                 });
 
-            modelBuilder.Entity("VehicleDiary.Models.DBVehicleModel", b =>
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBTiresModel", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TireAmount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TireBrand")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("TireChangedPrice")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime>("TireDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TireDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("TirePrice")
+                        .HasColumnType("real");
+
+                    b.Property<string>("TireShopWhereBought")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TireSize")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TireType")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("DBTiresSet");
+                });
+
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBVehicleModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("Bought")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -378,7 +418,7 @@ namespace VehicleDiary.Migrations
                     b.Property<int>("Power")
                         .HasColumnType("int");
 
-                    b.Property<float>("RepairCost")
+                    b.Property<float?>("RepairCost")
                         .HasColumnType("real");
 
                     b.Property<string>("UserId")
@@ -395,13 +435,11 @@ namespace VehicleDiary.Migrations
                     b.ToTable("DBVehiclesSet");
                 });
 
-            modelBuilder.Entity("VehicleDiary.Models.DBVignetteModel", b =>
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBVignetteModel", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
@@ -480,9 +518,9 @@ namespace VehicleDiary.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("VehicleDiary.Models.DBOilModel", b =>
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBOilModel", b =>
                 {
-                    b.HasOne("VehicleDiary.Models.DBVehicleModel", "Vehicle")
+                    b.HasOne("VehicleDiary.Core.Entities.DBVehicleModel", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -491,9 +529,9 @@ namespace VehicleDiary.Migrations
                     b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("VehicleDiary.Models.DBPetrolModel", b =>
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBPetrolModel", b =>
                 {
-                    b.HasOne("VehicleDiary.Models.DBVehicleModel", "Vehicle")
+                    b.HasOne("VehicleDiary.Core.Entities.DBVehicleModel", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -502,9 +540,9 @@ namespace VehicleDiary.Migrations
                     b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("VehicleDiary.Models.DBRepairsModel", b =>
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBRepairsModel", b =>
                 {
-                    b.HasOne("VehicleDiary.Models.DBVehicleModel", "Vehicle")
+                    b.HasOne("VehicleDiary.Core.Entities.DBVehicleModel", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -513,7 +551,18 @@ namespace VehicleDiary.Migrations
                     b.Navigation("Vehicle");
                 });
 
-            modelBuilder.Entity("VehicleDiary.Models.DBVehicleModel", b =>
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBTiresModel", b =>
+                {
+                    b.HasOne("VehicleDiary.Core.Entities.DBVehicleModel", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBVehicleModel", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
@@ -524,9 +573,9 @@ namespace VehicleDiary.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("VehicleDiary.Models.DBVignetteModel", b =>
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBVignetteModel", b =>
                 {
-                    b.HasOne("VehicleDiary.Models.DBVehicleModel", "Vehicle")
+                    b.HasOne("VehicleDiary.Core.Entities.DBVehicleModel", "Vehicle")
                         .WithMany()
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)

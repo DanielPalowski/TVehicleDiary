@@ -1,4 +1,5 @@
 ﻿using VehicleDiary.Application.DTOs;
+using VehicleDiary.Core.Interfaces.Repositories;
 
 namespace VehicleDiary.Core.Interfaces.Services
 {
@@ -6,5 +7,6 @@ namespace VehicleDiary.Core.Interfaces.Services
     {
         Task<IEnumerable<TireDto>>? GetAllTiresAsync(Guid vehicleIDRoute);
         Task AddingNewTiresAsync(TireDto tireDto);
+        Task RemovingAsync(Guid Id);
     }
 }

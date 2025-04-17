@@ -7,7 +7,8 @@ namespace VehicleDiary.Core.Entities
 {
     public class DBVignetteModel : IVehicleEntity
     {
-        public int ID { get; set; }
+        [Key]
+        public Guid ID { get; set; }
         [Required]
         public string VignetteCountry { get; set; }
         [Required]

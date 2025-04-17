@@ -37,9 +37,9 @@ namespace VehicleDiary.Application.Services.MapperService
             var entity = _mapper.Map<DBRepairsModel>(repairDto);
             await _repositoryCrud.AddAsync(entity);
         }
-        public async Task RemovingAsync(Guid vehicleIDRoute)
+        public async Task RemovingAsync(Guid Id)
         {
-            await _repositoryCrud.DeleteAsync(vehicleIDRoute);
+            await _repositoryCrud.DeleteAsync(Id);
         }
     }
 }

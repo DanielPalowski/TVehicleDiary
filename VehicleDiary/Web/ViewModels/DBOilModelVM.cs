@@ -6,6 +6,8 @@ namespace VehicleDiary.Web.ViewModels
 {
     public class DBOilModelVM
     {
+        public Guid Id { get; set; }
+
         [Required]
         public float OilAmount { get; set; }
         [Required]

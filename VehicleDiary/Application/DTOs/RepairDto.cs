@@ -5,12 +5,12 @@ namespace VehicleDiary.Application.DTOs
 {
     public class RepairDto
     {
-
+        public Guid Id { get; set; }
         public string RepairType { get; set; }
 
         public string? RepairDescription { get; set; }
 
-        public int RepairCost { get; set; }
+        public float RepairCost { get; set; }
 
         public string RepairMade { get; set; }
 

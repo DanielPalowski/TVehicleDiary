@@ -41,5 +41,11 @@ namespace VehicleDiary.Web.Controllers
             }
             return View(dBOilModelVM);
         }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            await _oilService.RemovingAsync(Id);
+            return Ok();
+        }
     }
 }

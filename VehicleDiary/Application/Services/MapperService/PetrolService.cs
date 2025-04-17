@@ -27,5 +27,9 @@ namespace VehicleDiary.Application.Services.MapperService
             var entity = _mapper.Map<DBPetrolModel>(petrolDto);
             await _repositoryCrud.AddAsync(entity);
         }
+        public async Task RemovingAsync(Guid Id)
+        {
+            await _repositoryCrud.DeleteAsync(Id);
+        }
     }
 }

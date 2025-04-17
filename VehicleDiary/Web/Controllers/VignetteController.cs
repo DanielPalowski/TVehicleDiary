@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using VehicleDiary.Application.DTOs;
 using VehicleDiary.Application.Services;
+using VehicleDiary.Application.Services.MapperService;
 using VehicleDiary.Core.Entities;
 using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
@@ -43,6 +44,12 @@ namespace VehicleDiary.Web.Controllers
 
             }
             return View(dBVignetteModelVM);
+        }
+        [HttpDelete]
+        public async Task<IActionResult> Delete(Guid Id)
+        {
+            await _vignetteService.RemovingAsync(Id);
+            return Ok();
         }
     }
 }

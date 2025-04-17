@@ -2,6 +2,7 @@
 {
     public class TireDto
     {
+        public Guid Id { get; set; }
         public float TirePrice { get; set; }
         public int TireAmount { get; set; }
         public string TireBrand { get; set; }
