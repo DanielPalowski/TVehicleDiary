@@ -1,0 +1,61 @@
+﻿@page
+@model LogoutModel
+@{
+    ViewData["Title"] = "Log out";
+    ViewBag.Footer = true;
+}
+
+<div class="split-container">
+    <div class="login-form">
+        <div class="title-section text-center">
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <h2>Ready to leave?</h2>
+                <p class="text-muted">Confirm below to log out of your account</p>
+            }
+            else
+            {
+                <h2>Signed Out</h2>
+                <p class="text-muted">You have successfully logged out</p>
+            }
+        </div>
+
+        @if (User.Identity?.IsAuthenticated ?? false)
+        {
+            <form asp-area="Identity"
+                  asp-page="/Account/Logout"
+                  asp-route-returnUrl="@Url.Page("/", new { area = "" })"
+                  method="post">
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit"
+                            class="btn btn-blue rounded-pill py-2 px-5 mb-3"
+                            style="color: white; min-width: 220px; max-width: 320px; width: 100%; min-height:50px; max-height:100%; height: 100%;">
+                        Log out
+                    </button>
+                </div>
+
+                <div class="auth-links text-center pt-2">
+                    <p class="text-sm">
+                        Changed your mind?
+                        <a asp-page="/Index" class="fw-semibold">Back to Home</a>
+                    </p>
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-success text-center rounded-pill py-2">
+                <i class="fas fa-check-circle me-2"></i> You are now logged out
+            </div>
+
+            <a class="w-100 btn btn-secondary mt-3 rounded-pill" asp-area="" asp-page="/Index">
+                Back to Home
+            </a>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

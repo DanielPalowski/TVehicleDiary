@@ -2,46 +2,71 @@
 @model DBRepairModelVM
 
 <div class="container py-4">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h3>Repair History</h3>
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <div>
+            <h1 class="display-6 fw-bold text-gradient">Repair History</h1>
+            <p class="text-muted">Track and manage all vehicle repairs</p>
+        </div>
         <a asp-controller="Repair" asp-action="Create" asp-route-vehicleIDRoute="@Model.vehicleId"
-           class="btn btn-primary">
-            <i class="fas fa-tools me-2"></i>New Repair
+           class="btn btn-primary btn-lg rounded-3 px-4 py-2 shadow-sm">
+            <i class="fas fa-plus-circle me-2"></i>New Repair
         </a>
     </div>
 
-    <div class="row g-3">
+    <!-- Repair List -->
+    <div class="row g-4">
         @if (Model.RepairsView != null && Model.RepairsView.Any())
         {
             @foreach (var entry in Model.RepairsView)
             {
                 <div class="col-12" id="repair-@entry.Id">
-                    <div class="card shadow-sm">
-                        <div class="card-body">
+                    <div class="card repair-card border-0 rounded-4 shadow-sm overflow-hidden">
+                        <div class="card-body p-4">
                             <div class="row align-items-center">
-                                <div class="col-md-4">
-                                    <h5 class="mb-0">@entry.RepairType</h5>
-                                    <small class="text-muted">@entry.RepairMade.ToString("d MMM yyyy")</small>
+                                <!-- Repair Type & Date -->
+                                <div class="col-md-4 mb-3 mb-md-0">
+                                    <div class="d-flex align-items-center">
+                                        <div class="repair-icon-container bg-primary bg-opacity-10 rounded-3 p-3 me-3">
+                                            <i class="fas fa-tools text-primary fa-lg"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="fw-bold mb-1">@entry.RepairType</h5>
+                                            <p class="text-muted mb-0">
+                                                <i class="far fa-calendar me-1"></i>
+                                                @entry.RepairMade.ToString("d MMM yyyy")
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="d-flex gap-2">
-                                        <span class="badge bg-primary">
+
+                                <!-- Mileage & Description -->
+                                <div class="col-md-4 mb-3 mb-md-0">
+                                    <div class="d-flex flex-column gap-2">
+                                        <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2">
+                                            <i class="fas fa-tachometer-alt me-1"></i>
                                             @entry.RepairMileage km
                                         </span>
                                         @if (!string.IsNullOrEmpty(entry.RepairDescription))
                                         {
-                                            <span class="badge bg-light text-dark">
-                                                <i class="fas fa-info-circle me-1"></i>@entry.RepairDescription
+                                            <span class="badge bg-light text-dark rounded-pill px-3 py-2">
+                                                <i class="fas fa-info-circle me-1"></i>
+                                                @entry.RepairDescription
                                             </span>
                                         }
                                     </div>
                                 </div>
-                                <div class="col-md-4 text-end">
-                                    <span class="h5 text-danger">€@entry.RepairCost</span>
+
+                                <!-- Cost & Actions -->
+                                <div class="col-md-4 d-flex align-items-center justify-content-between justify-content-md-end">
+                                    <div class="me-4">
+                                        <span class="h4 fw-bold text-danger">€@entry.RepairCost</span>
+                                    </div>
+                                    <button onclick="deleteRepair('@entry.Id')"
+                                            class="btn btn-outline-danger btn-sm rounded-3 px-3 py-2">
+                                        <i class="fas fa-trash-alt me-1"></i>Delete
+                                    </button>
                                 </div>
-                                <button onclick="deleteVehicle('@entry.Id')" class="btn btn-outline-danger">
-                                    <i class="fas fa-trash-alt me-2"></i>Delete
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -51,25 +76,83 @@
         else
         {
             <div class="col-12">
-                <div class="alert alert-info">
-                    <i class="fas fa-info-circle me-2"></i>No repair history found
+                <div class="alert alert-info rounded-4 border-0 shadow-sm p-4">
+                    <div class="d-flex align-items-center">
+                        <div class="alert-icon-container bg-info bg-opacity-10 rounded-3 p-3 me-3">
+                            <i class="fas fa-info-circle fa-2x text-info"></i>
+                        </div>
+                        <div>
+                            <h4 class="alert-heading">No repair history found</h4>
+                            <p class="mb-0">Start by adding your first repair record.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         }
     </div>
 </div>
-@section Scripts{
+
+<style>
+    .text-gradient {
+        background: linear-gradient(135deg, #0d6efd 0%, #6610f2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .repair-card {
+        transition: all 0.3s ease;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    }
+
+        .repair-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1) !important;
+        }
+
+    .repair-icon-container {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .alert-icon-container {
+        width: 60px;
+        height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .btn {
+        transition: all 0.2s ease;
+    }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+    .badge {
+        font-weight: 500;
+    }
+</style>
+
+@section Scripts {
     <script>
-        function deleteVehicle(ID) {
-            if (confirm("Are you sure you want to delete this?")) {
+        function deleteRepair(ID) {
+            if (confirm("Are you sure you want to delete this repair record?")) {
                 $.ajax({
                     url: "@Url.Action("Delete", "Repair")/" + ID,
                     type: "DELETE",
                     success: function (result) {
-                        $("#repair-" + ID).remove();
+                        $("#repair-" + ID).fadeOut(300, function () {
+                            $(this).remove();
+                        });
                     },
                     error: function (err) {
-                        alert("An error occurred.");
+                        alert("An error occurred while deleting the repair record.");
                     }
                 });
             }

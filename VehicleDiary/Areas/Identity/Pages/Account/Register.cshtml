@@ -8,16 +8,20 @@
     <div class="card shadow-lg mx-auto" style="max-width: 800px; border-radius: 1rem;">
         <div class="card-body p-5">
             <div class="text-center mb-5">
-                <h2 class="fw-bold mb-2">Create Your Account</h2>
+                <h2 class="fw-bold mb-2 text-primary">Create Your Account</h2>
                 <p class="text-muted">Start managing your vehicle maintenance</p>
             </div>
+
+            <!-- Validation Summary -->
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
             <div class="row g-4">
                 <div class="col-lg-6">
                     <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input asp-for="Input.Email" class="form-control"
+                                <input asp-for="Input.Email" class="form-control" 
+                                       autocomplete="username" aria-required="true"
                                        placeholder="name@example.com" />
                                 <label asp-for="Input.Email" class="form-label">
                                     <i class="fas fa-envelope me-2"></i>Email Address
@@ -28,119 +32,211 @@
 
                         <div class="mb-3">
                             <div class="form-floating">
-                                <input asp-for="Input.Password" class="form-control"
-                                       placeholder="password" />
+                                <input asp-for="Input.Password" class="form-control" 
+                                       autocomplete="new-password" aria-required="true"
+                                       placeholder="password" id="password" />
                                 <label asp-for="Input.Password" class="form-label">
                                     <i class="fas fa-lock me-2"></i>Password
                                 </label>
                             </div>
                             <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                            
+                            <!-- Password Requirements -->
+                            <div class="password-requirements mt-2">
+                                <div class="form-text">Password must contain:</div>
+                                <ul class="list-unstyled small mt-1">
+                                    <li id="req-length" class="text-danger"><i class="fas fa-times-circle me-1"></i>At least 6 characters</li>
+                                    <li id="req-uppercase" class="text-danger"><i class="fas fa-times-circle me-1"></i>One uppercase letter</li>
+                                    <li id="req-digit" class="text-danger"><i class="fas fa-times-circle me-1"></i>One number</li>
+                                    <li id="req-special" class="text-danger"><i class="fas fa-times-circle me-1"></i>One special character</li>
+                                </ul>
+                            </div>
                         </div>
 
                         <div class="mb-4">
                             <div class="form-floating">
-                                <input asp-for="Input.ConfirmPassword" class="form-control"
-                                       placeholder="password" />
+                                <input asp-for="Input.ConfirmPassword" class="form-control" 
+                                       autocomplete="new-password" aria-required="true"
+                                       placeholder="password" id="confirmPassword" />
                                 <label asp-for="Input.ConfirmPassword" class="form-label">
                                     <i class="fas fa-check-circle me-2"></i>Confirm Password
                                 </label>
                             </div>
                             <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                            <div id="password-match" class="form-text"></div>
                         </div>
 
                         <button id="registerSubmit" type="submit"
                                 class="w-100 btn btn-lg btn-primary py-3 fw-bold">
-                            Create Account
+                            <span id="submitText">Create Account</span>
+                            <div id="submitSpinner" class="spinner-border spinner-border-sm d-none" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
                         </button>
                     </form>
                 </div>
 
                 <div class="col-lg-6">
-                    <div class="auth-divider d-flex align-items-center my-4">
-                        <span class="text-muted mx-3">OR</span>
-                    </div>
-
-                    @if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                    @if ((Model.ExternalLogins?.Count ?? 0) > 0)
                     {
-                        <div class="alert alert-info">
-                            <i class="fas fa-info-circle me-2"></i>
-                            No external authentication providers configured.
+                        <div class="auth-divider d-flex align-items-center my-4">
+                            <span class="text-muted mx-3">OR</span>
                         </div>
-                    }
-                    else
-                    {
-                        <form id="external-account" asp-page="./ExternalLogin" method="post">
+
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
                             <div class="d-grid gap-2">
                                 @foreach (var provider in Model.ExternalLogins!)
                                 {
                                     <button type="submit" class="btn btn-outline-secondary text-start py-2"
-                                            name="provider" value="@provider.Name">
-                                        <i class="fab fa-@provider.DisplayName.ToLower() me-2"></i>
+                                            name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                        <i class="fab fa-@provider.Name.ToLower() me-2"></i>
                                         Continue with @provider.DisplayName
                                     </button>
                                 }
                             </div>
                         </form>
                     }
+                    else
+                    {
+                        <div class="alert alert-info mt-4">
+                            <i class="fas fa-info-circle me-2"></i>
+                            No external authentication providers configured.
+                        </div>
+                    }
                 </div>
             </div>
 
             <div class="text-center mt-4 text-muted">
                 Already have an account?
-                <a asp-page="./Login" class="text-decoration-none">Sign in here</a>
+                <a asp-page="./Login" class="text-decoration-none fw-semibold">Sign in here</a>
             </div>
         </div>
     </div>
 </div>
 
-<style>
-    .auth-container {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        padding: 2rem 0;
-        background: #f8f9fa;
-    }
-
-    .auth-divider {
-        color: #dee2e6;
-    }
-
-        .auth-divider::before,
-        .auth-divider::after {
-            content: "";
-            flex: 1;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-    .form-control {
-        border-radius: 0.5rem;
-        padding: 1rem;
-    }
-
-    .btn-primary {
-        background: #2563eb;
-        border: none;
-        border-radius: 0.5rem;
-        transition: all 0.3s ease;
-    }
-
-        .btn-primary:hover {
-            background: #1d4ed8;
-            transform: translateY(-1px);
-        }
-
-    .btn-outline-secondary {
-        border: 1px solid #dee2e6;
-        border-radius: 0.5rem;
-        transition: all 0.2s ease;
-    }
-
-        .btn-outline-secondary:hover {
-            background: #f8f9fa;
-        }
-</style>
-
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('registerForm');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const passwordMatch = document.getElementById('password-match');
+            const submitBtn = document.getElementById('registerSubmit');
+            const submitText = document.getElementById('submitText');
+            const submitSpinner = document.getElementById('submitSpinner');
+            
+            // Initialize requirement indicators for empty password
+            const initialRequirements = validatePassword('');
+            updateRequirementIndicators(initialRequirements);
+            
+            // Password validation logic
+            function validatePassword(password) {
+                const requirements = {
+                    length: password.length >= 6,
+                    uppercase: /[A-Z]/.test(password),
+                    digit: /\d/.test(password),
+                    special: /[!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)
+                };
+                
+                return requirements;
+            }
+            
+            // Update requirement indicators
+            function updateRequirementIndicators(requirements) {
+                const reqLength = document.getElementById('req-length');
+                const reqUppercase = document.getElementById('req-uppercase');
+                const reqDigit = document.getElementById('req-digit');
+                const reqSpecial = document.getElementById('req-special');
+                
+                if (reqLength) {
+                    reqLength.className = requirements.length ? 'text-success' : 'text-danger';
+                    reqLength.innerHTML = requirements.length ? 
+                        '<i class="fas fa-check-circle me-1"></i>At least 6 characters' : 
+                        '<i class="fas fa-times-circle me-1"></i>At least 6 characters';
+                }
+                
+                if (reqUppercase) {
+                    reqUppercase.className = requirements.uppercase ? 'text-success' : 'text-danger';
+                    reqUppercase.innerHTML = requirements.uppercase ? 
+                        '<i class="fas fa-check-circle me-1"></i>One uppercase letter' : 
+                        '<i class="fas fa-times-circle me-1"></i>One uppercase letter';
+                }
+                
+                if (reqDigit) {
+                    reqDigit.className = requirements.digit ? 'text-success' : 'text-danger';
+                    reqDigit.innerHTML = requirements.digit ? 
+                        '<i class="fas fa-check-circle me-1"></i>One number' : 
+                        '<i class="fas fa-times-circle me-1"></i>One number';
+                }
+                
+                if (reqSpecial) {
+                    reqSpecial.className = requirements.special ? 'text-success' : 'text-danger';
+                    reqSpecial.innerHTML = requirements.special ? 
+                        '<i class="fas fa-check-circle me-1"></i>One special character' : 
+                        '<i class="fas fa-times-circle me-1"></i>One special character';
+                }
+            }
+            
+            // Check if passwords match
+            function checkPasswordMatch() {
+                if (!confirmPasswordInput.value) {
+                    passwordMatch.innerHTML = '';
+                    return false;
+                }
+                
+                if (passwordInput.value !== confirmPasswordInput.value) {
+                    passwordMatch.className = 'text-danger';
+                    passwordMatch.innerHTML = '<i class="fas fa-times-circle me-1"></i>Passwords do not match';
+                    return false;
+                } else {
+                    passwordMatch.className = 'text-success';
+                    passwordMatch.innerHTML = '<i class="fas fa-check-circle me-1"></i>Passwords match';
+                    return true;
+                }
+            }
+            
+            // Event listeners
+            if (passwordInput) {
+                passwordInput.addEventListener('input', function () {
+                    const requirements = validatePassword(this.value);
+                    updateRequirementIndicators(requirements);
+                    checkPasswordMatch();
+                });
+            }
+            
+            if (confirmPasswordInput) {
+                confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+            }
+            
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    // Check if form is valid before showing loading state
+                    if (!form.checkValidity()) {
+                        // If form is invalid, don't show loading state
+                        return;
+                    }
+                    
+                    const password = passwordInput.value;
+                    const requirements = validatePassword(password);
+                    const isPasswordValid = requirements.length && requirements.uppercase && 
+                                           requirements.digit && requirements.special;
+                    
+                    if (!isPasswordValid || !checkPasswordMatch()) {
+                        // Prevent form submission if password is invalid
+                        e.preventDefault();
+                        
+                        // Show all validation errors
+                        form.classList.add('was-validated');
+                        return;
+                    }
+                    
+                    // Show loading state only if form is valid
+                    submitText.classList.add('d-none');
+                    submitSpinner.classList.remove('d-none');
+                    submitBtn.disabled = true;
+                });
+            }
+        });
+    </script>
 }

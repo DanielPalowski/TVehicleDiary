@@ -4,10 +4,10 @@
 
 <div class="container-fluid px-0">
     <!-- Hero Section -->
-    <div class="bg-light py-5">
-        <div class="container text-center py-5">
-            <h1 class="display-4 mb-4">Welcome to VehicleDiary 🚗</h1>
-            <p class="lead text-muted mb-4">
+    <div class=" py-5" style="background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);">
+        <div class="container text-center py-5" >
+            <h1 class="display-4 mb-4 fw-bold text-white">Welcome to VehicleDiary </h1>
+            <p class="lead mb-4" style="color: rgb(230,230,230)">
                 Your comprehensive vehicle management solution<br>
                 Track maintenance, repairs, fuel consumption, and costs all in one place
             </p>
@@ -15,7 +15,8 @@
                 <a asp-controller="Vehicle" asp-action="Create" class="btn btn-primary btn-lg px-4 gap-3">
                     <i class="fas fa-plus-circle me-2"></i>Add New Vehicle
                 </a>
-                <a asp-controller="Home" asp-action="Features" class="btn btn-outline-secondary btn-lg px-4">
+                <a asp-controller="Home" asp-action="Features"
+                   class="btn btn-outline-white btn-lg px-4">
                     Learn More
                 </a>
             </div>
@@ -25,42 +26,45 @@
     <!-- Features Grid -->
     <div class="container py-5">
         <div class="row g-4 py-5">
+
             <div class="col-md-4">
-                <div class="card shadow-sm h-100 border-0">
-                    <div class="card-body text-center">
-                        <div class="feature-icon bg-primary bg-gradient mb-3">
-                            <i class="fas fa-wrench fa-3x text-white"></i>
+                <div class="card h-100 border-0 rounded-4 shadow-lg feature-card feature-card-1">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-primary bg-gradient mb-4 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:70px; height:70px;">
+                            <i class="fas fa-wrench fa-2x text-white"></i>
                         </div>
-                        <h3>Maintenance Tracking</h3>
+                        <h3 class="fw-semibold mb-3 fw-bold">Maintenance Tracking</h3>
                         <p class="text-muted">Record and monitor all vehicle services, repairs, and maintenance schedules</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
-                <div class="card shadow-sm h-100 border-0">
-                    <div class="card-body text-center">
-                        <div class="feature-icon bg-success bg-gradient mb-3">
-                            <i class="fas fa-gas-pump fa-3x text-white"></i>
+                <div class="card h-100 border-0 rounded-4 shadow-lg feature-card feature-card-2">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-success bg-gradient mb-4 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:70px; height:70px;">
+                            <i class="fas fa-gas-pump fa-2x text-white"></i>
                         </div>
-                        <h3>Fuel Management</h3>
+                        <h3 class="fw-semibold mb-3 fw-bold">Fuel Management</h3>
                         <p class="text-muted">Track fuel consumption, costs, and analyze your vehicle's efficiency</p>
                     </div>
                 </div>
             </div>
+
             <div class="col-md-4">
-                <div class="card shadow-sm h-100 border-0">
-                    <div class="card-body text-center">
-                        <div class="feature-icon bg-info bg-gradient mb-3">
-                            <i class="fas fa-chart-line fa-3x text-white"></i>
+                <div class="card h-100 border-0 rounded-4 shadow-lg feature-card feature-card-3">
+                    <div class="card-body text-center p-4">
+                        <div class="feature-icon bg-info bg-gradient mb-4 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:70px; height:70px;">
+                            <i class="fas fa-chart-line fa-2x text-white"></i>
                         </div>
-                        <h3>Cost Analytics</h3>
+                        <h3 class="fw-semibold mb-3 fw-bold">Cost Analytics</h3>
                         <p class="text-muted">Visualize and understand your vehicle's operational costs over time</p>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-
     <!-- CTA Section -->
     <div class="bg-dark text-white py-5">
         <div class="container text-center py-5">

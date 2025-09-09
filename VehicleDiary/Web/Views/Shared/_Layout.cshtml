@@ -39,12 +39,40 @@
                             </li>
                         </ul>
 
-                        <!-- Logout Button -->
-                        <form class="d-flex ms-auto" asp-area="Identity" asp-page="/Account/Logout" method="post">
-                            <button type="submit" class="btn btn-link text-dark text-decoration-none px-3 py-2">
-                                <i class="fas fa-sign-out-alt me-2"></i>Sign Out
-                            </button>
-                        </form>
+                        <!-- User Info and Logout -->
+                        <div class="d-flex align-items-center ms-auto">
+                            <!-- User Welcome -->
+                            <div class="user-welcome me-3 d-none d-md-block">
+                                <span class="text-muted small">Hi,</span>
+                                <span class="fw-semibold text-dark">@User.Identity.Name</span>
+                            </div>
+
+                            <!-- User Avatar Dropdown -->
+                            <div class="dropdown">
+                                <button class="btn p-0 border-0" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <div class="user-avatar d-flex align-items-center">
+                                        <div class="avatar-circle bg-primary text-white d-flex align-items-center justify-content-center">
+                                            <i class="fas fa-user"></i>
+                                        </div>
+                                        <span class="d-md-none ms-2 text-dark">@User.Identity.Name</span>
+                                    </div>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown">
+                                    <li class="dropdown-item-text d-md-none">
+                                        <div class="fw-semibold">@User.Identity.Name</div>
+                                        <div class="small text-muted">Welcome back!</div>
+                                    </li>
+                                    <li><hr class="dropdown-divider d-md-none"></li>
+                                    <li>
+                                        <a class="dropdown-item text-danger"
+                                           asp-area="Identity"
+                                           asp-page="/Account/Logout">
+                                            <i class="fas fa-sign-out-alt me-2"></i>Sign Out
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     }
                     else
                     {
@@ -96,5 +124,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
