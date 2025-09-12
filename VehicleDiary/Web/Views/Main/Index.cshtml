@@ -2,119 +2,745 @@
     ViewBag.IsFooter = true;
 }
 
-<div class="container-fluid px-0">
+<div class="vehicle-diary-home">
     <!-- Hero Section -->
-    <div class=" py-5" style="background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);">
-        <div class="container text-center py-5" >
-            <h1 class="display-4 mb-4 fw-bold text-white">Welcome to VehicleDiary </h1>
-            <p class="lead mb-4" style="color: rgb(230,230,230)">
-                Your comprehensive vehicle management solution<br>
-                Track maintenance, repairs, fuel consumption, and costs all in one place
-            </p>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <a asp-controller="Vehicle" asp-action="Create" class="btn btn-primary btn-lg px-4 gap-3">
-                    <i class="fas fa-plus-circle me-2"></i>Add New Vehicle
-                </a>
-                <a asp-controller="Home" asp-action="Features"
-                   class="btn btn-outline-white btn-lg px-4">
-                    Learn More
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Features Grid -->
-    <div class="container py-5">
-        <div class="row g-4 py-5">
-
-            <div class="col-md-4">
-                <div class="card h-100 border-0 rounded-4 shadow-lg feature-card feature-card-1">
-                    <div class="card-body text-center p-4">
-                        <div class="feature-icon bg-primary bg-gradient mb-4 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:70px; height:70px;">
-                            <i class="fas fa-wrench fa-2x text-white"></i>
-                        </div>
-                        <h3 class="fw-semibold mb-3 fw-bold">Maintenance Tracking</h3>
-                        <p class="text-muted">Record and monitor all vehicle services, repairs, and maintenance schedules</p>
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">Welcome to <span class="brand-gradient">VehicleDiary</span></h1>
+                    <p class="hero-subtitle">Your all-in-one vehicle management solution. Track maintenance, repairs, fuel consumption, and costs in one intuitive platform.</p>
+                    <div class="hero-actions">
+                        <a asp-controller="Vehicle" asp-action="Create" class="btn btn-primary btn-hero">
+                            <i class="fas fa-plus-circle me-2"></i>Add Your Vehicle
+                        </a>
+                        <a asp-controller="Vehicle" asp-action="Features" class="btn btn-outline-light btn-hero">
+                            Discover Features
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="floating-card card-1">
+                        <i class="fas fa-tools"></i>
+                        <p>Oil Change</p>
+                        <span>€89.99</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-gas-pump"></i>
+                        <p>Fuel Refill</p>
+                        <span>€65.50</span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <i class="fas fa-car-battery"></i>
+                        <p>Battery</p>
+                        <span>€129.99</span>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 border-0 rounded-4 shadow-lg feature-card feature-card-2">
-                    <div class="card-body text-center p-4">
-                        <div class="feature-icon bg-success bg-gradient mb-4 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:70px; height:70px;">
-                            <i class="fas fa-gas-pump fa-2x text-white"></i>
-                        </div>
-                        <h3 class="fw-semibold mb-3 fw-bold">Fuel Management</h3>
-                        <p class="text-muted">Track fuel consumption, costs, and analyze your vehicle's efficiency</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 border-0 rounded-4 shadow-lg feature-card feature-card-3">
-                    <div class="card-body text-center p-4">
-                        <div class="feature-icon bg-info bg-gradient mb-4 rounded-circle d-inline-flex align-items-center justify-content-center" style="width:70px; height:70px;">
-                            <i class="fas fa-chart-line fa-2x text-white"></i>
-                        </div>
-                        <h3 class="fw-semibold mb-3 fw-bold">Cost Analytics</h3>
-                        <p class="text-muted">Visualize and understand your vehicle's operational costs over time</p>
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
-    <!-- CTA Section -->
-    <div class="bg-dark text-white py-5">
-        <div class="container text-center py-5">
-            <h2 class="mb-4">Ready to Get Started?</h2>
-            <p class="lead mb-4">Add your first vehicle and begin tracking its history today</p>
-            <a asp-controller="Vehicle" asp-action="Create" class="btn btn-light btn-lg">
-                <i class="fas fa-car me-2"></i>Add Your Vehicle Now
-            </a>
-        </div>
-    </div>
+    </section>
 
     <!-- Stats Section -->
-    <div class="container py-5">
-        <div class="row text-center">
-            <div class="col-md-3">
-                <h3 class="text-primary">1M+</h3>
-                <p class="text-muted">Vehicles Tracked</p>
-            </div>
-            <div class="col-md-3">
-                <h3 class="text-success">€10M+</h3>
-                <p class="text-muted">In Maintenance Costs Analyzed</p>
-            </div>
-            <div class="col-md-3">
-                <h3 class="text-info">500K+</h3>
-                <p class="text-muted">Fuel Records</p>
-            </div>
-            <div class="col-md-3">
-                <h3 class="text-warning">24/7</h3>
-                <p class="text-muted">Vehicle Monitoring</p>
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="stat-data">
+                        <span class="stat-number" data-count="5000">0</span>
+                        <span class="stat-label">Vehicles Tracked</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <div class="stat-data">
+                        <span class="stat-number" data-count="25000">0</span>
+                        <span class="stat-label">Services Logged</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-euro-sign"></i>
+                    </div>
+                    <div class="stat-data">
+                        <span class="stat-number" data-count="1.2">0</span>
+                        <span class="stat-label">Million Saved</span>
+                    </div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-data">
+                        <span class="stat-number" data-count="4200">0</span>
+                        <span class="stat-label">Active Users</span>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose VehicleDiary?</h2>
+                <p>Comprehensive vehicle management with powerful tracking features</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wrench"></i>
+                    </div>
+                    <h3>Maintenance Tracking</h3>
+                    <p>Record and monitor all vehicle services, repairs, and maintenance schedules with our intuitive system.</p>
+                    <ul class="feature-benefits">
+                        <li><i class="fas fa-check"></i> Service reminders</li>
+                        <li><i class="fas fa-check"></i> Repair history</li>
+                        <li><i class="fas fa-check"></i> Maintenance scheduling</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gas-pump"></i>
+                    </div>
+                    <h3>Fuel Management</h3>
+                    <p>Track fuel consumption, costs, and analyze your vehicle's efficiency over time.</p>
+                    <ul class="feature-benefits">
+                        <li><i class="fas fa-check"></i> Fuel consumption tracking</li>
+                        <li><i class="fas fa-check"></i> Cost analysis</li>
+                        <li><i class="fas fa-check"></i> Efficiency reports</li>
+                    </ul>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Cost Analytics</h3>
+                    <p>Visualize and understand your vehicle's operational costs with detailed analytics and reports.</p>
+                    <ul class="feature-benefits">
+                        <li><i class="fas fa-check"></i> Expense categorization</li>
+                        <li><i class="fas fa-check"></i> Cost forecasting</li>
+                        <li><i class="fas fa-check"></i> Budget planning</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Start managing your vehicle in three simple steps</p>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Add Your Vehicle</h3>
+                        <p>Enter your vehicle details to get started with our comprehensive tracking system.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Log Services & Expenses</h3>
+                        <p>Record fuel fills, maintenance, repairs, and other vehicle-related expenses.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Analyze & Save</h3>
+                        <p>Use our insights to understand your costs and optimize your vehicle maintenance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Take Control of Your Vehicle Expenses?</h2>
+                <p>Join thousands of vehicle owners who are saving time and money with VehicleDiary</p>
+                <a asp-controller="Vehicle" asp-action="Create" class="btn btn-light btn-large">
+                    <i class="fas fa-car me-2"></i>Get Started Now
+                </a>
+            </div>
+        </div>
+    </section>
 </div>
 
 <style>
+    /* Global Styles */
+    .vehicle-diary-home {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #333;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);
+        color: white;
+        padding: 80px 0;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .hero-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+    }
+
+    .hero-text {
+        flex: 1;
+        max-width: 550px;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    .brand-gradient {
+        background: linear-gradient(90deg, #8B5CF6, #EC4899);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .hero-subtitle {
+        font-size: 1.25rem;
+        margin-bottom: 30px;
+        line-height: 1.6;
+        opacity: 0.9;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .btn-hero {
+        padding: 12px 30px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        border: none;
+    }
+
+    .btn-outline-light {
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        background: transparent;
+        color: white;
+    }
+
+        .btn-outline-light:hover {
+            background: white;
+            color: #0F52BA;
+        }
+
+    .hero-visual {
+        flex: 1;
+        position: relative;
+        min-height: 300px;
+    }
+
+    .main-visual {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 250px;
+        width: 100%;
+    }
+
+    .dashboard-img {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+        filter: invert(1);
+        opacity: 0.8;
+    }
+
+    .floating-card {
+        position: absolute;
+        background: white;
+        color: #0F52BA;
+        padding: 12px 15px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        animation: float 5s infinite ease-in-out;
+    }
+
+        .floating-card i {
+            font-size: 1.2rem;
+        }
+
+        .floating-card span {
+            margin-left: auto;
+            font-weight: 700;
+            color: #059669;
+        }
+
+    .card-1 {
+        top: 0;
+        left: 0;
+        animation-delay: 0s;
+    }
+
+    .card-2 {
+        top: 40%;
+        right: 0;
+        animation-delay: 1s;
+    }
+
+    .card-3 {
+        bottom: 0;
+        left: 20%;
+        animation-delay: 2s;
+    }
+
+    @@keyframes float {
+        0%, 100%
+
+    {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    }
+
+    /* Stats Section */
+    .stats-section {
+        padding: 80px 0;
+        background: #f8fafc;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+    }
+
+    .stat-item {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        background: white;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+    }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+    .stat-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.8rem;
+    }
+
+    .stat-data {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: #0F52BA;
+        line-height: 1;
+    }
+
+    .stat-label {
+        color: #64748b;
+        font-weight: 500;
+    }
+
+    /* Features Section */
+    .features-section {
+        padding: 100px 0;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .feature-card {
+        background: white;
+        padding: 40px 30px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        text-align: center;
+        border: 1px solid #f1f5f9;
+    }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
     .feature-icon {
         width: 80px;
         height: 80px;
-        border-radius: 50%;
-        display: inline-flex;
+        background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);
+        border-radius: 20px;
+        display: flex;
         align-items: center;
+        justify-content: center;
+        margin: 0 auto 25px;
+        color: white;
+        font-size: 2rem;
+    }
+
+    .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+        color: #1e293b;
+    }
+
+    .feature-card p {
+        color: #64748b;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+
+    .feature-benefits {
+        list-style: none;
+        padding: 0;
+        text-align: left;
+    }
+
+        .feature-benefits li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            color: #475569;
+        }
+
+        .feature-benefits i {
+            color: #10b981;
+            margin-right: 10px;
+        }
+
+    /* How It Works */
+    .how-it-works {
+        padding: 100px 0;
+        background: #f8fafc;
+    }
+
+    .steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 40px;
+        counter-reset: step-counter;
+    }
+
+    .step {
+        display: flex;
+        gap: 20px;
+        position: relative;
+    }
+
+    .step-number {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: 700;
+        flex-shrink: 0;
+    }
+
+    .step-content h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+        color: #1e293b;
+    }
+
+    .step-content p {
+        color: #64748b;
+        line-height: 1.6;
+    }
+
+    /* Testimonials */
+    .testimonials {
+        padding: 100px 0;
+    }
+
+    .testimonial-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+
+    .testimonial-card {
+        background: white;
+        padding: 30px;
+        border-radius: 16px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        border: 1px solid #f1f5f9;
+    }
+
+    .testimonial-content {
+        margin-bottom: 25px;
+        padding: 20px;
+        background: #f8fafc;
+        border-radius: 12px;
+        font-style: italic;
+        color: #475569;
+        line-height: 1.6;
+        position: relative;
+    }
+
+        .testimonial-content:after {
+            content: '"';
+            font-size: 4rem;
+            color: #e2e8f0;
+            position: absolute;
+            bottom: -20px;
+            right: 20px;
+            line-height: 1;
+        }
+
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .author-avatar {
+        width: 50px;
+        height: 50px;
+        background: #e2e8f0;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64748b;
+    }
+
+    .author-details h4 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #1e293b;
+    }
+
+    .author-details p {
+        margin: 0;
+        color: #64748b;
+        font-size: 0.9rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+    }
+
+    .cta-content h2 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
+
+    .cta-content p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn-light {
+        background: white;
+        color: #0F52BA;
+        border: none;
+        padding: 15px 40px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+
+        .btn-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+    /* Responsive Design */
+    @@media (max-width: 992px) {
+        .hero-content
+
+    {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-text {
+        max-width: 100%;
+    }
+
+    .hero-actions {
         justify-content: center;
     }
 
-    .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    .hero-title {
+        font-size: 2.8rem;
     }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
+    .floating-card {
+        display: none;
+    }
+
+    }
+
+    @@media (max-width: 768px) {
+        .section-header h2
+
+    {
+        font-size: 2rem;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .features-grid,
+    .testimonial-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .step {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    }
 </style>
+
+<script>
+    // Animate stats counting
+    document.addEventListener('DOMContentLoaded', function() {
+        const statElements = document.querySelectorAll('.stat-number');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const target = parseInt(element.getAttribute('data-count'));
+                    const suffix = element.textContent.includes('M') ? 'M' : '';
+                    const duration = 2000;
+                    const steps = 60;
+                    const stepValue = target / steps;
+                    let current = 0;
+
+                    const timer = setInterval(() => {
+                        current += stepValue;
+                        if (current >= target) {
+                            element.textContent = suffix ? target + suffix : target;
+                            clearInterval(timer);
+                        } else {
+                            element.textContent = suffix ? Math.round(current) + suffix : Math.round(current);
+                        }
+                    }, duration / steps);
+
+                    observer.unobserve(element);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        statElements.forEach(el => observer.observe(el));
+    });
+</script>

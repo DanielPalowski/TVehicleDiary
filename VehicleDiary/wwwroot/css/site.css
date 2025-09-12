@@ -297,6 +297,175 @@ body {
     }
 }
 
+
+
+/* Service History Form Styles - 2025 Modern Design */
+.service-history-card {
+    border: none;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+    .service-history-card:hover {
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+        transform: translateY(-5px);
+    }
+
+.service-history-title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #1e293b;
+    position: relative;
+    padding-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+}
+
+    .service-history-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #2563eb, #3b82f6);
+        border-radius: 2px;
+    }
+
+.service-form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #374151;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+/* Modré ikony v popiscích formuláøe */
+.service-icon-blue {
+    color: #2563eb !important;
+    width: 18px;
+    text-align: center;
+}
+
+/* Bílé ikony v tlaèítkách */
+.service-icon-white {
+    color: #ffffff !important;
+}
+
+.service-form-control {
+    padding: 0.875rem 1rem;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background-color: #ffffff;
+    color: #1f2937;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+    .service-form-control:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+.service-input-group {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+    .service-input-group .input-group-text {
+        background-color: #f9fafb;
+        border: 1px solid #e5e7eb;
+        color: #374151;
+        padding: 0.875rem 1rem;
+    }
+
+.service-textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.service-submit-btn {
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    border: none;
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+}
+
+    .service-submit-btn:hover {
+        background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+    }
+
+/* Custom select styling */
+.service-form-control[type="select"] {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%232563eb' viewBox='0 0 16 16'%3E%3Cpath d='M8 12L2 6h12L8 12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px;
+    padding-right: 2.5rem;
+}
+
+/* Loading animation */
+.service-loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255,255,255,.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: service-spin 1s ease-in-out infinite;
+    margin-left: 10px;
+}
+
+@keyframes service-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Animation for form elements */
+.service-form-control, .service-input-group {
+    animation: service-fadeIn 0.5s ease forwards;
+}
+
+@keyframes service-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .service-history-title {
+        font-size: 1.5rem;
+    }
+
+    .service-history-card .card-body {
+        padding: 1.5rem;
+    }
+}
+
+
+
+
+
+
+
 /* NavBar LogOut a Name */
 .user-avatar {
     cursor: pointer;

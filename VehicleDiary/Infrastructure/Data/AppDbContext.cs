@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using VehicleDiary.Core.Entities;
+using System.Security.Permissions;
 
 
 
@@ -19,5 +20,6 @@ namespace VehicleDiary.Infrastructure.Data
         public DbSet<DBVignetteModel> DBVignetteSet { get; set; }
         public DbSet<DBOilModel> DBOilSet { get; set; }
         public DbSet<DBTiresModel> DBTiresSet { get; set; }
+        public DbSet<DBRepairVehicleModel> DBRepairVehicleModelsSet { get; set; }
     }
 }

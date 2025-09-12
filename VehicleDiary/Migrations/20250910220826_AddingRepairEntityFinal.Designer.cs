@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VehicleDiary.Infrastructure.Data;
 
@@ -11,9 +12,11 @@ using VehicleDiary.Infrastructure.Data;
 namespace VehicleDiary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250910220826_AddingRepairEntityFinal")]
+    partial class AddingRepairEntityFinal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -310,6 +313,7 @@ namespace VehicleDiary.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ReapairVNotes")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RepairVCategory")
