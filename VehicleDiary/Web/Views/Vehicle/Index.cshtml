@@ -1,26 +1,41 @@
 ﻿@using VehicleDiary.Core.Entities;
 @model IEnumerable<VehicleDiary.Web.ViewModels.DBVehicleViewVM>
 
+@{
+    var AddingVehicle = Model.Count() < 3;
+}
 <div class="container py-4">
-    <!-- Modernized "Add New Vehicle" button -->
-    <div class="row mb-5">
-        <div class="col-12">
-            <div class="d-grid">
-                <a asp-controller="Vehicle" asp-action="Create"
-                   class="btn-add-vehicle rounded-4 shadow-lg py-3 px-4 text-decoration-none">
-                    <div class="d-flex align-items-center justify-content-center">
-                        <div class="btn-icon-container me-3">
-                            <i class="fas fa-plus-circle"></i>
+@if (AddingVehicle)
+{
+    
+        <!-- Modernized "Add New Vehicle" button -->
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="d-grid">
+                    <a asp-controller="Vehicle" asp-action="Create"
+                       class="btn-add-vehicle rounded-4 shadow-lg py-3 px-4 text-decoration-none">
+                        <div class="d-flex align-items-center justify-content-center">
+                            <div class="btn-icon-container me-3">
+                                <i class="fas fa-plus-circle"></i>
+                            </div>
+                            <div class="text-center">
+                                <div class="fw-bold fs-4">Add New Vehicle</div>
+                                <div class="small opacity-75">Click to register a new vehicle to your profile</div>
+                            </div>
                         </div>
-                        <div class="text-center">
-                            <div class="fw-bold fs-4">Add New Vehicle</div>
-                            <div class="small opacity-75">Click to register a new vehicle to your profile</div>
-                        </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         </div>
+}
+else
+{
+    <div class="alert alert-warning text-center rounded-4 shadow-sm">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        You have reached the maximum limit of 3 vehicles.
     </div>
+}
+
 
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
         @foreach (var entry in Model)
@@ -61,7 +76,7 @@
                                 </div>
                                 <div class="info-content">
                                     <div class="info-label">Power</div>
-                                    <div class="info-value">@entry.Power kW</div>
+                                    <div class="info-value">@entry.Power HP</div>
                                 </div>
                             </div>
 

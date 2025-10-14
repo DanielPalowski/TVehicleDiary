@@ -3,6 +3,8 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VehicleDiary.Application.DTOs;
+using VehicleDiary.Core.Entities;
+using VehicleDiary.Core.Interfaces.Repositories;
 using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
 
@@ -12,11 +14,13 @@ namespace VehicleDiary.Web.Controllers
     {
         private readonly IRepairVehicleService _repairVehicleService;
         private readonly IMapper _mapper;
+        private readonly IRepositoryCrud<DBRepairVehicleModel> _repairRepository;
 
-        public RepairVehicleController(IRepairVehicleService repairVehicleService, IMapper mapper)
+        public RepairVehicleController(IRepairVehicleService repairVehicleService, IMapper mapper, IRepositoryCrud<DBRepairVehicleModel> repairRepository)
         {
             _repairVehicleService = repairVehicleService;
             _mapper = mapper;
+            _repairRepository = repairRepository;
         }
 
         public async Task<IActionResult> Index([FromQuery] Guid vehicleIDRoute)
@@ -42,22 +46,12 @@ namespace VehicleDiary.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                Debug.WriteLine($"RepairVCategory: {model.RepairVCategory}");
-                Debug.WriteLine($"RepairVType: {model.RepairVType}");
-                Debug.WriteLine($"RepairVName: {model.RepairVName}");
-                Debug.WriteLine($"RepairVPart: {model.RepairVPart}");
-                Debug.WriteLine($"RepairVWhen: {model.RepairVWhen}");
-                Debug.WriteLine($"RepairVPrice: {model.RepairVPrice}");
-                Debug.WriteLine($"RepairVNotes: {model.ReapairVNotes}");
-                Debug.WriteLine($"RepairVTechnician: {model.RepairVTechnician}");
-                Debug.WriteLine($"VehicleId: {model.VehicleId}");
                 var repairDto = _mapper.Map<RepairVehicleDto>(model);
                 await _repairVehicleService.AddingRepairAsync(repairDto);
                 return RedirectToAction("Index", new { vehicleIDRoute = model.VehicleId });
             }
-
-                    // If validation fails, reload the repairs
-                    var repairs = await _repairVehicleService.GettingRepairViewAsync(model.VehicleId);
+           
+            var repairs = await _repairVehicleService.GettingRepairViewAsync(model.VehicleId);
             model.RepairViews = _mapper.Map<IEnumerable<DBRepairVehicleModelVM>>(repairs);
 
             return View(model);
@@ -68,6 +62,30 @@ namespace VehicleDiary.Web.Controllers
         {
             await _repairVehicleService.RemovingAsync(id);
             return Ok();
+        }
+        [HttpGet]
+        public async Task<IActionResult> Download(Guid id)
+        {
+            try
+            {
+                var fileResult = await _repairVehicleService.DownloadingAsync(id);
+                return fileResult;
+            }
+            catch (Exception ex)
+            {
+
+                TempData["ErrorMessage"] = "File not found or error downloading file.";
+
+                var currentVehicleId = Request.Query["vehicleIDRoute"];
+                if (!string.IsNullOrEmpty(currentVehicleId))
+                {
+                    return RedirectToAction("Index", new { vehicleIDRoute = currentVehicleId });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
         }
     }
 }

@@ -306,8 +306,17 @@ namespace VehicleDiary.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ContentType")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("Data")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ReapairVNotes")
                         .HasColumnType("nvarchar(max)");
@@ -317,6 +326,9 @@ namespace VehicleDiary.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("RepairVMileage")
+                        .HasColumnType("int");
+
                     b.Property<string>("RepairVName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -325,11 +337,16 @@ namespace VehicleDiary.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RepairVPartBrand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RepairVPartCode")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<float>("RepairVPrice")
                         .HasColumnType("real");
 
                     b.Property<string>("RepairVTechnician")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RepairVType")

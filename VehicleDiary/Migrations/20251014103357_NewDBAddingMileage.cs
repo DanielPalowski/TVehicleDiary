@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VehicleDiary.Migrations
 {
     /// <inheritdoc />
-    public partial class GuidToDB : Migration
+    public partial class NewDBAddingMileage : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -260,6 +260,39 @@ namespace VehicleDiary.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "DBRepairVehicleModelsSet",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    RepairVCategory = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    RepairVType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    RepairVName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RepairVPart = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    RepairVMileage = table.Column<int>(type: "int", nullable: false),
+                    RepairVWhen = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RepairVPrice = table.Column<float>(type: "real", nullable: false),
+                    ReapairVNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RepairVTechnician = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RepairVPartBrand = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RepairVPartCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Data = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DBRepairVehicleModelsSet", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_DBRepairVehicleModelsSet_DBVehiclesSet_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "DBVehiclesSet",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DBTiresSet",
                 columns: table => new
                 {
@@ -365,6 +398,11 @@ namespace VehicleDiary.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DBRepairVehicleModelsSet_VehicleId",
+                table: "DBRepairVehicleModelsSet",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DBTiresSet_VehicleId",
                 table: "DBTiresSet",
                 column: "VehicleId");
@@ -406,6 +444,9 @@ namespace VehicleDiary.Migrations
 
             migrationBuilder.DropTable(
                 name: "DBRepairsSet");
+
+            migrationBuilder.DropTable(
+                name: "DBRepairVehicleModelsSet");
 
             migrationBuilder.DropTable(
                 name: "DBTiresSet");

@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using VehicleDiary.Application.DTOs;
 using VehicleDiary.Core.Entities;
 using VehicleDiary.Core.Interfaces.Repositories;
@@ -44,7 +45,13 @@ namespace VehicleDiary.Application.Services.MapperService
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBPetrolSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBTiresSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBVignetteSet, vehicleID);
+            await _repositoryVehicle.TryRemoveByIdAsync(_context.DBRepairVehicleModelsSet, vehicleID);
             await _context.SaveChangesAsync();
+        }
+        public async Task<int> CountingVehiclesAsync(string userID)
+        {
+            var count = await _context.DBVehiclesSet.CountAsync(x => x.UserId == userID.ToString());
+            return count;
         }
     }
 }

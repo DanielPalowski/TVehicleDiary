@@ -7,8 +7,7 @@
         <h2 class="repair-history-title">
             <i class="fas fa-history me-2"></i>Service History
         </h2>
-        <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
-           class="btn btn-primary btn-add-repair">
+        <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId" class="btn btn-primary btn-add-repair">
             <i class="fas fa-plus-circle me-2"></i>Add New Service
         </a>
     </div>
@@ -30,8 +29,6 @@
                     <select class="form-control filter-select" id="filterCategory">
                         <option value="">All Categories</option>
                         <option value="Vehicle Repairs">Vehicle Repairs</option>
-                        <option value="Vehicle Upgrades">Vehicle Upgrades</option>
-                        <option value="Diagnostics">Diagnostics</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -81,33 +78,62 @@
         <div class="repair-cards-container" id="repairCardsContainer">
             @foreach (var repair in Model.RepairViews)
             {
-                <div class="repair-card" id="repair-@repair.Id" data-category="@repair.RepairVCategory" data-type="@repair.RepairVType"
-                     data-date="@repair.RepairVWhen.ToString("yyyy-MM-dd")" data-price="@repair.RepairVPrice">
+                <div class="repair-card" id="repair-@repair.Id" data-category="@repair.RepairVCategory" data-type="@repair.RepairVType" data-date="@repair.RepairVWhen.ToString("yyyy-MM-dd")" data-price="@repair.RepairVPrice" data-mileage="@repair.RepairVMileage">
                     <div class="repair-card-header">
                         <div class="repair-category-badge">
                             @repair.RepairVCategory
                         </div>
                         <span class="repair-date">@repair.RepairVWhen.ToString("d MMM yyyy")</span>
                     </div>
-
                     <div class="repair-card-body">
                         <div class="repair-type">
                             <i class="fas fa-cog me-2"></i>@repair.RepairVType
                         </div>
-
                         <h4 class="repair-name">@repair.RepairVName</h4>
+
+                        <!-- Mileage - NOVÉ -->
+                        <div class="repair-detail-item">
+                            <i class="fas fa-tachometer-alt me-2"></i>Mileage: @repair.RepairVMileage km
+                        </div>
 
                         @if (!string.IsNullOrEmpty(repair.RepairVPart))
                         {
-                            <div class="repair-part">
+                            <div class="repair-detail-item">
                                 <i class="fas fa-tools me-2"></i>Part: @repair.RepairVPart
+                            </div>
+                        }
+
+                        <!-- Part Brand - NOVÉ -->
+                        @if (!string.IsNullOrEmpty(repair.RepairVPartBrand))
+                        {
+                            <div class="repair-detail-item">
+                                <i class="fas fa-industry me-2"></i>Part Brand: @repair.RepairVPartBrand
+                            </div>
+                        }
+
+                        <!-- Part Code - NOVÉ -->
+                        @if (!string.IsNullOrEmpty(repair.RepairVPartCode))
+                        {
+                            <div class="repair-detail-item">
+                                <i class="fas fa-barcode me-2"></i>Part Code: @repair.RepairVPartCode
                             </div>
                         }
 
                         @if (!string.IsNullOrEmpty(repair.RepairVTechnician))
                         {
-                            <div class="repair-technician">
+                            <div class="repair-detail-item">
                                 <i class="fas fa-user me-2"></i>Technician: @repair.RepairVTechnician
+                            </div>
+                        }
+
+                        <!-- File Download - NOVÉ -->
+                        @if (!string.IsNullOrEmpty(repair.FileName))
+                        {
+                            <div class="repair-file-download">
+                                <i class="fas fa-paperclip me-2"></i>
+                                <a href="@Url.Action("Download", "RepairVehicle", new { id = repair.Id })" class="file-download-link" target="_blank">
+                                    Download: @repair.FileName
+                                </a>
                             </div>
                         }
 
@@ -118,7 +144,6 @@
                             </div>
                         }
                     </div>
-
                     <div class="repair-card-footer">
                         <div class="repair-price">
                             €@repair.RepairVPrice
@@ -139,8 +164,7 @@
             </div>
             <h3>No Service Records</h3>
             <p>No service records available for this vehicle.</p>
-            <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
-               class="btn btn-primary btn-add-first-repair">
+            <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId" class="btn btn-primary btn-add-first-repair">
                 <i class="fas fa-plus-circle me-2"></i>Add First Service
             </a>
         </div>
@@ -177,6 +201,11 @@
             }
         }
 
+        // Download file function
+        function downloadFile(repairId) {
+            window.open('@Url.Action("Download", "RepairVehicle")/' + repairId, '_blank');
+        }
+
         // Filter functionality
         $(document).ready(function() {
             // Toggle filter section
@@ -195,7 +224,6 @@
             $('#filterCategory').change(function() {
                 const selectedCategory = $(this).val();
                 const typeSelect = $('#filterType');
-
                 typeSelect.html('<option value="">All Types</option>');
 
                 if (selectedCategory && categoryTypes[selectedCategory]) {
@@ -236,6 +264,7 @@
                 const dateToFilter = $('#filterDateTo').val();
                 const priceMinFilter = $('#filterPriceMin').val();
                 const priceMaxFilter = $('#filterPriceMax').val();
+                const mileageFilter = $('#filterMileage').val();
 
                 $('.repair-card').each(function() {
                     let show = true;
@@ -243,6 +272,7 @@
                     const type = $(this).data('type');
                     const date = $(this).data('date');
                     const price = parseFloat($(this).data('price'));
+                    const mileage = parseInt($(this).data('mileage'));
 
                     // Category filter
                     if (categoryFilter && category !== categoryFilter) {
@@ -446,9 +476,8 @@
             margin-bottom: 1rem;
         }
 
-        .repair-part,
-        .repair-technician,
-        .repair-notes {
+        /* NOVÉ STYLY PRO DOPLŇUJÍCÍ INFORMACE */
+        .repair-detail-item {
             display: flex;
             align-items: center;
             color: #475569;
@@ -456,12 +485,38 @@
             font-size: 0.9rem;
         }
 
+        .repair-file-download {
+            display: flex;
+            align-items: center;
+            color: #2563eb;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            padding: 0.5rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border-left: 3px solid #2563eb;
+        }
+
+        .file-download-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+            .file-download-link:hover {
+                color: #1e40af;
+                text-decoration: underline;
+            }
+
         .repair-notes {
             background: #f8fafc;
             padding: 0.75rem;
             border-radius: 8px;
             margin-top: 1rem;
             border-left: 3px solid #e2e8f0;
+            color: #475569;
+            font-size: 0.9rem;
         }
 
         .repair-card-footer {
@@ -568,9 +623,7 @@
                 flex-direction: column;
             }
 
-            .filter-header,
-            .repair-card-header,
-            .repair-card-footer {
+            .filter-header, .repair-card-header, .repair-card-footer {
                 flex-direction: column;
                 gap: 0.75rem;
                 align-items: flex-start;

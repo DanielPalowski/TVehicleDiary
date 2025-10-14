@@ -1,6 +1,16 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBRepairVehicleModelVM
 
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
@@ -9,23 +19,22 @@
                     <h2 class="service-history-title mb-4">
                         <i class="fas fa-tools me-2 service-icon-blue"></i>Vehicle Service History
                     </h2>
-                    <form asp-action="Create" method="post" id="repairForm">
+                    <form asp-action="Create" method="post" enctype="multipart/form-data" id="repairForm">
                         <input type="hidden" asp-for="VehicleId" />
 
-                        <!-- Display validation summary -->
                         <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
 
                         <div class="row g-3">
+
                             <!-- Category -->
                             <div class="col-md-6">
                                 <label asp-for="RepairVCategory" class="form-label service-form-label">
                                     <i class="fas fa-list me-1 service-icon-blue"></i>Category
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <select asp-for="RepairVCategory" class="form-control service-form-control" id="categorySelect" required>
                                     <option value="">Select Category</option>
                                     <option value="Vehicle Repairs">Vehicle Repairs</option>
-                                    <option value="Vehicle Upgrades">Vehicle Upgrades</option>
-                                    <option value="Diagnostics">Diagnostics</option>
                                 </select>
                                 <span asp-validation-for="RepairVCategory" class="text-danger small"></span>
                             </div>
@@ -34,70 +43,119 @@
                             <div class="col-md-6">
                                 <label asp-for="RepairVType" class="form-label service-form-label">
                                     <i class="fas fa-cog me-1 service-icon-blue"></i>Type
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <select asp-for="RepairVType" class="form-control service-form-control" id="typeSelect" required disabled>
                                     <option value="">Select Type</option>
-                                    <!-- Options will be populated dynamically -->
                                 </select>
                                 <span asp-validation-for="RepairVType" class="text-danger small"></span>
                             </div>
 
-                            <!-- Name & Part -->
+                            <!-- Service Name -->
                             <div class="col-md-6">
                                 <label asp-for="RepairVName" class="form-label service-form-label">
                                     <i class="fas fa-wrench me-1 service-icon-blue"></i>Service Name
+                                    <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" asp-for="RepairVName" class="form-control service-form-control" placeholder="Oil Change" required>
+                                <input type="text" asp-for="RepairVName" class="form-control service-form-control" placeholder="Air Leak" required>
                                 <span asp-validation-for="RepairVName" class="text-danger small"></span>
                             </div>
 
+                            <!-- Part -->
                             <div class="col-md-6">
                                 <label asp-for="RepairVPart" class="form-label service-form-label">
                                     <i class="fas fa-cog me-1 service-icon-blue"></i>Part
+                                    <span class="text-danger">*</span>
                                 </label>
-                                <input type="text" asp-for="RepairVPart" class="form-control service-form-control" placeholder="Oil Filter">
+                                <input type="text" asp-for="RepairVPart" class="form-control service-form-control" placeholder="Air intake elbow" required>
                                 <span asp-validation-for="RepairVPart" class="text-danger small"></span>
                             </div>
 
-                            <!-- Date & Price -->
+                            <!-- Part Brand & Code -->
                             <div class="col-md-6">
+                                <label asp-for="RepairVPartBrand" class="form-label service-form-label">
+                                    <i class="fas fa-industry me-1 service-icon-blue"></i>Part Brand
+                                    <span class="text-muted small">(optional)</span>
+                                </label>
+                                <input type="text" asp-for="RepairVPartBrand" class="form-control service-form-control" placeholder="OEM Brand">
+                                <span asp-validation-for="RepairVPartBrand" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="RepairVPartCode" class="form-label service-form-label">
+                                    <i class="fas fa-barcode me-1 service-icon-blue"></i>Part Code
+                                    <span class="text-muted small">(optional)</span>
+                                </label>
+                                <input type="text" asp-for="RepairVPartCode" class="form-control service-form-control" placeholder="12345ABC">
+                                <span asp-validation-for="RepairVPartCode" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Mileage -->
+                            <div class="col-md-4">
+                                <label asp-for="RepairVMileage" class="form-label service-form-label">
+                                    <i class="fas fa-tachometer-alt me-1 service-icon-blue"></i>Mileage
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="number" asp-for="RepairVMileage" class="form-control service-form-control" placeholder="158000" required>
+                                <span asp-validation-for="RepairVMileage" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Date -->
+                            <div class="col-md-4">
                                 <label asp-for="RepairVWhen" class="form-label service-form-label">
                                     <i class="fas fa-calendar me-1 service-icon-blue"></i>Date
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <input type="date" asp-for="RepairVWhen" class="form-control service-form-control"
                                        value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
                                 <span asp-validation-for="RepairVWhen" class="text-danger small"></span>
                             </div>
 
-                            <div class="col-md-6">
+                            <!-- Price -->
+                            <div class="col-md-4">
                                 <label asp-for="RepairVPrice" class="form-label service-form-label">
                                     <i class="fas fa-euro-sign me-1 service-icon-blue"></i>Price
+                                    <span class="text-danger">*</span>
                                 </label>
                                 <div class="input-group service-input-group">
-                                    <span class="input-group-text">€</span>
+                                    
                                     <input type="number" step="0.01" asp-for="RepairVPrice" class="form-control service-form-control" placeholder="120.50" required>
+                                    <span class="input-group-text">€</span>
                                 </div>
                                 <span asp-validation-for="RepairVPrice" class="text-danger small"></span>
                             </div>
 
-                            <!-- Technician & Notes -->
+                            <!-- Technician -->
                             <div class="col-md-6">
                                 <label asp-for="RepairVTechnician" class="form-label service-form-label">
-                                    <i class="fas fa-user me-1 service-icon-blue"></i>Technician
+                                    <i class="fas fa-user me-1 service-icon-blue"></i>Technician/Service
+                                    <span class="text-muted small">(optional)</span>
                                 </label>
-                                <input type="text" asp-for="RepairVTechnician" class="form-control service-form-control" placeholder="John Doe">
+                                <input type="text" asp-for="RepairVTechnician" class="form-control service-form-control" placeholder="John Doe / Car Repairs">
                                 <span asp-validation-for="RepairVTechnician" class="text-danger small"></span>
                             </div>
 
+                            <!-- File Upload -->
+                            <div class="col-md-6">
+                                <label asp-for="Upload" class="form-label service-form-label">
+                                    <i class="fas fa-file-upload me-1 service-icon-blue"></i>Upload File
+                                    <span class="text-muted small">(optional)</span>
+                                </label>
+                                <input asp-for="Upload" type="file" class="form-control" />
+                                <span asp-validation-for="Upload" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Notes -->
                             <div class="col-12">
                                 <label asp-for="ReapairVNotes" class="form-label service-form-label">
                                     <i class="fas fa-sticky-note me-1 service-icon-blue"></i>Notes
+                                    <span class="text-muted small">(optional)</span>
                                 </label>
                                 <textarea asp-for="ReapairVNotes" class="form-control service-form-control service-textarea" rows="3" placeholder="Additional notes..."></textarea>
                                 <span asp-validation-for="ReapairVNotes" class="text-danger small"></span>
                             </div>
 
-                            <!-- Submit Button -->
+                            <!-- Submit -->
                             <div class="col-12 mt-4">
                                 <button class="btn btn-primary service-submit-btn w-100" type="submit" id="submitButton">
                                     <i class="fas fa-plus-circle me-2 service-icon-white"></i>Add Service Record
@@ -175,3 +233,11 @@
         }
     });
 </script>
+<style>
+    input:required,
+    select:required,
+    textarea:required {
+        border-left: 4px solid #ef4444; /* červený pruh u povinných polí */
+        padding-left: 0.5rem;
+    }
+</style>

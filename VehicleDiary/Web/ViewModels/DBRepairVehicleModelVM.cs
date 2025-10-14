@@ -27,6 +27,10 @@ namespace VehicleDiary.Web.ViewModels
         public DateTime RepairVWhen { get; set; }
 
         [Required]
+        [Display(Name = "Mileage")]
+        public int RepairVMileage { get; set; }
+
+        [Required]
         [Display(Name = "Price")]
         public float RepairVPrice { get; set; }
 
@@ -34,13 +38,26 @@ namespace VehicleDiary.Web.ViewModels
         public string? ReapairVNotes { get; set; }
 
         [Display(Name = "Technician")]
-        public string RepairVTechnician { get; set; }
+        public string? RepairVTechnician { get; set; }
+
+        [Display(Name = "Part Brand")]
+        public string? RepairVPartBrand { get; set; }
+        [Display(Name = "Part Code")]
+        public string? RepairVPartCode { get; set; }
+
+
 
         [Required]
         public Guid VehicleId { get; set; }
 
 
         public IEnumerable<DBRepairVehicleModelVM>? RepairViews { get; set; }
+
+        public IFormFile? Upload { get; set; }
+        public string? FileName { get; set; }
+        public string? ContentType { get; set; }
+        public DateTime? UploadTime { get; set; }
+        public IEnumerable<DBRepairVehicleModelVM>? Files { get; set; }
     }
 
 }

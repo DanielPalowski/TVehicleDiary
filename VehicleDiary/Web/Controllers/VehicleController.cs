@@ -44,6 +44,14 @@ namespace VehicleDiary.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(DBVehicleModelVM DBVehicleVM)
         {
+            var userId = _userManager.GetUserId(User);
+            var userVehicleCount = await _vehicleService.CountingVehiclesAsync(userId);
+            if (userVehicleCount >= 3)
+            {
+                ModelState.AddModelError(string.Empty, "Nelze přidat více než 3 vozidla.");
+                return View(DBVehicleVM);
+            }
+
             if (ModelState.IsValid)
             {
                 var dto = _mapper.Map<VehicleDto>(DBVehicleVM); 
