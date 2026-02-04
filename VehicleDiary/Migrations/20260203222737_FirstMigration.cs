@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace VehicleDiary.Migrations
 {
     /// <inheritdoc />
-    public partial class NewDBAddingMileage : Migration
+    public partial class FirstMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -161,14 +161,15 @@ namespace VehicleDiary.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Model = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    MadeYear = table.Column<int>(type: "int", nullable: false),
-                    License_plate = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    VIN = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Power = table.Column<int>(type: "int", nullable: false),
-                    Insurence = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Model = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
+                    MadeYear = table.Column<int>(type: "int", maxLength: 4, nullable: false),
+                    STK = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    License_plate = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
+                    VIN = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
+                    Power = table.Column<int>(type: "int", maxLength: 5, nullable: false),
+                    Insurence = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true),
                     Bought = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RepairCost = table.Column<float>(type: "real", nullable: true),
@@ -181,6 +182,40 @@ namespace VehicleDiary.Migrations
                         name: "FK_DBVehiclesSet_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DBDiagnosticVehicleSet",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    DiagnosticVCategory = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DiagnosticVType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DiagnosticVErrorType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    DiagnosticVName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DiagnosticVErrorCode = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DiagnosticVErrorDis = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DiagnosticVDiagnosticType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DiagnosticVMileage = table.Column<int>(type: "int", maxLength: 9, nullable: false),
+                    DiagnosticVWhen = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DiagnosticVPrice = table.Column<float>(type: "real", maxLength: 20, nullable: false),
+                    DiagnosticVNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpgradeVTechnician = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Data = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DBDiagnosticVehicleSet", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_DBDiagnosticVehicleSet_DBVehiclesSet_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "DBVehiclesSet",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -260,7 +295,7 @@ namespace VehicleDiary.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DBRepairVehicleModelsSet",
+                name: "DBRepairVehicleSet",
                 columns: table => new
                 {
                     ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -283,9 +318,9 @@ namespace VehicleDiary.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DBRepairVehicleModelsSet", x => x.ID);
+                    table.PrimaryKey("PK_DBRepairVehicleSet", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_DBRepairVehicleModelsSet_DBVehiclesSet_VehicleId",
+                        name: "FK_DBRepairVehicleSet_DBVehiclesSet_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "DBVehiclesSet",
                         principalColumn: "Id",
@@ -314,6 +349,39 @@ namespace VehicleDiary.Migrations
                     table.PrimaryKey("PK_DBTiresSet", x => x.Id);
                     table.ForeignKey(
                         name: "FK_DBTiresSet_DBVehiclesSet_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "DBVehiclesSet",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DBUpgradeVehicleSet",
+                columns: table => new
+                {
+                    ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UpgradeVCategory = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UpgradeVType = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UpgradeVStatus = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UpgradeVName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    UpgradeVMileage = table.Column<int>(type: "int", maxLength: 9, nullable: false),
+                    UpgradeVWhen = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpgradeVPrice = table.Column<float>(type: "real", maxLength: 20, nullable: false),
+                    UpgradeVNotes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpgradeVTechnician = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpgradeVPartBrand = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UpgradeVPartCode = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FileName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ContentType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Data = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    VehicleId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DBUpgradeVehicleSet", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_DBUpgradeVehicleSet_DBVehiclesSet_VehicleId",
                         column: x => x.VehicleId,
                         principalTable: "DBVehiclesSet",
                         principalColumn: "Id",
@@ -383,6 +451,11 @@ namespace VehicleDiary.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DBDiagnosticVehicleSet_VehicleId",
+                table: "DBDiagnosticVehicleSet",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DBOilSet_VehicleId",
                 table: "DBOilSet",
                 column: "VehicleId");
@@ -398,13 +471,18 @@ namespace VehicleDiary.Migrations
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DBRepairVehicleModelsSet_VehicleId",
-                table: "DBRepairVehicleModelsSet",
+                name: "IX_DBRepairVehicleSet_VehicleId",
+                table: "DBRepairVehicleSet",
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DBTiresSet_VehicleId",
                 table: "DBTiresSet",
+                column: "VehicleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DBUpgradeVehicleSet_VehicleId",
+                table: "DBUpgradeVehicleSet",
                 column: "VehicleId");
 
             migrationBuilder.CreateIndex(
@@ -437,6 +515,9 @@ namespace VehicleDiary.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "DBDiagnosticVehicleSet");
+
+            migrationBuilder.DropTable(
                 name: "DBOilSet");
 
             migrationBuilder.DropTable(
@@ -446,10 +527,13 @@ namespace VehicleDiary.Migrations
                 name: "DBRepairsSet");
 
             migrationBuilder.DropTable(
-                name: "DBRepairVehicleModelsSet");
+                name: "DBRepairVehicleSet");
 
             migrationBuilder.DropTable(
                 name: "DBTiresSet");
+
+            migrationBuilder.DropTable(
+                name: "DBUpgradeVehicleSet");
 
             migrationBuilder.DropTable(
                 name: "DBVignetteSet");

@@ -15,8 +15,8 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom border-2 border-light py-3">
             <div class="container">
                 <!-- Brand with modern typography -->
-                <a class="navbar-brand fw-bold fs-4 text-primary" asp-area="" asp-controller="Main" asp-action="Index">
-                    <span class="align-middle">VehicleDiary</span>
+                <a class="navbar-brand fw-bold fs-4" asp-area="" asp-controller="Main" asp-action="Index">
+                    <span class="align-middle main-color-txt">VehicleDiary</span>
                 </a>
 
                 <!-- Responsive Toggler -->
@@ -35,6 +35,13 @@
                                    asp-controller="Vehicle"
                                    asp-action="Index">
                                     <i class="fas fa-car me-2"></i>My Garage
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark px-3 py-2 rounded-3"
+                                   asp-controller="AboutUs"
+                                   asp-action="AboutUs">
+                                    <i class="fas fa-info me-2"></i>About us
                                 </a>
                             </li>
                         </ul>
@@ -77,10 +84,19 @@
                     }
                     else
                     {
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark px-3 py-2 rounded-3"
+                                   asp-controller="AboutUs"
+                                   asp-action="AboutUs">
+                                    <i class="fas fa-info me-2"></i>About us
+                                </a>
+                            </li>
+                        </ul>
                         <!-- Guest Menu -->
                         <ul class="navbar-nav ms-auto">
                             <li class="nav-item">
-                                <a class="btn btn-outline-primary px-4 mx-2"
+                                <a class="btn fw-bold main-outline-colory px-4 mx-2"
                                    asp-area="Identity"
                                    asp-page="/Account/Login">
                                     Sign In

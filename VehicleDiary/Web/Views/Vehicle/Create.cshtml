@@ -1,103 +1,588 @@
 ﻿@model VehicleDiary.Web.ViewModels.DBVehicleModelVM
+@{
+    Layout = null;
+}
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
-            <div class="card shadow-sm">
-                <div class="card-header bg-light">
-                    <h3 class="card-title mb-0">Add New Vehicle</h3>
-                </div>
-                <div class="card-body p-4">
-                    <form asp-action="Create" method="post">
-                        <div class="row g-3">
-                            <!-- Brand & Model -->
-                            <div class="col-md-6">
-                                <label asp-for="Name" class="form-label">Brand</label>
-                                <input type="text" asp-for="Name" class="form-control"
-                                       placeholder="e.g. Toyota">
-                                <span asp-validation-for="Name" class="text-danger small"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label asp-for="Model" class="form-label">Model</label>
-                                <input type="text" asp-for="Model" class="form-control"
-                                       placeholder="e.g. Corolla">
-                                <span asp-validation-for="Model" class="text-danger small"></span>
-                            </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Vehicle | VehicleDiary</title>
 
-                            <!-- License Plate & VIN -->
-                            <div class="col-md-6">
-                                <label asp-for="License_plate" class="form-label">License Plate</label>
-                                <input type="text" asp-for="License_plate" class="form-control"
-                                       placeholder="e.g. AB 123 CD">
-                                <span asp-validation-for="License_plate" class="text-danger small"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label asp-for="VIN" class="form-label">VIN Number</label>
-                                <input type="text" asp-for="VIN" class="form-control"
-                                       placeholder="17-digit vehicle identification number">
-                                <span asp-validation-for="VIN" class="text-danger small"></span>
-                            </div>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-                            <!-- Insurance & Purchase Date -->
-                            <div class="col-md-6">
-                                <label asp-for="Insurence" class="form-label">Insurance</label>
-                                <input type="text" asp-for="Insurence" class="form-control"
-                                       placeholder="Insurance policy number">
-                                <span asp-validation-for="Insurence" class="text-danger small"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label asp-for="Bought" class="form-label">Purchase Date</label>
-                                <input type="date" asp-for="Bought" class="form-control"
-                                       value="@DateTime.Today.ToString("yyyy-MM-dd")">
-                                <span asp-validation-for="Bought" class="text-danger small"></span>
-                            </div>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-                            <!-- Specifications -->
-                            <div class="col-md-6">
-                                <label asp-for="Power" class="form-label">Horsepower</label>
-                                <div class="input-group">
-                                    <input type="number" asp-for="Power" class="form-control"
-                                           placeholder="e.g. 150">
-                                    <span class="input-group-text">HP</span>
-                                </div>
-                                <span asp-validation-for="Power" class="text-danger small"></span>
-                            </div>
-                            <div class="col-md-6">
-                                <label asp-for="MadeYear" class="form-label">Manufacture Year</label>
-                                <div class="input-group">
-                                    <input type="number" asp-for="MadeYear" class="form-control"
-                                           min="1900" max="@DateTime.Now.Year"
-                                           placeholder="e.g. 2020">
-                                    <span class="input-group-text">Year</span>
-                                </div>
-                                <span asp-validation-for="MadeYear" class="text-danger small"></span>
-                            </div>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-                            <!-- Description -->
-                            <div class="col-12">
-                                <label asp-for="Description" class="form-label">Description</label>
-                                <textarea asp-for="Description" class="form-control" rows="3"
-                                          placeholder="Additional vehicle details"></textarea>
-                                <span asp-validation-for="Description" class="text-danger small"></span>
-                            </div>
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --background: #f8fafc;
+            --card: #ffffff;
+            --text: #0f172a;
+            --border: #e2e8f0;
+            --error: #ef4444;
+        }
 
-                            <!-- Submit Button -->
-                            <div class="col-12 mt-4">
-                                <button class="btn btn-primary w-100 py-2" type="submit">
-                                    <i class="fas fa-car me-2"></i>Add Vehicle
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 100%;
+            padding: 1rem;
+        }
+
+        @@media (min-width: 768px) {
+            .container
+
+        {
+            max-width: 32rem;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        }
+
+        .form-card {
+            background: var(--card);
+            border-radius: 1rem;
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .form-body {
+            padding: 1.5rem;
+        }
+
+        @@media (min-width: 768px) {
+            .form-body
+
+        {
+            padding: 2rem;
+        }
+
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            font-size: 0.875rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.875rem;
+            font-size: 16px;
+            border: 2px solid var(--border);
+            border-radius: 0.5rem;
+            background: white;
+            transition: all 0.2s ease;
+        }
+
+            .form-input:focus {
+                outline: none;
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+            }
+
+            .form-input.error {
+                border-color: var(--error);
+            }
+
+        .error-message {
+            display: block;
+            margin-top: 0.375rem;
+            font-size: 0.75rem;
+            color: var(--error);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+            .submit-btn:hover {
+                opacity: 0.95;
+            }
+
+            .submit-btn:active {
+                transform: scale(0.98);
+            }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1rem;
+            background: var(--background);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+            .back-btn:hover {
+                background: #e2e8f0;
+            }
+
+        /* Mobile optimizations */
+        @@media (max-width: 640px) {
+            body
+
+        {
+            padding: 0;
+        }
+
+        .form-input {
+            padding: 1rem;
+            font-size: 16px;
+        }
+
+        .form-body {
+            padding: 1rem;
+        }
+
+        .form-header {
+            padding: 1rem;
+        }
+
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        @@media (min-width: 640px) {
+            .grid-2
+
+        {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        }
+
+        .required::after {
+            content: " *";
+            color: var(--error);
+        }
+
+        textarea.form-input {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        input[type="date"] {
+            color: var(--text);
+        }
+
+            input[type="date"]:invalid {
+                color: #94a3b8;
+            }
+
+        /* Remove spinner from number inputs */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="sticky top-0 bg-white border-b border-gray-200 z-10">
+        <div class="container">
+            <div class="flex items-center justify-between py-3">
+                <a href="@Url.Action("Index", "Vehicle")" class="back-btn">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    Back
+                </a>
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                        <i data-lucide="car" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <span class="font-bold text-sm">Add Vehicle</span>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+    <!-- Main Content -->
+    <main class="container">
+        <div class="form-card mt-4">
+            <!-- Form Header -->
+            <div class="form-header">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                        <i data-lucide="car" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold mb-1">Add New Vehicle</h1>
+                        <p class="text-white/80 text-sm">Fill in your vehicle details below</p>
+                    </div>
+                </div>
+            </div>
 
+            <!-- Form Body -->
+            <div class="form-body">
+                <form id="vehicleForm" asp-action="Create" method="post">
+                    <!-- Brand & Model -->
+                    <div class="grid-2 mb-4">
+                        <div class="form-group">
+                            <label asp-for="Name" class="form-label required">Brand</label>
+                            <input type="text" asp-for="Name" class="form-input"
+                                   placeholder="Toyota, BMW, etc."
+                                   required>
+                            <span asp-validation-for="Name" class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Model" class="form-label required">Model</label>
+                            <input type="text" asp-for="Model" class="form-input"
+                                   placeholder="Corolla, X5, etc."
+                                   required>
+                            <span asp-validation-for="Model" class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <!-- License Plate & VIN -->
+                    <div class="grid-2 mb-4">
+                        <div class="form-group">
+                            <label asp-for="License_plate" class="form-label required">License Plate</label>
+                            <input type="text" asp-for="License_plate" class="form-input"
+                                   placeholder="AB 123 CD"
+                                   required
+                                   oninput="this.value = this.value.toUpperCase()">
+                            <span asp-validation-for="License_plate" class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="VIN" class="form-label required">VIN Number</label>
+                            <input type="text" asp-for="VIN" class="form-input"
+                                   placeholder="17 characters"
+                                   maxlength="17"
+                                   minlength="17"
+                                   required
+                                   oninput="this.value = this.value.toUpperCase()">
+                            <span asp-validation-for="VIN" class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <!-- Year & Power -->
+                    <div class="grid-2 mb-4">
+                        <div class="form-group">
+                            <label asp-for="MadeYear" class="form-label required">Year</label>
+                            <input type="number" asp-for="MadeYear" class="form-input"
+                                   placeholder="2020"
+                                   min="1900"
+                                   max="@DateTime.Now.Year"
+                                   required>
+                            <span asp-validation-for="MadeYear" class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Power" class="form-label required">Horsepower</label>
+                            <input type="number" asp-for="Power" class="form-input"
+                                   placeholder="150"
+                                   min="1"
+                                   required>
+                            <span asp-validation-for="Power" class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <!-- Insurance & Purchase Date -->
+                    <div class="grid-2 mb-4">
+                        <div class="form-group">
+                            <label asp-for="Insurence" class="form-label">Insurance</label>
+                            <input type="text" asp-for="Insurence" class="form-input"
+                                   placeholder="Allianz, AXA, etc.">
+                            <span asp-validation-for="Insurence" class="error-message"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Bought" class="form-label">Purchase Date</label>
+                            <input type="date" asp-for="Bought" class="form-input"
+                                   value="@DateTime.Today.ToString("yyyy-MM-dd")"
+                                   max="@DateTime.Today.ToString("yyyy-MM-dd")">
+                            <span asp-validation-for="Bought" class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="form-group mb-6">
+                        <label asp-for="Description" class="form-label">Description</label>
+                        <textarea asp-for="Description" class="form-input"
+                                  placeholder="Optional: Add notes about your vehicle"
+                                  rows="3"></textarea>
+                        <span asp-validation-for="Description" class="error-message"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="form-group">
+                        <button type="submit" class="submit-btn">
+                            <i data-lucide="car" class="w-5 h-5"></i>
+                            Add Vehicle
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Form Tips -->
+                <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <div class="flex items-start gap-3">
+                        <i data-lucide="info" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
+                        <div>
+                            <p class="text-sm text-blue-700">
+                                <span class="font-medium">Tip:</span> VIN can be found on your vehicle registration or insurance documents.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Error Toast -->
+    <div id="errorToast" class="fixed top-4 right-4 bg-red-500 text-white px-4 py-3 rounded-lg shadow-lg hidden z-50 max-w-sm">
+        <div class="flex items-center gap-3">
+            <i data-lucide="alert-circle" class="w-5 h-5 flex-shrink-0"></i>
+            <div>
+                <p id="errorMessage" class="text-sm"></p>
+            </div>
+            <button onclick="hideError()" class="ml-auto">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Simple form validation
+        const form = document.getElementById('vehicleForm');
+        const errorToast = document.getElementById('errorToast');
+        const errorMessage = document.getElementById('errorMessage');
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorToast.classList.remove('hidden');
+            errorToast.classList.add('flex');
+
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                hideError();
+            }, 5000);
+        }
+
+        function hideError() {
+            errorToast.classList.remove('flex');
+            errorToast.classList.add('hidden');
+        }
+
+        // Real-time validation
+        form.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.classList.add('error');
+                } else {
+                    this.classList.remove('error');
+                }
+            });
+
+            input.addEventListener('input', function() {
+                this.classList.remove('error');
+            });
+        });
+
+        // VIN length validation
+        const vinInput = form.querySelector('input[name="VIN"]');
+        if (vinInput) {
+            vinInput.addEventListener('blur', function() {
+                if (this.value.length > 0 && this.value.length !== 17) {
+                    showError('VIN must be exactly 17 characters');
+                    this.classList.add('error');
+                }
+            });
+        }
+
+        // Year validation
+        const yearInput = form.querySelector('input[name="MadeYear"]');
+        if (yearInput) {
+            yearInput.addEventListener('blur', function() {
+                const year = parseInt(this.value);
+                const currentYear = new Date().getFullYear();
+                if (year < 1900 || year > currentYear) {
+                    showError(`Year must be between 1900 and ${currentYear}`);
+                    this.classList.add('error');
+                }
+            });
+        }
+
+        // Prevent form submission if there are errors
+        form.addEventListener('submit', function(e) {
+            let hasErrors = false;
+
+            // Check required fields
+            const requiredFields = form.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.classList.add('error');
+                    hasErrors = true;
+                }
+            });
+
+            // Check VIN length if provided
+            if (vinInput.value.length > 0 && vinInput.value.length !== 17) {
+                vinInput.classList.add('error');
+                showError('VIN must be exactly 17 characters');
+                hasErrors = true;
+            }
+
+            // Check year range
+            if (yearInput.value) {
+                const year = parseInt(yearInput.value);
+                const currentYear = new Date().getFullYear();
+                if (year < 1900 || year > currentYear) {
+                    yearInput.classList.add('error');
+                    showError(`Year must be between 1900 and ${currentYear}`);
+                    hasErrors = true;
+                }
+            }
+
+            if (hasErrors) {
+                e.preventDefault();
+                // Scroll to first error
+                const firstError = form.querySelector('.error');
+                if (firstError) {
+                    firstError.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }
+        });
+
+        // Format license plate input
+        const licensePlateInput = form.querySelector('input[name="License_plate"]');
+        if (licensePlateInput) {
+            licensePlateInput.addEventListener('input', function(e) {
+                // Remove special characters except letters and numbers
+                this.value = this.value.replace(/[^A-Z0-9]/gi, '');
+            });
+        }
+
+        // Format VIN input
+        if (vinInput) {
+            vinInput.addEventListener('input', function(e) {
+                // Remove spaces and special characters
+                this.value = this.value.replace(/[^A-Z0-9]/gi, '');
+            });
+        }
+
+        // Handle date input display
+        const dateInput = form.querySelector('input[type="date"]');
+        if (dateInput) {
+            // Set default value to today if empty
+            if (!dateInput.value) {
+                dateInput.value = new Date().toISOString().split('T')[0];
+            }
+        }
+
+        // Prevent number input scroll
+        const numberInputs = form.querySelectorAll('input[type="number"]');
+        numberInputs.forEach(input => {
+            input.addEventListener('wheel', function(e) {
+                e.preventDefault();
+            });
+        });
+
+        // Focus management for mobile
+        form.querySelectorAll('input, textarea').forEach((input, index) => {
+            input.addEventListener('focus', function() {
+                // On mobile, ensure input is visible
+                if (window.innerWidth < 768) {
+                    setTimeout(() => {
+                        this.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }, 300);
+                }
+            });
+        });
+
+        // Show validation errors from server
+        @if (ViewData.ModelState.ErrorCount > 0)
+        {
+                <text>
+                document.addEventListener('DOMContentLoaded', function() {
+                    @foreach (var key in ViewData.ModelState.Keys)
+                    {
+                            @foreach (var error in ViewData.ModelState[key].Errors)
+                            {
+                                    <text>
+                                    showError('@error.ErrorMessage');
+                                    const input = document.querySelector('[name="@key"]');
+                                    if (input) {
+                                        input.classList.add('error');
+                                    }
+                                    </text>
+                            }
+                    }
+                });
+                </text>
+        }
+    </script>
+</body>
+</html>

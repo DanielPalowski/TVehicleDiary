@@ -45,7 +45,7 @@ namespace VehicleDiary.Application.Services.MapperService
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBPetrolSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBTiresSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBVignetteSet, vehicleID);
-            await _repositoryVehicle.TryRemoveByIdAsync(_context.DBRepairVehicleModelsSet, vehicleID);
+            await _repositoryVehicle.TryRemoveByIdAsync(_context.DBRepairVehicleSet, vehicleID);
             await _context.SaveChangesAsync();
         }
         public async Task<int> CountingVehiclesAsync(string userID)

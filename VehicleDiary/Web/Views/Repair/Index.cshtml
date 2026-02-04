@@ -4,302 +4,640 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Repair History Hub</title>
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            --secondary-gradient: linear-gradient(135deg, #ff6b6b 0%, #ff8e53 100%);
-            --tertiary-gradient: linear-gradient(135deg, #0bd1d1 0%, #00aaff 100%);
-            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            --card-hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            --repair-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --upgrade-blue: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --diagnostic-orange: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            --card-hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
         }
 
-        html {
-            font-size: 14px;
-        }
-
-        @@media (min-width: 768px) {
-            html
-
-        {
-            font-size: 16px;
-        }
-
-        }
-
-        .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-            box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-        }
-
-        html {
-            position: relative;
-            min-height: 100%;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: #f8f9fa;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
         }
 
-        .text-gradient {
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* Header */
+        .header-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         }
 
-        .card-hub {
-            border: none;
-            border-radius: 16px;
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05) 0%, rgba(5, 150, 105, 0.05) 100%);
+            border-radius: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.1);
+        }
+
+        /* Cards */
+        .hub-card {
+            border-radius: 1.5rem;
+            border: 1px solid #e2e8f0;
             overflow: hidden;
             transition: all 0.3s ease;
             height: 100%;
-            box-shadow: var(--card-shadow);
+            background: white;
         }
 
-            .card-hub:hover {
+            .hub-card:hover {
                 transform: translateY(-8px);
                 box-shadow: var(--card-hover-shadow);
             }
 
-        .card-repairs {
-            background: var(--primary-gradient);
-        }
-
-        .card-upgrades {
-            background: var(--secondary-gradient);
-        }
-
-        .card-diagnostics {
-            background: var(--tertiary-gradient);
-        }
-
-        .card-icon {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            opacity: 0.9;
-        }
-
-        .btn-modern {
-            border-radius: 50px;
-            padding: 12px 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: none;
-        }
-
-            .btn-modern:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-            }
-
-        .hub-section {
-            padding: 60px 0;
-        }
-
-        .card-content {
-            padding: 2.5rem;
+        /* Repair Card (Green) */
+        .repair-card {
+            background: var(--repair-green);
             color: white;
+        }
+
+        /* Upgrade Card (Blue) */
+        .upgrade-card {
+            background: var(--upgrade-blue);
+            color: white;
+        }
+
+        /* Diagnostic Card (Orange) */
+        .diagnostic-card {
+            background: var(--diagnostic-orange);
+            color: white;
+        }
+
+        /* Card Content */
+        .card-content {
+            padding: 2rem;
             height: 100%;
             display: flex;
             flex-direction: column;
         }
 
-        .hero-section {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(30, 64, 175, 0.1) 100%);
-            border-radius: 16px;
-            padding: 3rem 2rem;
-            margin-bottom: 3rem;
-            text-align: center;
+        @@media (max-width: 640px) {
+            .card-content
+
+        {
+            padding: 1.5rem;
         }
 
+        }
+
+        /* Card Icon */
+        .card-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Buttons */
+        .btn-outline-light {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+            .btn-outline-light:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+
+        /* Stat Cards */
         .stat-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
             padding: 1.5rem;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
             .stat-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+                transform: translateY(-4px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        .repair-stat .stat-icon {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+        }
+
+        .upgrade-stat .stat-icon {
+            background: rgba(59, 130, 246, 0.1);
+            color: #3b82f6;
+        }
+
+        .diagnostic-stat .stat-icon {
+            background: rgba(249, 115, 22, 0.1);
+            color: #f97316;
+        }
 
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            background: var(--primary-gradient);
+            margin-bottom: 0.25rem;
+        }
+
+        .repair-stat .stat-number {
+            background: var(--repair-green);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 0.5rem;
         }
 
-        .stat-label {
-            color: #6c757d;
-            font-weight: 500;
+        .upgrade-stat .stat-number {
+            background: var(--upgrade-blue);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            display: flex;
+        .diagnostic-stat .stat-number {
+            background: var(--diagnostic-orange);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: var(--repair-green);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Mobile Optimizations */
+        @@media (max-width: 640px) {
+            .container
+
+        {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .hero-section {
+            padding: 1.5rem 1rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            padding: 1.25rem 1rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+        }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+        }
+
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
             align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: #f1f5f9;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            color: #0f172a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+            .back-btn:hover {
+                background: #e2e8f0;
+                border-color: #cbd5e1;
+            }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
             justify-content: center;
-            margin: 0 auto 1.5rem;
-            background: rgba(37, 99, 235, 0.1);
-            color: #2563eb;
-            font-size: 1.8rem;
         }
 
-        /* Additional styles to match your CSS */
-        .btn-primary {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            border: none;
-            border-radius: 0.5rem;
-            transition: all 0.3s ease;
+        @@media (max-width: 640px) {
+            .action-buttons
+
+        {
+            flex-direction: column;
+            width: 100%;
         }
 
-            .btn-primary:hover {
-                background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
-            }
-
-        .feature-card {
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        .action-buttons a, .action-buttons button {
+            width: 100%;
         }
 
-            .feature-card:hover {
-                transform: translateY(-6px);
-                box-shadow: 0 1rem 2rem rgba(0,0,0,0.15);
-            }
+        }
+
+        /* Loading Animation */
+        @@keyframes pulse {
+            0%, 100%
+
+        {
+            opacity: 1;
+        }
+
+        50% {
+            opacity: 0.5;
+        }
+
+        }
+
+        .loading {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
     </style>
 </head>
-<body>
-    <div class="container py-5">
-        <!-- Hero Section -->
-        <div class="hero-section">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <h1 class="display-5 fw-bold text-gradient mb-3">Welcome to Repair History Hub</h1>
-                    <p class="lead mb-4">Complete overview of your vehicle's history in one place. Track repairs, upgrades, and diagnostic records for better vehicle management and maintenance.</p>
-
-                    <div class="d-flex justify-content-center gap-3 flex-wrap">
-                        <a asp-controller="RepairVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
-                           class="btn btn-primary btn-modern">
-                            <i class="fas fa-history me-2"></i>Repair History
-                        </a>
-                        <button class="btn btn-outline-primary btn-modern">
-                            <i class="fas fa-download me-2"></i>Download Report
-                        </button>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="header-gradient text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <a href="#" class="back-btn text-white bg-white/10 border-white/20 hover:bg-white/20">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    Back to Vehicles
+                </a>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                        <i data-lucide="wrench" class="w-5 h-5 text-white"></i>
                     </div>
+                    <div>
+                        <h1 class="font-bold">Repair Hub</h1>
+                        <p class="text-sm text-white/70">Vehicle Management</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Hero Section -->
+        <div class="hero-section mb-8">
+            <div class="text-center py-8 px-4">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Repair History Hub</h1>
+                <p class="text-gray-600 text-lg mb-6 max-w-2xl mx-auto">
+                    Complete overview of your vehicle's history in one place. Track repairs, upgrades,
+                    and diagnostic records for better vehicle management and maintenance.
+                </p>
+
+                <div class="action-buttons">
+                    <a asp-controller="RepairVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
+                       class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity">
+                        <i data-lucide="history" class="w-5 h-5"></i>
+                        View Repair History
+                    </a>
+
+                    <button class="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-50 transition-colors">
+                        <i data-lucide="download" class="w-5 h-5"></i>
+                        Download Report
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- Statistics Section -->
-        <div class="row mb-5">
-            <div class="col-md-4 mb-4">
-                <div class="stat-card feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <div class="stat-number">X</div>
-                    <div class="stat-label">Total Repairs</div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <!-- Repair Stats -->
+            <div class="stat-card repair-stat">
+                <div class="stat-icon">
+                    <i data-lucide="wrench" class="w-6 h-6"></i>
                 </div>
+                <div class="stat-number">0</div>
+                <div class="stat-label text-gray-600 font-medium">Total Repairs</div>
+                <p class="text-sm text-gray-500 mt-2">Recorded maintenance and fixes</p>
+                <p class="text-sm text-gray-500 mt-2">@Model.TotalRepairCost</p>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="stat-card feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-calendar-check"></i>
-                    </div>
-                    <div class="stat-number">X</div>
-                    <div class="stat-label">Diagnostics</div>
+
+            <!-- Upgrade Stats -->
+            <div class="stat-card upgrade-stat">
+                <div class="stat-icon">
+                    <i data-lucide="zap" class="w-6 h-6"></i>
                 </div>
+                <div class="stat-number">0</div>
+                <div class="stat-label text-gray-600 font-medium">Vehicle Upgrades</div>
+                <p class="text-sm text-gray-500 mt-2">Performance and feature enhancements</p>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="stat-card feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="stat-number">X</div>
-                    <div class="stat-label">Upgrades</div>
+
+            <!-- Diagnostic Stats -->
+            <div class="stat-card diagnostic-stat">
+                <div class="stat-icon">
+                    <i data-lucide="activity" class="w-6 h-6"></i>
                 </div>
+                <div class="stat-number">0</div>
+                <div class="stat-label text-gray-600 font-medium">Diagnostics</div>
+                <p class="text-sm text-gray-500 mt-2">System checks and error reports</p>
             </div>
         </div>
 
         <!-- Hub Cards Section -->
-        <div class="hub-section">
-            <h2 class="text-center mb-5 fw-bold">Explore Your Vehicle's History</h2>
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-center mb-2 text-gray-900">Explore Your Vehicle's History</h2>
+            <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
+                Manage different aspects of your vehicle's maintenance and improvements
+            </p>
 
-            <div class="row g-4">
-                <!-- Vehicle Repairs Card -->
-                <div class="col-md-4">
-                    <div class="card-hub card-repairs">
-                        <div class="card-content">
-                            <div class="text-center mb-4">
-                                <i class="card-icon fas fa-tools"></i>
-                                <h3 class="fw-bold">Vehicle Repairs</h3>
-                            </div>
-                            <p class="flex-grow-1">View complete history of all repairs performed on your vehicle including dates, services, and costs.</p>
-                            <div class="text-center mt-4">
-                                <a asp-controller="RepairVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
-                                   class="btn btn-light btn-modern">
-                                    Explore Repairs <i class="fas fa-arrow-right ms-2"></i>
-                                </a>
-                            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Repair Card (GREEN) -->
+                <div class="hub-card repair-card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <i data-lucide="wrench" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Vehicle Repairs</h3>
+                        <p class="text-white/90 mb-6 flex-grow">
+                            View complete history of all repairs performed on your vehicle including
+                            dates, services, parts replaced, and costs.
+                        </p>
+                        <div class="mt-auto">
+                            <a asp-controller="RepairVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
+                               class="btn-outline-light inline-flex items-center justify-center w-full">
+                                <span>Explore Repairs</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Upgrades Card -->
-                <div class="col-md-4">
-                    <div class="card-hub card-upgrades">
-                        <div class="card-content">
-                            <div class="text-center mb-4">
-                                <i class="card-icon fas fa-tachometer-alt"></i>
-                                <h3 class="fw-bold">Upgrades</h3>
-                            </div>
-                            <p class="flex-grow-1">Track performance upgrades and modifications made to your vehicle to enhance its capabilities and features.</p>
-                            <div class="text-center mt-4">
-                                <a href="#" class="btn btn-light btn-modern disabled" aria-disabled="true">
-                                    Coming Soon <i class="fas fa-clock ms-2"></i>
-                                </a>
-                            </div>
+                <!-- Upgrade Card (BLUE) -->
+                <div class="hub-card upgrade-card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <i data-lucide="zap" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Upgrades & Modifications</h3>
+                        <p class="text-white/90 mb-6 flex-grow">
+                            Track performance upgrades, modifications, and enhancements made to
+                            your vehicle to improve capabilities and features.
+                        </p>
+                        <div class="mt-auto">
+                            <a asp-controller="UpgradeVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
+                               class="btn-outline-light inline-flex items-center justify-center w-full">
+                                <span>View Upgrades</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Diagnostics Card -->
-                <div class="col-md-4">
-                    <div class="card-hub card-diagnostics">
-                        <div class="card-content">
-                            <div class="text-center mb-4">
-                                <i class="card-icon fas fa-stethoscope"></i>
-                                <h3 class="fw-bold">Diagnostics</h3>
-                            </div>
-                            <p class="flex-grow-1">Access diagnostic reports and error codes to understand your vehicle's health and performance status.</p>
-                            <div class="text-center mt-4">
-                                <a href="#" class="btn btn-light btn-modern disabled" aria-disabled="true">
-                                    Coming Soon <i class="fas fa-clock ms-2"></i>
-                                </a>
-                            </div>
+                <!-- Diagnostic Card (ORANGE) -->
+                <div class="hub-card diagnostic-card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <i data-lucide="activity" class="w-8 h-8"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">Diagnostics & Health</h3>
+                        <p class="text-white/90 mb-6 flex-grow">
+                            Access diagnostic reports, error codes, and health checks to understand
+                            your vehicle's condition and performance status.
+                        </p>
+                        <div class="mt-auto">
+                            <a asp-controller="DiagnosticVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
+                               class="btn-outline-light inline-flex items-center justify-center w-full">
+                                <span>View Diagnostic</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Recent Activity Section -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 mb-8">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-900">Recent Activity</h2>
+                <button class="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1">
+                    <span>View All</span>
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <!-- No Activity State -->
+                <div class="text-center py-12">
+                    <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
+                        <i data-lucide="clock" class="w-8 h-8 text-gray-400"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">No Recent Activity</h3>
+                    <p class="text-gray-600 mb-4">Start by adding your first repair or upgrade</p>
+                    <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.vehicleId"
+                       class="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        Add First Repair
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100 rounded-2xl p-6">
+            <h2 class="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.vehicleId"
+                   class="bg-white border border-green-200 rounded-xl p-4 flex items-center justify-between hover:border-green-300 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
+                            <i data-lucide="plus-circle" class="w-5 h-5 text-green-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-900">Add New Repair</h3>
+                            <p class="text-sm text-gray-600">Record a recent repair or service</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400 group-hover:text-green-600"></i>
+                </a>
+
+                <a asp-controller="UpgradeVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.vehicleId"
+                   class="bg-white border border-blue-200 rounded-xl p-4 flex items-center justify-between hover:border-blue-300 transition-colors group">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                            <i data-lucide="zap" class="w-5 h-5 text-blue-600"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-900">Add Upgrade</h3>
+                            <p class="text-sm text-gray-600">Record a performance upgrade</p>
+                        </div>
+                    </div>
+                    <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400 group-hover:text-blue-600"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 mt-12">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                        <i data-lucide="car" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <span class="font-medium text-gray-900">VehicleDiary</span>
+                </div>
+                <p class="text-sm text-gray-600">
+                    © 2024 Repair History Hub. All vehicle data is securely stored.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Animate stat counters
+        document.addEventListener('DOMContentLoaded', function() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+
+            // Simple counter animation
+            statNumbers.forEach(stat => {
+                const target = 12; // Example number, replace with actual data
+                let current = 0;
+                const increment = target / 30; // 30 frames
+                const interval = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = target;
+                        clearInterval(interval);
+                    } else {
+                        stat.textContent = Math.floor(current);
+                    }
+                }, 50);
+            });
+
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.hub-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transition = 'all 0.3s ease';
+                });
+            });
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            // Handle disabled button
+            const comingSoonBtn = document.querySelector('.cursor-not-allowed');
+            if (comingSoonBtn) {
+                comingSoonBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Show a toast notification
+                    showNotification('Diagnostics feature coming soon!', 'info');
+                });
+            }
+        });
+
+        // Simple notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 ${
+                type === 'info' ? 'bg-blue-500 text-white' : 'bg-green-500 text-white'
+            }`;
+            notification.innerHTML = `
+                <div class="flex items-center gap-2">
+                    <i data-lucide="${type === 'info' ? 'info' : 'check-circle'}" class="w-5 h-5"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            document.body.appendChild(notification);
+
+            // Initialize icon
+            lucide.createIcons();
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Handle responsive behavior
+        function handleResponsive() {
+            const cards = document.querySelectorAll('.hub-card');
+
+            if (window.innerWidth < 768) {
+                // Mobile: adjust card spacing
+                cards.forEach(card => {
+                    card.style.marginBottom = '1rem';
+                });
+            } else {
+                // Desktop: reset
+                cards.forEach(card => {
+                    card.style.marginBottom = '';
+                });
+            }
+        }
+
+        // Initial call
+        handleResponsive();
+
+        // Listen for resize
+        window.addEventListener('resize', handleResponsive);
+    </script>
 </body>
 </html>

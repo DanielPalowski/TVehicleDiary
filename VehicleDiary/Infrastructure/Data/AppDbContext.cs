@@ -20,6 +20,8 @@ namespace VehicleDiary.Infrastructure.Data
         public DbSet<DBVignetteModel> DBVignetteSet { get; set; }
         public DbSet<DBOilModel> DBOilSet { get; set; }
         public DbSet<DBTiresModel> DBTiresSet { get; set; }
-        public DbSet<DBRepairVehicleModel> DBRepairVehicleModelsSet { get; set; }
+        public DbSet<DBRepairVehicleModel> DBRepairVehicleSet { get; set; }
+        public DbSet<DBUpgradeVehicleModel> DBUpgradeVehicleSet { get;set; }
+        public DbSet<DBDiagnosticVehicleModel> DBDiagnosticVehicleSet { get; set; }
     }
 }

@@ -4,12 +4,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using VehicleDiary.Application.DTOs;
+using VehicleDiary.Core.Constants;
 using VehicleDiary.Core.Entities;
 using VehicleDiary.Core.Interfaces.Repositories;
 using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
 
-namespace VehicleDiary.Web.Controllers
+namespace VehicleDiary.Web.Controllers.Vehicle
 {
     [Authorize]
     public class VehicleController : Controller
@@ -48,7 +49,7 @@ namespace VehicleDiary.Web.Controllers
             var userVehicleCount = await _vehicleService.CountingVehiclesAsync(userId);
             if (userVehicleCount >= 3)
             {
-                ModelState.AddModelError(string.Empty, "Nelze přidat více než 3 vozidla.");
+                ModelState.AddModelError(string.Empty, "You cant add more than 3 vehicles.");
                 return View(DBVehicleVM);
             }
 

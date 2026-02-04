@@ -12,7 +12,7 @@ using VehicleDiary.Core.Interfaces.Repositories;
 using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
 
-namespace VehicleDiary.Web.Controllers
+namespace VehicleDiary.Web.Controllers.Usage
 {
     [Authorize]
     public class CarUsageController : Controller

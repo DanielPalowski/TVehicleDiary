@@ -1,0 +1,421 @@
+﻿@using VehicleDiary.Web.ViewModels
+@model DBDiagnosticVehicleModelVM
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card service-history-card shadow-sm mb-5">
+                <div class="card-body p-4">
+                    <h2 class="service-history-title mb-4">
+                        <i class="fas fa-stethoscope me-2 service-icon-orange"></i>Vehicle Diagnostics
+                    </h2>
+                    <form asp-action="Create" method="post" enctype="multipart/form-data" id="diagnosticForm">
+                        <input type="hidden" asp-for="VehicleId" />
+
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <div class="row g-3">
+
+                            <!-- Category (Fixed) -->
+                            <div class="col-md-6">
+                                <label class="form-label service-form-label">
+                                    <i class="fas fa-list me-1 service-icon-orange"></i>Category
+                                </label>
+                                <input type="text" class="form-control service-form-control" value="Diagnostics" readonly>
+                                <input type="hidden" asp-for="DiagnosticVCategory" value="Diagnostics" />
+                            </div>
+
+                            <!-- Diagnostic Type -->
+                            <div class="col-md-6">
+                                <label asp-for="DiagnosticVType" class="form-label service-form-label">
+                                    <i class="fas fa-tools me-1 service-icon-orange"></i>Diagnostic Type
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <select asp-for="DiagnosticVType" class="form-control service-form-control" id="typeSelect" required>
+                                    <option value="">Select Diagnostic Type</option>
+                                    <option value="Coding">Coding</option>
+                                    <option value="Error Diagnostics">Error Diagnostics</option>
+                                    <option value="Software Update">Software Update</option>
+                                    <option value="Tuning">Tuning</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                                <span asp-validation-for="DiagnosticVType" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Conditional Error Fields (Initially Hidden) -->
+                            <div id="errorFieldsSection" class="row g-3 mt-3" style="display: none;">
+                                <div class="col-12">
+                                    <div class="card border-warning bg-warning-subtle">
+                                        <div class="card-body">
+                                            <h6 class="fw-semibold mb-3">
+                                                <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                                Error Details
+                                            </h6>
+
+                                            <!-- Error Type -->
+                                            <div class="col-md-6 mb-3">
+                                                <label asp-for="DiagnosticVErrorType" class="form-label service-form-label">
+                                                    Error Type
+                                                    <span class="text-muted small">(optional)</span>
+                                                </label>
+                                                <select asp-for="DiagnosticVErrorType"
+                                                        class="form-control border-warning">
+                                                    <option value="">Select Error Type</option>
+                                                    <option value="Engine">Engine</option>
+                                                    <option value="Transmission">Transmission</option>
+                                                    <option value="ABS">ABS/ESP</option>
+                                                    <option value="Airbag">Airbag</option>
+                                                    <option value="Electrical">Electrical</option>
+                                                    <option value="Sensor">Sensor</option>
+                                                    <option value="Communication">Communication</option>
+                                                    <option value="Other">Other</option>
+                                                </select>
+                                            </div>
+
+                                            <!-- Error Code -->
+                                            <div class="col-md-6 mb-3">
+                                                <label asp-for="DiagnosticVErrorCode" class="form-label service-form-label">
+                                                    Error Code
+                                                    <span class="text-muted small">(optional)</span>
+                                                </label>
+                                                <input type="text" asp-for="DiagnosticVErrorCode"
+                                                       class="form-control border-warning"
+                                                       placeholder="e.g., P0300, U1123">
+                                            </div>
+
+                                            <!-- Error Description -->
+                                            <div class="col-12 mb-3">
+                                                <label asp-for="DiagnosticVErrorDis" class="form-label service-form-label">
+                                                    Error Description
+                                                    <span class="text-muted small">(optional)</span>
+                                                </label>
+                                                <textarea asp-for="DiagnosticVErrorDis"
+                                                          class="form-control border-warning"
+                                                          rows="2"
+                                                          placeholder="Describe the error symptoms and findings..."></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Diagnostic Tool -->
+                            <div class="col-md-6">
+                                <label asp-for="DiagnosticVDiagnosticType" class="form-label service-form-label">
+                                    <i class="fas fa-laptop-medical me-1 service-icon-orange"></i>Diagnostic Tool
+                                    <span class="text-muted small">(optional)</span>
+                                </label>
+                                <input type="text" asp-for="DiagnosticVDiagnosticType"
+                                       class="form-control service-form-control"
+                                       placeholder="e.g., VCDS, INPA, Launch X431">
+                                <span asp-validation-for="DiagnosticVDiagnosticType" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Procedure Name -->
+                            <div class="col-md-6">
+                                <label asp-for="DiagnosticVName" class="form-label service-form-label">
+                                    <i class="fas fa-clipboard-check me-1 service-icon-orange"></i>Procedure Name
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="text" asp-for="DiagnosticVName"
+                                       class="form-control service-form-control"
+                                       placeholder="e.g., Full system scan, ECU coding, Software update" required>
+                                <span asp-validation-for="DiagnosticVName" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Mileage -->
+                            <div class="col-md-4">
+                                <label asp-for="DiagnosticVMileage" class="form-label service-form-label">
+                                    <i class="fas fa-tachometer-alt me-1 service-icon-orange"></i>Mileage
+                                    <span class="text-muted small">(optional)</span>
+                                </label>
+                                <input type="number" asp-for="DiagnosticVMileage"
+                                       class="form-control service-form-control"
+                                       placeholder="158000">
+                                <span asp-validation-for="DiagnosticVMileage" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Date -->
+                            <div class="col-md-4">
+                                <label asp-for="DiagnosticVWhen" class="form-label service-form-label">
+                                    <i class="fas fa-calendar me-1 service-icon-orange"></i>Date
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <input type="date" asp-for="DiagnosticVWhen" class="form-control service-form-control"
+                                       value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
+                                <span asp-validation-for="DiagnosticVWhen" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Price -->
+                            <div class="col-md-4">
+                                <label asp-for="DiagnosticVPrice" class="form-label service-form-label">
+                                    <i class="fas fa-euro-sign me-1 service-icon-orange"></i>Cost
+                                    <span class="text-muted small">(optional)</span>
+                                </label>
+                                <div class="input-group service-input-group">
+                                    <input type="number" step="0.01" asp-for="DiagnosticVPrice"
+                                           class="form-control service-form-control"
+                                           placeholder="85.00">
+                                    <span class="input-group-text">€</span>
+                                </div>
+                                <span asp-validation-for="DiagnosticVPrice" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Technician -->
+                            <div class="col-md-6">
+                                <label asp-for="UpgradeVTechnician" class="form-label service-form-label">
+                                    <i class="fas fa-user-md me-1 service-icon-orange"></i>Technician
+                                    <span class="text-muted small">(optional)</span>
+                                </label>
+                                <input type="text" asp-for="UpgradeVTechnician"
+                                       class="form-control service-form-control"
+                                       placeholder="John Doe / Diagnostic Center">
+                                <span asp-validation-for="UpgradeVTechnician" class="text-danger small"></span>
+                            </div>
+
+                            <!-- File Upload -->
+                            <div class="col-md-6">
+                                <label asp-for="Upload" class="form-label service-form-label">
+                                    <i class="fas fa-file-upload me-1 service-icon-orange"></i>Upload File
+                                    <span class="text-muted small">(optional, max 5 MB)</span>
+                                </label>
+                                <input asp-for="Upload" type="file" class="form-control"
+                                       onchange="validateFile(this)"
+                                       accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.txt" />
+                                <div class="form-text">Allowed formats: PDF, JPG, PNG, DOC, DOCX, TXT</div>
+                                <div id="fileSizeWarning" class="text-danger small mt-1" style="display: none;"></div>
+                                <span asp-validation-for="Upload" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Notes -->
+                            <div class="col-12">
+                                <label asp-for="DiagnosticVNotes" class="form-label service-form-label">
+                                    <i class="fas fa-sticky-note me-1 service-icon-orange"></i>Additional Notes
+                                    <span class="text-muted small">(optional)</span>
+                                </label>
+                                <textarea asp-for="DiagnosticVNotes"
+                                          class="form-control service-form-control service-textarea"
+                                          rows="3"
+                                          placeholder="Additional notes, observations, or follow-up recommendations..."></textarea>
+                                <span asp-validation-for="DiagnosticVNotes" class="text-danger small"></span>
+                            </div>
+
+                            <!-- Submit -->
+                            <div class="col-12 mt-4">
+                                <button class="btn btn-primary service-submit-btn w-100" type="submit" id="submitButton">
+                                    <i class="fas fa-plus-circle me-2 service-icon-white"></i>Add Diagnostic Record
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    // Get DOM elements
+    const typeSelect = document.getElementById('typeSelect');
+    const errorFieldsSection = document.getElementById('errorFieldsSection');
+    const diagnosticForm = document.getElementById('diagnosticForm');
+    const submitButton = document.getElementById('submitButton');
+
+    // Toggle error fields based on diagnostic type selection
+    typeSelect.addEventListener('change', function () {
+        const selectedType = this.value;
+
+        if (selectedType === 'Error Diagnostics') {
+            errorFieldsSection.style.display = 'block';
+        } else {
+            errorFieldsSection.style.display = 'none';
+        }
+    });
+
+    // Form submission handler
+    diagnosticForm.addEventListener('submit', function(e) {
+        // Basic validation
+        if (!typeSelect.value) {
+            e.preventDefault();
+            alert('Please select a Diagnostic Type');
+            typeSelect.focus();
+            return;
+        }
+
+        // Show loading state
+        submitButton.innerHTML = '<span class="service-loading"></span> Processing...';
+        submitButton.disabled = true;
+    });
+
+    // File validation function
+    function validateFile(input) {
+        const maxSize = 5 * 1024 * 1024; // 5 MB
+        const fileSizeWarning = document.getElementById('fileSizeWarning');
+
+        if (input.files.length > 0) {
+            const file = input.files[0];
+            const fileSize = file.size;
+
+            if (fileSize > maxSize) {
+                fileSizeWarning.textContent = `File size (${(fileSize / (1024 * 1024)).toFixed(2)} MB) exceeds the 5 MB limit.`;
+                fileSizeWarning.style.display = 'block';
+                fileSizeWarning.style.color = 'red';
+                input.value = ''; // Clear the file input
+            } else {
+                fileSizeWarning.textContent = `File size: ${(fileSize / 1024).toFixed(2)} KB`;
+                fileSizeWarning.style.color = 'green';
+                fileSizeWarning.style.display = 'block';
+            }
+
+            // Validate file extension
+            const allowedExtensions = ['.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx', '.txt'];
+            const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+
+            if (!allowedExtensions.includes(fileExtension)) {
+                fileSizeWarning.textContent = `File type ${fileExtension} is not allowed.`;
+                fileSizeWarning.style.display = 'block';
+                fileSizeWarning.style.color = 'red';
+                input.value = '';
+            }
+        } else {
+            fileSizeWarning.style.display = 'none';
+        }
+    }
+
+    // Client-side validation before form submission
+    document.getElementById('diagnosticForm').addEventListener('submit', function(e) {
+        const fileInput = document.querySelector('input[type="file"]');
+        const maxSize = 5 * 1024 * 1024;
+
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+
+            if (file.size > maxSize) {
+                e.preventDefault();
+                alert('File size exceeds the 5 MB limit. Please choose a smaller file.');
+                return false;
+            }
+        }
+    });
+</script>
+<style>
+    /* Orange theme for diagnostics */
+    .service-icon-orange {
+        color: #f97316;
+    }
+
+    .service-history-title {
+        font-weight: 700;
+        font-size: 1.8rem;
+        color: #1e293b;
+        display: flex;
+        align-items: center;
+    }
+
+    .service-form-label {
+        font-weight: 600;
+        color: #475569;
+        margin-bottom: 0.5rem;
+        display: flex;
+        align-items: center;
+    }
+
+    .service-form-control {
+        border-radius: 10px;
+        padding: 0.75rem;
+        border: 1px solid #e2e8f0;
+        transition: all 0.3s ease;
+    }
+
+        .service-form-control:focus {
+            border-color: #f97316;
+            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
+            outline: none;
+        }
+
+    .service-input-group .input-group-text {
+        background-color: #fff7ed;
+        border: 1px solid #fed7aa;
+        color: #f97316;
+    }
+
+    .service-textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+
+    .service-submit-btn {
+        background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+        border: none;
+        padding: 0.875rem;
+        font-weight: 600;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
+    }
+
+        .service-submit-btn:hover {
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(249, 115, 22, 0.35);
+        }
+
+    .service-icon-white {
+        color: white;
+    }
+
+    .service-history-card {
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    /* Required field indicator */
+    input:required,
+    select:required,
+    textarea:required {
+        border-left: 4px solid #ef4444;
+        padding-left: 0.5rem;
+    }
+
+    /* Loading spinner */
+    .service-loading {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 0.5rem;
+    }
+
+    @@keyframes spin {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Responsive adjustments */
+    @@media (max-width: 768px) {
+        .service-history-title {
+            font-size: 1.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem !important;
+        }
+    }
+</style>

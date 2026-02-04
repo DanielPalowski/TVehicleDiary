@@ -22,6 +22,7 @@ namespace VehicleDiary.Web.ViewModels
         [Required]
         public Guid vehicleId { get; set; }
         public IEnumerable<DBRepairModelVM>? RepairsView { get; set; }
+        public float TotalRepairCost { get; set; }
 
     }
 }

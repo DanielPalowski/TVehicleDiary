@@ -12,8 +12,8 @@ using VehicleDiary.Infrastructure.Data;
 namespace VehicleDiary.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251014103357_NewDBAddingMileage")]
-    partial class NewDBAddingMileage
+    [Migration("20260203222737_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -227,6 +227,87 @@ namespace VehicleDiary.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBDiagnosticVehicleModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("Data")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("DiagnosticVCategory")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DiagnosticVDiagnosticType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DiagnosticVErrorCode")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DiagnosticVErrorDis")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DiagnosticVErrorType")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int?>("DiagnosticVMileage")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("int");
+
+                    b.Property<string>("DiagnosticVName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DiagnosticVNotes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float?>("DiagnosticVPrice")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("real");
+
+                    b.Property<string>("DiagnosticVType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("DiagnosticVWhen")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpgradeVTechnician")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("DBDiagnosticVehicleSet");
+                });
+
             modelBuilder.Entity("VehicleDiary.Core.Entities.DBOilModel", b =>
                 {
                     b.Property<Guid>("Id")
@@ -367,7 +448,7 @@ namespace VehicleDiary.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("DBRepairVehicleModelsSet");
+                    b.ToTable("DBRepairVehicleSet");
                 });
 
             modelBuilder.Entity("VehicleDiary.Core.Entities.DBRepairsModel", b =>
@@ -453,6 +534,77 @@ namespace VehicleDiary.Migrations
                     b.ToTable("DBTiresSet");
                 });
 
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBUpgradeVehicleModel", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContentType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte[]>("Data")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpgradeVCategory")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("UpgradeVMileage")
+                        .HasMaxLength(9)
+                        .HasColumnType("int");
+
+                    b.Property<string>("UpgradeVName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UpgradeVNotes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpgradeVPartBrand")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpgradeVPartCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<float>("UpgradeVPrice")
+                        .HasMaxLength(20)
+                        .HasColumnType("real");
+
+                    b.Property<string>("UpgradeVStatus")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("UpgradeVTechnician")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UpgradeVType")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("UpgradeVWhen")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("DBUpgradeVehicleSet");
+                });
+
             modelBuilder.Entity("VehicleDiary.Core.Entities.DBVehicleModel", b =>
                 {
                     b.Property<Guid>("Id")
@@ -466,37 +618,49 @@ namespace VehicleDiary.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
 
                     b.Property<string>("Insurence")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("License_plate")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<int>("MadeYear")
+                        .HasMaxLength(4)
                         .HasColumnType("int");
 
                     b.Property<string>("Model")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<int>("Power")
+                        .HasMaxLength(5)
                         .HasColumnType("int");
 
                     b.Property<float?>("RepairCost")
                         .HasColumnType("real");
+
+                    b.Property<string>("STK")
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("VIN")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.HasKey("Id");
 
@@ -588,6 +752,17 @@ namespace VehicleDiary.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBDiagnosticVehicleModel", b =>
+                {
+                    b.HasOne("VehicleDiary.Core.Entities.DBVehicleModel", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
+                });
+
             modelBuilder.Entity("VehicleDiary.Core.Entities.DBOilModel", b =>
                 {
                     b.HasOne("VehicleDiary.Core.Entities.DBVehicleModel", "Vehicle")
@@ -633,6 +808,17 @@ namespace VehicleDiary.Migrations
                 });
 
             modelBuilder.Entity("VehicleDiary.Core.Entities.DBTiresModel", b =>
+                {
+                    b.HasOne("VehicleDiary.Core.Entities.DBVehicleModel", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("VehicleDiary.Core.Entities.DBUpgradeVehicleModel", b =>
                 {
                     b.HasOne("VehicleDiary.Core.Entities.DBVehicleModel", "Vehicle")
                         .WithMany()

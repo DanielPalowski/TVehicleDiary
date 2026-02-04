@@ -3,201 +3,828 @@
 
 @{
     var AddingVehicle = Model.Count() < 3;
+    Layout = null;
 }
-<div class="container py-4">
-@if (AddingVehicle)
-{
-    
-        <!-- Modernized "Add New Vehicle" button -->
-        <div class="row mb-5">
-            <div class="col-12">
-                <div class="d-grid">
-                    <a asp-controller="Vehicle" asp-action="Create"
-                       class="btn-add-vehicle rounded-4 shadow-lg py-3 px-4 text-decoration-none">
-                        <div class="d-flex align-items-center justify-content-center">
-                            <div class="btn-icon-container me-3">
-                                <i class="fas fa-plus-circle"></i>
-                            </div>
-                            <div class="text-center">
-                                <div class="fw-bold fs-4">Add New Vehicle</div>
-                                <div class="small opacity-75">Click to register a new vehicle to your profile</div>
-                            </div>
-                        </div>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Vehicles | VehicleDiary</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #d1fae5;
+            --secondary: #3b82f6;
+            --secondary-dark: #2563eb;
+            --secondary-light: #dbeafe;
+            --background: #f8fafc;
+            --card: #ffffff;
+            --text: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Header with gradient */
+        .header-gradient {
+            background: linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(215, 28%, 17%) 100%);
+        }
+
+        /* Vehicle counter badge */
+        .vehicle-counter {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Vehicle card styles */
+        .vehicle-card {
+            background: var(--card);
+            border-radius: 1.5rem;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+            .vehicle-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            }
+
+        /* Insurance badge */
+        .insurance-badge {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Blue action button */
+        .action-btn-blue {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+            .action-btn-blue:hover {
+                background: var(--secondary-dark);
+                transform: translateY(-1px);
+            }
+
+        /* Other action buttons */
+        .action-btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+            .action-btn-primary:hover {
+                background: var(--primary-dark);
+                transform: translateY(-1px);
+            }
+
+        .action-btn-secondary {
+            background: var(--background);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+            .action-btn-secondary:hover {
+                background: #f1f5f9;
+                transform: translateY(-1px);
+            }
+
+        .action-btn-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+
+            .action-btn-danger:hover {
+                background: rgba(239, 68, 68, 0.15);
+                transform: translateY(-1px);
+            }
+
+        /* Insurance container */
+        .insurance-container {
+            background: var(--primary-light);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 1rem;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Welcome message */
+        .welcome-message {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
+            border: 1px solid rgba(16, 185, 129, 0.1);
+            border-radius: 1.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Floating action button */
+        .fab {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+            .fab:hover {
+                transform: scale(1.1);
+                box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
+            }
+
+        /* Empty state */
+        .empty-state {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem 1rem;
+            text-align: center;
+        }
+
+        /* Animation */
+        @@keyframes slideIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        /* Mobile optimizations */
+        @@media (max-width: 640px) {
+            .container
+
+        {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        button, a {
+            min-height: 44px;
+            min-width: 44px;
+        }
+
+        .vehicle-image {
+            height: 160px;
+        }
+
+        .fab {
+            bottom: 1.5rem;
+            right: 1.5rem;
+        }
+
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: #94a3b8;
+            }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="header-gradient text-white">
+        <div class="container mx-auto px-4">
+            <!-- Top navigation -->
+            <div class="flex items-center justify-between py-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
+                        <i data-lucide="car" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-lg">VehicleDiary</h1>
+                        <p class="text-sm text-white/70">Your Vehicle Management Hub</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="/" class="p-2 rounded-lg hover:bg-white/10 transition-colors">
+                        <i data-lucide="home" class="w-5 h-5"></i>
                     </a>
+                    <div class="vehicle-counter rounded-full px-3 py-1 text-sm">
+                        <i data-lucide="car" class="w-3 h-3 inline mr-1"></i>
+                        <span>@Model.Count()/3</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Vehicle counter bar -->
+            <div class="border-t border-white/10 pt-3 pb-4">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="layers" class="w-4 h-4 text-white/80"></i>
+                        <span class="text-sm font-medium">Your Vehicles</span>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-xl font-bold">@Model.Count()</div>
+                        <div class="text-xs text-white/60">out of 3 vehicles</div>
+                    </div>
+                </div>
+                <div class="mt-2 w-full bg-white/10 rounded-full h-1.5">
+                    <div class="bg-green-400 h-1.5 rounded-full" style="width: @((Model.Count() / 3.0 * 100))%"></div>
                 </div>
             </div>
         </div>
-}
-else
-{
-    <div class="alert alert-warning text-center rounded-4 shadow-sm">
-        <i class="fas fa-exclamation-triangle me-2"></i>
-        You have reached the maximum limit of 3 vehicles.
-    </div>
-}
+    </header>
 
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Welcome Message -->
+        <div class="welcome-message p-6 mb-6">
+            <div class="flex items-start gap-4">
+                <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="car" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">Welcome to VehicleDiary</h2>
+                    <p class="text-gray-600 mb-3">
+                        This app helps you track and manage all aspects of your vehicle ownership.
+                        From maintenance schedules to fuel consumption, insurance tracking to repair history –
+                        everything you need to stay on top of your vehicle's health and costs.
+                    </p>
+                    <p class="text-sm text-gray-500">
+                        <i data-lucide="info" class="w-4 h-4 inline mr-1"></i>
+                        Add up to 3 vehicles to get started with comprehensive vehicle management.
+                    </p>
+                </div>
+            </div>
+        </div>
 
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        @foreach (var entry in Model)
+        <!-- Add Vehicle Section -->
+        @if (AddingVehicle)
         {
-            Random randomImageGen = new Random();
-            int randomImage = randomImageGen.Next(1, 5);
-            string imagePath = $"~/images/{randomImage}.jpeg";
+            <div class="mb-8">
+                <div class="hidden md:block">
+                    <a asp-controller="Vehicle" asp-action="Create"
+                       class="group relative overflow-hidden bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-2xl p-6 flex items-center justify-between shadow-lg hover:shadow-xl transition-all duration-300">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center">
+                                <i data-lucide="plus" class="w-7 h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl font-bold mb-1">Add New Vehicle</h2>
+                                <p class="text-white/80">Register a new vehicle to start tracking maintenance and costs</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-sm font-medium px-3 py-1 bg-white/20 rounded-full">Add Vehicle</span>
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                        </div>
+                    </a>
+                </div>
 
-            <div class="col" id="vehicle-@entry.Id">
-                <div class="vehicle-card-container h-100">
-                    <!-- Car Image - Full width without borders -->
-                    <div class="vehicle-image-container position-relative">
-                        <img src="@Url.Content(imagePath)"
+                <!-- Mobile Add Button -->
+                <div class="md:hidden">
+                    <a asp-controller="Vehicle" asp-action="Create"
+                       class="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl p-4 flex items-center justify-between shadow-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold">Add Vehicle</h3>
+                                <p class="text-sm text-white/80">Tap to register</p>
+                            </div>
+                        </div>
+                        <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <!-- Limit Reached -->
+            <div class="mb-8 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl p-4 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0">
+                    <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600"></i>
+                </div>
+                <div>
+                    <p class="font-medium text-amber-800">Vehicle limit reached</p>
+                    <p class="text-sm text-amber-600">You have reached the maximum limit of 3 vehicles.</p>
+                </div>
+            </div>
+        }
+
+        <!-- Vehicle Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            @foreach (var entry in Model)
+            {
+                var random = new Random(entry.GetHashCode());
+                int randomImage = random.Next(1, 5);
+                string imagePath = $"/images/{randomImage}.jpeg";
+
+                <div class="vehicle-card slide-in" id="vehicle-@entry.Id">
+                    <!-- Vehicle Image -->
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="@imagePath"
                              alt="@entry.Name @entry.Model"
-                             class="img-fluid vehicle-image w-100">
+                             class="w-full h-full object-cover"
+                             loading="lazy">
 
-                        <!-- Floating vehicle badge -->
-                        <div class="vehicle-badge position-absolute top-0 start-0 m-3">
-                            <span class="badge bg-dark bg-opacity-75 rounded-pill px-3 py-2">
-                                <i class="fas fa-car me-1"></i>@entry.MadeYear
+                        <!-- Year Badge -->
+                        <div class="absolute top-4 left-4">
+                            <span class="insurance-badge">
+                                <i data-lucide="calendar" class="w-3 h-3"></i>
+                                @entry.MadeYear
+                            </span>
+                        </div>
+
+                        <!-- VIN Badge -->
+                        <div class="absolute bottom-4 left-4">
+                            <span class="bg-black/60 text-white text-xs px-2 py-1 rounded">
+                                VIN: @entry.VIN.Substring(0, Math.Min(8, entry.VIN.Length))...
                             </span>
                         </div>
                     </div>
 
                     <!-- Card Content -->
-                    <div class="vehicle-card-content">
-                        <!-- Title -->
-                        <div class="vehicle-title text-center mb-3">
-                            <h3 class="vehicle-name mb-1 fw-bold">@entry.Name @entry.Model</h3>
-                            <div class="vehicle-vin text-muted font-monospace small">@entry.VIN</div>
-                        </div>
-
-                        <!-- Vehicle Info Grid -->
-                        <div class="vehicle-info-grid mb-4">
-                            <div class="info-item">
-                                <div class="info-icon">
-                                    <i class="fas fa-horse-head"></i>
-                                </div>
-                                <div class="info-content">
-                                    <div class="info-label">Power</div>
-                                    <div class="info-value">@entry.Power HP</div>
-                                </div>
-                            </div>
-
-                            <div class="info-item">
-                                <div class="info-icon">
-                                    <i class="fas fa-id-card"></i>
-                                </div>
-                                <div class="info-content">
-                                    <div class="info-label">License Plate</div>
-                                    <div class="info-value">@entry.License_plate</div>
-                                </div>
-                            </div>
-
-                            @if (!string.IsNullOrEmpty(entry.Insurence))
-                            {
-                                <div class="info-item">
-                                    <div class="info-icon">
-                                        <i class="fas fa-shield-alt"></i>
-                                    </div>
-                                    <div class="info-content">
-                                        <div class="info-label">Insurance</div>
-                                        <div class="info-value badge bg-success rounded-pill">@entry.Insurence</div>
-                                    </div>
-                                </div>
-                            }
-
-                            @if (entry.Bought.HasValue)
-                            {
-                                <div class="info-item">
-                                    <div class="info-icon">
-                                        <i class="fas fa-calendar-check"></i>
-                                    </div>
-                                    <div class="info-content">
-                                        <div class="info-label">Purchased</div>
-                                        <div class="info-value">@entry.Bought.Value.ToString("d MMM yyyy")</div>
-                                    </div>
-                                </div>
-                            }
-                        </div>
-
-                        <!-- Repair Costs - Enhanced Design -->
-                        <div class="repair-costs-section mb-4">
-                            <div class="d-flex align-items-center justify-content-between mb-2">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-tools me-2 text-danger"></i>
-                                    <span class="fw-semibold">Total Repair Costs</span>
-                                </div>
-                                <span class="repair-cost-amount fw-bold">
-                                    €@entry.RepairCost?.ToString("N2")
-                                </span>
-                            </div>
-                            <div class="progress repair-cost-progress" style="height: 6px;">
-                                <div class="progress-bar bg-danger"
-                                     style="width: @(Math.Min((entry.RepairCost ?? 0) / 2000 * 100, 100))%">
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between mt-1">
-                                <small class="text-muted">€0</small>
-                                <small class="text-muted">€2000+</small>
+                    <div class="p-6">
+                        <!-- Vehicle Title -->
+                        <div class="mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 mb-1">@entry.Name @entry.Model</h3>
+                            <div class="flex items-center gap-2 text-sm text-gray-500">
+                                <i data-lucide="hash" class="w-3 h-3"></i>
+                                <span>@entry.License_plate</span>
                             </div>
                         </div>
 
-                        <!-- Description -->
-                        @if (!string.IsNullOrEmpty(entry.Description))
+                        <!-- Quick Stats -->
+                        <div class="grid grid-cols-2 gap-3 mb-4">
+                            <div class="bg-blue-50 border border-blue-100 rounded-xl p-3">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <i data-lucide="zap" class="w-4 h-4 text-blue-600"></i>
+                                    <span class="text-xs text-gray-500">Power</span>
+                                </div>
+                                <div class="font-bold text-gray-900">@entry.Power HP</div>
+                            </div>
+                            <div class="bg-green-50 border border-green-100 rounded-xl p-3">
+                                <div class="flex items-center gap-2 mb-1">
+                                    <i data-lucide="calendar-days" class="w-4 h-4 text-green-600"></i>
+                                    <span class="text-xs text-gray-500">Purchased</span>
+                                </div>
+                                <div class="font-bold text-gray-900">
+                                    @if (entry.Bought.HasValue)
+                                    {
+                                        @entry.Bought.Value.ToString("MMM yyyy")
+                                    }
+                                    else
+                                    {
+                                        <span class="text-gray-400">Unknown</span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Insurance Information -->
+                        @if (!string.IsNullOrEmpty(entry.Insurence))
                         {
-                            <div class="vehicle-description mb-4">
-                                <div class="description-header d-flex align-items-center mb-2">
-                                    <i class="fas fa-align-left me-2 text-primary"></i>
-                                    <span class="fw-semibold">Notes</span>
+                            <div class="insurance-container">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i data-lucide="shield-check" class="w-4 h-4 text-green-600"></i>
+                                    <span class="font-medium text-gray-900">Insurance Details</span>
                                 </div>
-                                <p class="description-text mb-0">@entry.Description</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <div class="text-sm text-gray-600">Provider</div>
+                                        <div class="font-bold text-gray-900">@entry.Insurence</div>
+                                    </div>
+                                    <div class="text-right">
+                                        <div class="text-sm text-gray-600">Status</div>
+                                        <div class="flex items-center gap-1">
+                                            <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                                            <span class="text-sm font-medium text-green-600">Active</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         }
 
-                        <!-- Action Buttons -->
-                        <div class="vehicle-actions">
-                            <div class="d-grid gap-2">
-                                <a asp-controller="Repair" asp-action="Index"
-                                   asp-route-vehicleIDRoute="@entry.Id"
-                                   class="btn btn-action repair-btn rounded-3 py-2">
-                                    <i class="fas fa-tools me-2"></i>Repair History
-                                </a>
-                                <a asp-controller="CarUsage" asp-action="Index"
-                                   asp-route-vehicleIDRoute="@entry.Id"
-                                   class="btn btn-action usage-btn rounded-3 py-2">
-                                    <i class="fas fa-road me-2"></i>Usage Stats
-                                </a>
-                                <button onclick="deleteVehicle('@entry.Id')"
-                                        class="btn btn-action delete-btn rounded-3 py-2">
-                                    <i class="fas fa-trash-alt me-2"></i>Remove Vehicle
-                                </button>
+                        <!-- Repair Costs -->
+                        <div class="mt-6 mb-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center gap-2">
+                                    <i data-lucide="wrench" class="w-4 h-4 text-red-500"></i>
+                                    <span class="text-sm font-medium">Total Repair Costs</span>
+                                </div>
+                                <span class="font-bold text-gray-900">€@entry.RepairCost?.ToString("N2")</span>
                             </div>
+                            <div class="relative pt-1">
+                                <div class="overflow-hidden h-2 text-xs flex rounded-full bg-gray-100">
+                                    <div style="width: @((Math.Min((entry.RepairCost ?? 0) / 2000 * 100, 100)).ToString("0"))%"
+                                         class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-red-400 to-red-500">
+                                    </div>
+                                </div>
+                                <div class="flex justify-between mt-1">
+                                    <span class="text-xs text-gray-500">€0</span>
+                                    <span class="text-xs text-gray-500">€2000+</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="space-y-3 mt-6">
+                            <a asp-controller="Repair" asp-action="Index"
+                               asp-route-vehicleIDRoute="@entry.Id"
+                               class="action-btn-primary">
+                                <i data-lucide="wrench" class="w-4 h-4"></i>
+                                <span>Repair History</span>
+                            </a>
+
+                            <!-- Blue Usage Stats Button -->
+                            <a asp-controller="CarUsage" asp-action="Index"
+                               asp-route-vehicleIDRoute="@entry.Id"
+                               class="action-btn-blue">
+                                <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
+                                <span>Usage Stats</span>
+                            </a>
+
+                            <button onclick="showDeleteConfirmation('@entry.Id', '@entry.Name @entry.Model')"
+                                    class="action-btn-danger">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                <span>Remove Vehicle</span>
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
-</div>
+            }
 
+            @if (!Model.Any())
+            {
+                <!-- Empty State -->
+                <div class="col-span-full">
+                    <div class="empty-state">
+                        <div class="w-24 h-24 rounded-full bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center mb-6">
+                            <i data-lucide="car" class="w-12 h-12 text-green-600"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-3">No vehicles yet</h2>
+                        <p class="text-gray-600 mb-4 max-w-md">
+                            Start by adding your first vehicle to track maintenance, repairs, and costs.
+                            Get insights into fuel consumption, insurance status, and more.
+                        </p>
+                        @if (AddingVehicle)
+                        {
+                            <a asp-controller="Vehicle" asp-action="Create"
+                               class="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl px-6 py-3 font-medium inline-flex items-center gap-2 hover:opacity-90 transition-opacity">
+                                <i data-lucide="plus" class="w-5 h-5"></i>
+                                Add Your First Vehicle
+                            </a>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </main>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    <!-- Floating Action Button (Mobile) -->
+    @if (AddingVehicle)
+    {
+        <div class="md:hidden">
+            <a asp-controller="Vehicle" asp-action="Create" class="fab">
+                <i data-lucide="plus" class="w-6 h-6"></i>
+            </a>
+        </div>
     }
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4">
+        <div class="bg-white rounded-2xl max-w-md w-full p-6 transform transition-all duration-300 scale-95">
+            <div class="flex items-center gap-3 mb-4">
+                <div class="w-12 h-12 rounded-xl bg-red-100 flex items-center justify-center">
+                    <i data-lucide="alert-triangle" class="w-6 h-6 text-red-600"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg">Remove Vehicle</h3>
+                    <p id="vehicleName" class="text-gray-600"></p>
+                </div>
+            </div>
+
+            <p class="text-gray-600 mb-6">
+                Are you sure you want to remove this vehicle? All associated data including repair history and usage stats will be permanently deleted.
+            </p>
+
+            <div class="flex gap-3">
+                <button onclick="hideDeleteModal()"
+                        class="flex-1 py-3 rounded-xl border border-gray-300 font-medium hover:bg-gray-50 transition-colors">
+                    Cancel
+                </button>
+                <button id="confirmDeleteBtn"
+                        class="flex-1 py-3 rounded-xl bg-red-600 text-white font-medium hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
+                    <i data-lucide="trash-2" class="w-4 h-4"></i>
+                    Remove
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Notification Template -->
+    <template id="notificationTemplate">
+        <div class="fixed top-4 right-4 px-6 py-3 rounded-xl shadow-lg transform transition-all duration-300 opacity-0 -translate-y-2 z-50">
+            <div class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5"></i>
+                <span class="notification-message"></span>
+            </div>
+        </div>
+    </template>
+
     <script>
-        function deleteVehicle(vehicleID) {
-            if (confirm("Are you sure you want to delete this vehicle? This action cannot be undone.")) {
-                $.ajax({
-                    url: "@Url.Action("Delete", "Vehicle")/" + vehicleID,
-                    type: "DELETE",
-                    success: function (result) {
-                        $("#vehicle-" + vehicleID).fadeOut(300, function () {
-                            $(this).remove();
-                        });
-                    },
-                    error: function (err) {
-                        alert("An error occurred while deleting the vehicle. Please try again.");
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Delete confirmation modal
+        let currentVehicleId = null;
+
+        function showDeleteConfirmation(vehicleId, vehicleName) {
+            currentVehicleId = vehicleId;
+            document.getElementById('vehicleName').textContent = vehicleName;
+            document.getElementById('deleteModal').classList.remove('hidden');
+            document.getElementById('deleteModal').classList.add('flex');
+
+            // Add animation
+            setTimeout(() => {
+                document.querySelector('#deleteModal > div').classList.remove('scale-95');
+                document.querySelector('#deleteModal > div').classList.add('scale-100');
+            }, 10);
+        }
+
+        function hideDeleteModal() {
+            document.querySelector('#deleteModal > div').classList.remove('scale-100');
+            document.querySelector('#deleteModal > div').classList.add('scale-95');
+
+            setTimeout(() => {
+                document.getElementById('deleteModal').classList.remove('flex');
+                document.getElementById('deleteModal').classList.add('hidden');
+                currentVehicleId = null;
+            }, 300);
+        }
+
+        // Handle delete confirmation
+        document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+            if (!currentVehicleId) return;
+
+            // Show loading state
+            const btn = this;
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i data-lucide="loader-2" class="w-4 h-4 animate-spin"></i> Removing...';
+            btn.disabled = true;
+
+            // Make AJAX request
+            fetch(`@Url.Action("Delete", "Vehicle")/${currentVehicleId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Remove vehicle card with animation
+                    const vehicleCard = document.getElementById(`vehicle-${currentVehicleId}`);
+                    vehicleCard.style.transition = 'all 0.3s ease';
+                    vehicleCard.style.opacity = '0';
+                    vehicleCard.style.transform = 'translateX(-100px)';
+
+                    setTimeout(() => {
+                        vehicleCard.remove();
+
+                        // Update vehicle counter in header
+                        updateVehicleCounter(-1);
+
+                        // Show success message
+                        showNotification('Vehicle removed successfully', 'success');
+                    }, 300);
+                } else {
+                    throw new Error('Delete failed');
+                }
+            })
+            .catch(error => {
+                showNotification('Failed to remove vehicle. Please try again.', 'error');
+            })
+            .finally(() => {
+                btn.innerHTML = originalHtml;
+                btn.disabled = false;
+                hideDeleteModal();
+            });
+        });
+
+        // Update vehicle counter
+        function updateVehicleCounter(change) {
+            const counterElements = document.querySelectorAll('.vehicle-counter span, .text-xl.font-bold');
+            const progressBar = document.querySelector('.bg-green-400');
+
+            counterElements.forEach(el => {
+                if (el.classList.contains('text-xl')) {
+                    const current = parseInt(el.textContent);
+                    el.textContent = current + change;
+                } else {
+                    const match = el.textContent.match(/(\d+)\/3/);
+                    if (match) {
+                        const current = parseInt(match[1]);
+                        el.textContent = `${current + change}/3`;
                     }
-                });
+                }
+            });
+
+            // Update progress bar
+            if (progressBar) {
+                const currentCount = parseInt(document.querySelector('.text-xl.font-bold').textContent);
+                const percentage = (currentCount / 3) * 100;
+                progressBar.style.width = `${percentage}%`;
             }
         }
+
+        // Show notification
+        function showNotification(message, type) {
+            const template = document.getElementById('notificationTemplate');
+            const notification = template.content.cloneNode(true);
+            const notificationDiv = notification.querySelector('div');
+
+            // Style based on type
+            if (type === 'success') {
+                notificationDiv.classList.add('bg-green-500', 'text-white');
+                notificationDiv.querySelector('i').setAttribute('data-lucide', 'check-circle');
+            } else {
+                notificationDiv.classList.add('bg-red-500', 'text-white');
+                notificationDiv.querySelector('i').setAttribute('data-lucide', 'alert-circle');
+            }
+
+            notificationDiv.querySelector('.notification-message').textContent = message;
+
+            document.body.appendChild(notificationDiv);
+
+            // Animate in
+            setTimeout(() => {
+                notificationDiv.classList.remove('opacity-0', '-translate-y-2');
+                notificationDiv.classList.add('opacity-100', 'translate-y-0');
+            }, 10);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notificationDiv.classList.remove('opacity-100', 'translate-y-0');
+                notificationDiv.classList.add('opacity-0', '-translate-y-2');
+                setTimeout(() => notificationDiv.remove(), 300);
+            }, 3000);
+
+            // Initialize icon in new element
+            lucide.createIcons();
+        }
+
+        // Add hover effect to cards on desktop
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize animations
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            // Observe vehicle cards
+            document.querySelectorAll('.vehicle-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+
+            // Add click animation to buttons
+            document.querySelectorAll('.action-btn-primary, .action-btn-blue, .action-btn-secondary, .action-btn-danger').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    if (!this.getAttribute('href') && !this.getAttribute('onclick')) {
+                        return;
+                    }
+                    this.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideDeleteModal();
+            }
+        });
+
+        // Close modal when clicking outside
+        document.getElementById('deleteModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideDeleteModal();
+            }
+        });
     </script>
-}
+</body>
+</html>

@@ -22,10 +22,9 @@ namespace VehicleDiary.Application.Services.MapperService
             _repositoryViews = repositoryViews;
             _repositoryCrud = repositoryCrud;
         }
-        public async Task TotalCostAsync(Guid vehicleIDRoute)
+        public async Task<float> TotalCostAsync(Guid vehicleIDRoute)
         {
-            var total = await _repositoryVehicle.CalculatingTotalCostRepairAsync(vehicleIDRoute);
-            var calculate = await _repositoryVehicle.AddingTotalCostRepairAsync(vehicleIDRoute, total);
+            return await _repositoryVehicle.CalculatingTotalCostRepairAsync(vehicleIDRoute);
         }
         public async Task<IEnumerable<RepairDto>>? ShowingRepairsAsync(Guid vehicleIDRoute)
         {

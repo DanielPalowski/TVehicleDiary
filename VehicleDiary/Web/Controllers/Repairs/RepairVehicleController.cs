@@ -3,14 +3,15 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VehicleDiary.Application.DTOs;
+using VehicleDiary.Core.Constants;
 using VehicleDiary.Core.Entities;
 using VehicleDiary.Core.Interfaces.Repositories;
 using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
 
-namespace VehicleDiary.Web.Controllers
+namespace VehicleDiary.Web.Controllers.Repairs
 {
-    public class RepairVehicleController : Controller
+    public class RepairVehicleController : Controller, IFileSizeMax
     {
         private readonly IRepairVehicleService _repairVehicleService;
         private readonly IMapper _mapper;
@@ -42,8 +43,19 @@ namespace VehicleDiary.Web.Controllers
             return View(model);
         }
         [HttpPost]
+        [RequestFormLimits(MultipartBodyLengthLimit = IFileSizeMax.MAX_FILE_SIZE)]
         public async Task<IActionResult> Create(DBRepairVehicleModelVM model)
         {
+            /*var MaxRapairCount = await _repairVehicleService.CountingAsync(model.VehicleId);
+            if (MaxRapairCount >= 25)
+            {
+                ModelState.AddModelError("MaxRepair","You have reached the maximum limit of 25 repair");
+            }*/
+            if (model.Upload != null && model.Upload.Length > IFileSizeMax.MAX_FILE_SIZE)
+            {
+                ModelState.AddModelError("Upload", $"File size exceeds the maximum limit of 5 MB.");
+            }
+
             if (ModelState.IsValid)
             {
                 var repairDto = _mapper.Map<RepairVehicleDto>(model);

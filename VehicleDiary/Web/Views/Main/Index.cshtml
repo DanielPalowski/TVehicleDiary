@@ -1,39 +1,224 @@
-﻿@{
-    ViewBag.IsFooter = true;
-}
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VehicleDiary - Your Vehicle Management Solution</title>
+    <meta name="description" content="Track maintenance, repairs, fuel consumption, and costs in one intuitive platform.">
 
-<div class="vehicle-diary-home">
+    
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                background: 'hsl(0, 0%, 99%)',
+                foreground: 'hsl(222, 47%, 11%)',
+                card: 'hsl(0, 0%, 100%)',
+                'card-foreground': 'hsl(222, 47%, 11%)',
+                primary: 'hsl(160, 84%, 39%)',
+                'primary-foreground': 'hsl(0, 0%, 100%)',
+                secondary: 'hsl(215, 20%, 95%)',
+                'secondary-foreground': 'hsl(222, 47%, 11%)',
+                muted: 'hsl(215, 20%, 96%)',
+                'muted-foreground': 'hsl(215, 16%, 47%)',
+                accent: 'hsl(160, 84%, 39%)',
+                border: 'hsl(215, 20%, 91%)',
+              },
+              fontFamily: {
+                heading: ['Space Grotesk', 'sans-serif'],
+                body: ['Inter', 'sans-serif'],
+              },
+              boxShadow: {
+                'soft': '0 4px 24px -2px rgba(30, 41, 59, 0.08)',
+                'elevated': '0 12px 40px -8px rgba(30, 41, 59, 0.12)',
+                'glow': '0 0 40px rgba(16, 185, 129, 0.15)',
+              },
+            },
+          },
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Google Sans';
+            background-color: hsl(0, 0%, 99%);
+            color: hsl(222, 47%, 11%);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(172, 66%, 50%) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(172, 66%, 50%) 100%);
+        }
+
+            .btn-primary-gradient:hover {
+                box-shadow: 0 0 40px rgba(16, 185, 129, 0.3);
+                transform: scale(1.02);
+            }
+
+        .floating-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-animation-delayed {
+            animation: float 6s ease-in-out infinite 2s;
+        }
+
+        .floating-animation-delayed-2 {
+            animation: float 6s ease-in-out infinite 4s;
+        }
+
+        @@keyframes float {
+            0%, 100%
+
+        {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-12px);
+        }
+
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+            .fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        .landing-page .gradient-text {
+            background: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(172, 66%, 50%) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+    </style>
+</head>
+<body class="landing-page">
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">Welcome to <span class="brand-gradient">VehicleDiary</span></h1>
-                    <p class="hero-subtitle">Your all-in-one vehicle management solution. Track maintenance, repairs, fuel consumption, and costs in one intuitive platform.</p>
-                    <div class="hero-actions">
-                        <a asp-controller="Vehicle" asp-action="Create" class="btn btn-primary btn-hero">
-                            <i class="fas fa-plus-circle me-2"></i>Add Your Vehicle
+    <section class="relative min-h-screen flex items-center overflow-hidden" style="background: linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(215, 28%, 17%) 100%);">
+        <!-- Background decorations -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 rounded-full opacity-30 blur-3xl" style="background: radial-gradient(circle, hsl(160, 84%, 39%), transparent);"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full opacity-20 blur-3xl" style="background: radial-gradient(circle, hsl(172, 66%, 50%), transparent);"></div>
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Text Content -->
+                <div class="text-center lg:text-left">
+                    <h1 class="text-6xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight">
+                        Welcome to<br>
+                        <span class="gradient-text">VehicleDiary</span>
+                    </h1>
+                    <p class="text-lg sm:text-xl text-white/70 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                        Your all-in-one vehicle management solution. Track maintenance, repairs, fuel consumption, and costs in one intuitive platform.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#" class="btn-primary-gradient text-white font-semibold px-8 py-4 rounded-2xl text-lg inline-flex items-center justify-center gap-3 transition-all duration-300 shadow-lg">
+                            <i data-lucide="car" class="w-6 h-6"></i>
+                            Add Your Vehicle
+                            <i data-lucide="arrow-right" class="w-5 h-5"></i>
                         </a>
-                        <a asp-controller="Vehicle" asp-action="Features" class="btn btn-outline-light btn-hero">
+                        <a href="#features" class="border-2 border-white/20 text-white font-semibold px-8 py-4 rounded-2xl text-lg inline-flex items-center justify-center gap-2 hover:bg-white/10 transition-all duration-300">
                             Discover Features
                         </a>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="floating-card card-1">
-                        <i class="fas fa-tools"></i>
-                        <p>Oil Change</p>
-                        <span>€89.99</span>
+
+                <!-- Floating Cards Visual -->
+                <div class="relative h-80 sm:h-96 lg:h-[500px] hidden md:block">
+                    <!-- Card 1 -->
+                    <div class="glass-card absolute top-8 left-4 lg:left-8 rounded-2xl p-3 shadow-elevated floating-animation">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, hsl(160, 84%, 39%), hsl(172, 66%, 50%));">
+                                <i data-lucide="wrench" class="w-7 h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-foreground text-lg">Oil Change</p>
+                                <p class="main-color-txt font-bold text-xl">€89.99</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="floating-card card-2">
-                        <i class="fas fa-gas-pump"></i>
-                        <p>Fuel Refill</p>
-                        <span>€65.50</span>
+
+                    <!-- Card 2 -->
+                    <div class="glass-card absolute top-1/3 right-4 lg:right-8 rounded-2xl p-3 shadow-elevated floating-animation-delayed">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, hsl(160, 84%, 39%), hsl(172, 66%, 50%));">
+                                <i data-lucide="fuel" class="w-7 h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-foreground text-lg">Fuel Refill</p>
+                                <p class="main-color-txt font-bold text-xl">€65.50</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="floating-card card-3">
-                        <i class="fas fa-car-battery"></i>
-                        <p>Battery</p>
-                        <span>€129.99</span>
+
+                    <!-- Card 3 -->
+                    <div class="glass-card absolute bottom-16 left-1/4 rounded-2xl p-3 shadow-elevated floating-animation-delayed-2">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, hsl(160, 84%, 39%), hsl(172, 66%, 50%));">
+                                <i data-lucide="battery" class="w-7 h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-foreground text-lg">Battery</p>
+                                <p class="main-color-txt font-bold text-xl">€129.99</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -41,43 +226,58 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-car"></i>
+    <section class="py-16 md:py-24" style="background: hsl(215, 20%, 96%);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <!-- Stat 1 -->
+                <div class="stat-card flex items-center gap-5 p-6 rounded-2xl bg-white border border-border/50 shadow-soft transition-all duration-300 hover:shadow-elevated fade-in">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                        <i data-lucide="car" class="w-7 h-7" style="color: hsl(160, 84%, 39%);"></i>
                     </div>
-                    <div class="stat-data">
-                        <span class="stat-number" data-count="5000">0</span>
-                        <span class="stat-label">Vehicles Tracked</span>
-                    </div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
-                    <div class="stat-data">
-                        <span class="stat-number" data-count="25000">0</span>
-                        <span class="stat-label">Services Logged</span>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-bold text-foreground">
+                            <span class="stat-number" data-target="5000">0</span><span class="main-color-txt">+</span>
+                        </div>
+                        <p class="text-muted-foreground text-sm mt-1">Vehicles Tracked</p>
                     </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-euro-sign"></i>
+
+                <!-- Stat 2 -->
+                <div class="stat-card flex items-center gap-5 p-6 rounded-2xl bg-white border border-border/50 shadow-soft transition-all duration-300 hover:shadow-elevated fade-in">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                        <i data-lucide="wrench" class="w-7 h-7" style="color: hsl(160, 84%, 39%);"></i>
                     </div>
-                    <div class="stat-data">
-                        <span class="stat-number" data-count="1.2">0</span>
-                        <span class="stat-label">Million Saved</span>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-bold text-foreground">
+                            <span class="stat-number" data-target="25000">0</span><span class="main-color-txt">+</span>
+                        </div>
+                        <p class="text-muted-foreground text-sm mt-1">Services Logged</p>
                     </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-icon">
-                        <i class="fas fa-users"></i>
+
+                <!-- Stat 3 -->
+                <div class="stat-card flex items-center gap-5 p-6 rounded-2xl bg-white border border-border/50 shadow-soft transition-all duration-300 hover:shadow-elevated fade-in">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                        <i data-lucide="euro" class="w-7 h-7" style="color: hsl(160, 84%, 39%);"></i>
                     </div>
-                    <div class="stat-data">
-                        <span class="stat-number" data-count="4200">0</span>
-                        <span class="stat-label">Active Users</span>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-bold text-foreground">
+                            <span class="stat-number" data-target="1.2" data-decimals="1">0</span><span class="main-color-txt">M</span>
+                        </div>
+                        <p class="text-muted-foreground text-sm mt-1">Million Saved</p>
+                    </div>
+                </div>
+
+                <!-- Stat 4 -->
+                <div class="stat-card flex items-center gap-5 p-6 rounded-2xl bg-white border border-border/50 shadow-soft transition-all duration-300 hover:shadow-elevated fade-in">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                        <i data-lucide="users" class="w-7 h-7" style="color: hsl(160, 84%, 39%);"></i>
+                    </div>
+                    <div>
+                        <div class="text-3xl sm:text-4xl font-bold text-foreground">
+                            <span class="stat-number" data-target="4200">0</span><span class="main-color-txt">+</span>
+                        </div>
+                        <p class="text-muted-foreground text-sm mt-1">Active Users</p>
                     </div>
                 </div>
             </div>
@@ -85,86 +285,181 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features-section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Why Choose VehicleDiary?</h2>
-                <p>Comprehensive vehicle management with powerful tracking features</p>
+    <section id="features" class="py-20 md:py-32 bg-background">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                    Why Choose <span class="gradient-text">VehicleDiary</span>?
+                </h2>
+                <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+                    Comprehensive vehicle management with powerful tracking features
+                </p>
             </div>
 
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-wrench"></i>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                <!-- Feature 1 -->
+                <div class="feature-card h-full p-8 rounded-3xl bg-white border border-border/50 shadow-soft transition-all duration-500 hover:shadow-elevated fade-in">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300" style="background: hsla(160, 84%, 39%, 0.1);">
+                        <i data-lucide="wrench" class="w-8 h-8" style="color: hsl(160, 84%, 39%);"></i>
                     </div>
-                    <h3>Maintenance Tracking</h3>
-                    <p>Record and monitor all vehicle services, repairs, and maintenance schedules with our intuitive system.</p>
-                    <ul class="feature-benefits">
-                        <li><i class="fas fa-check"></i> Service reminders</li>
-                        <li><i class="fas fa-check"></i> Repair history</li>
-                        <li><i class="fas fa-check"></i> Maintenance scheduling</li>
+                    <h3 class="text-xl font-bold text-foreground mb-3">Maintenance Tracking</h3>
+                    <p class="text-muted-foreground mb-6 leading-relaxed">
+                        Record and monitor all vehicle services, repairs, and maintenance schedules with our intuitive system.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                                <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
+                            </span>
+                            <span class="text-muted-foreground">Service reminders</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                                <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
+                            </span>
+                            <span class="text-muted-foreground">Repair history</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                                <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
+                            </span>
+                            <span class="text-muted-foreground">Maintenance scheduling</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-gas-pump"></i>
+                <!-- Feature 2 -->
+                <div class="feature-card h-full p-8 rounded-3xl bg-white border border-border/50 shadow-soft transition-all duration-500 hover:shadow-elevated fade-in">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300" style="background: hsla(160, 84%, 39%, 0.1);">
+                        <i data-lucide="fuel" class="w-8 h-8" style="color: hsl(160, 84%, 39%);"></i>
                     </div>
-                    <h3>Fuel Management</h3>
-                    <p>Track fuel consumption, costs, and analyze your vehicle's efficiency over time.</p>
-                    <ul class="feature-benefits">
-                        <li><i class="fas fa-check"></i> Fuel consumption tracking</li>
-                        <li><i class="fas fa-check"></i> Cost analysis</li>
-                        <li><i class="fas fa-check"></i> Efficiency reports</li>
+                    <h3 class="text-xl font-bold text-foreground mb-3">Fuel Management</h3>
+                    <p class="text-muted-foreground mb-6 leading-relaxed">
+                        Track fuel consumption, costs, and analyze your vehicle's efficiency over time.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                                <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
+                            </span>
+                            <span class="text-muted-foreground">Fuel consumption tracking</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                                <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
+                            </span>
+                            <span class="text-muted-foreground">Cost analysis</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                                <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
+                            </span>
+                            <span class="text-muted-foreground">Efficiency reports</span>
+                        </li>
                     </ul>
                 </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chart-pie"></i>
+                <!-- Feature 3 -->
+                <div class="feature-card h-full p-8 rounded-3xl bg-white border border-border/50 shadow-soft transition-all duration-500 hover:shadow-elevated fade-in">
+                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300" style="background: hsla(160, 84%, 39%, 0.1);">
+                        <i data-lucide="pie-chart" class="w-8 h-8" style="color: hsl(160, 84%, 39%);"></i>
                     </div>
-                    <h3>Cost Analytics</h3>
-                    <p>Visualize and understand your vehicle's operational costs with detailed analytics and reports.</p>
-                    <ul class="feature-benefits">
-                        <li><i class="fas fa-check"></i> Expense categorization</li>
-                        <li><i class="fas fa-check"></i> Cost forecasting</li>
-                        <li><i class="fas fa-check"></i> Budget planning</li>
+                    <h3 class="text-xl font-bold text-foreground mb-3">Cost Analytics</h3>
+                    <p class="text-muted-foreground mb-6 leading-relaxed">
+                        Visualize and understand your vehicle's operational costs with detailed analytics and reports.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                                <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
+                            </span>
+                            <span class="text-muted-foreground">Expense categorization</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                                <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
+                            </span>
+                            <span class="text-muted-foreground">Cost forecasting</span>
+                        </li>
+                        <li class="flex items-center gap-3 text-sm">
+                            <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
+                                <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
+                            </span>
+                            <span class="text-muted-foreground">Budget planning</span>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How It Works -->
-    <section class="how-it-works">
-        <div class="container">
-            <div class="section-header">
-                <h2>How It Works</h2>
-                <p>Start managing your vehicle in three simple steps</p>
+    <!-- How It Works Section -->
+    <section class="py-20 md:py-32" style="background: hsla(215, 20%, 96%, 0.3);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
+                    How It Works
+                </h2>
+                <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+                    Start managing your vehicle in three simple steps
+                </p>
             </div>
 
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Add Your Vehicle</h3>
-                        <p>Enter your vehicle details to get started with our comprehensive tracking system.</p>
+            <div class="grid md:grid-cols-3 gap-8 lg:gap-12 relative">
+                <!-- Connection line for desktop -->
+                <div class="hidden md:block absolute top-16 left-1/4 right-1/4 h-0.5" style="background: linear-gradient(to right, transparent, hsla(160, 84%, 39%, 0.3), transparent);"></div>
+
+                <!-- Step 1 -->
+                <div class="relative fade-in">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="relative mb-8">
+                            <div class="w-20 h-20 rounded-2xl flex items-center justify-center shadow-glow" style="background: hsl(160, 84%, 39%);">
+                                <i data-lucide="car" class="w-9 h-9 text-white"></i>
+                            </div>
+                            <span class="absolute -top-2 -right-2 w-8 h-8 rounded-lg text-sm font-bold flex items-center justify-center" style="background: hsl(222, 47%, 11%); color: white;">
+                                01
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-foreground mb-3">Add Your Vehicle</h3>
+                        <p class="text-muted-foreground leading-relaxed max-w-xs">
+                            Enter your vehicle details to get started with our comprehensive tracking system.
+                        </p>
                     </div>
                 </div>
 
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Log Services & Expenses</h3>
-                        <p>Record fuel fills, maintenance, repairs, and other vehicle-related expenses.</p>
+                <!-- Step 2 -->
+                <div class="relative fade-in">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="relative mb-8">
+                            <div class="w-20 h-20 rounded-2xl flex items-center justify-center shadow-glow" style="background: hsl(160, 84%, 39%);">
+                                <i data-lucide="clipboard-list" class="w-9 h-9 text-white"></i>
+                            </div>
+                            <span class="absolute -top-2 -right-2 w-8 h-8 rounded-lg text-sm font-bold flex items-center justify-center" style="background: hsl(222, 47%, 11%); color: white;">
+                                02
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-foreground mb-3">Log Services & Expenses</h3>
+                        <p class="text-muted-foreground leading-relaxed max-w-xs">
+                            Record fuel fills, maintenance, repairs, and other vehicle-related expenses.
+                        </p>
                     </div>
                 </div>
 
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>Analyze & Save</h3>
-                        <p>Use our insights to understand your costs and optimize your vehicle maintenance.</p>
+                <!-- Step 3 -->
+                <div class="relative fade-in">
+                    <div class="flex flex-col items-center text-center">
+                        <div class="relative mb-8">
+                            <div class="w-20 h-20 rounded-2xl flex items-center justify-center shadow-glow" style="background: hsl(160, 84%, 39%);">
+                                <i data-lucide="trending-up" class="w-9 h-9 text-white"></i>
+                            </div>
+                            <span class="absolute -top-2 -right-2 w-8 h-8 rounded-lg text-sm font-bold flex items-center justify-center" style="background: hsl(222, 47%, 11%); color: white;">
+                                03
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-foreground mb-3">Analyze & Save</h3>
+                        <p class="text-muted-foreground leading-relaxed max-w-xs">
+                            Use our insights to understand your costs and optimize your vehicle maintenance.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -172,575 +467,99 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Take Control of Your Vehicle Expenses?</h2>
-                <p>Join thousands of vehicle owners who are saving time and money with VehicleDiary</p>
-                <a asp-controller="Vehicle" asp-action="Create" class="btn btn-light btn-large">
-                    <i class="fas fa-car me-2"></i>Get Started Now
+    <section class="py-20 md:py-32 relative overflow-hidden" style="background: hsl(222, 47%, 11%);">
+        <!-- Background decorations -->
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, hsla(160, 84%, 39%, 0.2), transparent 70%);"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl" style="background: hsla(160, 84%, 39%, 0.1);"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full blur-3xl" style="background: hsla(160, 84%, 39%, 0.1);"></div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto fade-in">
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+                    Ready to Take Control of Your <span class="gradient-text">Vehicle Expenses</span>?
+                </h2>
+                <p class="text-white/70 text-lg md:text-xl mb-10 leading-relaxed">
+                    Join thousands of vehicle owners who are saving time and money with VehicleDiary
+                </p>
+                <a href="#" class="inline-flex items-center justify-center gap-3 bg-white text-foreground hover:bg-white/90 rounded-xl px-10 py-4 text-lg font-semibold shadow-elevated transition-all duration-300 hover:scale-105">
+                    <i data-lucide="car" class="w-6 h-6"></i>
+                    Get Started Now
+                    <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </a>
             </div>
         </div>
     </section>
-</div>
 
-<style>
-    /* Global Styles */
-    .vehicle-diary-home {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        color: #333;
-    }
-
-    .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-
-    .section-header {
-        text-align: center;
-        margin-bottom: 60px;
-    }
-
-        .section-header h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #1e293b;
-        }
-
-        .section-header p {
-            font-size: 1.1rem;
-            color: #64748b;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-    /* Hero Section */
-    .hero-section {
-        background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);
-        color: white;
-        padding: 80px 0;
-        overflow: hidden;
-        position: relative;
-    }
-
-    .hero-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 40px;
-    }
-
-    .hero-text {
-        flex: 1;
-        max-width: 550px;
-    }
-
-    .hero-title {
-        font-size: 3.5rem;
-        font-weight: 800;
-        margin-bottom: 20px;
-        line-height: 1.2;
-    }
-
-    .brand-gradient {
-        background: linear-gradient(90deg, #8B5CF6, #EC4899);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .hero-subtitle {
-        font-size: 1.25rem;
-        margin-bottom: 30px;
-        line-height: 1.6;
-        opacity: 0.9;
-    }
-
-    .hero-actions {
-        display: flex;
-        gap: 15px;
-        flex-wrap: wrap;
-    }
-
-    .btn-hero {
-        padding: 12px 30px;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-        border: none;
-    }
-
-    .btn-outline-light {
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        background: transparent;
-        color: white;
-    }
-
-        .btn-outline-light:hover {
-            background: white;
-            color: #0F52BA;
-        }
-
-    .hero-visual {
-        flex: 1;
-        position: relative;
-        min-height: 300px;
-    }
-
-    .main-visual {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 30px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 250px;
-        width: 100%;
-    }
-
-    .dashboard-img {
-        width: 100%;
-        height: auto;
-        max-width: 400px;
-        filter: invert(1);
-        opacity: 0.8;
-    }
-
-    .floating-card {
-        position: absolute;
-        background: white;
-        color: #0F52BA;
-        padding: 12px 15px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-weight: 500;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        animation: float 5s infinite ease-in-out;
-    }
-
-        .floating-card i {
-            font-size: 1.2rem;
-        }
-
-        .floating-card span {
-            margin-left: auto;
-            font-weight: 700;
-            color: #059669;
-        }
-
-    .card-1 {
-        top: 0;
-        left: 0;
-        animation-delay: 0s;
-    }
-
-    .card-2 {
-        top: 40%;
-        right: 0;
-        animation-delay: 1s;
-    }
-
-    .card-3 {
-        bottom: 0;
-        left: 20%;
-        animation-delay: 2s;
-    }
-
-    @@keyframes float {
-        0%, 100%
-
-    {
-        transform: translateY(0);
-    }
-
-    50% {
-        transform: translateY(-10px);
-    }
-
-    }
-
-    /* Stats Section */
-    .stats-section {
-        padding: 80px 0;
-        background: #f8fafc;
-    }
-
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 30px;
-    }
-
-    .stat-item {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        background: white;
-        padding: 25px;
-        border-radius: 16px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        transition: transform 0.3s ease;
-    }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-        }
-
-    .stat-icon {
-        width: 70px;
-        height: 70px;
-        background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1.8rem;
-    }
-
-    .stat-data {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .stat-number {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: #0F52BA;
-        line-height: 1;
-    }
-
-    .stat-label {
-        color: #64748b;
-        font-weight: 500;
-    }
-
-    /* Features Section */
-    .features-section {
-        padding: 100px 0;
-    }
-
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-    }
-
-    .feature-card {
-        background: white;
-        padding: 40px 30px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        transition: all 0.3s ease;
-        text-align: center;
-        border: 1px solid #f1f5f9;
-    }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-        }
-
-    .feature-icon {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 25px;
-        color: white;
-        font-size: 2rem;
-    }
-
-    .feature-card h3 {
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-        color: #1e293b;
-    }
-
-    .feature-card p {
-        color: #64748b;
-        margin-bottom: 20px;
-        line-height: 1.6;
-    }
-
-    .feature-benefits {
-        list-style: none;
-        padding: 0;
-        text-align: left;
-    }
-
-        .feature-benefits li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            color: #475569;
-        }
-
-        .feature-benefits i {
-            color: #10b981;
-            margin-right: 10px;
-        }
-
-    /* How It Works */
-    .how-it-works {
-        padding: 100px 0;
-        background: #f8fafc;
-    }
-
-    .steps {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 40px;
-        counter-reset: step-counter;
-    }
-
-    .step {
-        display: flex;
-        gap: 20px;
-        position: relative;
-    }
-
-    .step-number {
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 1.5rem;
-        font-weight: 700;
-        flex-shrink: 0;
-    }
-
-    .step-content h3 {
-        font-size: 1.4rem;
-        margin-bottom: 10px;
-        color: #1e293b;
-    }
-
-    .step-content p {
-        color: #64748b;
-        line-height: 1.6;
-    }
-
-    /* Testimonials */
-    .testimonials {
-        padding: 100px 0;
-    }
-
-    .testimonial-cards {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-    }
-
-    .testimonial-card {
-        background: white;
-        padding: 30px;
-        border-radius: 16px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-        border: 1px solid #f1f5f9;
-    }
-
-    .testimonial-content {
-        margin-bottom: 25px;
-        padding: 20px;
-        background: #f8fafc;
-        border-radius: 12px;
-        font-style: italic;
-        color: #475569;
-        line-height: 1.6;
-        position: relative;
-    }
-
-        .testimonial-content:after {
-            content: '"';
-            font-size: 4rem;
-            color: #e2e8f0;
-            position: absolute;
-            bottom: -20px;
-            right: 20px;
-            line-height: 1;
-        }
-
-    .testimonial-author {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }
-
-    .author-avatar {
-        width: 50px;
-        height: 50px;
-        background: #e2e8f0;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #64748b;
-    }
-
-    .author-details h4 {
-        margin: 0;
-        font-size: 1.1rem;
-        color: #1e293b;
-    }
-
-    .author-details p {
-        margin: 0;
-        color: #64748b;
-        font-size: 0.9rem;
-    }
-
-    /* CTA Section */
-    .cta-section {
-        background: linear-gradient(135deg, #0F52BA 0%, #00308F 100%);
-        color: white;
-        padding: 80px 0;
-        text-align: center;
-    }
-
-    .cta-content h2 {
-        font-size: 2.5rem;
-        margin-bottom: 20px;
-        font-weight: 700;
-    }
-
-    .cta-content p {
-        font-size: 1.2rem;
-        margin-bottom: 30px;
-        opacity: 0.9;
-        max-width: 600px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .btn-light {
-        background: white;
-        color: #0F52BA;
-        border: none;
-        padding: 15px 40px;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 1.1rem;
-        transition: all 0.3s ease;
-    }
-
-        .btn-light:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-    /* Responsive Design */
-    @@media (max-width: 992px) {
-        .hero-content
-
-    {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .hero-text {
-        max-width: 100%;
-    }
-
-    .hero-actions {
-        justify-content: center;
-    }
-
-    .hero-title {
-        font-size: 2.8rem;
-    }
-
-    .floating-card {
-        display: none;
-    }
-
-    }
-
-    @@media (max-width: 768px) {
-        .section-header h2
-
-    {
-        font-size: 2rem;
-    }
-
-    .hero-title {
-        font-size: 2.2rem;
-    }
-
-    .hero-subtitle {
-        font-size: 1.1rem;
-    }
-
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .features-grid,
-    .testimonial-cards {
-        grid-template-columns: 1fr;
-    }
-
-    .steps {
-        grid-template-columns: 1fr;
-    }
-
-    .step {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    }
-</style>
-
-<script>
-    // Animate stats counting
-    document.addEventListener('DOMContentLoaded', function() {
-        const statElements = document.querySelectorAll('.stat-number');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const element = entry.target;
-                    const target = parseInt(element.getAttribute('data-count'));
-                    const suffix = element.textContent.includes('M') ? 'M' : '';
-                    const duration = 2000;
-                    const steps = 60;
-                    const stepValue = target / steps;
-                    let current = 0;
-
-                    const timer = setInterval(() => {
-                        current += stepValue;
-                        if (current >= target) {
-                            element.textContent = suffix ? target + suffix : target;
-                            clearInterval(timer);
-                        } else {
-                            element.textContent = suffix ? Math.round(current) + suffix : Math.round(current);
-                        }
-                    }, duration / steps);
-
-                    observer.unobserve(element);
+    <!-- Footer -->
+    <footer class="py-12 border-t" style="background: hsla(215, 20%, 96%, 0.3); border-color: hsla(215, 20%, 91%, 0.5);">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: hsl(160, 84%, 39%);">
+                        <i data-lucide="car" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-xl font-bold text-foreground">VehicleDiary</span>
+                </div>
+
+                <nav class="flex flex-wrap items-center justify-center gap-8">
+                    <a href="#features" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Features</a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Pricing</a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">About</a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Contact</a>
+                </nav>
+
+                <p class="text-muted-foreground text-sm">
+                    © 2026 VehicleDiary. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Intersection Observer for fade-in animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const fadeObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+            }
+          });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => fadeObserver.observe(el));
+
+        // Stats counter animation
+        const statNumbers = document.querySelectorAll('.stat-number');
+        const statObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const el = entry.target;
+              const target = parseFloat(el.dataset.target);
+              const decimals = parseInt(el.dataset.decimals) || 0;
+              const duration = 2000;
+              const steps = 60;
+              const increment = target / steps;
+              let current = 0;
+
+              const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                  el.textContent = decimals > 0 ? target.toFixed(decimals) : Math.round(target);
+                  clearInterval(timer);
+                } else {
+                  el.textContent = decimals > 0 ? current.toFixed(decimals) : Math.round(current);
                 }
-            });
+              }, duration / steps);
+
+              statObserver.unobserve(el);
+            }
+          });
         }, { threshold: 0.5 });
 
-        statElements.forEach(el => observer.observe(el));
-    });
-</script>
+        statNumbers.forEach(el => statObserver.observe(el));
+    </script>
+</body>
+</html>

@@ -6,7 +6,7 @@ using VehicleDiary.Core.Entities;
 using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
 
-namespace VehicleDiary.Web.Controllers
+namespace VehicleDiary.Web.Controllers.Usage
 {
     public class PetrolController : Controller
     {

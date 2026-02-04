@@ -32,8 +32,16 @@ namespace VehicleDiary.Infrastructure.Repositories
 
         public async Task<float> CalculatingTotalCostRepairAsync(Guid id)
         {
-            return await _context.DBRepairsSet.Where(find => find.VehicleId == id).SumAsync(calculate => calculate.RepairCost);
+            return await _context.DBRepairVehicleSet.Where(find => find.VehicleId == id).SumAsync(calculate => calculate.RepairVPrice);
         }
+        public async Task<float> CalculatingTotalCostUpgradeAsync(Guid id)
+        {
+            return await _context.DBUpgradeVehicleSet.Where(find => find.VehicleId == id).SumAsync(calculate => calculate.UpgradeVPrice);
+        }
+        /*public async Task<float> CalculatingTotalCostDiagnosticAsync(Guid id)
+        {
+            return await _context.DBRepairVehicleModelsSet.Where(find => find.VehicleId == id).SumAsync(calculate => calculate.RepairVPrice);
+        }*/
 
         public async Task<IEnumerable<DBVehicleModel>> GetDBByIDForUserAsync(string userID)
         {

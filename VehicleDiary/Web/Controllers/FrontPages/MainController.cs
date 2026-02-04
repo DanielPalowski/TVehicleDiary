@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace VehicleDiary.Web.Controllers
+namespace VehicleDiary.Web.Controllers.FrontPages
 {
-    public class TestController : Controller
+    public class MainController : Controller
     {
         public IActionResult Index()
         {

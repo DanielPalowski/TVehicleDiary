@@ -1,0 +1,332 @@
+﻿@using VehicleDiary.Web.ViewModels
+@model DBUpgradeVehicleModelVM
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Diary - Your Digital Garage</title>
+    <link rel="stylesheet" href="~/css/AddingVehicleCreate/style.css" />
+</head>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+}
+
+
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card service-history-card mb-5">
+                    <div class="card-body p-4">
+                        <h2 class="service-history-title mb-4">
+                            <i class="fas fa-tools me-2 service-icon-orange"></i>
+                            <span style="margin-left: 1%;">Vehicle Service History</span>
+                        </h2>
+                        <form asp-action="Create" method="post" enctype="multipart/form-data" id="repairForm">
+                            <input type="hidden" asp-for="VehicleId" />
+
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                            <div class="row g-3">
+
+                                <!-- Category -->
+                                <div class="col-md-6">
+                                    <label asp-for="UpgradeVCategory" class="form-label service-form-label">
+                                        <i class="fas fa-list me-1 service-icon-orange"></i>Category
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select asp-for="UpgradeVCategory" class="form-control service-form-control" id="categorySelect" required>
+                                        <option value="">Select Category</option>
+                                        <option value="Vehicle Upgrades">Vehicle Upgrades</option>
+                                    </select>
+                                    <span asp-validation-for="UpgradeVCategory" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Type -->
+                                <div class="col-md-6">
+                                    <label asp-for="UpgradeVType" class="form-label service-form-label">
+                                        <i class="fas fa-cog me-1 service-icon-orange"></i>Type
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select asp-for="UpgradeVType" class="form-control service-form-control" id="typeSelect" required disabled>
+                                        <option value="">Select Type</option>
+                                    </select>
+                                    <span asp-validation-for="UpgradeVType" class="text-danger small"></span>
+                                </div>
+
+
+                                <!-- Status -->
+                                <div class="col-md-6">
+                                    <label asp-for="UpgradeVStatus" class="form-label service-form-label">
+                                        <i class="fas fa-cog me-1 service-icon-orange"></i>Part Origin
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select asp-for="UpgradeVStatus"
+                                            class="form-control service-form-control"
+                                            id="statusSelect"
+                                            required
+                                            disabled>
+                                        <option value="">Select Part Origin</option>
+                                    </select>
+                                    <span asp-validation-for="UpgradeVStatus" class="text-danger small"></span>
+                                </div>
+
+
+                                <!-- Service Name -->
+                                <div class="col-md-6">
+                                    <label asp-for="UpgradeVName" class="form-label service-form-label">
+                                        <i class="fas fa-wrench me-1 service-icon-orange"></i>Service Part
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" asp-for="UpgradeVName" class="form-control service-form-control" placeholder="BC racing coilovers" required>
+                                    <span asp-validation-for="UpgradeVName" class="text-danger small"></span>
+                                </div>
+
+                                
+
+                                <!-- Part Brand & Code -->
+                                <div class="col-md-6">
+                                    <label asp-for="UpgradeVPartBrand" class="form-label service-form-label">
+                                        <i class="fas fa-industry me-1 service-icon-orange"></i>Part Brand
+                                        <span class="text-muted small">(optional)</span>
+                                    </label>
+                                    <input type="text" asp-for="UpgradeVPartBrand" class="form-control service-form-control" placeholder="Bosch">
+                                    <span asp-validation-for="UpgradeVPartBrand" class="text-danger small"></span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label asp-for="UpgradeVPartCode" class="form-label service-form-label">
+                                        <i class="fas fa-barcode me-1 service-icon-orange"></i>Part Code
+                                        <span class="text-muted small">(optional)</span>
+                                    </label>
+                                    <input type="text" asp-for="UpgradeVPartCode" class="form-control service-form-control" placeholder="12345ABC">
+                                    <span asp-validation-for="UpgradeVPartCode" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Mileage -->
+                                <div class="col-md-4">
+                                    <label asp-for="UpgradeVMileage" class="form-label service-form-label">
+                                        <i class="fas fa-tachometer-alt me-1 service-icon-orange"></i>Mileage
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="number" asp-for="UpgradeVMileage" class="form-control service-form-control" placeholder="158000" required>
+                                    <span asp-validation-for="UpgradeVMileage" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Date -->
+                                <div class="col-md-4">
+                                    <label asp-for="UpgradeVWhen" class="form-label service-form-label">
+                                        <i class="fas fa-calendar me-1 service-icon-orange"></i>Date
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="date" asp-for="UpgradeVWhen" class="form-control service-form-control"
+                                           value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
+                                    <span asp-validation-for="UpgradeVWhen" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Price -->
+                                <div class="col-md-4">
+                                    <label asp-for="UpgradeVPrice" class="form-label service-form-label">
+                                        <i class="fas fa-euro-sign me-1 service-icon-orange"></i>Price
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="input-group service-input-group">
+
+                                        <input type="number" step="0.01" asp-for="UpgradeVPrice" class="form-control service-form-control" placeholder="120.50" required>
+                                        <span class="input-group-text">€</span>
+                                    </div>
+                                    <span asp-validation-for="UpgradeVPrice" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Technician -->
+                                <div class="col-md-6">
+                                    <label asp-for="UpgradeVTechnician" class="form-label service-form-label">
+                                        <i class="fas fa-user me-1 service-icon-orange"></i>Technician/Service
+                                        <span class="text-muted small">(optional)</span>
+                                    </label>
+                                    <input type="text" asp-for="UpgradeVTechnician" class="form-control service-form-control" placeholder="John Doe / Car Repairs">
+                                    <span asp-validation-for="UpgradeVTechnician" class="text-danger small"></span>
+                                </div>
+
+                                <!-- File Upload -->
+                                <div class="col-md-6">
+                                    <label asp-for="Upload" class="form-label service-form-label">
+                                        <i class="fas fa-file-upload me-1 service-icon-orange"></i>Upload File
+                                        <span class="text-muted small">(optional, max 5 MB)</span>
+                                    </label>
+                                    <input asp-for="Upload" type="file" class="form-control"
+                                           onchange="validateFile(this)"
+                                           accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.txt" />
+                                    <div class="form-text">Allowed formats: PDF, JPG, PNG, DOC, DOCX, TXT</div>
+                                    <div id="fileSizeWarning" class="text-danger small mt-1" style="display: none;"></div>
+                                    <span asp-validation-for="Upload" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Notes -->
+                                <div class="col-12">
+                                    <label asp-for="UpgradeVNotes" class="form-label service-form-label">
+                                        <i class="fas fa-sticky-note me-1 service-icon-orange"></i>Notes
+                                        <span class="text-muted small">(optional)</span>
+                                    </label>
+                                    <textarea asp-for="UpgradeVNotes" class="form-control service-form-control service-textarea" rows="3" placeholder="Additional notes..."></textarea>
+                                    <span asp-validation-for="UpgradeVNotes" class="text-danger small"></span>
+                                </div>
+
+                                <!-- Submit -->
+                                <div class="col-12 mt-4">
+                                    <button class="btn btn-primary service-submit-btn w-100" type="submit" id="submitButton" >
+                                        <i class="fas fa-plus-circle me-2 service-icon-white"></i>Add Service Record
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+<script>
+     // Data structure mapping categories to types
+    const categoryTypes = {
+        "Vehicle Repairs": ["Engine", "Transmission", "Brakes", "Chassis", "Electrical", "Bodywork", "Air Conditioning"],
+        "Vehicle Upgrades": ["BodyKit","Lights","Suspension","Engine","Performance","Transmission","Aerodynamics","Brakes","Drivetrain","Exterior","Interior","Safety","Utility","Other"],
+        "Diagnostics": ["Coding", "Error Diagnostics", "Software Update","Tuning","Other"]
+    };
+
+    // Part Origin options
+    const partOrigins = [
+        "Aftermarket (New)",
+        "Aftermarket (Used)",
+        "OEM Retrofit"
+    ];
+
+    // Get DOM elements
+    const categorySelect = document.getElementById('categorySelect');
+    const typeSelect = document.getElementById('typeSelect');
+    const statusSelect = document.getElementById('statusSelect');
+    const repairForm = document.getElementById('repairForm');
+    const submitButton = document.getElementById('submitButton');
+
+    // Category → Type
+    categorySelect.addEventListener('change', function () {
+        const selectedCategory = this.value;
+
+        // Reset Type
+        typeSelect.innerHTML = '<option value="">Select Type</option>';
+        typeSelect.disabled = true;
+
+        // Reset Status
+        statusSelect.innerHTML = '<option value="">Select Part Origin</option>';
+        statusSelect.disabled = true;
+
+        if (selectedCategory && categoryTypes[selectedCategory]) {
+            categoryTypes[selectedCategory].forEach(type => {
+                const option = document.createElement('option');
+                option.value = type;
+                option.textContent = type;
+                typeSelect.appendChild(option);
+            });
+
+            typeSelect.disabled = false;
+        }
+    });
+
+    // Type → Part Origin
+    typeSelect.addEventListener('change', function () {
+
+        statusSelect.innerHTML = '<option value="">Select Part Origin</option>';
+        statusSelect.disabled = true;
+
+        if (this.value) {
+            partOrigins.forEach(origin => {
+                const option = document.createElement('option');
+                option.value = origin;
+                option.textContent = origin;
+                statusSelect.appendChild(option);
+            });
+
+            statusSelect.disabled = false;
+        }
+    });
+
+    // Form validation
+    repairForm.addEventListener('submit', function(e) {
+        if (!categorySelect.value || !typeSelect.value || !statusSelect.value) {
+            e.preventDefault();
+            alert('Please select Category, Type and Part Origin');
+            return;
+        }
+
+        submitButton.innerHTML = '<span class="service-loading"></span> Processing...';
+        submitButton.disabled = true;
+    });
+
+
+    function validateFile(input) {
+        const maxSize = 5 * 1024 * 1024; // 5 MB
+        const fileSizeWarning = document.getElementById('fileSizeWarning');
+
+        if (input.files.length > 0) {
+            const file = input.files[0];
+            const fileSize = file.size;
+
+            if (fileSize > maxSize) {
+                fileSizeWarning.textContent = `File size (${(fileSize / (1024 * 1024)).toFixed(2)} MB) exceeds the 5 MB limit.`;
+                fileSizeWarning.style.display = 'block';
+                fileSizeWarning.style.color = 'red';
+                input.value = ''; // Clear the file input
+            } else {
+                fileSizeWarning.textContent = `File size: ${(fileSize / 1024).toFixed(2)} KB`;
+                fileSizeWarning.style.color = 'green';
+                fileSizeWarning.style.display = 'block';
+            }
+
+            // Validate file extension
+            const allowedExtensions = ['.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx', '.txt'];
+            const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+
+            if (!allowedExtensions.includes(fileExtension)) {
+                fileSizeWarning.textContent = `File type ${fileExtension} is not allowed.`;
+                fileSizeWarning.style.display = 'block';
+                fileSizeWarning.style.color = 'red';
+                input.value = '';
+            }
+        } else {
+            fileSizeWarning.style.display = 'none';
+        }
+    }
+
+    // Client-side validation before form submission
+    document.getElementById('repairForm').addEventListener('submit', function(e) {
+        const fileInput = document.querySelector('input[type="file"]');
+        const maxSize = 5 * 1024 * 1024;
+
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+
+            if (file.size > maxSize) {
+                e.preventDefault();
+                alert('File size exceeds the 5 MB limit. Please choose a smaller file.');
+                return false;
+            }
+        }
+    });
+</script>
+<style>
+    input:required,
+    select:required,
+    textarea:required {
+        border-left: 4px solid #ef4444; /* červený pruh u povinných polí */
+        padding-left: 0.5rem;
+    }
+
+</style>

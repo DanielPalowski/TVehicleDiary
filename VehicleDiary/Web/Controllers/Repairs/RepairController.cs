@@ -11,7 +11,7 @@ using VehicleDiary.Core.Interfaces.Repositories;
 using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Web.ViewModels;
 
-namespace VehicleDiary.Web.Controllers
+namespace VehicleDiary.Web.Controllers.Repairs
 {
     [Authorize]
     public class RepairController : Controller
@@ -37,7 +37,7 @@ namespace VehicleDiary.Web.Controllers
         }
         public async Task<IActionResult> Index([FromQuery] Guid vehicleIDRoute)
         {
-            await _repairService.TotalCostAsync(vehicleIDRoute);
+            var moneyCount = await _repairService.TotalCostAsync(vehicleIDRoute);
 
             var entity = await _repairService.ShowingRepairsAsync(vehicleIDRoute);
             var repairs = _mapper.Map<IEnumerable<DBRepairModelVM>>(entity);
@@ -46,7 +46,8 @@ namespace VehicleDiary.Web.Controllers
             var ViewModelDB = new DBRepairModelVM
             {
                 vehicleId = vehicleIDRoute,
-                RepairsView = repairs
+                RepairsView = repairs,
+                TotalRepairCost = moneyCount
             };
 
             return View(ViewModelDB);

@@ -1,14 +1,14 @@
 ﻿@using VehicleDiary.Web.ViewModels
-@model DBRepairVehicleModelVM
+@model DBDiagnosticVehicleModelVM
 
 <div class="container py-4">
     <!-- Header with button -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="repair-history-title">
-            <i class="fas fa-history me-2"></i>Service History
+        <h2 class="diagnostic-history-title">
+            <i class="fas fa-stethoscope me-2"></i>Diagnostic History
         </h2>
-        <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId" class="btn btn-primary btn-add-repair">
-            <i class="fas fa-plus-circle me-2"></i>Add New Service
+        <a asp-controller="DiagnosticVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId" class="btn btn-primary btn-add-diagnostic">
+            <i class="fas fa-plus-circle me-2"></i>Add New Diagnostic
         </a>
     </div>
 
@@ -28,14 +28,18 @@
                     <label class="form-label">Category</label>
                     <select class="form-control filter-select" id="filterCategory">
                         <option value="">All Categories</option>
-                        <option value="Vehicle Repairs">Vehicle Repairs</option>
+                        <option value="Diagnostics" selected>Vehicle Diagnostics</option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">Type</label>
+                    <label class="form-label">Diagnostic Type</label>
                     <select class="form-control filter-select" id="filterType">
                         <option value="">All Types</option>
-                        <!-- Options will be populated dynamically based on category -->
+                        <option value="Coding">Coding</option>
+                        <option value="Error Diagnostics">Error Diagnostics</option>
+                        <option value="Software Update">Software Update</option>
+                        <option value="Tuning">Tuning</option>
+                        <option value="Other">Other</option>
                     </select>
                 </div>
                 <div class="col-md-3">
@@ -69,108 +73,123 @@
 
     <!-- Results Count -->
     <div class="results-count mb-3" id="resultsCount">
-        Showing <span id="filteredCount">@Model.RepairViews.Count()</span> service records
+        Showing <span id="filteredCount">@Model.RepairViews?.Count() ?? 0</span> diagnostic records
     </div>
 
-    <!-- Repair History -->
+    <!-- Diagnostic History -->
     @if (Model.RepairViews != null && Model.RepairViews.Any())
     {
-        <div class="repair-cards-container" id="repairCardsContainer">
-            @foreach (var repair in Model.RepairViews)
+        <div class="diagnostic-cards-container" id="diagnosticCardsContainer">
+            @foreach (var diagnostic in Model.RepairViews)
             {
-                <div class="repair-card" id="repair-@repair.Id"
-                     data-category="@repair.RepairVCategory"
-                     data-type="@repair.RepairVType"
-                     data-date="@repair.RepairVWhen.ToString("yyyy-MM-dd")"
-                     data-price="@repair.RepairVPrice"
-                     data-mileage="@repair.RepairVMileage">
+                <div class="diagnostic-card" id="diagnostic-@diagnostic.ID"
+                     data-category="@diagnostic.DiagnosticVCategory"
+                     data-type="@diagnostic.DiagnosticVType"
+                     data-date="@diagnostic.DiagnosticVWhen.ToString("yyyy-MM-dd")"
+                     data-price="@(diagnostic.DiagnosticVPrice ?? 0)"
+                     data-error-type="@diagnostic.DiagnosticVErrorType">
 
-                    <div class="repair-card-header">
-                        <div class="repair-category-badge">
-                            @repair.RepairVCategory
+                    <div class="diagnostic-card-header">
+                        <div class="diagnostic-category-badge">
+                            @diagnostic.DiagnosticVCategory
                         </div>
-                        <span class="repair-date">@repair.RepairVWhen.ToString("d MMM yyyy")</span>
+                        <span class="diagnostic-date">@diagnostic.DiagnosticVWhen.ToString("d MMM yyyy")</span>
                     </div>
 
-                    <div class="repair-card-body">
-                        <div class="repair-type">
-                            <i class="fas fa-cog me-2"></i>@repair.RepairVType
+                    <div class="diagnostic-card-body">
+                        <div class="diagnostic-type">
+                            <i class="fas fa-tools me-2"></i>@diagnostic.DiagnosticVType
                         </div>
 
-                        <h4 class="repair-name">@repair.RepairVName</h4>
+                        <h4 class="diagnostic-name">@diagnostic.DiagnosticVName</h4>
+
+                        <!-- Diagnostic Tool -->
+                        @if (!string.IsNullOrEmpty(diagnostic.DiagnosticVDiagnosticType))
+                        {
+                            <div class="diagnostic-detail-item">
+                                <i class="fas fa-laptop-medical me-2"></i>Tool: @diagnostic.DiagnosticVDiagnosticType
+                            </div>
+                        }
+
+                        <!-- Error Type (only for Error Diagnostics) -->
+                        @if (!string.IsNullOrEmpty(diagnostic.DiagnosticVErrorType))
+                        {
+                            <div class="diagnostic-detail-item">
+                                <i class="fas fa-exclamation-triangle me-2 text-warning"></i>Error Type: @diagnostic.DiagnosticVErrorType
+                            </div>
+                        }
+
+                        <!-- Error Code -->
+                        @if (!string.IsNullOrEmpty(diagnostic.DiagnosticVErrorCode))
+                        {
+                            <div class="diagnostic-detail-item">
+                                <i class="fas fa-barcode me-2"></i>Error Code: <span class="error-code-badge">@diagnostic.DiagnosticVErrorCode</span>
+                            </div>
+                        }
+
+                        <!-- Error Description -->
+                        @if (!string.IsNullOrEmpty(diagnostic.DiagnosticVErrorDis))
+                        {
+                            <div class="diagnostic-error-description">
+                                <i class="fas fa-comment-dots me-2"></i>Description: @diagnostic.DiagnosticVErrorDis
+                            </div>
+                        }
 
                         <!-- Mileage -->
-                        <div class="repair-detail-item">
-                            <i class="fas fa-tachometer-alt me-2"></i>Mileage: @repair.RepairVMileage km
-                        </div>
-
-                        @if (!string.IsNullOrEmpty(repair.RepairVPart))
+                        @if (diagnostic.DiagnosticVMileage.HasValue && diagnostic.DiagnosticVMileage > 0)
                         {
-                            <div class="repair-detail-item">
-                                <i class="fas fa-tools me-2"></i>Part: @repair.RepairVPart
+                            <div class="diagnostic-detail-item">
+                                <i class="fas fa-tachometer-alt me-2"></i>Mileage: @diagnostic.DiagnosticVMileage km
                             </div>
                         }
 
-                        <!-- Part Brand -->
-                        @if (!string.IsNullOrEmpty(repair.RepairVPartBrand))
+                        <!-- Technician -->
+                        @if (!string.IsNullOrEmpty(diagnostic.UpgradeVTechnician))
                         {
-                            <div class="repair-detail-item">
-                                <i class="fas fa-industry me-2"></i>Part Brand: @repair.RepairVPartBrand
-                            </div>
-                        }
-
-                        <!-- Part Code -->
-                        @if (!string.IsNullOrEmpty(repair.RepairVPartCode))
-                        {
-                            <div class="repair-detail-item">
-                                <i class="fas fa-barcode me-2"></i>Part Code: @repair.RepairVPartCode
-                            </div>
-                        }
-
-                        @if (!string.IsNullOrEmpty(repair.RepairVTechnician))
-                        {
-                            <div class="repair-detail-item">
-                                <i class="fas fa-user me-2"></i>Technician: @repair.RepairVTechnician
+                            <div class="diagnostic-detail-item">
+                                <i class="fas fa-user-md me-2"></i>Technician: @diagnostic.UpgradeVTechnician
                             </div>
                         }
 
                         <!-- File Download -->
-                        @if (!string.IsNullOrEmpty(repair.FileName))
+                        @if (!string.IsNullOrEmpty(diagnostic.FileName))
                         {
-                            <div class="repair-file-download">
+                            <div class="diagnostic-file-download">
                                 <i class="fas fa-paperclip me-2"></i>
-                                <a href="@Url.Action("Download", "RepairVehicle", new { id = repair.Id })" class="file-download-link" target="_blank">
-                                    @repair.FileName
+                                <a href="@Url.Action("Download", "DiagnosticVehicle", new { id = diagnostic.ID })" class="file-download-link" target="_blank">
+                                    @diagnostic.FileName
                                 </a>
                             </div>
                         }
 
-                        @if (!string.IsNullOrEmpty(repair.ReapairVNotes))
+                        <!-- Notes -->
+                        @if (!string.IsNullOrEmpty(diagnostic.DiagnosticVNotes))
                         {
-                            <div class="repair-notes">
-                                <i class="fas fa-sticky-note me-2"></i>@repair.ReapairVNotes
+                            <div class="diagnostic-notes">
+                                <i class="fas fa-sticky-note me-2"></i>@diagnostic.DiagnosticVNotes
                             </div>
                         }
                     </div>
 
-                    <div class="repair-card-footer">
-                        @if (repair.RepairVPrice > 0)
+                    <div class="diagnostic-card-footer">
+                        @if (diagnostic.DiagnosticVPrice.HasValue)
                         {
-                            <div class="repair-price">
-                                €@repair.RepairVPrice.ToString("N2")
+                            <div class="diagnostic-price">
+                                €@diagnostic.DiagnosticVPrice.Value.ToString("N2")
                             </div>
                         }
                         else
                         {
-                            <div class="repair-price no-price">
+                            <div class="diagnostic-price no-price">
                                 No Cost
                             </div>
                         }
-                        <div class="repair-actions">
-                            <button onclick="editRepair('@repair.Id')" class="btn-edit-repair" title="Edit">
+
+                        <div class="diagnostic-actions">
+                            <button onclick="editDiagnostic('@diagnostic.ID')" class="btn-edit-diagnostic" title="Edit">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button onclick="deleteRepair('@repair.Id')" class="btn-delete-repair" title="Delete">
+                            <button onclick="deleteDiagnostic('@diagnostic.ID')" class="btn-delete-diagnostic" title="Delete">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
@@ -181,14 +200,14 @@
     }
     else
     {
-        <div class="no-repairs-card">
-            <div class="no-repairs-icon">
-                <i class="fas fa-wrench"></i>
+        <div class="no-diagnostics-card">
+            <div class="no-diagnostics-icon">
+                <i class="fas fa-stethoscope"></i>
             </div>
-            <h3>No Service Records</h3>
-            <p>No service records available for this vehicle.</p>
-            <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId" class="btn btn-primary btn-add-first-repair">
-                <i class="fas fa-plus-circle me-2"></i>Add First Service
+            <h3>No Diagnostic Records</h3>
+            <p>No diagnostic records available for this vehicle.</p>
+            <a asp-controller="DiagnosticVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId" class="btn btn-primary btn-add-first-diagnostic">
+                <i class="fas fa-plus-circle me-2"></i>Add First Diagnostic
             </a>
         </div>
     }
@@ -199,36 +218,37 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
     <script>
-        function deleteRepair(id) {
-            if (confirm("Are you sure you want to delete this service record?")) {
+        // Delete diagnostic record
+        function deleteDiagnostic(id) {
+            if (confirm("Are you sure you want to delete this diagnostic record?")) {
                 $.ajax({
-                    url: "@Url.Action("Delete", "RepairVehicle")/" + id,
+                    url: "@Url.Action("Delete", "DiagnosticVehicle")/" + id,
                     type: "DELETE",
                     headers: {
                         'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
                     },
                     success: function (result) {
-                        $("#repair-" + id).fadeOut(300, function() {
+                        $("#diagnostic-" + id).fadeOut(300, function() {
                             $(this).remove();
                             updateResultsCount();
-                            // If no repairs left, show the empty state
-                            if ($(".repair-card").length === 0) {
+                            // If no diagnostics left, show the empty state
+                            if ($(".diagnostic-card").length === 0) {
                                 location.reload();
                             }
                         });
-                        showToast('Service record deleted successfully', 'success');
+                        showToast('Diagnostic record deleted successfully', 'success');
                     },
                     error: function (err) {
                         console.error(err);
-                        showToast('An error occurred while deleting the service record', 'error');
+                        showToast('An error occurred while deleting the diagnostic record', 'error');
                     }
                 });
             }
         }
 
-        // Edit repair record (redirect to edit page)
-        function editRepair(id) {
-            window.location.href = '@Url.Action("Edit", "RepairVehicle")/' + id;
+        // Edit diagnostic record (redirect to edit page)
+        function editDiagnostic(id) {
+            window.location.href = '@Url.Action("Edit", "DiagnosticVehicle")/' + id;
         }
 
         // Filter functionality
@@ -239,28 +259,6 @@
                 $('.filter-toggle-icon i').toggleClass('fa-chevron-down fa-chevron-up');
             });
 
-            // Category and type relationship
-            const categoryTypes = {
-                "Vehicle Repairs": ["Engine", "Transmission", "Brakes", "Chassis", "Electrical", "Bodywork", "Air Conditioning", "Suspension", "Exhaust", "Cooling System"],
-                "Vehicle Upgrades": ["Retrofit", "Performance", "Style", "Interior", "Accessories"],
-                "Diagnostics": ["Coding", "Error Diagnostics", "Software Update"]
-            };
-
-            $('#filterCategory').change(function() {
-                const selectedCategory = $(this).val();
-                const typeSelect = $('#filterType');
-                typeSelect.html('<option value="">All Types</option>');
-
-                if (selectedCategory && categoryTypes[selectedCategory]) {
-                    categoryTypes[selectedCategory].forEach(type => {
-                        typeSelect.append($('<option>', {
-                            value: type,
-                            text: type
-                        }));
-                    });
-                }
-            });
-
             // Apply filters
             $('#applyFilters').click(function() {
                 applyFilters();
@@ -268,7 +266,7 @@
 
             // Reset filters
             $('#resetFilters').click(function() {
-                $('#filterCategory').val('Vehicle Repairs');
+                $('#filterCategory').val('Diagnostics');
                 $('#filterType').val('');
                 $('#filterDateFrom').val('');
                 $('#filterDateTo').val('');
@@ -289,15 +287,13 @@
                 const dateToFilter = $('#filterDateTo').val();
                 const priceMinFilter = $('#filterPriceMin').val();
                 const priceMaxFilter = $('#filterPriceMax').val();
-                const mileageFilter = $('#filterMileage').val();
 
-                $('.repair-card').each(function() {
+                $('.diagnostic-card').each(function() {
                     let show = true;
                     const category = $(this).data('category');
                     const type = $(this).data('type');
                     const date = $(this).data('date');
                     const price = parseFloat($(this).data('price'));
-                    const mileage = parseInt($(this).data('mileage'));
 
                     // Category filter
                     if (categoryFilter && category !== categoryFilter) {
@@ -336,8 +332,8 @@
             }
 
             function updateResultsCount() {
-                const visibleCount = $('.repair-card:visible').length;
-                const totalCount = $('.repair-card').length;
+                const visibleCount = $('.diagnostic-card:visible').length;
+                const totalCount = $('.diagnostic-card').length;
                 $('#filteredCount').text(visibleCount);
 
                 if (visibleCount === 0 && totalCount > 0) {
@@ -345,7 +341,7 @@
                     $('#resultsCount').html('<span class="text-danger"><i class="fas fa-exclamation-circle me-1"></i>No records match your filters</span>');
                 } else {
                     $('#resultsCount').removeClass('no-results');
-                    $('#resultsCount').html(`Showing <span id="filteredCount">${visibleCount}</span> service records`);
+                    $('#resultsCount').html(`Showing <span id="filteredCount">${visibleCount}</span> diagnostic records`);
                 }
             }
 
@@ -355,8 +351,8 @@
     </script>
 
     <style>
-        /* Repair History Styles - Green Theme */
-        .repair-history-title {
+        /* Diagnostic History Styles - Orange Theme */
+        .diagnostic-history-title {
             font-weight: 700;
             font-size: 1.8rem;
             color: #1e293b;
@@ -364,20 +360,20 @@
             align-items: center;
         }
 
-        .btn-add-repair, .btn-add-first-repair {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        .btn-add-diagnostic, .btn-add-first-diagnostic {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
             border: none;
             padding: 0.75rem 1.5rem;
             font-weight: 600;
             border-radius: 10px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+            box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
         }
 
-            .btn-add-repair:hover, .btn-add-first-repair:hover {
-                background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            .btn-add-diagnostic:hover, .btn-add-first-diagnostic:hover {
+                background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
                 transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
+                box-shadow: 0 6px 16px rgba(249, 115, 22, 0.35);
             }
 
         /* Filter Styles */
@@ -394,9 +390,9 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
             cursor: pointer;
-            border-bottom: 1px solid #bbf7d0;
+            border-bottom: 1px solid #fed7aa;
         }
 
         .filter-title {
@@ -408,11 +404,11 @@
         }
 
             .filter-title i {
-                color: #10b981;
+                color: #f97316;
             }
 
         .filter-toggle-icon {
-            color: #10b981;
+            color: #f97316;
             transition: transform 0.3s ease;
         }
 
@@ -429,17 +425,17 @@
         }
 
             .filter-select:focus, .filter-date:focus, .filter-price:focus {
-                border-color: #10b981;
-                box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+                border-color: #f97316;
+                box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
             }
 
         .btn-primary {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
             border: none;
         }
 
             .btn-primary:hover {
-                background: linear-gradient(135deg, #059669 0%, #047857 100%);
+                background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
             }
 
         .results-count {
@@ -452,15 +448,15 @@
                 color: #ef4444;
             }
 
-        /* Repair Cards Container */
-        .repair-cards-container {
+        /* Diagnostic Cards Container */
+        .diagnostic-cards-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 1.5rem;
         }
 
-        /* Repair Card */
-        .repair-card {
+        /* Diagnostic Card */
+        .diagnostic-card {
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
@@ -471,23 +467,23 @@
             flex-direction: column;
         }
 
-            .repair-card:hover {
+            .diagnostic-card:hover {
                 transform: translateY(-5px);
                 box-shadow: 0 12px 32px rgba(149, 157, 165, 0.2);
-                border-color: #bbf7d0;
+                border-color: #fed7aa;
             }
 
-        .repair-card-header {
+        .diagnostic-card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-            border-bottom: 1px solid #bbf7d0;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            border-bottom: 1px solid #fed7aa;
         }
 
-        .repair-category-badge {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        .diagnostic-category-badge {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
             color: white;
             padding: 0.35rem 0.75rem;
             border-radius: 20px;
@@ -495,19 +491,19 @@
             font-weight: 600;
         }
 
-        .repair-date {
+        .diagnostic-date {
             color: #64748b;
             font-size: 0.85rem;
             font-weight: 500;
         }
 
-        .repair-card-body {
+        .diagnostic-card-body {
             padding: 1.5rem;
             flex-grow: 1;
         }
 
-        .repair-type {
-            color: #10b981;
+        .diagnostic-type {
+            color: #f97316;
             font-weight: 600;
             margin-bottom: 0.75rem;
             display: flex;
@@ -515,14 +511,14 @@
             font-size: 0.9rem;
         }
 
-        .repair-name {
+        .diagnostic-name {
             font-weight: 700;
             font-size: 1.25rem;
             color: #1e293b;
             margin-bottom: 1rem;
         }
 
-        .repair-detail-item {
+        .diagnostic-detail-item {
             display: flex;
             align-items: center;
             color: #475569;
@@ -530,36 +526,57 @@
             font-size: 0.9rem;
         }
 
-            .repair-detail-item i {
-                color: #10b981;
+            .diagnostic-detail-item i {
+                color: #f97316;
                 width: 20px;
             }
 
-        .repair-file-download {
+        .error-code-badge {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            border: 1px solid rgba(239, 68, 68, 0.2);
+        }
+
+        .diagnostic-error-description {
+            background: rgba(245, 158, 11, 0.05);
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            color: #5b5b5b;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .diagnostic-file-download {
             display: flex;
             align-items: center;
-            color: #10b981;
+            color: #f97316;
             margin-bottom: 0.5rem;
             font-size: 0.9rem;
             padding: 0.5rem;
-            background: #f0fdf4;
+            background: #fff7ed;
             border-radius: 8px;
-            border-left: 3px solid #10b981;
+            border-left: 3px solid #f97316;
         }
 
         .file-download-link {
-            color: #10b981;
+            color: #f97316;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.2s ease;
         }
 
             .file-download-link:hover {
-                color: #059669;
+                color: #ea580c;
                 text-decoration: underline;
             }
 
-        .repair-notes {
+        .diagnostic-notes {
             background: #f8fafc;
             padding: 0.75rem;
             border-radius: 8px;
@@ -569,36 +586,36 @@
             font-size: 0.9rem;
         }
 
-        .repair-card-footer {
+        .diagnostic-card-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 1rem 1.5rem;
-            background: #f0fdf4;
-            border-top: 1px solid #bbf7d0;
+            background: #fff7ed;
+            border-top: 1px solid #fed7aa;
         }
 
-        .repair-price {
+        .diagnostic-price {
             font-weight: 700;
             font-size: 1.25rem;
             color: #059669;
         }
 
-            .repair-price.no-price {
+            .diagnostic-price.no-price {
                 color: #94a3b8;
                 font-size: 1rem;
                 font-weight: 600;
             }
 
-        .repair-actions {
+        .diagnostic-actions {
             display: flex;
             gap: 0.5rem;
         }
 
-        .btn-edit-repair, .btn-delete-repair {
+        .btn-edit-diagnostic, .btn-delete-diagnostic {
             background: none;
-            border: 1px solid #10b981;
-            color: #10b981;
+            border: 1px solid #f97316;
+            color: #f97316;
             padding: 0.5rem;
             border-radius: 8px;
             font-weight: 500;
@@ -610,27 +627,27 @@
             height: 40px;
         }
 
-            .btn-edit-repair:hover {
-                background: #10b981;
+            .btn-edit-diagnostic:hover {
+                background: #f97316;
                 color: white;
                 transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);
+                box-shadow: 0 4px 8px rgba(249, 115, 22, 0.2);
             }
 
-        .btn-delete-repair {
+        .btn-delete-diagnostic {
             border-color: #f87171;
             color: #ef4444;
         }
 
-            .btn-delete-repair:hover {
+            .btn-delete-diagnostic:hover {
                 background: #ef4444;
                 color: white;
                 transform: translateY(-2px);
                 box-shadow: 0 4px 8px rgba(239, 68, 68, 0.2);
             }
 
-        /* No Repairs Card */
-        .no-repairs-card {
+        /* No Diagnostics Card */
+        .no-diagnostics-card {
             background: #ffffff;
             border-radius: 16px;
             box-shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
@@ -639,25 +656,25 @@
             margin: 2rem 0;
         }
 
-        .no-repairs-icon {
+        .no-diagnostics-icon {
             font-size: 4rem;
-            color: #bbf7d0;
+            color: #fed7aa;
             margin-bottom: 1.5rem;
         }
 
-        .no-repairs-card h3 {
+        .no-diagnostics-card h3 {
             font-weight: 700;
             color: #1e293b;
             margin-bottom: 0.5rem;
         }
 
-        .no-repairs-card p {
+        .no-diagnostics-card p {
             color: #64748b;
             margin-bottom: 2rem;
         }
 
         /* Animation for cards */
-        .repair-card {
+        .diagnostic-card {
             animation: fadeInUp 0.5s ease forwards;
         }
 
@@ -675,7 +692,7 @@
 
         /* Responsive adjustments */
         @@media (max-width: 768px) {
-            .repair-cards-container {
+            .diagnostic-cards-container {
                 grid-template-columns: 1fr;
             }
 
@@ -683,7 +700,7 @@
                 flex-direction: column;
             }
 
-            .filter-header, .repair-card-header, .repair-card-footer {
+            .filter-header, .diagnostic-card-header, .diagnostic-card-footer {
                 flex-direction: column;
                 gap: 0.75rem;
                 align-items: flex-start;
@@ -694,7 +711,7 @@
                 gap: 1rem;
             }
 
-            .repair-history-title {
+            .diagnostic-history-title {
                 font-size: 1.5rem;
             }
 
