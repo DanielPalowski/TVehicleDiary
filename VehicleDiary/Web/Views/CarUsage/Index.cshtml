@@ -1,166 +1,876 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBCarUsageOverViewVM
 
-<div class="container py-4">
-    <!-- Navigation Links -->
-    <div class="d-flex flex-wrap gap-2 mb-4">
-        <a asp-controller="Petrol" asp-action="Petrol" asp-route-vehicleIDRoute="@Model.VehicleID"
-           class="btn btn-outline-primary d-flex align-items-center">
-            <i class="fas fa-gas-pump me-2"></i>Petrol
-        </a>
-        <a asp-controller="Vignette" asp-action="Vignette" asp-route-vehicleIDRoute="@Model.VehicleID"
-           class="btn btn-outline-primary d-flex align-items-center">
-            <i class="fas fa-road me-2"></i>Vignette
-        </a>
-        <a asp-controller="Oil" asp-action="Oil" asp-route-vehicleIDRoute="@Model.VehicleID"
-           class="btn btn-outline-primary d-flex align-items-center">
-            <i class="fas fa-oil-can me-2"></i>Oil
-        </a>
-        <a asp-controller="Tire" asp-action="Tires" asp-route-vehicleIDRoute="@Model.VehicleID"
-           class="btn btn-outline-primary d-flex align-items-center">
-            <i class="fas fa-car-side me-2"></i>Tires
-        </a>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Usage Dashboard</title>
 
-    <h2 class="mb-4 fw-light">Latest Maintenance Overview</h2>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <div class="row g-4">
-        <!-- Vignette Card -->
-        <div class="col-12 col-lg-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-header bg-primary text-white">
-                    <h3 class="card-title mb-0"><i class="fas fa-road me-2"></i>Vignette</h3>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --vignette-blue: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --petrol-green: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --oil-orange: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            --tire-purple: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+            --card-hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            color: #0f172a;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(29, 78, 216, 0.05) 100%);
+            border-radius: 1.5rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(59, 130, 246, 0.1);
+        }
+
+        /* Cards */
+        .usage-card {
+            border-radius: 1.5rem;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            height: 100%;
+            background: white;
+        }
+
+            .usage-card:hover {
+                transform: translateY(-8px);
+                box-shadow: var(--card-hover-shadow);
+            }
+
+        /* Category Cards */
+        .vignette-card {
+            background: var(--vignette-blue);
+            color: white;
+        }
+
+        .petrol-card {
+            background: var(--petrol-green);
+            color: white;
+        }
+
+        .oil-card {
+            background: var(--oil-orange);
+            color: white;
+        }
+
+        .tire-card {
+            background: var(--tire-purple);
+            color: white;
+        }
+
+        /* Card Content */
+        .card-content {
+            padding: 1.5rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Card Icon */
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Navigation Cards */
+        .nav-card {
+            background: white;
+            border-radius: 1rem;
+            border: 1px solid #e2e8f0;
+            padding: 1.25rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+            .nav-card:hover {
+                transform: translateY(-4px);
+                box-shadow: var(--card-hover-shadow);
+            }
+
+        .nav-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-vignette .nav-icon {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(29, 78, 216, 0.15) 100%);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .nav-petrol .nav-icon {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .nav-oil .nav-icon {
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(234, 88, 12, 0.15) 100%);
+            color: #f97316;
+            border: 1px solid rgba(249, 115, 22, 0.2);
+        }
+
+        .nav-tire .nav-icon {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.15) 0%, rgba(124, 58, 237, 0.15) 100%);
+            color: #8b5cf6;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        /* Data Grid */
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .data-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .data-label {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .data-value {
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .data-price {
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin-top: 0.25rem;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+
+        .empty-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.75rem;
+            color: #0f172a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+            .back-btn:hover {
+                background: #f8fafc;
+                border-color: #cbd5e1;
+                transform: translateY(-2px);
+            }
+
+        /* Button Outline Light */
+        .btn-outline-light {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+            .btn-outline-light:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: translateY(-2px);
+                border-color: rgba(255, 255, 255, 0.3);
+            }
+
+        /* Action Buttons */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+        }
+
+        .action-btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            color: white;
+        }
+
+            .action-btn-primary:hover {
+                opacity: 0.9;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            }
+
+        .action-btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+        }
+
+            .action-btn-success:hover {
+                opacity: 0.9;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            }
+
+        .action-btn-warning {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: white;
+        }
+
+            .action-btn-warning:hover {
+                opacity: 0.9;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+            }
+
+        .action-btn-secondary {
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+            color: white;
+        }
+
+            .action-btn-secondary:hover {
+                opacity: 0.9;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+            }
+
+        /* Responsive */
+        @@media (max-width: 640px) {
+            .container
+
+        {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .hero-section {
+            padding: 1.5rem 1rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .card-content {
+            padding: 1.25rem;
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            margin-bottom: 0.75rem;
+        }
+
+        .data-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .action-buttons-grid {
+            grid-template-columns: 1fr;
+        }
+
+        }
+
+        @@media (max-width: 768px) {
+            .data-grid
+
+        {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .action-buttons-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        }
+
+        /* Animations */
+        @@keyframes fadeIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        .fade-in {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        /* Action Buttons Grid */
+        .action-buttons-grid {
+            display: grid;
+            gap: 0.75rem;
+            grid-template-columns: repeat(4, 1fr);
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Header -->
+    <header class="header-gradient text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <a href="#" class="back-btn">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    <span style="color: #0f172a;">Back to Vehicles</span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
+                        <i data-lucide="fuel" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold">Usage Dashboard</h1>
+                        <p class="text-sm text-white/70">Vehicle Maintenance & Consumption</p>
+                    </div>
                 </div>
-                <div class="card-body">
-                    @if (Model.LatestVignetteUsage != null)
-                    {
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4">Valid From</dt>
-                            <dd class="col-sm-8">@Model.LatestVignetteUsage.VignetteValidFrom.ToString("d MMM yyyy")</dd>
+            </div>
+        </div>
+    </header>
 
-                            <dt class="col-sm-4">Valid To</dt>
-                            <dd class="col-sm-8">@Model.LatestVignetteUsage.VignetteValidTo.ToString("d MMM yyyy")</dd>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <!-- Hero Section -->
+        <div class="hero-section mb-8">
+            <div class="text-center py-8 px-4">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">
+                    <span class="bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent">
+                        Vehicle Usage Dashboard
+                    </span>
+                </h1>
+                <p class="text-gray-600 text-lg mb-6 max-w-2xl mx-auto">
+                    Track and manage all vehicle consumption and maintenance costs in one place.
+                    Monitor fuel, oil, tires, and road taxes with detailed insights.
+                </p>
 
-                            <dt class="col-sm-4">Price</dt>
-                            <dd class="col-sm-8 text-success fw-bold">€@Model.LatestVignetteUsage.VignettePrice</dd>
-
-                            <dt class="col-sm-4">Country</dt>
-                            <dd class="col-sm-8">@Model.LatestVignetteUsage.VignetteCountry</dd>
-                        </dl>
-                    }
-                    else
-                    {
-                        <div class="alert alert-info mb-0">
-                            <i class="fas fa-info-circle me-2"></i>No vignette records available
+                <!-- Navigation Cards -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-2xl mx-auto">
+                    <!-- Vignette Navigation -->
+                    <a asp-controller="Vignette" asp-action="Vignette" asp-route-vehicleIDRoute="@Model.VehicleID"
+                       class="nav-card nav-vignette fade-in" style="animation-delay: 0.1s">
+                        <div class="nav-icon">
+                            <i data-lucide="receipt" class="w-5 h-5"></i>
                         </div>
-                    }
+                        <span class="font-medium text-gray-900">Vignette</span>
+                        <span class="text-xs text-gray-500">Road Taxes</span>
+                    </a>
+
+                    <!-- Petrol Navigation -->
+                    <a asp-controller="Petrol" asp-action="Petrol" asp-route-vehicleIDRoute="@Model.VehicleID"
+                       class="nav-card nav-petrol fade-in" style="animation-delay: 0.2s">
+                        <div class="nav-icon">
+                            <i data-lucide="fuel" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-medium text-gray-900">Petrol</span>
+                        <span class="text-xs text-gray-500">Fuel Consumption</span>
+                    </a>
+
+                    <!-- Oil Navigation -->
+                    <a asp-controller="Oil" asp-action="Oil" asp-route-vehicleIDRoute="@Model.VehicleID"
+                       class="nav-card nav-oil fade-in" style="animation-delay: 0.3s">
+                        <div class="nav-icon">
+                            <i data-lucide="droplet" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-medium text-gray-900">Oil</span>
+                        <span class="text-xs text-gray-500">Oil Changes</span>
+                    </a>
+
+                    <!-- Tires Navigation -->
+                    <a asp-controller="Tire" asp-action="Tires" asp-route-vehicleIDRoute="@Model.VehicleID"
+                       class="nav-card nav-tire fade-in" style="animation-delay: 0.4s">
+                        <div class="nav-icon">
+                            <i data-lucide="circle" class="w-5 h-5"></i>
+                        </div>
+                        <span class="font-medium text-gray-900">Tires</span>
+                        <span class="text-xs text-gray-500">Tire Management</span>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <!-- Petrol Card -->
-        <div class="col-12 col-lg-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-header bg-success text-white">
-                    <h3 class="card-title mb-0"><i class="fas fa-gas-pump me-2"></i>Petrol</h3>
-                </div>
-                <div class="card-body">
-                    @if (Model.LatestPetrolUsage != null)
-                    {
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4">Date</dt>
-                            <dd class="col-sm-8">@Model.LatestPetrolUsage.PetrolDate</dd>
+        <!-- Latest Records Section -->
+        <div class="mb-8">
+            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">Latest Maintenance Records</h2>
+            <p class="text-gray-600 mb-6 max-w-2xl">
+                Most recent entries across all maintenance categories. Click on any category to view full history.
+            </p>
 
-                            <dt class="col-sm-4">Type</dt>
-                            <dd class="col-sm-8">@Model.LatestPetrolUsage.PetrolType</dd>
-
-                            <dt class="col-sm-4">Price</dt>
-                            <dd class="col-sm-8 text-success fw-bold">€@Model.LatestPetrolUsage.PetrolPrice</dd>
-
-                            <dt class="col-sm-4">Amount</dt>
-                            <dd class="col-sm-8">@Model.LatestPetrolUsage.PetrolAmount L</dd>
-                        </dl>
-                    }
-                    else
-                    {
-                        <div class="alert alert-info mb-0">
-                            <i class="fas fa-info-circle me-2"></i>No petrol records available
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+                <!-- Vignette Card -->
+                <div class="usage-card vignette-card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <i data-lucide="receipt" class="w-6 h-6"></i>
                         </div>
-                    }
+                        <h3 class="text-lg font-bold mb-3">Vignette</h3>
+
+                        @if (Model.LatestVignetteUsage != null)
+                        {
+                            <div class="data-grid">
+                                <div class="data-item">
+                                    <span class="data-label">Valid From</span>
+                                    <span class="data-value">@Model.LatestVignetteUsage.VignetteValidFrom.ToString("d MMM yyyy")</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Valid To</span>
+                                    <span class="data-value">@Model.LatestVignetteUsage.VignetteValidTo.ToString("d MMM yyyy")</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Country</span>
+                                    <span class="data-value">@Model.LatestVignetteUsage.VignetteCountry</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Price</span>
+                                    <span class="data-value data-price">€@Model.LatestVignetteUsage.VignettePrice</span>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <i data-lucide="receipt" class="w-6 h-6"></i>
+                                </div>
+                                <p class="text-white/80 mb-4">No vignette records</p>
+                                <a asp-controller="Vignette" asp-action="Vignette" asp-route-vehicleIDRoute="@Model.VehicleID"
+                                   class="btn-outline-light">
+                                    <span>Add First</span>
+                                    <i data-lucide="plus" class="w-3 h-3 ml-1"></i>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Petrol Card -->
+                <div class="usage-card petrol-card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <i data-lucide="fuel" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3">Petrol</h3>
+
+                        @if (Model.LatestPetrolUsage != null)
+                        {
+                            <div class="data-grid">
+                                <div class="data-item">
+                                    <span class="data-label">Date</span>
+                                    <span class="data-value">@Model.LatestPetrolUsage.PetrolDate</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Type</span>
+                                    <span class="data-value">@Model.LatestPetrolUsage.PetrolType</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Amount</span>
+                                    <span class="data-value">@Model.LatestPetrolUsage.PetrolAmount L</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Price</span>
+                                    <span class="data-value data-price">€@Model.LatestPetrolUsage.PetrolPrice</span>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <i data-lucide="fuel" class="w-6 h-6"></i>
+                                </div>
+                                <p class="text-white/80 mb-4">No petrol records</p>
+                                <a asp-controller="Petrol" asp-action="Petrol" asp-route-vehicleIDRoute="@Model.VehicleID"
+                                   class="btn-outline-light">
+                                    <span>Add First</span>
+                                    <i data-lucide="plus" class="w-3 h-3 ml-1"></i>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Oil Card -->
+                <div class="usage-card oil-card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <i data-lucide="droplet" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3">Oil</h3>
+
+                        @if (Model.LatestOilUsage != null)
+                        {
+                            <div class="data-grid">
+                                <div class="data-item">
+                                    <span class="data-label">Date</span>
+                                    <span class="data-value">@Model.LatestOilUsage.OilDate.ToString("d MMM yyyy")</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Type</span>
+                                    <span class="data-value">@Model.LatestOilUsage.OilType</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Amount</span>
+                                    <span class="data-value">@Model.LatestOilUsage.OilAmount L</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Price</span>
+                                    <span class="data-value data-price">€@Model.LatestOilUsage.OilPrice</span>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <i data-lucide="droplet" class="w-6 h-6"></i>
+                                </div>
+                                <p class="text-white/80 mb-4">No oil records</p>
+                                <a asp-controller="Oil" asp-action="Oil" asp-route-vehicleIDRoute="@Model.VehicleID"
+                                   class="btn-outline-light">
+                                    <span>Add First</span>
+                                    <i data-lucide="plus" class="w-3 h-3 ml-1"></i>
+                                </a>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <!-- Tires Card -->
+                <div class="usage-card tire-card">
+                    <div class="card-content">
+                        <div class="card-icon">
+                            <i data-lucide="circle" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold mb-3">Tires</h3>
+
+                        @if (Model.LatestTireUsage != null)
+                        {
+                            <div class="data-grid">
+                                <div class="data-item">
+                                    <span class="data-label">Date</span>
+                                    <span class="data-value">@Model.LatestTireUsage.TireDate.ToString("d MMM yyyy")</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Brand</span>
+                                    <span class="data-value">@Model.LatestTireUsage.TireBrand</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Size</span>
+                                    <span class="data-value">@Model.LatestTireUsage.TireSize</span>
+                                </div>
+                                <div class="data-item">
+                                    <span class="data-label">Price</span>
+                                    <span class="data-value data-price">€@Model.LatestTireUsage.TirePrice</span>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="empty-state">
+                                <div class="empty-icon">
+                                    <i data-lucide="circle" class="w-6 h-6"></i>
+                                </div>
+                                <p class="text-white/80 mb-4">No tire records</p>
+                                <a asp-controller="Tire" asp-action="Tires" asp-route-vehicleIDRoute="@Model.VehicleID"
+                                   class="btn-outline-light">
+                                    <span>Add First</span>
+                                    <i data-lucide="plus" class="w-3 h-3 ml-1"></i>
+                                </a>
+                            </div>
+                        }
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Oil Card -->
-        <div class="col-12 col-lg-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-header bg-warning text-dark">
-                    <h3 class="card-title mb-0"><i class="fas fa-oil-can me-2"></i>Oil</h3>
-                </div>
-                <div class="card-body">
-                    @if (Model.LatestOilUsage != null)
-                    {
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4">Date</dt>
-                            <dd class="col-sm-8">@Model.LatestOilUsage.OilDate.ToString("d MMM yyyy")</dd>
+        <!-- Add Records Section -->
+        <div class="bg-white rounded-2xl border border-gray-200 p-6 mb-8">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">Add New Records</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Track your vehicle's maintenance by adding new records for each category.
+                </p>
+            </div>
 
-                            <dt class="col-sm-4">Type</dt>
-                            <dd class="col-sm-8">@Model.LatestOilUsage.OilType</dd>
+            <div class="action-buttons-grid">
+                <!-- Add Vignette -->
+                <a asp-controller="Vignette" asp-action="Vignette" asp-route-vehicleIDRoute="@Model.VehicleID"
+                   class="action-btn action-btn-primary">
+                    <i data-lucide="receipt" class="w-4 h-4"></i>
+                    Add Vignette
+                </a>
 
-                            <dt class="col-sm-4">Price</dt>
-                            <dd class="col-sm-8 text-success fw-bold">€@Model.LatestOilUsage.OilPrice</dd>
+                <!-- Add Petrol -->
+                <a asp-controller="Petrol" asp-action="Petrol" asp-route-vehicleIDRoute="@Model.VehicleID"
+                   class="action-btn action-btn-success">
+                    <i data-lucide="fuel" class="w-4 h-4"></i>
+                    Add Petrol
+                </a>
 
-                            <dt class="col-sm-4">Amount</dt>
-                            <dd class="col-sm-8">@Model.LatestOilUsage.OilAmount L</dd>
-                        </dl>
-                    }
-                    else
-                    {
-                        <div class="alert alert-info mb-0">
-                            <i class="fas fa-info-circle me-2"></i>No oil records available
-                        </div>
-                    }
-                </div>
+                <!-- Add Oil -->
+                <a asp-controller="Oil" asp-action="Oil" asp-route-vehicleIDRoute="@Model.VehicleID"
+                   class="action-btn action-btn-warning">
+                    <i data-lucide="droplet" class="w-4 h-4"></i>
+                    Add Oil
+                </a>
+
+                <!-- Add Tires -->
+                <a asp-controller="Tire" asp-action="Tires" asp-route-vehicleIDRoute="@Model.VehicleID"
+                   class="action-btn action-btn-secondary">
+                    <i data-lucide="circle" class="w-4 h-4"></i>
+                    Add Tires
+                </a>
             </div>
         </div>
 
-        <!-- Tires Card -->
-        <div class="col-12 col-lg-6">
-            <div class="card shadow-sm h-100">
-                <div class="card-header bg-info text-white">
-                    <h3 class="card-title mb-0"><i class="fas fa-car-side me-2"></i>Tires</h3>
+        <!-- Call to Action -->
+        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 rounded-2xl p-8 text-center">
+            <div class="max-w-lg mx-auto">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="trending-up" class="w-8 h-8 text-white"></i>
                 </div>
-                <div class="card-body">
-                    @if (Model.LatestTireUsage != null)
-                    {
-                        <dl class="row mb-0">
-                            <dt class="col-sm-4">Date</dt>
-                            <dd class="col-sm-8">@Model.LatestTireUsage.TireDate.ToString("d MMM yyyy")</dd>
-
-                            <dt class="col-sm-4">Brand</dt>
-                            <dd class="col-sm-8">@Model.LatestTireUsage.TireBrand</dd>
-
-                            <dt class="col-sm-4">Price</dt>
-                            <dd class="col-sm-8 text-success fw-bold">€@Model.LatestTireUsage.TirePrice</dd>
-
-                            <dt class="col-sm-4">Size</dt>
-                            <dd class="col-sm-8">@Model.LatestTireUsage.TireSize</dd>
-                        </dl>
-                    }
-                    else
-                    {
-                        <div class="alert alert-info mb-0">
-                            <i class="fas fa-info-circle me-2"></i>No tire records available
-                        </div>
-                    }
-                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Track Everything in One Place</h3>
+                <p class="text-gray-600 mb-6">
+                    Get detailed insights into your vehicle's consumption patterns and maintenance costs.
+                    Stay on top of upcoming renewals and optimize your vehicle expenses.
+                </p>
             </div>
         </div>
-    </div>
-</div>
+    </main>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 mt-12">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
+                        <i data-lucide="car" class="w-4 h-4 text-white"></i>
+                    </div>
+                    <span class="font-medium text-gray-900">Vehicle Usage Dashboard</span>
+                </div>
+                <p class="text-sm text-gray-600">
+                    © 2024 Vehicle Diary. All usage data securely tracked.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Add animation to cards on load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate card entrance
+            const cards = document.querySelectorAll('.usage-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 + (index * 100));
+            });
+
+            // Add hover effects
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transition = 'all 0.3s ease';
+                });
+            });
+
+            // Format currency values
+            const priceElements = document.querySelectorAll('.data-price');
+            priceElements.forEach(element => {
+                const price = element.textContent.replace('€', '');
+                if (price) {
+                    const formattedPrice = parseFloat(price).toLocaleString('en-US', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2
+                    });
+                    element.textContent = `€${formattedPrice}`;
+                }
+            });
+
+            // Handle empty state buttons
+            const emptyStateButtons = document.querySelectorAll('.btn-outline-light');
+            emptyStateButtons.forEach(button => {
+                button.style.background = 'rgba(255, 255, 255, 0.1)';
+                button.style.border = '2px solid rgba(255, 255, 255, 0.2)';
+                button.style.padding = '0.5rem 1rem';
+                button.style.borderRadius = '0.75rem';
+                button.style.fontWeight = '500';
+                button.style.transition = 'all 0.2s ease';
+                button.style.display = 'inline-flex';
+                button.style.alignItems = 'center';
+                button.style.justifyContent = 'center';
+                button.style.gap = '0.5rem';
+                button.style.textDecoration = 'none';
+                button.style.color = 'white';
+
+                button.addEventListener('mouseenter', function() {
+                    this.style.background = 'rgba(255, 255, 255, 0.2)';
+                    this.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                });
+
+                button.addEventListener('mouseleave', function() {
+                    this.style.background = 'rgba(255, 255, 255, 0.1)';
+                    this.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+                });
+            });
+
+            // Ensure back button text is black
+            const backButton = document.querySelector('.back-btn span');
+            if (backButton) {
+                backButton.style.color = '#0f172a';
+            }
+
+            // Animate action buttons
+            const actionButtons = document.querySelectorAll('.action-btn');
+            actionButtons.forEach((button, index) => {
+                button.style.opacity = '0';
+                button.style.transform = 'translateY(10px)';
+
+                setTimeout(() => {
+                    button.style.transition = 'all 0.4s ease-out';
+                    button.style.opacity = '1';
+                    button.style.transform = 'translateY(0)';
+                }, 300 + (index * 100));
+            });
+        });
+
+        // Handle responsive behavior
+        function handleResponsive() {
+            const dataGrids = document.querySelectorAll('.data-grid');
+            const actionGrid = document.querySelector('.action-buttons-grid');
+
+            if (window.innerWidth < 640) {
+                dataGrids.forEach(grid => {
+                    grid.style.gridTemplateColumns = '1fr';
+                });
+                if (actionGrid) {
+                    actionGrid.style.gridTemplateColumns = '1fr';
+                }
+            } else if (window.innerWidth < 768) {
+                dataGrids.forEach(grid => {
+                    grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                });
+                if (actionGrid) {
+                    actionGrid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                }
+            } else {
+                dataGrids.forEach(grid => {
+                    grid.style.gridTemplateColumns = 'repeat(2, 1fr)';
+                });
+                if (actionGrid) {
+                    actionGrid.style.gridTemplateColumns = 'repeat(4, 1fr)';
+                }
+            }
+        }
+
+        // Initial call
+        handleResponsive();
+
+        // Listen for resize
+        window.addEventListener('resize', handleResponsive);
+
+        // Add parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroSection = document.querySelector('.hero-section');
+            if (heroSection) {
+                heroSection.style.transform = `translateY(${scrolled * 0.05}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

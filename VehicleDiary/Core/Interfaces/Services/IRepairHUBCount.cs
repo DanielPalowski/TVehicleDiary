@@ -2,6 +2,8 @@
 {
     public interface IRepairHUBCount
     {
-        Task CountingRepairsAsync(Guid repairId);
+        Task<float> TotalCostRepairAsync(Guid vehicleIDRoute);
+        Task<float> TotalCostUpgradeAsync(Guid vehicleIDRoute);
+        Task<float> TotalCostDiagnosticAsync(Guid vehicleIDRoute);
     }
 }

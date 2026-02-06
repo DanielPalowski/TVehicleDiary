@@ -89,6 +89,7 @@ namespace VehicleDiary
             builder.Services.AddScoped<IRepairVehicleService, RepairVehicleService>();
             builder.Services.AddScoped<IUpgradeVehicleService, UpgradeVehicleService>();
             builder.Services.AddScoped<IDiagnosticVehicleService, DiagnosticVehicleService>();
+            builder.Services.AddScoped<IRepairHUBCount, RepairHUBCount>();
 
             //Mapper
             builder.Services.AddAutoMapper(typeof(Program));

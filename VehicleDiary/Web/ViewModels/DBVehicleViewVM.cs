@@ -13,5 +13,6 @@
         public string? Description { get; set; }
         public float? RepairCost { get; set; }
         public DateTime? Bought { get; set; }
+        
     }
 }

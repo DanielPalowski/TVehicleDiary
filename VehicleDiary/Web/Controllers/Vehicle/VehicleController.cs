@@ -27,10 +27,17 @@ namespace VehicleDiary.Web.Controllers.Vehicle
         }
         public async Task<IActionResult> Index()
         {
+
             var user = _userManager.GetUserId(User);
-            var vehicle = await _vehicleService.GettingVehiclesAsync(user);
-            var returnView = _mapper.Map<IEnumerable<DBVehicleViewVM>>(vehicle);
+
+            // Get vehicles WITH RepairCost filled
+            var vehicles = await _vehicleService.GetVehiclesWithTotalCostAsync(user);
+
+            // Map THAT list
+            var returnView = _mapper.Map<IEnumerable<DBVehicleViewVM>>(vehicles);
+
             return View(returnView);
+
         }
         [HttpDelete]
         public async Task<IActionResult> Delete (Guid id)

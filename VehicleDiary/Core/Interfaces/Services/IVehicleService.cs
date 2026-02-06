@@ -1,4 +1,5 @@
 ﻿using VehicleDiary.Application.DTOs;
+using VehicleDiary.Core.Entities;
 
 namespace VehicleDiary.Core.Interfaces.Services
 {
@@ -8,5 +9,6 @@ namespace VehicleDiary.Core.Interfaces.Services
         Task<IEnumerable<VehicleDto>> GettingVehiclesAsync(string userID);
         Task DeleteVehicleAsync(Guid vehicleID);
         Task<int> CountingVehiclesAsync(string userID);
+        Task<List<DBVehicleModel>> GetVehiclesWithTotalCostAsync(string userId);
     }
 }

@@ -16,6 +16,7 @@ namespace VehicleDiary.Application.Mappings
             CreateMap<VehicleDto, DBVehicleViewVM>();
             CreateMap<VehicleDto, DBVehicleModelVM>();
             CreateMap<DBVehicleModelVM, VehicleDto>();
+            CreateMap<DBVehicleModel, DBVehicleViewVM>();
         }
     }
 }

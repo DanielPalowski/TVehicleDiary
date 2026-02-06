@@ -21,12 +21,14 @@ namespace VehicleDiary.Web.Controllers.Repairs
         public readonly IRepositoryVehicle _repositoryVehicle;
         public readonly IRepairService _repairService;
         public readonly IMapper _mapper;
+        public readonly IRepairHUBCount _repairHUBCount;
 
         public RepairController(IRepositoryCrud<DBRepairsModel> repository,
             IRepositoryVehicle repositoryVehicle,
             IRepositoryViews<DBRepairsModel> repositoryViews,
             IRepairService repairService,
-            IMapper mapper)
+            IMapper mapper,
+            IRepairHUBCount repairHUBCount)
 
         {
             _repositoryCrudRepair = repository;
@@ -34,10 +36,13 @@ namespace VehicleDiary.Web.Controllers.Repairs
             _repositoryViews = repositoryViews;
             _repairService = repairService;
             _mapper = mapper;
+            _repairHUBCount = repairHUBCount;
         }
         public async Task<IActionResult> Index([FromQuery] Guid vehicleIDRoute)
         {
-            var moneyCount = await _repairService.TotalCostAsync(vehicleIDRoute);
+            var moneyCountRepair = await _repairHUBCount.TotalCostRepairAsync(vehicleIDRoute);
+            var moneyCountUpgrade = await _repairHUBCount.TotalCostUpgradeAsync(vehicleIDRoute);
+            var moneyCountDiagnostic = await _repairHUBCount.TotalCostDiagnosticAsync(vehicleIDRoute);
 
             var entity = await _repairService.ShowingRepairsAsync(vehicleIDRoute);
             var repairs = _mapper.Map<IEnumerable<DBRepairModelVM>>(entity);
@@ -47,7 +52,10 @@ namespace VehicleDiary.Web.Controllers.Repairs
             {
                 vehicleId = vehicleIDRoute,
                 RepairsView = repairs,
-                TotalRepairCost = moneyCount
+                TotalRepairCost = moneyCountRepair,
+                TotalDiagnosticCost = moneyCountUpgrade,
+                TotalUpgradeCost = moneyCountDiagnostic
+
             };
 
             return View(ViewModelDB);

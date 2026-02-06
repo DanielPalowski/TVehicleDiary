@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repair History Hub</title>
+    <title>Vehicle Information Hub</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -33,7 +33,7 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #f8fafc;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
             color: #0f172a;
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
@@ -137,51 +137,60 @@
                 border-color: rgba(255, 255, 255, 0.3);
             }
 
-        /* Stat Cards */
+        /* Enhanced Stat Cards */
         .stat-card {
             background: white;
-            border-radius: 1rem;
+            border-radius: 1.5rem;
             border: 1px solid #e2e8f0;
-            padding: 1.5rem;
-            text-align: center;
+            padding: 1.75rem;
+            text-align: left;
             transition: all 0.3s ease;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
 
             .stat-card:hover {
                 transform: translateY(-4px);
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
             }
 
         .stat-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 0.75rem;
+            width: 64px;
+            height: 64px;
+            border-radius: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 1rem;
+            margin-bottom: 1.25rem;
+            flex-shrink: 0;
         }
 
         .repair-stat .stat-icon {
-            background: rgba(16, 185, 129, 0.1);
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.15) 100%);
             color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
         .upgrade-stat .stat-icon {
-            background: rgba(59, 130, 246, 0.1);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(29, 78, 216, 0.15) 100%);
             color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
         .diagnostic-stat .stat-icon {
-            background: rgba(249, 115, 22, 0.1);
+            background: linear-gradient(135deg, rgba(249, 115, 22, 0.15) 0%, rgba(234, 88, 12, 0.15) 100%);
             color: #f97316;
+            border: 1px solid rgba(249, 115, 22, 0.2);
         }
 
         .stat-number {
             font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+            font-family: 'Space Grotesk', sans-serif;
         }
 
         .repair-stat .stat-number {
@@ -205,6 +214,23 @@
             background-clip: text;
         }
 
+        .stat-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-description {
+            font-size: 0.875rem;
+            color: #64748b;
+            line-height: 1.5;
+            margin-top: auto;
+        }
+
         /* Gradient Text */
         .gradient-text {
             background: var(--repair-green);
@@ -213,36 +239,30 @@
             background-clip: text;
         }
 
-        /* Mobile Optimizations */
-        @@media (max-width: 640px) {
-            .container
-
-        {
-            padding-left: 1rem;
-            padding-right: 1rem;
+        /* Cost Breakdown */
+        .cost-breakdown {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 1.5rem;
+            border: 1px solid #e2e8f0;
+            padding: 2rem;
         }
 
-        .hero-section {
-            padding: 1.5rem 1rem;
+        .cost-item {
+            display: flex;
+            align-items: center;
+            padding: 1.25rem;
             border-radius: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            padding: 1.25rem 1rem;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-        }
-
-        .card-icon {
-            width: 64px;
-            height: 64px;
             margin-bottom: 1rem;
+            transition: all 0.2s ease;
         }
 
-        }
+            .cost-item:hover {
+                background: rgba(241, 245, 249, 0.5);
+            }
+
+            .cost-item:last-child {
+                margin-bottom: 0;
+            }
 
         /* Back Button */
         .back-btn {
@@ -273,16 +293,46 @@
         }
 
         @@media (max-width: 640px) {
-            .action-buttons
+            .container
 
         {
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .hero-section {
+            padding: 1.5rem 1rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            padding: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+        }
+
+        .card-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 1rem;
+        }
+
+        .cost-breakdown {
+            padding: 1.5rem;
+        }
+
+        .action-buttons {
             flex-direction: column;
             width: 100%;
         }
 
-        .action-buttons a, .action-buttons button {
-            width: 100%;
-        }
+            .action-buttons a,
+            .action-buttons button {
+                width: 100%;
+            }
 
         }
 
@@ -303,6 +353,24 @@
         .loading {
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+
+        /* Floating elements for modern feel */
+        .floating-element {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @@keyframes float {
+            0%, 100%
+
+        {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -310,17 +378,18 @@
     <header class="header-gradient text-white">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between py-4">
-                <a href="#" class="back-btn text-white bg-white/10 border-white/20 hover:bg-white/20">
+                <a asp-controller="Vehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
+                   class="back-btn text-black bg-white/10 border-white/20 hover:bg-white/20">
                     <i data-lucide="arrow-left" class="w-5 h-5"></i>
                     Back to Vehicles
                 </a>
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
-                        <i data-lucide="wrench" class="w-5 h-5 text-white"></i>
+                        <i data-lucide="car" class="w-5 h-5 text-white"></i>
                     </div>
                     <div>
-                        <h1 class="font-bold">Repair Hub</h1>
-                        <p class="text-sm text-white/70">Vehicle Management</p>
+                        <h1 class="font-bold">Vehicle Information Hub</h1>
+                        <p class="text-sm text-white/70">Complete Vehicle Management</p>
                     </div>
                 </div>
             </div>
@@ -328,70 +397,126 @@
     </header>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 py-6">
+    <main class="container mx-auto px-4 py-6 md:py-8">
         <!-- Hero Section -->
-        <div class="hero-section mb-8">
-            <div class="text-center py-8 px-4">
-                <h1 class="text-3xl md:text-4xl font-bold mb-4 gradient-text">Repair History Hub</h1>
-                <p class="text-gray-600 text-lg mb-6 max-w-2xl mx-auto">
-                    Complete overview of your vehicle's history in one place. Track repairs, upgrades,
-                    and diagnostic records for better vehicle management and maintenance.
+        <div class="hero-section mb-8 md:mb-12">
+            <div class="text-center py-8 px-4 md:py-12">
+                <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6">
+                    <span class="gradient-text">Vehicle Information Hub</span>
+                </h1>
+                <p class="text-gray-600 text-lg mb-6 max-w-2xl mx-auto md:text-xl">
+                    Complete financial overview of your vehicle's maintenance history. Track all expenses across repairs, upgrades, and diagnostics.
                 </p>
 
                 <div class="action-buttons">
                     <a asp-controller="RepairVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
-                       class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity">
+                       class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity shadow-lg">
                         <i data-lucide="history" class="w-5 h-5"></i>
-                        View Repair History
+                        View Complete History
                     </a>
-
-                    <button class="inline-flex items-center gap-2 bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-medium hover:bg-gray-50 transition-colors">
-                        <i data-lucide="download" class="w-5 h-5"></i>
-                        Download Report
-                    </button>
                 </div>
             </div>
         </div>
 
-        <!-- Statistics Section -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-            <!-- Repair Stats -->
-            <div class="stat-card repair-stat">
-                <div class="stat-icon">
-                    <i data-lucide="wrench" class="w-6 h-6"></i>
+        <!-- Statistics Section with Financial Overview -->
+        <div class="mb-8 md:mb-12">
+            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">Financial Overview</h2>
+            <p class="text-gray-600 mb-6 md:mb-8 max-w-2xl">
+                Total investment in your vehicle's maintenance and improvements
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
+                <!-- Repair Stats -->
+                <div class="stat-card repair-stat">
+                    <div class="flex items-start gap-4">
+                        <div class="stat-icon">
+                            <i data-lucide="wrench" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <div class="stat-label">
+                                <i data-lucide="dollar-sign" class="w-4 h-4"></i>
+                                Total Repair Cost
+                            </div>
+                            <div class="stat-number" id="repairCost">
+                                @Model.TotalRepairCost
+                            </div>
+                        </div>
+                    </div>
+                    <p class="stat-description mt-4">
+                        Total amount spent on all repairs, maintenance, and part replacements.
+                        Includes labor, parts, and service fees.
+                    </p>
                 </div>
-                <div class="stat-number">0</div>
-                <div class="stat-label text-gray-600 font-medium">Total Repairs</div>
-                <p class="text-sm text-gray-500 mt-2">Recorded maintenance and fixes</p>
-                <p class="text-sm text-gray-500 mt-2">@Model.TotalRepairCost</p>
+
+                <!-- Upgrade Stats -->
+                <div class="stat-card upgrade-stat">
+                    <div class="flex items-start gap-4">
+                        <div class="stat-icon">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <div class="stat-label">
+                                <i data-lucide="dollar-sign" class="w-4 h-4"></i>
+                                Total Upgrade Cost
+                            </div>
+                            <div class="stat-number" id="upgradeCost">
+                                @Model.TotalUpgradeCost
+                            </div>
+                        </div>
+                    </div>
+                    <p class="stat-description mt-4">
+                        Total investment in performance upgrades, modifications, and enhancements.
+                        Includes all aftermarket parts and installation.
+                    </p>
+                </div>
+
+                <!-- Diagnostic Stats -->
+                <div class="stat-card diagnostic-stat">
+                    <div class="flex items-start gap-4">
+                        <div class="stat-icon">
+                            <i data-lucide="activity" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <div class="stat-label">
+                                <i data-lucide="dollar-sign" class="w-4 h-4"></i>
+                                Total Diagnostic Cost
+                            </div>
+                            <div class="stat-number" id="diagnosticCost">
+                                @Model.TotalDiagnosticCost
+                            </div>
+                        </div>
+                    </div>
+                    <p class="stat-description mt-4">
+                        Total spent on diagnostic services, health checks, and system analysis.
+                        Includes professional scanning and inspection fees.
+                    </p>
+                </div>
             </div>
 
-            <!-- Upgrade Stats -->
-            <div class="stat-card upgrade-stat">
-                <div class="stat-icon">
-                    <i data-lucide="zap" class="w-6 h-6"></i>
+            <!-- Total Investment Card -->
+            <div class="bg-gradient-to-r from-gray-900 to-slate-900 rounded-2xl p-6 md:p-8 text-white mb-8 md:mb-12">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold mb-2">Total Vehicle Investment</h3>
+                        <p class="text-gray-300 mb-4 md:mb-0">
+                            Combined investment across all maintenance categories
+                        </p>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-3xl md:text-5xl font-bold mb-2" id="totalInvestment">
+                            <!-- Total will be calculated by JavaScript -->
+                        </div>
+                        <p class="text-gray-300">All-time maintenance costs</p>
+                    </div>
                 </div>
-                <div class="stat-number">0</div>
-                <div class="stat-label text-gray-600 font-medium">Vehicle Upgrades</div>
-                <p class="text-sm text-gray-500 mt-2">Performance and feature enhancements</p>
-            </div>
-
-            <!-- Diagnostic Stats -->
-            <div class="stat-card diagnostic-stat">
-                <div class="stat-icon">
-                    <i data-lucide="activity" class="w-6 h-6"></i>
-                </div>
-                <div class="stat-number">0</div>
-                <div class="stat-label text-gray-600 font-medium">Diagnostics</div>
-                <p class="text-sm text-gray-500 mt-2">System checks and error reports</p>
             </div>
         </div>
 
         <!-- Hub Cards Section -->
         <div class="mb-12">
-            <h2 class="text-2xl font-bold text-center mb-2 text-gray-900">Explore Your Vehicle's History</h2>
-            <p class="text-gray-600 text-center mb-8 max-w-2xl mx-auto">
-                Manage different aspects of your vehicle's maintenance and improvements
+            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">Vehicle Information Categories</h2>
+            <p class="text-gray-600 mb-8 max-w-2xl">
+                Access detailed records and manage all aspects of your vehicle's history
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -401,15 +526,15 @@
                         <div class="card-icon">
                             <i data-lucide="wrench" class="w-8 h-8"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Vehicle Repairs</h3>
+                        <h3 class="text-xl font-bold mb-3">Repair History</h3>
                         <p class="text-white/90 mb-6 flex-grow">
-                            View complete history of all repairs performed on your vehicle including
-                            dates, services, parts replaced, and costs.
+                            Complete record of all repairs, maintenance services, and part replacements.
+                            Track dates, costs, service providers, and detailed repair descriptions.
                         </p>
                         <div class="mt-auto">
                             <a asp-controller="RepairVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
                                class="btn-outline-light inline-flex items-center justify-center w-full">
-                                <span>Explore Repairs</span>
+                                <span>View Repairs</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </a>
                         </div>
@@ -424,8 +549,8 @@
                         </div>
                         <h3 class="text-xl font-bold mb-3">Upgrades & Modifications</h3>
                         <p class="text-white/90 mb-6 flex-grow">
-                            Track performance upgrades, modifications, and enhancements made to
-                            your vehicle to improve capabilities and features.
+                            Track all performance upgrades, aesthetic modifications, and feature enhancements.
+                            Document costs, installation dates, and performance improvements.
                         </p>
                         <div class="mt-auto">
                             <a asp-controller="UpgradeVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
@@ -445,79 +570,18 @@
                         </div>
                         <h3 class="text-xl font-bold mb-3">Diagnostics & Health</h3>
                         <p class="text-white/90 mb-6 flex-grow">
-                            Access diagnostic reports, error codes, and health checks to understand
-                            your vehicle's condition and performance status.
+                            Access comprehensive diagnostic reports, error code history, and vehicle health checks.
+                            Monitor system performance and preventive maintenance schedules.
                         </p>
                         <div class="mt-auto">
                             <a asp-controller="DiagnosticVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
                                class="btn-outline-light inline-flex items-center justify-center w-full">
-                                <span>View Diagnostic</span>
+                                <span>View Diagnostics</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Recent Activity Section -->
-        <div class="bg-white rounded-2xl border border-gray-200 p-6 mb-8">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-bold text-gray-900">Recent Activity</h2>
-                <button class="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1">
-                    <span>View All</span>
-                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
-                </button>
-            </div>
-
-            <div class="space-y-4">
-                <!-- No Activity State -->
-                <div class="text-center py-12">
-                    <div class="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-4">
-                        <i data-lucide="clock" class="w-8 h-8 text-gray-400"></i>
-                    </div>
-                    <h3 class="text-lg font-medium text-gray-900 mb-2">No Recent Activity</h3>
-                    <p class="text-gray-600 mb-4">Start by adding your first repair or upgrade</p>
-                    <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.vehicleId"
-                       class="inline-flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
-                        <i data-lucide="plus" class="w-4 h-4"></i>
-                        Add First Repair
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Quick Actions -->
-        <div class="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-100 rounded-2xl p-6">
-            <h2 class="text-xl font-bold text-gray-900 mb-4">Quick Actions</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.vehicleId"
-                   class="bg-white border border-green-200 rounded-xl p-4 flex items-center justify-between hover:border-green-300 transition-colors group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
-                            <i data-lucide="plus-circle" class="w-5 h-5 text-green-600"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-medium text-gray-900">Add New Repair</h3>
-                            <p class="text-sm text-gray-600">Record a recent repair or service</p>
-                        </div>
-                    </div>
-                    <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400 group-hover:text-green-600"></i>
-                </a>
-
-                <a asp-controller="UpgradeVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.vehicleId"
-                   class="bg-white border border-blue-200 rounded-xl p-4 flex items-center justify-between hover:border-blue-300 transition-colors group">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
-                            <i data-lucide="zap" class="w-5 h-5 text-blue-600"></i>
-                        </div>
-                        <div>
-                            <h3 class="font-medium text-gray-900">Add Upgrade</h3>
-                            <p class="text-sm text-gray-600">Record a performance upgrade</p>
-                        </div>
-                    </div>
-                    <i data-lucide="chevron-right" class="w-5 h-5 text-gray-400 group-hover:text-blue-600"></i>
-                </a>
             </div>
         </div>
     </main>
@@ -530,10 +594,10 @@
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
                         <i data-lucide="car" class="w-4 h-4 text-white"></i>
                     </div>
-                    <span class="font-medium text-gray-900">VehicleDiary</span>
+                    <span class="font-medium text-gray-900">Vehicle Information System</span>
                 </div>
                 <p class="text-sm text-gray-600">
-                    © 2024 Repair History Hub. All vehicle data is securely stored.
+                    © 2024 Vehicle Information Hub. All data securely stored and encrypted.
                 </p>
             </div>
         </div>
@@ -543,35 +607,75 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
-        // Animate stat counters
-        document.addEventListener('DOMContentLoaded', function() {
-            const statNumbers = document.querySelectorAll('.stat-number');
+        // Function to parse currency string to number
+        function parseCurrency(currencyString) {
+            if (!currencyString) return 0;
+            // Remove currency symbols, commas, and convert to number
+            return parseFloat(currencyString.replace(/[^0-9.-]+/g, ""));
+        }
 
-            // Simple counter animation
-            statNumbers.forEach(stat => {
-                const target = 12; // Example number, replace with actual data
-                let current = 0;
-                const increment = target / 30; // 30 frames
-                const interval = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        stat.textContent = target;
-                        clearInterval(interval);
+        // Function to format number as currency
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(value);
+        }
+
+        // Animate stat counters with currency
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get cost elements
+            const repairCostElement = document.getElementById('repairCost');
+            const upgradeCostElement = document.getElementById('upgradeCost');
+            const diagnosticCostElement = document.getElementById('diagnosticCost');
+            const totalInvestmentElement = document.getElementById('totalInvestment');
+
+            // Parse current values
+            const repairCost = parseCurrency(repairCostElement.textContent) || 0;
+            const upgradeCost = parseCurrency(upgradeCostElement.textContent) || 0;
+            const diagnosticCost = parseCurrency(diagnosticCostElement.textContent) || 0;
+            const totalCost = repairCost + upgradeCost + diagnosticCost;
+
+            // Function to animate counter
+            function animateCounter(element, start, end, duration = 1000) {
+                const startTime = performance.now();
+                const updateValue = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+
+                    // Easing function for smooth animation
+                    const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                    const currentValue = start + (end - start) * easeOutQuart;
+
+                    element.textContent = formatCurrency(currentValue);
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateValue);
                     } else {
-                        stat.textContent = Math.floor(current);
+                        element.textContent = formatCurrency(end);
                     }
-                }, 50);
-            });
+                };
+
+                requestAnimationFrame(updateValue);
+            }
+
+            // Animate all counters
+            animateCounter(repairCostElement, 0, repairCost, 1200);
+            animateCounter(upgradeCostElement, 0, upgradeCost, 1200);
+            animateCounter(diagnosticCostElement, 0, diagnosticCost, 1200);
+            animateCounter(totalInvestmentElement, 0, totalCost, 1500);
 
             // Add hover effects to cards
-            const cards = document.querySelectorAll('.hub-card');
+            const cards = document.querySelectorAll('.hub-card, .stat-card');
             cards.forEach(card => {
                 card.addEventListener('mouseenter', () => {
                     card.style.transition = 'all 0.3s ease';
                 });
             });
 
-            // Mobile menu toggle
+            // Handle mobile menu if exists
             const mobileMenuButton = document.getElementById('mobileMenuButton');
             const mobileMenu = document.getElementById('mobileMenu');
 
@@ -581,52 +685,48 @@
                 });
             }
 
-            // Handle disabled button
-            const comingSoonBtn = document.querySelector('.cursor-not-allowed');
-            if (comingSoonBtn) {
-                comingSoonBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    // Show a toast notification
-                    showNotification('Diagnostics feature coming soon!', 'info');
+            // Initialize tooltips for currency values
+            const initTooltips = () => {
+                const costElements = [repairCostElement, upgradeCostElement, diagnosticCostElement];
+                costElements.forEach(element => {
+                    element.addEventListener('mouseenter', () => {
+                        const value = parseCurrency(element.textContent);
+                        if (value > 0) {
+                            showTooltip(element, `${formatCurrency(value)} spent`);
+                        }
+                    });
                 });
+            };
+
+            // Simple tooltip function
+            function showTooltip(element, text) {
+                const tooltip = document.createElement('div');
+                tooltip.className = 'fixed bg-gray-900 text-white px-3 py-2 rounded-lg text-sm z-50';
+                tooltip.textContent = text;
+                document.body.appendChild(tooltip);
+
+                const rect = element.getBoundingClientRect();
+                tooltip.style.left = `${rect.left + window.scrollX}px`;
+                tooltip.style.top = `${rect.top + window.scrollY - 40}px`;
+
+                setTimeout(() => {
+                    tooltip.remove();
+                }, 2000);
             }
+
+            initTooltips();
         });
-
-        // Simple notification function
-        function showNotification(message, type = 'info') {
-            const notification = document.createElement('div');
-            notification.className = `fixed top-4 right-4 px-4 py-3 rounded-lg shadow-lg z-50 ${
-                type === 'info' ? 'bg-blue-500 text-white' : 'bg-green-500 text-white'
-            }`;
-            notification.innerHTML = `
-                <div class="flex items-center gap-2">
-                    <i data-lucide="${type === 'info' ? 'info' : 'check-circle'}" class="w-5 h-5"></i>
-                    <span>${message}</span>
-                </div>
-            `;
-
-            document.body.appendChild(notification);
-
-            // Initialize icon
-            lucide.createIcons();
-
-            // Remove after 3 seconds
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
-        }
 
         // Handle responsive behavior
         function handleResponsive() {
             const cards = document.querySelectorAll('.hub-card');
+            const isMobile = window.innerWidth < 768;
 
-            if (window.innerWidth < 768) {
-                // Mobile: adjust card spacing
+            if (isMobile) {
                 cards.forEach(card => {
                     card.style.marginBottom = '1rem';
                 });
             } else {
-                // Desktop: reset
                 cards.forEach(card => {
                     card.style.marginBottom = '';
                 });
@@ -638,6 +738,15 @@
 
         // Listen for resize
         window.addEventListener('resize', handleResponsive);
+
+        // Add subtle parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroSection = document.querySelector('.hero-section');
+            if (heroSection) {
+                heroSection.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
     </script>
 </body>
 </html>

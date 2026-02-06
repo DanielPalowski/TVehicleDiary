@@ -46,12 +46,18 @@ namespace VehicleDiary.Application.Services.MapperService
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBTiresSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBVignetteSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBRepairVehicleSet, vehicleID);
+            await _repositoryVehicle.TryRemoveByIdAsync(_context.DBDiagnosticVehicleSet, vehicleID);
+            await _repositoryVehicle.TryRemoveByIdAsync(_context.DBUpgradeVehicleSet, vehicleID);
             await _context.SaveChangesAsync();
         }
         public async Task<int> CountingVehiclesAsync(string userID)
         {
             var count = await _context.DBVehiclesSet.CountAsync(x => x.UserId == userID.ToString());
             return count;
+        }
+        public async Task<List<DBVehicleModel>> GetVehiclesWithTotalCostAsync(string userId)
+        {
+            return await _repositoryVehicle.GetVehiclesWithTotalCostAsync(userId);
         }
     }
 }
