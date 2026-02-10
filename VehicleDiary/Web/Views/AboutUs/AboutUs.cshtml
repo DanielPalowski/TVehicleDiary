@@ -1,90 +1,203 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using System.Globalization
+@inject IViewLocalizer Localizer
+
+<!DOCTYPE html>
+<html lang="@CultureInfo.CurrentUICulture.Name">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Vehicle Diary - Your Digital Garage</title>
-    <link rel="stylesheet" href="~/css/AboutUs/style.css">
-</head>
-<body>
-    <!-- Animated Background -->
-    <div class="animated-bg">
-        <div class="gradient-orb orb-1"></div>
-        <div class="gradient-orb orb-2"></div>
-        <div class="gradient-orb orb-3"></div>
-        <div class="grid-overlay"></div>
-    </div>
+    <title>@Localizer["PageTitle"]</title>
+    <meta name="description" content="@Localizer["MetaDescription"]">
 
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                background: 'hsl(0, 0%, 99%)',
+                foreground: 'hsl(222, 47%, 11%)',
+                card: 'hsl(0, 0%, 100%)',
+                'card-foreground': 'hsl(222, 47%, 11%)',
+                primary: 'hsl(160, 84%, 39%)',
+                'primary-foreground': 'hsl(0, 0%, 100%)',
+                secondary: 'hsl(215, 20%, 95%)',
+                'secondary-foreground': 'hsl(222, 47%, 11%)',
+                muted: 'hsl(215, 20%, 96%)',
+                'muted-foreground': 'hsl(215, 16%, 47%)',
+                accent: 'hsl(160, 84%, 39%)',
+                border: 'hsl(215, 20%, 91%)',
+              },
+              fontFamily: {
+                heading: ['Space Grotesk', 'sans-serif'],
+                body: ['Inter', 'sans-serif'],
+              },
+              boxShadow: {
+                'soft': '0 4px 24px -2px rgba(30, 41, 59, 0.08)',
+                'elevated': '0 12px 40px -8px rgba(30, 41, 59, 0.12)',
+                'glow': '0 0 40px rgba(16, 185, 129, 0.15)',
+              },
+              animation: {
+                'float': 'float 6s ease-in-out infinite',
+                'float-delayed': 'float 6s ease-in-out infinite 2s',
+                'float-delayed-2': 'float 6s ease-in-out infinite 4s',
+                'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+              },
+              keyframes: {
+                float: {
+                  '0%, 100%': { transform: 'translateY(0px)' },
+                  '50%': { transform: 'translateY(-20px)' },
+                },
+                pulseGlow: {
+                  '0%, 100%': { opacity: 1 },
+                  '50%': { opacity: 0.5 },
+                }
+              }
+            },
+          },
+        }
+    </script>
+
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(172, 66%, 50%) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(172, 66%, 50%) 100%);
+        }
+
+        .dark-gradient-bg {
+            background: linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(215, 28%, 17%) 100%);
+        }
+
+        .border-glow {
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+            .hover-lift:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            }
+    </style>
+</head>
+<body class="bg-background text-foreground font-body">
     <!-- Hero Section -->
-    <section class="about-hero">
-        <div class="container">
-            <div class="badge blcktxt">About Vehicle Diary</div>
-            <h1 class="hero-title blcktxt">
-                What is Vehicle Diary ?<br>
-            </h1>
-            <p class="hero-subtitle blcktxt">
-                Your digital garage. Your vehicle's story. All in one beautifully designed platform.
-            </p>
+    <section class="relative min-h-[80vh] flex items-center overflow-hidden dark-gradient-bg">
+        <!-- Background Orbs -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-1/4 -left-48 w-96 h-96 rounded-full opacity-30 blur-3xl bg-primary animate-pulse"></div>
+            <div class="absolute bottom-1/4 -right-48 w-96 h-96 rounded-full opacity-20 blur-3xl bg-[hsl(172,66%,50%)] animate-pulse delay-1000"></div>
+        </div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-sm font-semibold uppercase tracking-wider mb-8">
+                    <i class="fas fa-car"></i>
+                    @Localizer["AboutBadge"]
+                </div>
+
+                <!-- Title -->
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-heading font-bold text-white mb-6 leading-tight">
+                    @Localizer["HeroTitle"]
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto mb-10 leading-relaxed">
+                    @Localizer["HeroSubtitle"]
+                </p>
+            </div>
         </div>
     </section>
 
-    <!-- Main About Section -->
-    <section class="about-main">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text ">
-                    <h2 class="blcktxt">By a Car Lover to a Car Lovers.</h2>
-                    <p class="about-lead blcktxt">
-                        Vehicle Diary is your ultimate digital garage — a smart and beautifully designed platform
-                        for tracking everything about your car in one place.
+    <!-- Main Content Section -->
+    <section class="py-20 bg-background">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Text Content -->
+                <div>
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6">
+                        @Localizer["ByCarLovers"]
+                    </h2>
+
+                    <p class="text-lg text-muted-foreground mb-6 leading-relaxed">
+                        @Localizer["AboutLead"]
                     </p>
-                    <p class="about-body blcktxt">
-                        From repairs, upgrades, and oil changes to tires, vignettes, and future plans — it helps
-                        you stay organized, save money, and truly understand your vehicle's story. Gone are the days
-                        of messy spreadsheets, paper notes, or forgotten reminders.
+
+                    <p class="text-muted-foreground mb-6 leading-relaxed">
+                        @Localizer["AboutBody1"]
                     </p>
-                    <p class="about-body blcktxt">
-                        Vehicle Diary automatically calculates how much you've already invested in your car, lets
-                        you upload invoices, PDFs, or images, and even keeps a to-do list for future ideas and
-                        modifications.
+
+                    <p class="text-muted-foreground mb-8 leading-relaxed">
+                        @Localizer["AboutBody2"]
                     </p>
-                    <div class="highlight-box">
-                        <p class="blcktxt">
-                            Built by a passionate 23-year-old IT student and car enthusiast who believes every
-                            car deserves attention — and every car owner deserves a smarter, simpler way to manage it.
+
+                    <!-- Highlight Box -->
+                    <div class="bg-gradient-to-br from-primary/10 to-[hsl(172,66%,50%)]/10 border border-primary/20 rounded-2xl p-6 mb-8">
+                        <p class="text-foreground text-lg font-medium">
+                            @Localizer["HighlightBox"]
                         </p>
                     </div>
-                    <div class="about-actions ">
-                        <a asp-controller="Vehicle" asp-action="Index" class="btn btn-primary">
-                            <span>Start Your Vehicle Diary</span>
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
+
+                    <!-- CTA Button -->
+                    <a asp-controller="Vehicle" asp-action="Index"
+                       class="inline-flex items-center gap-3 gradient-bg text-white font-semibold px-8 py-4 rounded-xl text-lg hover:shadow-glow transition-all duration-300 hover:scale-105">
+                        <span>@Localizer["StartYourVehicleDiary"]</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
 
-                <div class="about-visual">
-                    <div class="image-wrapper">
+                <!-- Image Section -->
+                <div class="relative">
+                    <div class="relative rounded-3xl overflow-hidden shadow-elevated hover-lift">
                         <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
                              alt="Vehicle Diary Dashboard"
-                             class="about-image">
-                        <div class="image-overlay"></div>
+                             class="w-full h-auto">
+                        <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent"></div>
                     </div>
-                    <div class="floating-badge badge-1">
-                        <div class="badge-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="badge-content">
-                            <div class="badge-value">Many</div>
-                            <div class="badge-label">Active Users</div>
+
+                    <!-- Floating Badges -->
+                    <div class="absolute -top-4 -left-4 bg-card rounded-2xl p-4 shadow-elevated border border-border animate-float">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center">
+                                <i class="fas fa-users text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-foreground">Many</div>
+                                <div class="text-muted-foreground text-sm">Active Users</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="floating-badge badge-2">
-                        <div class="badge-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="badge-content">
-                            <div class="badge-value">Amazing</div>
-                            <div class="badge-label">User Rating</div>
+
+                    <div class="absolute -bottom-4 -right-4 bg-card rounded-2xl p-4 shadow-elevated border border-border animate-float-delayed">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center">
+                                <i class="fas fa-star text-white text-lg"></i>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-foreground">High</div>
+                                <div class="text-muted-foreground text-sm">User Rating</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -93,87 +206,151 @@
     </section>
 
     <!-- Mission Section -->
-    <section class="mission-section">
-        <div class="container">
-            <div class="mission-content">
-                <span class="section-badge blcktxt">Our Mission</span>
-                <h2 class="mission-title blcktxt">
-                    Connecting Car Lovers<br>
-                    <span class="gradient-text">Through Technology</span>
+    <section class="py-20 bg-muted">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Badge -->
+                <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/20 text-foreground text-sm font-semibold uppercase tracking-wider mb-8">
+                    <i class="fas fa-bullseye"></i>
+                    @Localizer["OurMission"]
+                </div>
+
+                <!-- Title -->
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-6">
+                    @Localizer["ConnectingCarLovers"]<br>
+                    <span class="gradient-text">@Localizer["ThroughTechnology"]</span>
                 </h2>
-                <p class="mission-text blcktxt">
-                    Vehicle Diary isn't just a tool; it's a mission to connect car lovers through technology,
-                    data, and passion. We believe every vehicle has a story worth telling, and every owner
-                    deserves the tools to tell it.
+
+                <!-- Mission Text -->
+                <p class="text-lg text-muted-foreground mb-6 max-w-3xl mx-auto leading-relaxed">
+                    @Localizer["MissionText1"]
                 </p>
-                <p class="mission-text blcktxt">
-                    Whether you're tracking a daily driver, restoring a classic, or maintaining a fleet,
-                    Vehicle Diary gives you the insights you need to make smarter decisions and build a
-                    deeper connection with your vehicle.
+                <p class="text-lg text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
+                    @Localizer["MissionText2"]
                 </p>
 
-                <div class="values-grid">
-                    <div class="value-card">
-                        <div class="value-icon">
-                            <i class="fas fa-heart"></i>
+                <!-- Values Grid -->
+                <div class="grid md:grid-cols-3 gap-8 mt-16">
+                    <!-- Value 1 -->
+                    <div class="bg-card rounded-3xl p-8 border border-border shadow-soft hover-lift group">
+                        <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-heart text-white text-2xl"></i>
                         </div>
-                        <h3 class="value-title blcktxt">Passion-Driven</h3>
-                        <p class="value-description blcktxt">
-                            Built by enthusiasts who understand the bond between owner and machine.
+                        <h3 class="text-xl font-heading font-bold mb-4">@Localizer["PassionDriven"]</h3>
+                        <p class="text-muted-foreground leading-relaxed">
+                            @Localizer["PassionDrivenDescription"]
                         </p>
                     </div>
 
-                    <div class="value-card">
-                        <div class="value-icon">
-                            <i class="fas fa-lightbulb"></i>
+                    <!-- Value 2 -->
+                    <div class="bg-card rounded-3xl p-8 border border-border shadow-soft hover-lift group">
+                        <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-lightbulb text-white text-2xl"></i>
                         </div>
-                        <h3 class="value-title blcktxt">Innovation First</h3>
-                        <p class="value-description blcktxt">
-                            Cutting-edge technology meets intuitive design for seamless experiences.
+                        <h3 class="text-xl font-heading font-bold mb-4">@Localizer["InnovationFirst"]</h3>
+                        <p class="text-muted-foreground leading-relaxed">
+                            @Localizer["InnovationFirstDescription"]
                         </p>
                     </div>
 
-                    <div class="value-card">
-                        <div class="value-icon">
-                            <i class="fas fa-shield-alt"></i>
+                    <!-- Value 3 -->
+                    <div class="bg-card rounded-3xl p-8 border border-border shadow-soft hover-lift group">
+                        <div class="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
                         </div>
-                        <h3 class="value-title blcktxt">Privacy Focused</h3>
-                        <p class="value-description blcktxt">
-                            Your data is yours. Bank-level security and complete transparency.
+                        <h3 class="text-xl font-heading font-bold mb-4">@Localizer["PrivacyFocused"]</h3>
+                        <p class="text-muted-foreground leading-relaxed">
+                            @Localizer["PrivacyFocusedDescription"]
                         </p>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
-
-  
 
     <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title blcktxt">
-                    Ready to Start Your<br>
-                    <span class="gradient-text">Vehicle Journey?</span>
+    <section class="py-20 bg-gradient-to-br from-[hsl(222,47%,11%)] to-[hsl(215,28%,17%)] relative overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, hsla(160, 84%, 39%, 0.2), transparent 70%);"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 rounded-full blur-3xl" style="background: hsla(160, 84%, 39%, 0.1);"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full blur-3xl" style="background: hsla(160, 84%, 39%, 0.1);"></div>
+
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <!-- Title -->
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white mb-6">
+                    @Localizer["ReadyToStart"]<br>
+                    <span class="gradient-text">@Localizer["VehicleJourney"]</span>
                 </h2>
-                <p class="cta-subtitle blcktxt">
-                    Join our community of passionate car owners who are taking control of their vehicle management.
-                    It's free, it's beautiful, and it's built for you.
+
+                <!-- Subtitle -->
+                <p class="text-xl text-white/80 mb-10 max-w-2xl mx-auto leading-relaxed">
+                    @Localizer["CTASubtitle"]
                 </p>
-                <div class="cta-buttons">
-                    <a class="btn btn-primary" asp-controller="Vehicle" asp-action="Index">
-                        <span>Create Your Diary</span>
+
+                <!-- Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a asp-controller="Vehicle" asp-action="Index"
+                       class="inline-flex items-center justify-center gap-3 gradient-bg text-white font-semibold px-8 py-4 rounded-xl text-lg hover:shadow-glow transition-all duration-300 hover:scale-105">
+                        <span>@Localizer["CreateYourDiary"]</span>
                         <i class="fas fa-arrow-right"></i>
                     </a>
-                    <a class="btn btn-primary" asp-controller="Main" asp-action="Index">
+
+                    <a asp-controller="Main" asp-action="Index"
+                       class="inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-sm text-white font-semibold px-8 py-4 rounded-xl text-lg border border-white/20 hover:bg-white/20 transition-all duration-300">
                         <i class="fas fa-home"></i>
-                        <span>Get a Look</span>
+                        <span>@Localizer["GetALook"]</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-muted border-t border-border">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center">
+                        <i class="fas fa-car text-white"></i>
+                    </div>
+                    <span class="text-xl font-heading font-bold text-foreground">VehicleDiary</span>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+
+                <p class="text-muted-foreground text-sm">
+                    © 2024 VehicleDiary. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add visible class to fade-in elements on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>

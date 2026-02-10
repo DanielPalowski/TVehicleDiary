@@ -1,14 +1,15 @@
 ﻿@using VehicleDiary.Web.ViewModels
+@inject IViewLocalizer Localizer
 @model DBRepairVehicleModelVM
 
 <div class="container py-4">
     <!-- Header with button -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="repair-history-title">
-            <i class="fas fa-history me-2"></i>Service History
+            <i class="fas fa-history me-2"></i>@Localizer["ServiceHistory"]
         </h2>
         <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId" class="btn btn-primary btn-add-repair">
-            <i class="fas fa-plus-circle me-2"></i>Add New Service
+            <i class="fas fa-plus-circle me-2"></i>@Localizer["AddNewService"]
         </a>
     </div>
 
@@ -16,7 +17,7 @@
     <div class="filter-card mb-4">
         <div class="filter-header" id="filterToggle">
             <h3 class="filter-title">
-                <i class="fas fa-filter me-2"></i>Filters
+                <i class="fas fa-filter me-2"></i>@Localizer["Filters"]
             </h3>
             <span class="filter-toggle-icon">
                 <i class="fas fa-chevron-down"></i>
@@ -25,41 +26,41 @@
         <div class="filter-content" id="filterContent" style="display: none;">
             <div class="row g-3">
                 <div class="col-md-3">
-                    <label class="form-label">Category</label>
+                    <label class="form-label">@Localizer["Category"]</label>
                     <select class="form-control filter-select" id="filterCategory">
-                        <option value="">All Categories</option>
-                        <option value="Vehicle Repairs">Vehicle Repairs</option>
+                        <option value="">@Localizer["AllCategories"]</option>
+                        <option value="Vehicle Repairs">@Localizer["VehicleRepairs"]</option>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">Type</label>
+                    <label class="form-label">@Localizer["Type"]</label>
                     <select class="form-control filter-select" id="filterType">
-                        <option value="">All Types</option>
+                        <option value="">@Localizer["AllTypes"]</option>
                         <!-- Options will be populated dynamically based on category -->
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">Date Range</label>
+                    <label class="form-label">@Localizer["DateRange"]</label>
                     <div class="input-group">
-                        <input type="date" class="form-control filter-date" id="filterDateFrom" placeholder="From">
-                        <input type="date" class="form-control filter-date" id="filterDateTo" placeholder="To">
+                        <input type="date" class="form-control filter-date" id="filterDateFrom" placeholder="@Localizer["From"]">
+                        <input type="date" class="form-control filter-date" id="filterDateTo" placeholder="@Localizer["To"]">
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <label class="form-label">Price Range</label>
+                    <label class="form-label">@Localizer["PriceRange"]</label>
                     <div class="d-flex align-items-center">
-                        <input type="number" class="form-control filter-price" id="filterPriceMin" placeholder="Min" step="0.01">
+                        <input type="number" class="form-control filter-price" id="filterPriceMin" placeholder="@Localizer["Min"]" step="0.01">
                         <span class="mx-2">-</span>
-                        <input type="number" class="form-control filter-price" id="filterPriceMax" placeholder="Max" step="0.01">
+                        <input type="number" class="form-control filter-price" id="filterPriceMax" placeholder="@Localizer["Max"]" step="0.01">
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="d-flex justify-content-end gap-2">
                         <button class="btn btn-outline-secondary" id="resetFilters">
-                            <i class="fas fa-redo me-1"></i>Reset Filters
+                            <i class="fas fa-redo me-1"></i>@Localizer["ResetFilters"]
                         </button>
                         <button class="btn btn-primary" id="applyFilters">
-                            <i class="fas fa-check me-1"></i>Apply Filters
+                            <i class="fas fa-check me-1"></i>@Localizer["ApplyFilters"]
                         </button>
                     </div>
                 </div>
@@ -69,7 +70,10 @@
 
     <!-- Results Count -->
     <div class="results-count mb-3" id="resultsCount">
-        Showing <span id="filteredCount">@Model.RepairViews.Count()</span> service records
+        @{
+            var showingRecordsText = Localizer["ShowingRecords", Model.RepairViews.Count()];
+        }
+        @showingRecordsText
     </div>
 
     <!-- Repair History -->
@@ -101,13 +105,13 @@
 
                         <!-- Mileage -->
                         <div class="repair-detail-item">
-                            <i class="fas fa-tachometer-alt me-2"></i>Mileage: @repair.RepairVMileage km
+                            <i class="fas fa-tachometer-alt me-2"></i>@Localizer["Mileage"]: @repair.RepairVMileage km
                         </div>
 
                         @if (!string.IsNullOrEmpty(repair.RepairVPart))
                         {
                             <div class="repair-detail-item">
-                                <i class="fas fa-tools me-2"></i>Part: @repair.RepairVPart
+                                <i class="fas fa-tools me-2"></i>@Localizer["Part"]: @repair.RepairVPart
                             </div>
                         }
 
@@ -115,7 +119,7 @@
                         @if (!string.IsNullOrEmpty(repair.RepairVPartBrand))
                         {
                             <div class="repair-detail-item">
-                                <i class="fas fa-industry me-2"></i>Part Brand: @repair.RepairVPartBrand
+                                <i class="fas fa-industry me-2"></i>@Localizer["PartBrand"]: @repair.RepairVPartBrand
                             </div>
                         }
 
@@ -123,14 +127,14 @@
                         @if (!string.IsNullOrEmpty(repair.RepairVPartCode))
                         {
                             <div class="repair-detail-item">
-                                <i class="fas fa-barcode me-2"></i>Part Code: @repair.RepairVPartCode
+                                <i class="fas fa-barcode me-2"></i>@Localizer["PartCode"]: @repair.RepairVPartCode
                             </div>
                         }
 
                         @if (!string.IsNullOrEmpty(repair.RepairVTechnician))
                         {
                             <div class="repair-detail-item">
-                                <i class="fas fa-user me-2"></i>Technician: @repair.RepairVTechnician
+                                <i class="fas fa-user me-2"></i>@Localizer["Technician"]: @repair.RepairVTechnician
                             </div>
                         }
 
@@ -163,14 +167,14 @@
                         else
                         {
                             <div class="repair-price no-price">
-                                No Cost
+                                @Localizer["NoCost"]
                             </div>
                         }
                         <div class="repair-actions">
-                            <button onclick="editRepair('@repair.Id')" class="btn-edit-repair" title="Edit">
+                            <button onclick="editRepair('@repair.Id')" class="btn-edit-repair" title="@Localizer["Edit"]">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button onclick="deleteRepair('@repair.Id')" class="btn-delete-repair" title="Delete">
+                            <button onclick="deleteRepair('@repair.Id')" class="btn-delete-repair" title="@Localizer["Delete"]">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                         </div>
@@ -185,10 +189,10 @@
             <div class="no-repairs-icon">
                 <i class="fas fa-wrench"></i>
             </div>
-            <h3>No Service Records</h3>
-            <p>No service records available for this vehicle.</p>
+            <h3>@Localizer["NoServiceRecords"]</h3>
+            <p>@Localizer["NoServiceRecordsDescription"]</p>
             <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId" class="btn btn-primary btn-add-first-repair">
-                <i class="fas fa-plus-circle me-2"></i>Add First Service
+                <i class="fas fa-plus-circle me-2"></i>@Localizer["AddFirstService"]
             </a>
         </div>
     }

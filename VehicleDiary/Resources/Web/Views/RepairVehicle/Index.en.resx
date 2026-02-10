@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Header -->
+  <data name="ServiceHistory" xml:space="preserve">
+    <value>Service History</value>
+  </data>
+  <data name="AddNewService" xml:space="preserve">
+    <value>Add New Service</value>
+  </data>
+  
+  <!-- Filter Section -->
+  <data name="Filters" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="AllCategories" xml:space="preserve">
+    <value>All Categories</value>
+  </data>
+  <data name="VehicleRepairs" xml:space="preserve">
+    <value>Vehicle Repairs</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="AllTypes" xml:space="preserve">
+    <value>All Types</value>
+  </data>
+  <data name="DateRange" xml:space="preserve">
+    <value>Date Range</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="PriceRange" xml:space="preserve">
+    <value>Price Range</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>Min</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Max</value>
+  </data>
+  <data name="ResetFilters" xml:space="preserve">
+    <value>Reset Filters</value>
+  </data>
+  <data name="ApplyFilters" xml:space="preserve">
+    <value>Apply Filters</value>
+  </data>
+  
+  <!-- Results Count -->
+  <data name="ShowingRecords" xml:space="preserve">
+    <value>Showing {0} service records</value>
+  </data>
+  
+  <!-- Repair Card Labels -->
+  <data name="Mileage" xml:space="preserve">
+    <value>Mileage</value>
+  </data>
+  <data name="Part" xml:space="preserve">
+    <value>Part</value>
+  </data>
+  <data name="PartBrand" xml:space="preserve">
+    <value>Part Brand</value>
+  </data>
+  <data name="PartCode" xml:space="preserve">
+    <value>Part Code</value>
+  </data>
+  <data name="Technician" xml:space="preserve">
+    <value>Technician</value>
+  </data>
+  <data name="NoCost" xml:space="preserve">
+    <value>No Cost</value>
+  </data>
+  
+  <!-- Button Titles (Tooltips) -->
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  
+  <!-- Empty State -->
+  <data name="NoServiceRecords" xml:space="preserve">
+    <value>No Service Records</value>
+  </data>
+  <data name="NoServiceRecordsDescription" xml:space="preserve">
+    <value>No service records available for this vehicle.</value>
+  </data>
+  <data name="AddFirstService" xml:space="preserve">
+    <value>Add First Service</value>
+  </data>
+</root>

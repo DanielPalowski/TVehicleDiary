@@ -1,4 +1,5 @@
 ﻿@using VehicleDiary.Web.ViewModels
+@inject IViewLocalizer Localizer
 @model DBCarUsageOverViewVM
 
 <!DOCTYPE html>
@@ -395,21 +396,20 @@
     </style>
 </head>
 <body class="min-h-screen">
-    <!-- Header -->
     <header class="header-gradient text-white">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between py-4">
                 <a href="#" class="back-btn">
                     <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                    <span style="color: #0f172a;">Back to Vehicles</span>
+                    <span style="color: #0f172a;">@Localizer["BackToVehicles"]</span>
                 </a>
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
                         <i data-lucide="fuel" class="w-5 h-5 text-white"></i>
                     </div>
                     <div>
-                        <h1 class="font-bold">Usage Dashboard</h1>
-                        <p class="text-sm text-white/70">Vehicle Maintenance & Consumption</p>
+                        <h1 class="font-bold">@Localizer["UsageDashboard"]</h1>
+                        <p class="text-sm text-white/70">@Localizer["VehicleMaintenanceConsumption"]</p>
                     </div>
                 </div>
             </div>
@@ -423,12 +423,11 @@
             <div class="text-center py-8 px-4">
                 <h1 class="text-3xl md:text-4xl font-bold mb-4">
                     <span class="bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent">
-                        Vehicle Usage Dashboard
+                        @Localizer["VehicleUsageDashboard"]
                     </span>
                 </h1>
                 <p class="text-gray-600 text-lg mb-6 max-w-2xl mx-auto">
-                    Track and manage all vehicle consumption and maintenance costs in one place.
-                    Monitor fuel, oil, tires, and road taxes with detailed insights.
+                    @Localizer["HeroDescription"]
                 </p>
 
                 <!-- Navigation Cards -->
@@ -439,8 +438,8 @@
                         <div class="nav-icon">
                             <i data-lucide="receipt" class="w-5 h-5"></i>
                         </div>
-                        <span class="font-medium text-gray-900">Vignette</span>
-                        <span class="text-xs text-gray-500">Road Taxes</span>
+                        <span class="font-medium text-gray-900">@Localizer["Vignette"]</span>
+                        <span class="text-xs text-gray-500">@Localizer["RoadTaxes"]</span>
                     </a>
 
                     <!-- Petrol Navigation -->
@@ -449,8 +448,8 @@
                         <div class="nav-icon">
                             <i data-lucide="fuel" class="w-5 h-5"></i>
                         </div>
-                        <span class="font-medium text-gray-900">Petrol</span>
-                        <span class="text-xs text-gray-500">Fuel Consumption</span>
+                        <span class="font-medium text-gray-900">@Localizer["Petrol"]</span>
+                        <span class="text-xs text-gray-500">@Localizer["FuelConsumption"]</span>
                     </a>
 
                     <!-- Oil Navigation -->
@@ -459,8 +458,8 @@
                         <div class="nav-icon">
                             <i data-lucide="droplet" class="w-5 h-5"></i>
                         </div>
-                        <span class="font-medium text-gray-900">Oil</span>
-                        <span class="text-xs text-gray-500">Oil Changes</span>
+                        <span class="font-medium text-gray-900">@Localizer["Oil"]</span>
+                        <span class="text-xs text-gray-500">@Localizer["OilChanges"]</span>
                     </a>
 
                     <!-- Tires Navigation -->
@@ -469,8 +468,8 @@
                         <div class="nav-icon">
                             <i data-lucide="circle" class="w-5 h-5"></i>
                         </div>
-                        <span class="font-medium text-gray-900">Tires</span>
-                        <span class="text-xs text-gray-500">Tire Management</span>
+                        <span class="font-medium text-gray-900">@Localizer["Tires"]</span>
+                        <span class="text-xs text-gray-500">@Localizer["TireManagement"]</span>
                     </a>
                 </div>
             </div>
@@ -478,9 +477,9 @@
 
         <!-- Latest Records Section -->
         <div class="mb-8">
-            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">Latest Maintenance Records</h2>
+            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">@Localizer["LatestMaintenanceRecords"]</h2>
             <p class="text-gray-600 mb-6 max-w-2xl">
-                Most recent entries across all maintenance categories. Click on any category to view full history.
+                @Localizer["LatestRecordsDescription"]
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
@@ -490,25 +489,25 @@
                         <div class="card-icon">
                             <i data-lucide="receipt" class="w-6 h-6"></i>
                         </div>
-                        <h3 class="text-lg font-bold mb-3">Vignette</h3>
+                        <h3 class="text-lg font-bold mb-3">@Localizer["Vignette"]</h3>
 
                         @if (Model.LatestVignetteUsage != null)
                         {
                             <div class="data-grid">
                                 <div class="data-item">
-                                    <span class="data-label">Valid From</span>
+                                    <span class="data-label">@Localizer["ValidFrom"]</span>
                                     <span class="data-value">@Model.LatestVignetteUsage.VignetteValidFrom.ToString("d MMM yyyy")</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Valid To</span>
+                                    <span class="data-label">@Localizer["ValidTo"]</span>
                                     <span class="data-value">@Model.LatestVignetteUsage.VignetteValidTo.ToString("d MMM yyyy")</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Country</span>
+                                    <span class="data-label">@Localizer["Country"]</span>
                                     <span class="data-value">@Model.LatestVignetteUsage.VignetteCountry</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Price</span>
+                                    <span class="data-label">@Localizer["Price"]</span>
                                     <span class="data-value data-price">€@Model.LatestVignetteUsage.VignettePrice</span>
                                 </div>
                             </div>
@@ -519,10 +518,10 @@
                                 <div class="empty-icon">
                                     <i data-lucide="receipt" class="w-6 h-6"></i>
                                 </div>
-                                <p class="text-white/80 mb-4">No vignette records</p>
+                                <p class="text-white/80 mb-4">@Localizer["NoVignetteRecords"]</p>
                                 <a asp-controller="Vignette" asp-action="Vignette" asp-route-vehicleIDRoute="@Model.VehicleID"
                                    class="btn-outline-light">
-                                    <span>Add First</span>
+                                    <span>@Localizer["AddFirst"]</span>
                                     <i data-lucide="plus" class="w-3 h-3 ml-1"></i>
                                 </a>
                             </div>
@@ -536,25 +535,25 @@
                         <div class="card-icon">
                             <i data-lucide="fuel" class="w-6 h-6"></i>
                         </div>
-                        <h3 class="text-lg font-bold mb-3">Petrol</h3>
+                        <h3 class="text-lg font-bold mb-3">@Localizer["Petrol"]</h3>
 
                         @if (Model.LatestPetrolUsage != null)
                         {
                             <div class="data-grid">
                                 <div class="data-item">
-                                    <span class="data-label">Date</span>
+                                    <span class="data-label">@Localizer["Date"]</span>
                                     <span class="data-value">@Model.LatestPetrolUsage.PetrolDate</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Type</span>
+                                    <span class="data-label">@Localizer["Type"]</span>
                                     <span class="data-value">@Model.LatestPetrolUsage.PetrolType</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Amount</span>
+                                    <span class="data-label">@Localizer["Amount"]</span>
                                     <span class="data-value">@Model.LatestPetrolUsage.PetrolAmount L</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Price</span>
+                                    <span class="data-label">@Localizer["Price"]</span>
                                     <span class="data-value data-price">€@Model.LatestPetrolUsage.PetrolPrice</span>
                                 </div>
                             </div>
@@ -565,10 +564,10 @@
                                 <div class="empty-icon">
                                     <i data-lucide="fuel" class="w-6 h-6"></i>
                                 </div>
-                                <p class="text-white/80 mb-4">No petrol records</p>
+                                <p class="text-white/80 mb-4">@Localizer["NoPetrolRecords"]</p>
                                 <a asp-controller="Petrol" asp-action="Petrol" asp-route-vehicleIDRoute="@Model.VehicleID"
                                    class="btn-outline-light">
-                                    <span>Add First</span>
+                                    <span>@Localizer["AddFirst"]</span>
                                     <i data-lucide="plus" class="w-3 h-3 ml-1"></i>
                                 </a>
                             </div>
@@ -582,25 +581,25 @@
                         <div class="card-icon">
                             <i data-lucide="droplet" class="w-6 h-6"></i>
                         </div>
-                        <h3 class="text-lg font-bold mb-3">Oil</h3>
+                        <h3 class="text-lg font-bold mb-3">@Localizer["Oil"]</h3>
 
                         @if (Model.LatestOilUsage != null)
                         {
                             <div class="data-grid">
                                 <div class="data-item">
-                                    <span class="data-label">Date</span>
+                                    <span class="data-label">@Localizer["Date"]</span>
                                     <span class="data-value">@Model.LatestOilUsage.OilDate.ToString("d MMM yyyy")</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Type</span>
+                                    <span class="data-label">@Localizer["Type"]</span>
                                     <span class="data-value">@Model.LatestOilUsage.OilType</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Amount</span>
+                                    <span class="data-label">@Localizer["Amount"]</span>
                                     <span class="data-value">@Model.LatestOilUsage.OilAmount L</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Price</span>
+                                    <span class="data-label">@Localizer["Price"]</span>
                                     <span class="data-value data-price">€@Model.LatestOilUsage.OilPrice</span>
                                 </div>
                             </div>
@@ -611,10 +610,10 @@
                                 <div class="empty-icon">
                                     <i data-lucide="droplet" class="w-6 h-6"></i>
                                 </div>
-                                <p class="text-white/80 mb-4">No oil records</p>
+                                <p class="text-white/80 mb-4">@Localizer["NoOilRecords"]</p>
                                 <a asp-controller="Oil" asp-action="Oil" asp-route-vehicleIDRoute="@Model.VehicleID"
                                    class="btn-outline-light">
-                                    <span>Add First</span>
+                                    <span>@Localizer["AddFirst"]</span>
                                     <i data-lucide="plus" class="w-3 h-3 ml-1"></i>
                                 </a>
                             </div>
@@ -628,25 +627,25 @@
                         <div class="card-icon">
                             <i data-lucide="circle" class="w-6 h-6"></i>
                         </div>
-                        <h3 class="text-lg font-bold mb-3">Tires</h3>
+                        <h3 class="text-lg font-bold mb-3">@Localizer["Tires"]</h3>
 
                         @if (Model.LatestTireUsage != null)
                         {
                             <div class="data-grid">
                                 <div class="data-item">
-                                    <span class="data-label">Date</span>
+                                    <span class="data-label">@Localizer["Date"]</span>
                                     <span class="data-value">@Model.LatestTireUsage.TireDate.ToString("d MMM yyyy")</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Brand</span>
+                                    <span class="data-label">@Localizer["Brand"]</span>
                                     <span class="data-value">@Model.LatestTireUsage.TireBrand</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Size</span>
+                                    <span class="data-label">@Localizer["Size"]</span>
                                     <span class="data-value">@Model.LatestTireUsage.TireSize</span>
                                 </div>
                                 <div class="data-item">
-                                    <span class="data-label">Price</span>
+                                    <span class="data-label">@Localizer["Price"]</span>
                                     <span class="data-value data-price">€@Model.LatestTireUsage.TirePrice</span>
                                 </div>
                             </div>
@@ -657,10 +656,10 @@
                                 <div class="empty-icon">
                                     <i data-lucide="circle" class="w-6 h-6"></i>
                                 </div>
-                                <p class="text-white/80 mb-4">No tire records</p>
+                                <p class="text-white/80 mb-4">@Localizer["NoTireRecords"]</p>
                                 <a asp-controller="Tire" asp-action="Tires" asp-route-vehicleIDRoute="@Model.VehicleID"
                                    class="btn-outline-light">
-                                    <span>Add First</span>
+                                    <span>@Localizer["AddFirst"]</span>
                                     <i data-lucide="plus" class="w-3 h-3 ml-1"></i>
                                 </a>
                             </div>
@@ -673,9 +672,9 @@
         <!-- Add Records Section -->
         <div class="bg-white rounded-2xl border border-gray-200 p-6 mb-8">
             <div class="text-center mb-8">
-                <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">Add New Records</h2>
+                <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">@Localizer["AddNewRecords"]</h2>
                 <p class="text-gray-600 max-w-2xl mx-auto">
-                    Track your vehicle's maintenance by adding new records for each category.
+                    @Localizer["AddRecordsDescription"]
                 </p>
             </div>
 
@@ -684,28 +683,28 @@
                 <a asp-controller="Vignette" asp-action="Vignette" asp-route-vehicleIDRoute="@Model.VehicleID"
                    class="action-btn action-btn-primary">
                     <i data-lucide="receipt" class="w-4 h-4"></i>
-                    Add Vignette
+                    @Localizer["AddVignette"]
                 </a>
 
                 <!-- Add Petrol -->
                 <a asp-controller="Petrol" asp-action="Petrol" asp-route-vehicleIDRoute="@Model.VehicleID"
                    class="action-btn action-btn-success">
                     <i data-lucide="fuel" class="w-4 h-4"></i>
-                    Add Petrol
+                    @Localizer["AddPetrol"]
                 </a>
 
                 <!-- Add Oil -->
                 <a asp-controller="Oil" asp-action="Oil" asp-route-vehicleIDRoute="@Model.VehicleID"
                    class="action-btn action-btn-warning">
                     <i data-lucide="droplet" class="w-4 h-4"></i>
-                    Add Oil
+                    @Localizer["AddOil"]
                 </a>
 
                 <!-- Add Tires -->
                 <a asp-controller="Tire" asp-action="Tires" asp-route-vehicleIDRoute="@Model.VehicleID"
                    class="action-btn action-btn-secondary">
                     <i data-lucide="circle" class="w-4 h-4"></i>
-                    Add Tires
+                    @Localizer["AddTires"]
                 </a>
             </div>
         </div>
@@ -716,10 +715,9 @@
                 <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center mx-auto mb-4">
                     <i data-lucide="trending-up" class="w-8 h-8 text-white"></i>
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Track Everything in One Place</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">@Localizer["TrackEverything"]</h3>
                 <p class="text-gray-600 mb-6">
-                    Get detailed insights into your vehicle's consumption patterns and maintenance costs.
-                    Stay on top of upcoming renewals and optimize your vehicle expenses.
+                    @Localizer["TrackEverythingDescription"]
                 </p>
             </div>
         </div>
@@ -733,10 +731,10 @@
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-400 to-indigo-500 flex items-center justify-center">
                         <i data-lucide="car" class="w-4 h-4 text-white"></i>
                     </div>
-                    <span class="font-medium text-gray-900">Vehicle Usage Dashboard</span>
+                    <span class="font-medium text-gray-900">@Localizer["VehicleUsageDashboardFooter"]</span>
                 </div>
                 <p class="text-sm text-gray-600">
-                    © 2024 Vehicle Diary. All usage data securely tracked.
+                    @Localizer["FooterCopyright"]
                 </p>
             </div>
         </div>

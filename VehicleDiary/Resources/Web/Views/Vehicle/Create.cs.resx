@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Header -->
+  <data name="Back" xml:space="preserve">
+    <value>Zpět</value>
+  </data>
+  <data name="AddVehicle" xml:space="preserve">
+    <value>Přidat vozidlo</value>
+  </data>
+  
+  <!-- Form Header -->
+  <data name="AddNewVehicle" xml:space="preserve">
+    <value>Přidat nové vozidlo</value>
+  </data>
+  <data name="FillVehicleDetails" xml:space="preserve">
+    <value>Vyplňte údaje o vašem vozidle níže</value>
+  </data>
+  
+  <!-- Form Labels -->
+  <data name="Brand" xml:space="preserve">
+    <value>Značka</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Model</value>
+  </data>
+  <data name="LicensePlate" xml:space="preserve">
+    <value>SPZ</value>
+  </data>
+  <data name="VINNumber" xml:space="preserve">
+    <value>VIN číslo</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Rok výroby</value>
+  </data>
+  <data name="Horsepower" xml:space="preserve">
+    <value>Výkon</value>
+  </data>
+  <data name="Insurance" xml:space="preserve">
+    <value>Pojištění</value>
+  </data>
+  <data name="PurchaseDate" xml:space="preserve">
+    <value>Datum nákupu</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Popis</value>
+  </data>
+  
+  <!-- Placeholders -->
+  <data name="BrandPlaceholder" xml:space="preserve">
+    <value>Toyota, BMW, atd.</value>
+  </data>
+  <data name="ModelPlaceholder" xml:space="preserve">
+    <value>Corolla, X5, atd.</value>
+  </data>
+  <data name="LicensePlatePlaceholder" xml:space="preserve">
+    <value>AB 123 CD</value>
+  </data>
+  <data name="VINPlaceholder" xml:space="preserve">
+    <value>17 znaků</value>
+  </data>
+  <data name="YearPlaceholder" xml:space="preserve">
+    <value>2020</value>
+  </data>
+  <data name="HorsepowerPlaceholder" xml:space="preserve">
+    <value>150</value>
+  </data>
+  <data name="InsurancePlaceholder" xml:space="preserve">
+    <value>Allianz, AXA, atd.</value>
+  </data>
+  <data name="DescriptionPlaceholder" xml:space="preserve">
+    <value>Volitelné: Přidejte poznámky k vašemu vozidlu</value>
+  </data>
+  
+  <!-- Submit Button -->
+  <data name="AddVehicleButton" xml:space="preserve">
+    <value>Přidat vozidlo</value>
+  </data>
+  
+  <!-- Form Tip -->
+  <data name="FormTip" xml:space="preserve">
+    <value>Tip: VIN najdete v registraci vozidla nebo v dokumentech k pojištění.</value>
+  </data>
+  
+  <!-- Required Field Indicator -->
+  <data name="Required" xml:space="preserve">
+    <value>povinné</value>
+  </data>
+</root>

@@ -4,6 +4,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>VehicleDiary</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -13,6 +14,8 @@
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.11" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.13" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.13" />
+		<PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.3.9" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.3.9" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.11" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.13" />
@@ -26,6 +29,9 @@
 
 	<ItemGroup>
 	  <Folder Include="Infrastructure\Data\Migrations\" />
+	  <Folder Include="Resources\Web\Views\CarUsage\" />
+	  <Folder Include="Resources\Web\Views\AboutUs\" />
+	  <Folder Include="Resources\Web\Views\Shared\" />
 	</ItemGroup>
 
 

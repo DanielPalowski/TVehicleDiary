@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Header -->
+  <data name="BackToVehicles" xml:space="preserve">
+    <value>Zpět na vozidla</value>
+  </data>
+  <data name="UsageDashboard" xml:space="preserve">
+    <value>Dashboard využití</value>
+  </data>
+  <data name="VehicleMaintenanceConsumption" xml:space="preserve">
+    <value>Údržba a spotřeba vozidla</value>
+  </data>
+  
+  <!-- Hero Section -->
+  <data name="VehicleUsageDashboard" xml:space="preserve">
+    <value>Dashboard využití vozidla</value>
+  </data>
+  <data name="HeroDescription" xml:space="preserve">
+    <value>Sledujte a spravujte veškerou spotřebu a náklady na údržbu vozidla na jednom místě. Sledujte palivo, olej, pneumatiky a silniční daně s podrobnými přehledy.</value>
+  </data>
+  
+  <!-- Navigation Cards -->
+  <data name="Vignette" xml:space="preserve">
+    <value>Dálniční známka</value>
+  </data>
+  <data name="RoadTaxes" xml:space="preserve">
+    <value>Silniční daně</value>
+  </data>
+  <data name="Petrol" xml:space="preserve">
+    <value>Benzín</value>
+  </data>
+  <data name="FuelConsumption" xml:space="preserve">
+    <value>Spotřeba paliva</value>
+  </data>
+  <data name="Oil" xml:space="preserve">
+    <value>Olej</value>
+  </data>
+  <data name="OilChanges" xml:space="preserve">
+    <value>Výměny oleje</value>
+  </data>
+  <data name="Tires" xml:space="preserve">
+    <value>Pneumatiky</value>
+  </data>
+  <data name="TireManagement" xml:space="preserve">
+    <value>Správa pneumatik</value>
+  </data>
+  
+  <!-- Latest Records Section -->
+  <data name="LatestMaintenanceRecords" xml:space="preserve">
+    <value>Nejnovější záznamy údržby</value>
+  </data>
+  <data name="LatestRecordsDescription" xml:space="preserve">
+    <value>Nejnovější záznamy napříč všemi kategoriemi údržby. Kliknutím na libovolnou kategorii zobrazíte celou historii.</value>
+  </data>
+  
+  <!-- Data Labels -->
+  <data name="ValidFrom" xml:space="preserve">
+    <value>Platné od</value>
+  </data>
+  <data name="ValidTo" xml:space="preserve">
+    <value>Platné do</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Země</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Cena</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Množství</value>
+  </data>
+  <data name="Brand" xml:space="preserve">
+    <value>Značka</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Velikost</value>
+  </data>
+  
+  <!-- Empty State -->
+  <data name="NoVignetteRecords" xml:space="preserve">
+    <value>Žádné záznamy dálničních známek</value>
+  </data>
+  <data name="NoPetrolRecords" xml:space="preserve">
+    <value>Žádné záznamy benzínu</value>
+  </data>
+  <data name="NoOilRecords" xml:space="preserve">
+    <value>Žádné záznamy oleje</value>
+  </data>
+  <data name="NoTireRecords" xml:space="preserve">
+    <value>Žádné záznamy pneumatik</value>
+  </data>
+  <data name="AddFirst" xml:space="preserve">
+    <value>Přidat první</value>
+  </data>
+  
+  <!-- Add Records Section -->
+  <data name="AddNewRecords" xml:space="preserve">
+    <value>Přidat nové záznamy</value>
+  </data>
+  <data name="AddRecordsDescription" xml:space="preserve">
+    <value>Sledujte údržbu vašeho vozidla přidáváním nových záznamů pro každou kategorii.</value>
+  </data>
+  <data name="AddVignette" xml:space="preserve">
+    <value>Přidat dálniční známku</value>
+  </data>
+  <data name="AddPetrol" xml:space="preserve">
+    <value>Přidat benzín</value>
+  </data>
+  <data name="AddOil" xml:space="preserve">
+    <value>Přidat olej</value>
+  </data>
+  <data name="AddTires" xml:space="preserve">
+    <value>Přidat pneumatiky</value>
+  </data>
+  
+  <!-- Call to Action -->
+  <data name="TrackEverything" xml:space="preserve">
+    <value>Sledujte vše na jednom místě</value>
+  </data>
+  <data name="TrackEverythingDescription" xml:space="preserve">
+    <value>Získejte podrobné přehledy o vzorcích spotřeby vašeho vozidla a nákladech na údržbu. Mějte přehled o nadcházejících obnovách a optimalizujte výdaje za vozidlo.</value>
+  </data>
+  
+  <!-- Footer -->
+  <data name="VehicleUsageDashboardFooter" xml:space="preserve">
+    <value>Dashboard využití vozidla</value>
+  </data>
+  <data name="FooterCopyright" xml:space="preserve">
+    <value>© 2024 Vehicle Diary. Veškerá data o využití jsou bezpečně sledována.</value>
+  </data>
+</root>

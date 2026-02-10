@@ -40,7 +40,7 @@ namespace VehicleDiary.Application.Services.MapperService
         public async Task DeleteVehicleAsync(Guid vehicleID)
         {
             await _repositoryCrud.DeleteAsync(vehicleID);
-            await _repositoryVehicle.TryRemoveByIdAsync(_context.DBRepairsSet,vehicleID);
+            await _repositoryVehicle.TryRemoveByIdAsync(_context.DBRepairsSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBOilSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBPetrolSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBTiresSet, vehicleID);
@@ -59,5 +59,19 @@ namespace VehicleDiary.Application.Services.MapperService
         {
             return await _repositoryVehicle.GetVehiclesWithTotalCostAsync(userId);
         }
+        public async Task<int> GetTotalNumberOfUsers()
+        {
+            return await _repositoryVehicle.CalculatingTotalUsers();
+        }
+        public async Task<int> GetTotalNumberOfCars()
+        {
+            return await _repositoryVehicle.CalculatingTotalCars();
+        }
+        public async Task<int> GetTotalNumberOfServices()
+        {
+            return await _repositoryVehicle.CalculatingTotalServices();
+        }
+
+
     }
 }

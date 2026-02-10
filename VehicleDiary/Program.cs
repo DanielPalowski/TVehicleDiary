@@ -1,17 +1,21 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
 using VehicleDiary.Application.Mappings;
 using VehicleDiary.Application.Services;
+using VehicleDiary.Application.Services.MapperService;
+using VehicleDiary.Application.Services.Seeding;
+using VehicleDiary.Core.Entities;
+using VehicleDiary.Core.Interfaces.Repositories;
+using VehicleDiary.Core.Interfaces.Services;
 using VehicleDiary.Infrastructure.Data;
 using VehicleDiary.Infrastructure.Middleware;
 using VehicleDiary.Infrastructure.Repositories;
-using VehicleDiary.Core.Entities;
-using Microsoft.AspNetCore.Mvc.Razor;
-using VehicleDiary.Application.Services.Seeding;
-using VehicleDiary.Application.Services.MapperService;
-using VehicleDiary.Core.Interfaces.Services;
-using VehicleDiary.Core.Interfaces.Repositories;
 
 namespace VehicleDiary
 {
@@ -21,24 +25,36 @@ namespace VehicleDiary
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddLocalization(options =>
+            {
+                options.ResourcesPath = "Resources";
+            });
 
             //New view engine
             builder.Services
                 .AddControllersWithViews()
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization()
                 .AddRazorOptions(options =>
                 {
                     options.ViewLocationFormats.Clear();
-
-                    // MVC View routes
                     options.ViewLocationFormats.Add("/Web/Views/{1}/{0}.cshtml");
                     options.ViewLocationFormats.Add("/Web/Views/Shared/{0}.cshtml");
-
-                    // MVC Area rote
                     options.AreaViewLocationFormats.Add("/Web/Views/{2}/{1}/{0}.cshtml");
-
-                    // Shared
-                    options.AreaPageViewLocationFormats.Add("/Web/Views/Shared/{0}.cshtml"); 
+                    options.AreaPageViewLocationFormats.Add("/Web/Views/Shared/{0}.cshtml");
                 });
+
+
+
+
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[] { "en", "cs", };
+                options.SetDefaultCulture(supportedCultures[0])
+                    .AddSupportedCultures(supportedCultures)
+                    .AddSupportedUICultures(supportedCultures);
+            });
 
 
 
@@ -106,6 +122,10 @@ namespace VehicleDiary
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+
+            app.UseRequestLocalization();
+
             //Seeding role a Users
             using (var scope = app.Services.CreateScope())
             {

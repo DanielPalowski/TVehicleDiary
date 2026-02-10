@@ -12,6 +12,9 @@ public interface IRepositoryVehicle : IRepositoryCrud<DBVehicleModel>
     Task<float> CalculatingTotalCostOilAsync(Guid id);
     Task<float> CalculatingTotalCostVignetteAsync(Guid id);
     Task<float> CalculatingTotalCostTiresAsync(Guid id);
+    Task<int> CalculatingTotalUsers();
+    Task<int> CalculatingTotalCars();
+    Task<int> CalculatingTotalServices();
     Task<List<DBVehicleModel>> GetVehiclesWithTotalCostAsync(string userId);
 
     Task<DBVehicleModel?> AddingTotalCostRepairAsync(Guid id, float cost);

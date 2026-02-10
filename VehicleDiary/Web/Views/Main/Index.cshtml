@@ -1,5 +1,10 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@model DBMainModelVM
+@using System.Globalization
+@inject IViewLocalizer Localizer
+
+<!DOCTYPE html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -149,6 +154,7 @@
     </style>
 </head>
 <body class="landing-page">
+
     <!-- Hero Section -->
     <section class="relative min-h-screen flex items-center overflow-hidden" style="background: linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(215, 28%, 17%) 100%);">
         <!-- Background decorations -->
@@ -162,20 +168,20 @@
                 <!-- Text Content -->
                 <div class="text-center lg:text-left">
                     <h1 class="text-6xl sm:text-6xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight">
-                        Welcome to<br>
-                        <span class="gradient-text">VehicleDiary</span>
+                        @Localizer["HeroTitleLine1"]<br>
+                        <span class="gradient-text">@Localizer["HeroTitleBrand"]</span>
                     </h1>
                     <p class="text-lg sm:text-xl text-white/70 mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                        Your all-in-one vehicle management solution. Track maintenance, repairs, fuel consumption, and costs in one intuitive platform.
+                        @Localizer["HeroSubtitle"]
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                         <a href="#" class="btn-primary-gradient text-white font-semibold px-8 py-4 rounded-2xl text-lg inline-flex items-center justify-center gap-3 transition-all duration-300 shadow-lg">
                             <i data-lucide="car" class="w-6 h-6"></i>
-                            Add Your Vehicle
+                            @Localizer["HeroPrimaryAction"]
                             <i data-lucide="arrow-right" class="w-5 h-5"></i>
                         </a>
                         <a href="#features" class="border-2 border-white/20 text-white font-semibold px-8 py-4 rounded-2xl text-lg inline-flex items-center justify-center gap-2 hover:bg-white/10 transition-all duration-300">
-                            Discover Features
+                            @Localizer["HeroSecondaryAction"]
                         </a>
                     </div>
                 </div>
@@ -189,7 +195,7 @@
                                 <i data-lucide="wrench" class="w-7 h-7 text-white"></i>
                             </div>
                             <div>
-                                <p class="font-semibold text-foreground text-lg">Oil Change</p>
+                                <p class="font-semibold text-foreground text-lg">@Localizer["CardOilChangeTitle"]</p>
                                 <p class="main-color-txt font-bold text-xl">€89.99</p>
                             </div>
                         </div>
@@ -202,7 +208,7 @@
                                 <i data-lucide="fuel" class="w-7 h-7 text-white"></i>
                             </div>
                             <div>
-                                <p class="font-semibold text-foreground text-lg">Fuel Refill</p>
+                                <p class="font-semibold text-foreground text-lg">@Localizer["CardFuelRefillTitle"]</p>
                                 <p class="main-color-txt font-bold text-xl">€65.50</p>
                             </div>
                         </div>
@@ -215,7 +221,7 @@
                                 <i data-lucide="battery" class="w-7 h-7 text-white"></i>
                             </div>
                             <div>
-                                <p class="font-semibold text-foreground text-lg">Battery</p>
+                                <p class="font-semibold text-foreground text-lg">@Localizer["CardBatteryTitle"]</p>
                                 <p class="main-color-txt font-bold text-xl">€129.99</p>
                             </div>
                         </div>
@@ -228,7 +234,7 @@
     <!-- Stats Section -->
     <section class="py-16 md:py-24" style="background: hsl(215, 20%, 96%);">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 <!-- Stat 1 -->
                 <div class="stat-card flex items-center gap-5 p-6 rounded-2xl bg-white border border-border/50 shadow-soft transition-all duration-300 hover:shadow-elevated fade-in">
                     <div class="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
@@ -236,9 +242,9 @@
                     </div>
                     <div>
                         <div class="text-3xl sm:text-4xl font-bold text-foreground">
-                            <span class="stat-number" data-target="5000">0</span><span class="main-color-txt">+</span>
+                            <span class="stat-number" data-target="@Model.TotalCars">0</span><span class="main-color-txt">+</span>
                         </div>
-                        <p class="text-muted-foreground text-sm mt-1">Vehicles Tracked</p>
+                        <p class="text-muted-foreground text-sm mt-1">@Localizer["StatsVehiclesTracked"]</p>
                     </div>
                 </div>
 
@@ -249,50 +255,38 @@
                     </div>
                     <div>
                         <div class="text-3xl sm:text-4xl font-bold text-foreground">
-                            <span class="stat-number" data-target="25000">0</span><span class="main-color-txt">+</span>
+                            <span class="stat-number" data-target="@Model.TotalServices">0</span><span class="main-color-txt">+</span>
                         </div>
-                        <p class="text-muted-foreground text-sm mt-1">Services Logged</p>
+                        <p class="text-muted-foreground text-sm mt-1">@Localizer["StatsServicesLogged"]</p>
                     </div>
                 </div>
 
                 <!-- Stat 3 -->
                 <div class="stat-card flex items-center gap-5 p-6 rounded-2xl bg-white border border-border/50 shadow-soft transition-all duration-300 hover:shadow-elevated fade-in">
                     <div class="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
-                        <i data-lucide="euro" class="w-7 h-7" style="color: hsl(160, 84%, 39%);"></i>
-                    </div>
-                    <div>
-                        <div class="text-3xl sm:text-4xl font-bold text-foreground">
-                            <span class="stat-number" data-target="1.2" data-decimals="1">0</span><span class="main-color-txt">M</span>
-                        </div>
-                        <p class="text-muted-foreground text-sm mt-1">Million Saved</p>
-                    </div>
-                </div>
-
-                <!-- Stat 4 -->
-                <div class="stat-card flex items-center gap-5 p-6 rounded-2xl bg-white border border-border/50 shadow-soft transition-all duration-300 hover:shadow-elevated fade-in">
-                    <div class="w-16 h-16 rounded-2xl flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
                         <i data-lucide="users" class="w-7 h-7" style="color: hsl(160, 84%, 39%);"></i>
                     </div>
                     <div>
                         <div class="text-3xl sm:text-4xl font-bold text-foreground">
-                            <span class="stat-number" data-target="4200">0</span><span class="main-color-txt">+</span>
+                            <span class="stat-number" data-target="@Model.TotalUsers">0</span><span class="main-color-txt">+</span>
                         </div>
-                        <p class="text-muted-foreground text-sm mt-1">Active Users</p>
+                        <p class="text-muted-foreground text-sm mt-1">@Localizer["StatsActiveUsers"]</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+
     <!-- Features Section -->
     <section id="features" class="py-20 md:py-32 bg-background">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                    Why Choose <span class="gradient-text">VehicleDiary</span>?
+                    @Localizer["FeaturesTitle"]
                 </h2>
                 <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
-                    Comprehensive vehicle management with powerful tracking features
+                    @Localizer["FeaturesSubtitle"]
                 </p>
             </div>
 
@@ -302,28 +296,28 @@
                     <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300" style="background: hsla(160, 84%, 39%, 0.1);">
                         <i data-lucide="wrench" class="w-8 h-8" style="color: hsl(160, 84%, 39%);"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-foreground mb-3">Maintenance Tracking</h3>
+                    <h3 class="text-xl font-bold text-foreground mb-3">@Localizer["FeatureMaintenanceTitle"]</h3>
                     <p class="text-muted-foreground mb-6 leading-relaxed">
-                        Record and monitor all vehicle services, repairs, and maintenance schedules with our intuitive system.
+                        @Localizer["FeatureMaintenanceDescription"]
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-sm">
                             <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
                                 <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
                             </span>
-                            <span class="text-muted-foreground">Service reminders</span>
+                            <span class="text-muted-foreground">@Localizer["FeatureMaintenanceItem1"]</span>
                         </li>
                         <li class="flex items-center gap-3 text-sm">
                             <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
                                 <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
                             </span>
-                            <span class="text-muted-foreground">Repair history</span>
+                            <span class="text-muted-foreground">@Localizer["FeatureMaintenanceItem2"]</span>
                         </li>
                         <li class="flex items-center gap-3 text-sm">
                             <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
                                 <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
                             </span>
-                            <span class="text-muted-foreground">Maintenance scheduling</span>
+                            <span class="text-muted-foreground">@Localizer["FeatureMaintenanceItem3"]</span>
                         </li>
                     </ul>
                 </div>
@@ -333,28 +327,28 @@
                     <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300" style="background: hsla(160, 84%, 39%, 0.1);">
                         <i data-lucide="fuel" class="w-8 h-8" style="color: hsl(160, 84%, 39%);"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-foreground mb-3">Fuel Management</h3>
+                    <h3 class="text-xl font-bold text-foreground mb-3">@Localizer["FeatureFuelTitle"]</h3>
                     <p class="text-muted-foreground mb-6 leading-relaxed">
-                        Track fuel consumption, costs, and analyze your vehicle's efficiency over time.
+                        @Localizer["FeatureFuelDescription"]
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-sm">
                             <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
                                 <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
                             </span>
-                            <span class="text-muted-foreground">Fuel consumption tracking</span>
+                            <span class="text-muted-foreground">@Localizer["FeatureFuelItem1"]</span>
                         </li>
                         <li class="flex items-center gap-3 text-sm">
                             <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
                                 <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
                             </span>
-                            <span class="text-muted-foreground">Cost analysis</span>
+                            <span class="text-muted-foreground">@Localizer["FeatureFuelItem2"]</span>
                         </li>
                         <li class="flex items-center gap-3 text-sm">
                             <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
                                 <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
                             </span>
-                            <span class="text-muted-foreground">Efficiency reports</span>
+                            <span class="text-muted-foreground">@Localizer["FeatureFuelItem3"]</span>
                         </li>
                     </ul>
                 </div>
@@ -364,28 +358,28 @@
                     <div class="w-16 h-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300" style="background: hsla(160, 84%, 39%, 0.1);">
                         <i data-lucide="pie-chart" class="w-8 h-8" style="color: hsl(160, 84%, 39%);"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-foreground mb-3">Cost Analytics</h3>
+                    <h3 class="text-xl font-bold text-foreground mb-3">@Localizer["FeatureCostsTitle"]</h3>
                     <p class="text-muted-foreground mb-6 leading-relaxed">
-                        Visualize and understand your vehicle's operational costs with detailed analytics and reports.
+                        @Localizer["FeatureCostsDescription"]
                     </p>
                     <ul class="space-y-3">
                         <li class="flex items-center gap-3 text-sm">
                             <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
                                 <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
                             </span>
-                            <span class="text-muted-foreground">Expense categorization</span>
+                            <span class="text-muted-foreground">@Localizer["FeatureCostsItem1"]</span>
                         </li>
                         <li class="flex items-center gap-3 text-sm">
                             <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
                                 <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
                             </span>
-                            <span class="text-muted-foreground">Cost forecasting</span>
+                            <span class="text-muted-foreground">@Localizer["FeatureCostsItem2"]</span>
                         </li>
                         <li class="flex items-center gap-3 text-sm">
                             <span class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background: hsla(160, 84%, 39%, 0.1);">
                                 <i data-lucide="check" class="w-3 h-3" style="color: hsl(160, 84%, 39%);"></i>
                             </span>
-                            <span class="text-muted-foreground">Budget planning</span>
+                            <span class="text-muted-foreground">@Localizer["FeatureCostsItem3"]</span>
                         </li>
                     </ul>
                 </div>
@@ -398,10 +392,10 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 fade-in">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                    How It Works
+                    @Localizer["HowItWorksTitle"]
                 </h2>
                 <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
-                    Start managing your vehicle in three simple steps
+                    @Localizer["HowItWorksSubtitle"]
                 </p>
             </div>
 
@@ -420,9 +414,9 @@
                                 01
                             </span>
                         </div>
-                        <h3 class="text-xl font-bold text-foreground mb-3">Add Your Vehicle</h3>
+                        <h3 class="text-xl font-bold text-foreground mb-3">@Localizer["Step1Title"]</h3>
                         <p class="text-muted-foreground leading-relaxed max-w-xs">
-                            Enter your vehicle details to get started with our comprehensive tracking system.
+                            @Localizer["Step1Description"]
                         </p>
                     </div>
                 </div>
@@ -438,9 +432,9 @@
                                 02
                             </span>
                         </div>
-                        <h3 class="text-xl font-bold text-foreground mb-3">Log Services & Expenses</h3>
+                        <h3 class="text-xl font-bold text-foreground mb-3">@Localizer["Step2Title"]</h3>
                         <p class="text-muted-foreground leading-relaxed max-w-xs">
-                            Record fuel fills, maintenance, repairs, and other vehicle-related expenses.
+                            @Localizer["Step2Description"]
                         </p>
                     </div>
                 </div>
@@ -456,9 +450,9 @@
                                 03
                             </span>
                         </div>
-                        <h3 class="text-xl font-bold text-foreground mb-3">Analyze & Save</h3>
+                        <h3 class="text-xl font-bold text-foreground mb-3">@Localizer["Step3Title"]</h3>
                         <p class="text-muted-foreground leading-relaxed max-w-xs">
-                            Use our insights to understand your costs and optimize your vehicle maintenance.
+                            @Localizer["Step3Description"]
                         </p>
                     </div>
                 </div>
@@ -476,14 +470,14 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="text-center max-w-3xl mx-auto fade-in">
                 <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-                    Ready to Take Control of Your <span class="gradient-text">Vehicle Expenses</span>?
+                    @Localizer["CtaTitle"]
                 </h2>
                 <p class="text-white/70 text-lg md:text-xl mb-10 leading-relaxed">
-                    Join thousands of vehicle owners who are saving time and money with VehicleDiary
+                    @Localizer["CtaSubtitle"]
                 </p>
                 <a href="#" class="inline-flex items-center justify-center gap-3 bg-white text-foreground hover:bg-white/90 rounded-xl px-10 py-4 text-lg font-semibold shadow-elevated transition-all duration-300 hover:scale-105">
                     <i data-lucide="car" class="w-6 h-6"></i>
-                    Get Started Now
+                    @Localizer["CtaButton"]
                     <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </a>
             </div>
@@ -498,18 +492,18 @@
                     <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: hsl(160, 84%, 39%);">
                         <i data-lucide="car" class="w-5 h-5 text-white"></i>
                     </div>
-                    <span class="text-xl font-bold text-foreground">VehicleDiary</span>
+                    <span class="text-xl font-bold text-foreground">@Localizer["HeroTitleBrand"]</span>
                 </div>
 
                 <nav class="flex flex-wrap items-center justify-center gap-8">
-                    <a href="#features" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Features</a>
-                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Pricing</a>
-                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">About</a>
-                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">Contact</a>
+                    <a href="#features" class="text-muted-foreground hover:text-foreground transition-colors text-sm">@Localizer["FooterFeatures"]</a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">@Localizer["FooterPricing"]</a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">@Localizer["FooterAbout"]</a>
+                    <a href="#" class="text-muted-foreground hover:text-foreground transition-colors text-sm">@Localizer["FooterContact"]</a>
                 </nav>
 
                 <p class="text-muted-foreground text-sm">
-                    © 2026 VehicleDiary. All rights reserved.
+                    @Localizer["FooterCopyright"]
                 </p>
             </div>
         </div>

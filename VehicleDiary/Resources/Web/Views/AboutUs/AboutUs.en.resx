@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Page Title & Meta -->
+  <data name="PageTitle" xml:space="preserve">
+    <value>About VehicleDiary - Your Digital Garage</value>
+  </data>
+  <data name="MetaDescription" xml:space="preserve">
+    <value>Track maintenance, repairs, fuel consumption, and costs in one intuitive platform. Perfect for both car enthusiasts and everyday drivers seeking financial clarity.</value>
+  </data>
+  
+  <!-- Hero Section -->
+  <data name="AboutBadge" xml:space="preserve">
+    <value>About VehicleDiary</value>
+  </data>
+  <data name="HeroTitle" xml:space="preserve">
+    <value>What is VehicleDiary?</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>Your digital garage. Your vehicle's story. All in one beautifully designed platform.</value>
+  </data>
+  
+  <!-- Main About Section -->
+  <data name="ByCarLovers" xml:space="preserve">
+    <value>By Car Lovers, For Car Lovers.</value>
+  </data>
+  <data name="AboutLead" xml:space="preserve">
+    <value>VehicleDiary is your ultimate digital garage — a smart and beautifully designed platform for tracking everything about your vehicle in one place.</value>
+  </data>
+  <data name="AboutBody1" xml:space="preserve">
+    <value>From repairs, upgrades, and oil changes to tires, vignettes, and future plans — it helps you stay organized, save money, and truly understand your vehicle's story. Gone are the days of messy spreadsheets, paper notes, or forgotten reminders.</value>
+  </data>
+  <data name="AboutBody2" xml:space="preserve">
+    <value>VehicleDiary automatically calculates how much you've already invested in your car, lets you upload invoices, PDFs, or images, and even keeps a to-do list for future ideas and modifications.</value>
+  </data>
+  <data name="HighlightBox" xml:space="preserve">
+    <value>Built by a passionate IT student and car enthusiast who believes every vehicle deserves attention — and every owner deserves a smarter, simpler way to manage it.</value>
+  </data>
+  <data name="StartYourVehicleDiary" xml:space="preserve">
+    <value>Start Your VehicleDiary</value>
+  </data>
+  
+  <!-- Floating Badges -->
+  <data name="ActiveUsersLabel" xml:space="preserve">
+    <value>Active Users</value>
+  </data>
+  <data name="UserRatingLabel" xml:space="preserve">
+    <value>User Rating</value>
+  </data>
+  
+  <!-- Mission Section -->
+  <data name="OurMission" xml:space="preserve">
+    <value>Our Mission</value>
+  </data>
+  <data name="ConnectingCarLovers" xml:space="preserve">
+    <value>Connecting Car Lovers</value>
+  </data>
+  <data name="ThroughTechnology" xml:space="preserve">
+    <value>Through Technology</value>
+  </data>
+  <data name="MissionText1" xml:space="preserve">
+    <value>VehicleDiary isn't just a tool; it's a mission to connect car lovers through technology, data, and passion. We believe every vehicle has a story worth telling, and every owner deserves the tools to tell it.</value>
+  </data>
+  <data name="MissionText2" xml:space="preserve">
+    <value>Whether you're tracking a daily driver, restoring a classic, or maintaining a fleet, VehicleDiary gives you the insights you need to make smarter decisions and build a deeper connection with your vehicle.</value>
+  </data>
+  
+  <!-- Values -->
+  <data name="PassionDriven" xml:space="preserve">
+    <value>Passion-Driven</value>
+  </data>
+  <data name="PassionDrivenDescription" xml:space="preserve">
+    <value>Built by enthusiasts who understand the bond between owner and machine. Perfect for project car builders tracking every modification.</value>
+  </data>
+  
+  <data name="InnovationFirst" xml:space="preserve">
+    <value>Innovation First</value>
+  </data>
+  <data name="InnovationFirstDescription" xml:space="preserve">
+    <value>Cutting-edge technology meets intuitive design for seamless experiences. Auto-calculates total investment for financial clarity.</value>
+  </data>
+  
+  <data name="PrivacyFocused" xml:space="preserve">
+    <value>Privacy Focused</value>
+  </data>
+  <data name="PrivacyFocusedDescription" xml:space="preserve">
+    <value>Your data is yours. Bank-level security and complete transparency. Perfect for tracking sensitive financial vehicle data.</value>
+  </data>
+  
+  <!-- CTA Section -->
+  <data name="ReadyToStart" xml:space="preserve">
+    <value>Ready to Start Your</value>
+  </data>
+  <data name="VehicleJourney" xml:space="preserve">
+    <value>Vehicle Journey?</value>
+  </data>
+  <data name="CTASubtitle" xml:space="preserve">
+    <value>Join thousands of vehicle owners who are taking control of their vehicle management and finances. Perfect for both enthusiasts seeking to document their passion and practical drivers wanting financial wisdom.</value>
+  </data>
+  <data name="CreateYourDiary" xml:space="preserve">
+    <value>Create Your Diary</value>
+  </data>
+  <data name="GetALook" xml:space="preserve">
+    <value>Get a Look</value>
+  </data>
+</root>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Page Title & Meta -->
+  <data name="PageTitle" xml:space="preserve">
+    <value>O aplikaci VehicleDiary - Vaše digitální garáž</value>
+  </data>
+  <data name="MetaDescription" xml:space="preserve">
+    <value>Sledujte údržbu, opravy, spotřebu paliva a náklady na jednom intuitivním místě. Perfektní pro nadšence i běžné řidiče hledající finanční přehled.</value>
+  </data>
+  
+  <!-- Hero Section -->
+  <data name="AboutBadge" xml:space="preserve">
+    <value>O aplikaci VehicleDiary</value>
+  </data>
+  <data name="HeroTitle" xml:space="preserve">
+    <value>Co je VehicleDiary?</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>Vaše digitální garáž. Příběh vašeho vozidla. Vše na jednom krásně navrženém místě.</value>
+  </data>
+  
+  <!-- Main About Section -->
+  <data name="ByCarLovers" xml:space="preserve">
+    <value>Od nadšenců automobilů pro nadšence automobilů.</value>
+  </data>
+  <data name="AboutLead" xml:space="preserve">
+    <value>VehicleDiary je vaše ultimátní digitální garáž — chytrá a krásně navržená platforma pro sledování všeho o vašem vozidle na jednom místě.</value>
+  </data>
+  <data name="AboutBody1" xml:space="preserve">
+    <value>Od oprav, vylepšení a výměn oleje po pneumatiky, dálniční známky a budoucí plány — pomáhá vám zůstat organizovaný, ušetřit peníze a skutečně porozumět příběhu vašeho vozidla. Pryč jsou dny chaotických tabulek, papírových poznámek nebo zapomenutých připomínek.</value>
+  </data>
+  <data name="AboutBody2" xml:space="preserve">
+    <value>VehicleDiary automaticky počítá, kolik jste již do svého vozu investovali, umožňuje nahrávat faktury, PDF nebo obrázky a dokonce udržuje seznam úkolů pro budoucí nápady a úpravy.</value>
+  </data>
+  <data name="HighlightBox" xml:space="preserve">
+    <value>Vytvořeno vášnivým studentem IT a nadšencem automobilů, který věří, že každé vozidlo si zaslouží pozornost — a každý majitel si zaslouží chytřejší, jednodušší způsob, jak jej spravovat.</value>
+  </data>
+  <data name="StartYourVehicleDiary" xml:space="preserve">
+    <value>Začněte s VehicleDiary</value>
+  </data>
+  
+  <!-- Floating Badges -->
+  <data name="ActiveUsersLabel" xml:space="preserve">
+    <value>Aktivní uživatelé</value>
+  </data>
+  <data name="UserRatingLabel" xml:space="preserve">
+    <value>Hodnocení uživatelů</value>
+  </data>
+  
+  <!-- Mission Section -->
+  <data name="OurMission" xml:space="preserve">
+    <value>Naše mise</value>
+  </data>
+  <data name="ConnectingCarLovers" xml:space="preserve">
+    <value>Spojujeme nadšence automobilů</value>
+  </data>
+  <data name="ThroughTechnology" xml:space="preserve">
+    <value>prostřednictvím technologie</value>
+  </data>
+  <data name="MissionText1" xml:space="preserve">
+    <value>VehicleDiary není jen nástroj; je to mise spojit nadšence automobilů prostřednictvím technologie, dat a vášně. Věříme, že každé vozidlo má příběh, který stojí za vyprávění, a každý majitel si zaslouží nástroje, jak jej vyprávět.</value>
+  </data>
+  <data name="MissionText2" xml:space="preserve">
+    <value>Ať už sledujete každodenní auto, restaurujete klasik nebo spravujete flotilu, VehicleDiary vám poskytuje přehledy, které potřebujete k chytřejším rozhodnutím a budování hlubšího spojení s vaším vozidlem.</value>
+  </data>
+  
+  <!-- Values -->
+  <data name="PassionDriven" xml:space="preserve">
+    <value>Řízeno vášní</value>
+  </data>
+  <data name="PassionDrivenDescription" xml:space="preserve">
+    <value>Vytvořeno nadšenci, kteří chápou pouto mezi majitelem a strojem. Perfektní pro stavitele projektových aut sledující každou úpravu.</value>
+  </data>
+  
+  <data name="InnovationFirst" xml:space="preserve">
+    <value>Inovace na prvním místě</value>
+  </data>
+  <data name="InnovationFirstDescription" xml:space="preserve">
+    <value>Špičková technologie se setkává s intuitivním designem pro bezproblémové zážitky. Automaticky počítá celkovou investici pro finanční přehlednost.</value>
+  </data>
+  
+  <data name="PrivacyFocused" xml:space="preserve">
+    <value>Zaměřeno na soukromí</value>
+  </data>
+  <data name="PrivacyFocusedDescription" xml:space="preserve">
+    <value>Vaše data jsou vaše. Zabezpečení na úrovni bank a úplná transparentnost. Perfektní pro sledování citlivých finančních dat vozidla.</value>
+  </data>
+  
+  <!-- CTA Section -->
+  <data name="ReadyToStart" xml:space="preserve">
+    <value>Jste připraveni začít svou</value>
+  </data>
+  <data name="VehicleJourney" xml:space="preserve">
+    <value>cestu s vozidlem?</value>
+  </data>
+  <data name="CTASubtitle" xml:space="preserve">
+    <value>Přidejte se k tisícům majitelů vozidel, kteří přebírají kontrolu nad správou svých vozidel a financí. Perfektní jak pro nadšence, kteří chtějí dokumentovat svou vášeň, tak pro praktické řidiče hledající finanční moudrost.</value>
+  </data>
+  <data name="CreateYourDiary" xml:space="preserve">
+    <value>Vytvořte si svůj deník</value>
+  </data>
+  <data name="GetALook" xml:space="preserve">
+    <value>Podívejte se</value>
+  </data>
+</root>

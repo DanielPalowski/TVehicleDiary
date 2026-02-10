@@ -1,5 +1,7 @@
 ﻿@using VehicleDiary.Core.Entities;
 @model IEnumerable<VehicleDiary.Web.ViewModels.DBVehicleViewVM>
+@using System.Globalization
+@inject IViewLocalizer Localizer
 
 @{
     var AddingVehicle = Model.Count() < 3;
@@ -304,8 +306,8 @@
                         <i data-lucide="car" class="w-5 h-5 text-white"></i>
                     </div>
                     <div>
-                        <h1 class="font-bold text-lg">VehicleDiary</h1>
-                        <p class="text-sm text-white/70">Your Vehicle Management Hub</p>
+                        <h1 class="font-bold text-lg">@Localizer["HeaderTitle"]</h1>
+                        <p class="text-sm text-white/70">@Localizer["HeaderSubtitle"]</p>
                     </div>
                 </div>
                 <div class="flex items-center gap-4">
@@ -324,11 +326,11 @@
                 <div class="flex items-center justify-between">
                     <div class="flex items-center gap-2">
                         <i data-lucide="layers" class="w-4 h-4 text-white/80"></i>
-                        <span class="text-sm font-medium">Your Vehicles</span>
+                        <span class="text-sm font-medium">@Localizer["YourVehicles"]</span>
                     </div>
                     <div class="text-right">
                         <div class="text-xl font-bold">@Model.Count()</div>
-                        <div class="text-xs text-white/60">out of 3 vehicles</div>
+                        <div class="text-xs text-white/60">@Localizer["OutOfVehicles"]</div>
                     </div>
                 </div>
                 <div class="mt-2 w-full bg-white/10 rounded-full h-1.5">
@@ -347,15 +349,13 @@
                     <i data-lucide="car" class="w-6 h-6 text-white"></i>
                 </div>
                 <div>
-                    <h2 class="text-xl font-bold text-gray-900 mb-2">Welcome to VehicleDiary</h2>
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["WelcomeTitle"]</h2>
                     <p class="text-gray-600 mb-3">
-                        This app helps you track and manage all aspects of your vehicle ownership.
-                        From maintenance schedules to fuel consumption, insurance tracking to repair history –
-                        everything you need to stay on top of your vehicle's health and costs.
+                        @Localizer["WelcomeDescription"]
                     </p>
                     <p class="text-sm text-gray-500">
                         <i data-lucide="info" class="w-4 h-4 inline mr-1"></i>
-                        Add up to 3 vehicles to get started with comprehensive vehicle management.
+                        @Localizer["WelcomeNote"]
                     </p>
                 </div>
             </div>
@@ -373,12 +373,12 @@
                                 <i data-lucide="plus" class="w-7 h-7 text-white"></i>
                             </div>
                             <div>
-                                <h2 class="text-2xl font-bold mb-1">Add New Vehicle</h2>
-                                <p class="text-white/80">Register a new vehicle to start tracking maintenance and costs</p>
+                                <h2 class="text-2xl font-bold mb-1">@Localizer["AddNewVehicle"]</h2>
+                                <p class="text-white/80">@Localizer["AddVehicleDescription"]</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-2">
-                            <span class="text-sm font-medium px-3 py-1 bg-white/20 rounded-full">Add Vehicle</span>
+                            <span class="text-sm font-medium px-3 py-1 bg-white/20 rounded-full">@Localizer["AddVehicleButton"]</span>
                             <i data-lucide="arrow-right" class="w-5 h-5"></i>
                         </div>
                     </a>
@@ -393,8 +393,8 @@
                                 <i data-lucide="plus" class="w-5 h-5"></i>
                             </div>
                             <div>
-                                <h3 class="font-bold">Add Vehicle</h3>
-                                <p class="text-sm text-white/80">Tap to register</p>
+                                <h3 class="font-bold">@Localizer["AddVehicleMobile"]</h3>
+                                <p class="text-sm text-white/80">@Localizer["TapToRegister"]</p>
                             </div>
                         </div>
                         <i data-lucide="arrow-right" class="w-5 h-5"></i>
@@ -410,8 +410,8 @@
                     <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600"></i>
                 </div>
                 <div>
-                    <p class="font-medium text-amber-800">Vehicle limit reached</p>
-                    <p class="text-sm text-amber-600">You have reached the maximum limit of 3 vehicles.</p>
+                    <p class="font-medium text-amber-800">@Localizer["VehicleLimitReached"]</p>
+                    <p class="text-sm text-amber-600">@Localizer["VehicleLimitReachedDescription"]</p>
                 </div>
             </div>
         }
@@ -464,14 +464,14 @@
                             <div class="bg-blue-50 border border-blue-100 rounded-xl p-3">
                                 <div class="flex items-center gap-2 mb-1">
                                     <i data-lucide="zap" class="w-4 h-4 text-blue-600"></i>
-                                    <span class="text-xs text-gray-500">Power</span>
+                                    <span class="text-xs text-gray-500">@Localizer["PowerLabel"]</span>
                                 </div>
                                 <div class="font-bold text-gray-900">@entry.Power HP</div>
                             </div>
                             <div class="bg-green-50 border border-green-100 rounded-xl p-3">
                                 <div class="flex items-center gap-2 mb-1">
                                     <i data-lucide="calendar-days" class="w-4 h-4 text-green-600"></i>
-                                    <span class="text-xs text-gray-500">Purchased</span>
+                                    <span class="text-xs text-gray-500">@Localizer["PurchasedLabel"]</span>
                                 </div>
                                 <div class="font-bold text-gray-900">
                                     @if (entry.Bought.HasValue)
@@ -492,18 +492,18 @@
                             <div class="insurance-container">
                                 <div class="flex items-center gap-2 mb-2">
                                     <i data-lucide="shield-check" class="w-4 h-4 text-green-600"></i>
-                                    <span class="font-medium text-gray-900">Insurance Details</span>
+                                    <span class="font-medium text-gray-900">@Localizer["InsuranceDetails"]</span>
                                 </div>
                                 <div class="flex items-center justify-between">
                                     <div>
-                                        <div class="text-sm text-gray-600">Provider</div>
+                                        <div class="text-sm text-gray-600">@Localizer["InsuranceProvider"]</div>
                                         <div class="font-bold text-gray-900">@entry.Insurence</div>
                                     </div>
                                     <div class="text-right">
-                                        <div class="text-sm text-gray-600">Status</div>
+                                        <div class="text-sm text-gray-600">@Localizer["InsuranceStatus"]</div>
                                         <div class="flex items-center gap-1">
                                             <div class="w-2 h-2 rounded-full bg-green-500"></div>
-                                            <span class="text-sm font-medium text-green-600">Active</span>
+                                            <span class="text-sm font-medium text-green-600">@Localizer["InsuranceActive"]</span>
                                         </div>
                                     </div>
                                 </div>
@@ -515,7 +515,7 @@
                             <div class="flex items-center justify-between mb-2">
                                 <div class="flex items-center gap-2">
                                     <i data-lucide="wrench" class="w-4 h-4 text-red-500"></i>
-                                    <span class="text-sm font-medium">Total Repair Costs</span>
+                                    <span class="text-sm font-medium">@Localizer["TotalRepairCosts"]</span>
                                 </div>
                                 <span class="font-bold text-gray-900">€@entry.RepairCost?.ToString("N2")</span>
                             </div>
@@ -526,8 +526,8 @@
                                     </div>
                                 </div>
                                 <div class="flex justify-between mt-1">
-                                    <span class="text-xs text-gray-500">€0</span>
-                                    <span class="text-xs text-gray-500">€2000+</span>
+                                    <span class="text-xs text-gray-500">@Localizer["RepairCostMin"]</span>
+                                    <span class="text-xs text-gray-500">@Localizer["RepairCostMax"]</span>
                                 </div>
                             </div>
                         </div>
@@ -538,7 +538,7 @@
                                asp-route-vehicleIDRoute="@entry.Id"
                                class="action-btn-primary">
                                 <i data-lucide="wrench" class="w-4 h-4"></i>
-                                <span>Repair History</span>
+                                <span>@Localizer["RepairHistoryButton"]</span>
                             </a>
 
                             <!-- Blue Usage Stats Button -->
@@ -546,13 +546,13 @@
                                asp-route-vehicleIDRoute="@entry.Id"
                                class="action-btn-blue">
                                 <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
-                                <span>Usage Stats</span>
+                                <span>@Localizer["UsageStatsButton"]</span>
                             </a>
 
                             <button onclick="showDeleteConfirmation('@entry.Id', '@entry.Name @entry.Model')"
                                     class="action-btn-danger">
                                 <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                <span>Remove Vehicle</span>
+                                <span>@Localizer["RemoveVehicleButton"]</span>
                             </button>
                         </div>
                     </div>
@@ -567,17 +567,16 @@
                         <div class="w-24 h-24 rounded-full bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center mb-6">
                             <i data-lucide="car" class="w-12 h-12 text-green-600"></i>
                         </div>
-                        <h2 class="text-2xl font-bold text-gray-900 mb-3">No vehicles yet</h2>
+                        <h2 class="text-2xl font-bold text-gray-900 mb-3">@Localizer["NoVehicles"]</h2>
                         <p class="text-gray-600 mb-4 max-w-md">
-                            Start by adding your first vehicle to track maintenance, repairs, and costs.
-                            Get insights into fuel consumption, insurance status, and more.
+                            @Localizer["NoVehiclesDescription"]
                         </p>
                         @if (AddingVehicle)
                         {
                             <a asp-controller="Vehicle" asp-action="Create"
                                class="bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-xl px-6 py-3 font-medium inline-flex items-center gap-2 hover:opacity-90 transition-opacity">
                                 <i data-lucide="plus" class="w-5 h-5"></i>
-                                Add Your First Vehicle
+                                @Localizer["AddFirstVehicleButton"]
                             </a>
                         }
                     </div>
@@ -604,24 +603,24 @@
                     <i data-lucide="alert-triangle" class="w-6 h-6 text-red-600"></i>
                 </div>
                 <div>
-                    <h3 class="font-bold text-lg">Remove Vehicle</h3>
+                    <h3 class="font-bold text-lg">@Localizer["RemoveVehicleModalTitle"]</h3>
                     <p id="vehicleName" class="text-gray-600"></p>
                 </div>
             </div>
 
             <p class="text-gray-600 mb-6">
-                Are you sure you want to remove this vehicle? All associated data including repair history and usage stats will be permanently deleted.
+                @Localizer["RemoveVehicleConfirmation"]
             </p>
 
             <div class="flex gap-3">
                 <button onclick="hideDeleteModal()"
                         class="flex-1 py-3 rounded-xl border border-gray-300 font-medium hover:bg-gray-50 transition-colors">
-                    Cancel
+                    @Localizer["CancelButton"]
                 </button>
                 <button id="confirmDeleteBtn"
                         class="flex-1 py-3 rounded-xl bg-red-600 text-white font-medium hover:bg-red-700 transition-colors flex items-center justify-center gap-2">
                     <i data-lucide="trash-2" class="w-4 h-4"></i>
-                    Remove
+                    @Localizer["RemoveButton"]
                 </button>
             </div>
         </div>

@@ -10,5 +10,9 @@ namespace VehicleDiary.Core.Interfaces.Services
         Task DeleteVehicleAsync(Guid vehicleID);
         Task<int> CountingVehiclesAsync(string userID);
         Task<List<DBVehicleModel>> GetVehiclesWithTotalCostAsync(string userId);
+        Task<int> GetTotalNumberOfCars();
+        Task<int> GetTotalNumberOfUsers();
+        Task<int> GetTotalNumberOfServices();
+
     }
 }

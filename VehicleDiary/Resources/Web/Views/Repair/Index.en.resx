@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<!-- 
+		Microsoft ResX Schema
+
+		Version 1.3
+
+		The primary goals of this format is to allow a simple XML format 
+		that is mostly human readable. The generation and parsing of the 
+		various data types are done through the TypeConverter classes 
+		associated with the data types.
+
+		Example:
+
+		... ado.net/XML headers & schema ...
+		<resheader name="resmimetype">text/microsoft-resx</resheader>
+		<resheader name="version">1.3</resheader>
+		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+		<data name="Name1">this is my long string</data>
+		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+			[base64 mime encoded serialized .NET Framework object]
+		</data>
+		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+			[base64 mime encoded string representing a byte array form of the .NET Framework object]
+		</data>
+
+		There are any number of "resheader" rows that contain simple 
+		name/value pairs.
+
+		Each data row contains a name, and value. The row also contains a 
+		type or mimetype. Type corresponds to a .NET class that support 
+		text/value conversion through the TypeConverter architecture. 
+		Classes that don't support this are serialized and stored with the 
+		mimetype set.
+
+		The mimetype is used for serialized objects, and tells the 
+		ResXResourceReader how to depersist the object. This is currently not 
+		extensible. For a given mimetype the value must be set accordingly:
+
+		Note - application/x-microsoft.net.object.binary.base64 is the format 
+		that the ResXResourceWriter will generate, however the reader can 
+		read any of the formats listed below.
+
+		mimetype: application/x-microsoft.net.object.binary.base64
+		value   : The object must be serialized with 
+			: System.Serialization.Formatters.Binary.BinaryFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.soap.base64
+		value   : The object must be serialized with 
+			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+			: and then encoded with base64 encoding.
+
+		mimetype: application/x-microsoft.net.object.bytearray.base64
+		value   : The object must be serialized into a byte array 
+			: using a System.ComponentModel.TypeConverter
+			: and then encoded with base64 encoding.
+	-->
+	
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+  
+  <!-- Header Section -->
+  <data name="BackToVehicles" xml:space="preserve">
+    <value>Back to Vehicles</value>
+  </data>
+  <data name="VehicleInformationHub" xml:space="preserve">
+    <value>Vehicle Information Hub</value>
+  </data>
+  <data name="CompleteVehicleManagement" xml:space="preserve">
+    <value>Complete Vehicle Management</value>
+  </data>
+  
+  <!-- Hero Section -->
+  <data name="HeroTitle" xml:space="preserve">
+    <value>Vehicle Information Hub</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>Complete financial overview of your vehicle's maintenance history. Track all expenses across repairs, upgrades, and diagnostics.</value>
+  </data>
+  <data name="ViewCompleteHistory" xml:space="preserve">
+    <value>View Complete History</value>
+  </data>
+  
+  <!-- Financial Overview -->
+  <data name="FinancialOverview" xml:space="preserve">
+    <value>Financial Overview</value>
+  </data>
+  <data name="FinancialOverviewDescription" xml:space="preserve">
+    <value>Total investment in your vehicle's maintenance and improvements</value>
+  </data>
+  
+  <data name="TotalRepairCost" xml:space="preserve">
+    <value>Total Repair Cost</value>
+  </data>
+  <data name="TotalRepairCostDescription" xml:space="preserve">
+    <value>Total amount spent on all repairs, maintenance, and part replacements. Includes labor, parts, and service fees.</value>
+  </data>
+  
+  <data name="TotalUpgradeCost" xml:space="preserve">
+    <value>Total Upgrade Cost</value>
+  </data>
+  <data name="TotalUpgradeCostDescription" xml:space="preserve">
+    <value>Total investment in performance upgrades, modifications, and enhancements. Includes all aftermarket parts and installation.</value>
+  </data>
+  
+  <data name="TotalDiagnosticCost" xml:space="preserve">
+    <value>Total Diagnostic Cost</value>
+  </data>
+  <data name="TotalDiagnosticCostDescription" xml:space="preserve">
+    <value>Total spent on diagnostic services, health checks, and system analysis. Includes professional scanning and inspection fees.</value>
+  </data>
+  
+  <data name="TotalVehicleInvestment" xml:space="preserve">
+    <value>Total Vehicle Investment</value>
+  </data>
+  <data name="TotalVehicleInvestmentDescription" xml:space="preserve">
+    <value>Combined investment across all maintenance categories</value>
+  </data>
+  <data name="AllTimeMaintenanceCosts" xml:space="preserve">
+    <value>All-time maintenance costs</value>
+  </data>
+  
+  <!-- Hub Cards Section -->
+  <data name="VehicleInformationCategories" xml:space="preserve">
+    <value>Vehicle Information Categories</value>
+  </data>
+  <data name="VehicleInformationCategoriesDescription" xml:space="preserve">
+    <value>Access detailed records and manage all aspects of your vehicle's history</value>
+  </data>
+  
+  <data name="RepairHistory" xml:space="preserve">
+    <value>Repair History</value>
+  </data>
+  <data name="RepairHistoryDescription" xml:space="preserve">
+    <value>Complete record of all repairs, maintenance services, and part replacements. Track dates, costs, service providers, and detailed repair descriptions.</value>
+  </data>
+  <data name="ViewRepairs" xml:space="preserve">
+    <value>View Repairs</value>
+  </data>
+  
+  <data name="UpgradesModifications" xml:space="preserve">
+    <value>Upgrades &amp; Modifications</value>
+  </data>
+  <data name="UpgradesModificationsDescription" xml:space="preserve">
+    <value>Track all performance upgrades, aesthetic modifications, and feature enhancements. Document costs, installation dates, and performance improvements.</value>
+  </data>
+  <data name="ViewUpgrades" xml:space="preserve">
+    <value>View Upgrades</value>
+  </data>
+  
+  <data name="DiagnosticsHealth" xml:space="preserve">
+    <value>Diagnostics &amp; Health</value>
+  </data>
+  <data name="DiagnosticsHealthDescription" xml:space="preserve">
+    <value>Access comprehensive diagnostic reports, error code history, and vehicle health checks. Monitor system performance and preventive maintenance schedules.</value>
+  </data>
+  <data name="ViewDiagnostics" xml:space="preserve">
+    <value>View Diagnostics</value>
+  </data>
+  
+  <!-- Footer -->
+  <data name="VehicleInformationSystem" xml:space="preserve">
+    <value>Vehicle Information System</value>
+  </data>
+  <data name="FooterCopyright" xml:space="preserve">
+    <value>© 2024 Vehicle Information Hub. All data securely stored and encrypted.</value>
+  </data>
+</root>

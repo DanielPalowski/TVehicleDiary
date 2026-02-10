@@ -1,4 +1,5 @@
 ﻿@model VehicleDiary.Web.ViewModels.DBVehicleModelVM
+@inject IViewLocalizer Localizer
 @{
     Layout = null;
 }
@@ -240,19 +241,18 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <div class="sticky top-0 bg-white border-b border-gray-200 z-10">
         <div class="container">
             <div class="flex items-center justify-between py-3">
                 <a href="@Url.Action("Index", "Vehicle")" class="back-btn">
                     <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                    Back
+                    @Localizer["Back"]
                 </a>
                 <div class="flex items-center gap-2">
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
                         <i data-lucide="car" class="w-4 h-4 text-white"></i>
                     </div>
-                    <span class="font-bold text-sm">Add Vehicle</span>
+                    <span class="font-bold text-sm">@Localizer["AddVehicle"]</span>
                 </div>
             </div>
         </div>
@@ -268,8 +268,8 @@
                         <i data-lucide="car" class="w-6 h-6 text-white"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold mb-1">Add New Vehicle</h1>
-                        <p class="text-white/80 text-sm">Fill in your vehicle details below</p>
+                        <h1 class="text-xl font-bold mb-1">@Localizer["AddNewVehicle"]</h1>
+                        <p class="text-white/80 text-sm">@Localizer["FillVehicleDetails"]</p>
                     </div>
                 </div>
             </div>
@@ -280,17 +280,17 @@
                     <!-- Brand & Model -->
                     <div class="grid-2 mb-4">
                         <div class="form-group">
-                            <label asp-for="Name" class="form-label required">Brand</label>
+                            <label asp-for="Name" class="form-label required">@Localizer["Brand"]</label>
                             <input type="text" asp-for="Name" class="form-input"
-                                   placeholder="Toyota, BMW, etc."
+                                   placeholder="@Localizer["BrandPlaceholder"]"
                                    required>
                             <span asp-validation-for="Name" class="error-message"></span>
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="Model" class="form-label required">Model</label>
+                            <label asp-for="Model" class="form-label required">@Localizer["Model"]</label>
                             <input type="text" asp-for="Model" class="form-input"
-                                   placeholder="Corolla, X5, etc."
+                                   placeholder="@Localizer["ModelPlaceholder"]"
                                    required>
                             <span asp-validation-for="Model" class="error-message"></span>
                         </div>
@@ -299,18 +299,18 @@
                     <!-- License Plate & VIN -->
                     <div class="grid-2 mb-4">
                         <div class="form-group">
-                            <label asp-for="License_plate" class="form-label required">License Plate</label>
+                            <label asp-for="License_plate" class="form-label required">@Localizer["LicensePlate"]</label>
                             <input type="text" asp-for="License_plate" class="form-input"
-                                   placeholder="AB 123 CD"
+                                   placeholder="@Localizer["LicensePlatePlaceholder"]"
                                    required
                                    oninput="this.value = this.value.toUpperCase()">
                             <span asp-validation-for="License_plate" class="error-message"></span>
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="VIN" class="form-label required">VIN Number</label>
+                            <label asp-for="VIN" class="form-label required">@Localizer["VINNumber"]</label>
                             <input type="text" asp-for="VIN" class="form-input"
-                                   placeholder="17 characters"
+                                   placeholder="@Localizer["VINPlaceholder"]"
                                    maxlength="17"
                                    minlength="17"
                                    required
@@ -322,9 +322,9 @@
                     <!-- Year & Power -->
                     <div class="grid-2 mb-4">
                         <div class="form-group">
-                            <label asp-for="MadeYear" class="form-label required">Year</label>
+                            <label asp-for="MadeYear" class="form-label required">@Localizer["Year"]</label>
                             <input type="number" asp-for="MadeYear" class="form-input"
-                                   placeholder="2020"
+                                   placeholder="@Localizer["YearPlaceholder"]"
                                    min="1900"
                                    max="@DateTime.Now.Year"
                                    required>
@@ -332,9 +332,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="Power" class="form-label required">Horsepower</label>
+                            <label asp-for="Power" class="form-label required">@Localizer["Horsepower"]</label>
                             <input type="number" asp-for="Power" class="form-input"
-                                   placeholder="150"
+                                   placeholder="@Localizer["HorsepowerPlaceholder"]"
                                    min="1"
                                    required>
                             <span asp-validation-for="Power" class="error-message"></span>
@@ -344,14 +344,14 @@
                     <!-- Insurance & Purchase Date -->
                     <div class="grid-2 mb-4">
                         <div class="form-group">
-                            <label asp-for="Insurence" class="form-label">Insurance</label>
+                            <label asp-for="Insurence" class="form-label">@Localizer["Insurance"]</label>
                             <input type="text" asp-for="Insurence" class="form-input"
-                                   placeholder="Allianz, AXA, etc.">
+                                   placeholder="@Localizer["InsurancePlaceholder"]">
                             <span asp-validation-for="Insurence" class="error-message"></span>
                         </div>
 
                         <div class="form-group">
-                            <label asp-for="Bought" class="form-label">Purchase Date</label>
+                            <label asp-for="Bought" class="form-label">@Localizer["PurchaseDate"]</label>
                             <input type="date" asp-for="Bought" class="form-input"
                                    value="@DateTime.Today.ToString("yyyy-MM-dd")"
                                    max="@DateTime.Today.ToString("yyyy-MM-dd")">
@@ -361,9 +361,9 @@
 
                     <!-- Description -->
                     <div class="form-group mb-6">
-                        <label asp-for="Description" class="form-label">Description</label>
+                        <label asp-for="Description" class="form-label">@Localizer["Description"]</label>
                         <textarea asp-for="Description" class="form-input"
-                                  placeholder="Optional: Add notes about your vehicle"
+                                  placeholder="@Localizer["DescriptionPlaceholder"]"
                                   rows="3"></textarea>
                         <span asp-validation-for="Description" class="error-message"></span>
                     </div>
@@ -372,7 +372,7 @@
                     <div class="form-group">
                         <button type="submit" class="submit-btn">
                             <i data-lucide="car" class="w-5 h-5"></i>
-                            Add Vehicle
+                            @Localizer["AddVehicleButton"]
                         </button>
                     </div>
                 </form>
@@ -383,7 +383,7 @@
                         <i data-lucide="info" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
                         <div>
                             <p class="text-sm text-blue-700">
-                                <span class="font-medium">Tip:</span> VIN can be found on your vehicle registration or insurance documents.
+                                <span class="font-medium">@Localizer["Tip"]:</span> @Localizer["FormTip"]
                             </p>
                         </div>
                     </div>

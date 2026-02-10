@@ -59,6 +59,18 @@ namespace VehicleDiary.Infrastructure.Repositories
         {
             return await _context.DBTiresSet.Where(find => find.VehicleId == id).SumAsync(calculate => calculate.TirePrice);
         }
+        public async Task<int> CalculatingTotalUsers()
+        {
+            return await _context.Users.CountAsync();
+        }
+        public async Task<int> CalculatingTotalCars()
+        {
+            return await _context.DBVehiclesSet.CountAsync();
+        }
+        public async Task<int> CalculatingTotalServices()
+        {
+            return await _context.DBRepairVehicleSet.CountAsync();
+        }
         public async Task<List<DBVehicleModel>> GetVehiclesWithTotalCostAsync(string userId)
         {
             var vehicles = await _context.DBVehiclesSet

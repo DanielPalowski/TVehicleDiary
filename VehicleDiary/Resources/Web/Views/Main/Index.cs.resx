@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Welcome" xml:space="preserve">
+    <value>Vítejte</value>
+  </data>
+  <data name="ExploreWebsite" xml:space="preserve">
+    <value>Prozkoumejte web</value>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>VehicleDiary – Správa vašeho vozidla</value>
+  </data>
+  <data name="PageDescription" xml:space="preserve">
+    <value>Sledujte údržbu, opravy, spotřebu paliva a náklady na jednom přehledném místě.</value>
+  </data>
+  <data name="HeroTitleLine1" xml:space="preserve">
+    <value>Vítejte v</value>
+  </data>
+  <data name="HeroTitleBrand" xml:space="preserve">
+    <value>VehicleDiary</value>
+  </data>
+  <data name="HeroSubtitle" xml:space="preserve">
+    <value>Vše v jednom pro správu vašeho vozidla. Sledujte údržbu, opravy, spotřebu paliva a náklady na jednom přehledném místě.</value>
+  </data>
+  <data name="HeroPrimaryAction" xml:space="preserve">
+    <value>Přidat vozidlo</value>
+  </data>
+  <data name="HeroSecondaryAction" xml:space="preserve">
+    <value>Objevit funkce</value>
+  </data>
+  <data name="CardOilChangeTitle" xml:space="preserve">
+    <value>Výměna oleje</value>
+  </data>
+  <data name="CardFuelRefillTitle" xml:space="preserve">
+    <value>Tankování</value>
+  </data>
+  <data name="CardBatteryTitle" xml:space="preserve">
+    <value>Baterie</value>
+  </data>
+  <data name="StatsVehiclesTracked" xml:space="preserve">
+    <value>Sledovaných vozidel</value>
+  </data>
+  <data name="StatsServicesLogged" xml:space="preserve">
+    <value>Zaznamenaných servisů</value>
+  </data>
+  <data name="StatsMillionSaved" xml:space="preserve">
+    <value>Ušetřeno milionů</value>
+  </data>
+  <data name="StatsActiveUsers" xml:space="preserve">
+    <value>Aktivních uživatelů</value>
+  </data>
+  <data name="FeaturesTitle" xml:space="preserve">
+    <value>Proč si vybrat VehicleDiary?</value>
+  </data>
+  <data name="FeaturesSubtitle" xml:space="preserve">
+    <value>Komplexní správa vozidla s výkonnými sledovacími funkcemi</value>
+  </data>
+  <data name="FeatureMaintenanceTitle" xml:space="preserve">
+    <value>Sledování údržby</value>
+  </data>
+  <data name="FeatureMaintenanceDescription" xml:space="preserve">
+    <value>Zaznamenávejte a sledujte veškerý servis, opravy a plány údržby pomocí intuitivního systému.</value>
+  </data>
+  <data name="FeatureMaintenanceItem1" xml:space="preserve">
+    <value>Připomínky servisu</value>
+  </data>
+  <data name="FeatureMaintenanceItem2" xml:space="preserve">
+    <value>Historie oprav</value>
+  </data>
+  <data name="FeatureMaintenanceItem3" xml:space="preserve">
+    <value>Plánování údržby</value>
+  </data>
+  <data name="FeatureFuelTitle" xml:space="preserve">
+    <value>Správa paliva</value>
+  </data>
+  <data name="FeatureFuelDescription" xml:space="preserve">
+    <value>Sledujte spotřebu paliva, náklady a analyzujte efektivitu vašeho vozidla v čase.</value>
+  </data>
+  <data name="FeatureFuelItem1" xml:space="preserve">
+    <value>Sledování spotřeby paliva</value>
+  </data>
+  <data name="FeatureFuelItem2" xml:space="preserve">
+    <value>Analýza nákladů</value>
+  </data>
+  <data name="FeatureFuelItem3" xml:space="preserve">
+    <value>Přehledy efektivity</value>
+  </data>
+  <data name="FeatureCostsTitle" xml:space="preserve">
+    <value>Analýza nákladů</value>
+  </data>
+  <data name="FeatureCostsDescription" xml:space="preserve">
+    <value>Vizualizujte a pochopte provozní náklady vozidla pomocí detailních analýz a přehledů.</value>
+  </data>
+  <data name="FeatureCostsItem1" xml:space="preserve">
+    <value>Kategorizace výdajů</value>
+  </data>
+  <data name="FeatureCostsItem2" xml:space="preserve">
+    <value>Predikce nákladů</value>
+  </data>
+  <data name="FeatureCostsItem3" xml:space="preserve">
+    <value>Plánování rozpočtu</value>
+  </data>
+  <data name="HowItWorksTitle" xml:space="preserve">
+    <value>Jak to funguje</value>
+  </data>
+  <data name="HowItWorksSubtitle" xml:space="preserve">
+    <value>Začněte spravovat své vozidlo ve třech jednoduchých krocích</value>
+  </data>
+  <data name="Step1Title" xml:space="preserve">
+    <value>Přidejte své vozidlo</value>
+  </data>
+  <data name="Step1Description" xml:space="preserve">
+    <value>Zadejte údaje o vozidle a začněte využívat komplexní systém sledování.</value>
+  </data>
+  <data name="Step2Title" xml:space="preserve">
+    <value>Zaznamenávejte servis a výdaje</value>
+  </data>
+  <data name="Step2Description" xml:space="preserve">
+    <value>Ukládejte tankování, údržbu, opravy a další výdaje spojené s vozidlem.</value>
+  </data>
+  <data name="Step3Title" xml:space="preserve">
+    <value>Analyzujte a šetřete</value>
+  </data>
+  <data name="Step3Description" xml:space="preserve">
+    <value>Využijte přehledy k pochopení nákladů a optimalizaci údržby vozidla.</value>
+  </data>
+  <data name="CtaTitle" xml:space="preserve">
+    <value>Jste připraveni převzít kontrolu nad náklady na své vozidlo?</value>
+  </data>
+  <data name="CtaSubtitle" xml:space="preserve">
+    <value>Připojte se k tisícům majitelů vozidel, kteří šetří čas i peníze s VehicleDiary</value>
+  </data>
+  <data name="CtaButton" xml:space="preserve">
+    <value>Začít hned</value>
+  </data>
+  <data name="FooterFeatures" xml:space="preserve">
+    <value>Funkce</value>
+  </data>
+  <data name="FooterPricing" xml:space="preserve">
+    <value>Ceník</value>
+  </data>
+  <data name="FooterAbout" xml:space="preserve">
+    <value>O aplikaci</value>
+  </data>
+  <data name="FooterContact" xml:space="preserve">
+    <value>Kontakt</value>
+  </data>
+  <data name="FooterCopyright" xml:space="preserve">
+    <value>© 2026 VehicleDiary. Všechna práva vyhrazena.</value>
+  </data>
+</root>

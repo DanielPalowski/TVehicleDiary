@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject IViewLocalizer Localizer
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -381,15 +383,15 @@
                 <a asp-controller="Vehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
                    class="back-btn text-black bg-white/10 border-white/20 hover:bg-white/20">
                     <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                    Back to Vehicles
+                    @Localizer["BackToVehicles"]
                 </a>
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
                         <i data-lucide="car" class="w-5 h-5 text-white"></i>
                     </div>
                     <div>
-                        <h1 class="font-bold">Vehicle Information Hub</h1>
-                        <p class="text-sm text-white/70">Complete Vehicle Management</p>
+                        <h1 class="font-bold">@Localizer["VehicleInformationHub"]</h1>
+                        <p class="text-sm text-white/70">@Localizer["CompleteVehicleManagement"]</p>
                     </div>
                 </div>
             </div>
@@ -402,17 +404,17 @@
         <div class="hero-section mb-8 md:mb-12">
             <div class="text-center py-8 px-4 md:py-12">
                 <h1 class="text-3xl md:text-5xl font-bold mb-4 md:mb-6">
-                    <span class="gradient-text">Vehicle Information Hub</span>
+                    <span class="gradient-text">@Localizer["HeroTitle"]</span>
                 </h1>
                 <p class="text-gray-600 text-lg mb-6 max-w-2xl mx-auto md:text-xl">
-                    Complete financial overview of your vehicle's maintenance history. Track all expenses across repairs, upgrades, and diagnostics.
+                    @Localizer["HeroSubtitle"]
                 </p>
 
                 <div class="action-buttons">
                     <a asp-controller="RepairVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
                        class="inline-flex items-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl font-medium hover:opacity-90 transition-opacity shadow-lg">
                         <i data-lucide="history" class="w-5 h-5"></i>
-                        View Complete History
+                        @Localizer["ViewCompleteHistory"]
                     </a>
                 </div>
             </div>
@@ -420,9 +422,9 @@
 
         <!-- Statistics Section with Financial Overview -->
         <div class="mb-8 md:mb-12">
-            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">Financial Overview</h2>
+            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">@Localizer["FinancialOverview"]</h2>
             <p class="text-gray-600 mb-6 md:mb-8 max-w-2xl">
-                Total investment in your vehicle's maintenance and improvements
+                @Localizer["FinancialOverviewDescription"]
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8">
@@ -435,7 +437,7 @@
                         <div>
                             <div class="stat-label">
                                 <i data-lucide="dollar-sign" class="w-4 h-4"></i>
-                                Total Repair Cost
+                                @Localizer["TotalRepairCost"]
                             </div>
                             <div class="stat-number" id="repairCost">
                                 @Model.TotalRepairCost
@@ -443,8 +445,7 @@
                         </div>
                     </div>
                     <p class="stat-description mt-4">
-                        Total amount spent on all repairs, maintenance, and part replacements.
-                        Includes labor, parts, and service fees.
+                        @Localizer["TotalRepairCostDescription"]
                     </p>
                 </div>
 
@@ -457,7 +458,7 @@
                         <div>
                             <div class="stat-label">
                                 <i data-lucide="dollar-sign" class="w-4 h-4"></i>
-                                Total Upgrade Cost
+                                @Localizer["TotalUpgradeCost"]
                             </div>
                             <div class="stat-number" id="upgradeCost">
                                 @Model.TotalUpgradeCost
@@ -465,8 +466,7 @@
                         </div>
                     </div>
                     <p class="stat-description mt-4">
-                        Total investment in performance upgrades, modifications, and enhancements.
-                        Includes all aftermarket parts and installation.
+                        @Localizer["TotalUpgradeCostDescription"]
                     </p>
                 </div>
 
@@ -479,7 +479,7 @@
                         <div>
                             <div class="stat-label">
                                 <i data-lucide="dollar-sign" class="w-4 h-4"></i>
-                                Total Diagnostic Cost
+                                @Localizer["TotalDiagnosticCost"]
                             </div>
                             <div class="stat-number" id="diagnosticCost">
                                 @Model.TotalDiagnosticCost
@@ -487,8 +487,7 @@
                         </div>
                     </div>
                     <p class="stat-description mt-4">
-                        Total spent on diagnostic services, health checks, and system analysis.
-                        Includes professional scanning and inspection fees.
+                        @Localizer["TotalDiagnosticCostDescription"]
                     </p>
                 </div>
             </div>
@@ -497,16 +496,16 @@
             <div class="bg-gradient-to-r from-gray-900 to-slate-900 rounded-2xl p-6 md:p-8 text-white mb-8 md:mb-12">
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     <div>
-                        <h3 class="text-xl md:text-2xl font-bold mb-2">Total Vehicle Investment</h3>
+                        <h3 class="text-xl md:text-2xl font-bold mb-2">@Localizer["TotalVehicleInvestment"]</h3>
                         <p class="text-gray-300 mb-4 md:mb-0">
-                            Combined investment across all maintenance categories
+                            @Localizer["TotalVehicleInvestmentDescription"]
                         </p>
                     </div>
                     <div class="text-right">
                         <div class="text-3xl md:text-5xl font-bold mb-2" id="totalInvestment">
                             <!-- Total will be calculated by JavaScript -->
                         </div>
-                        <p class="text-gray-300">All-time maintenance costs</p>
+                        <p class="text-gray-300">@Localizer["AllTimeMaintenanceCosts"]</p>
                     </div>
                 </div>
             </div>
@@ -514,9 +513,9 @@
 
         <!-- Hub Cards Section -->
         <div class="mb-12">
-            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">Vehicle Information Categories</h2>
+            <h2 class="text-2xl md:text-3xl font-bold mb-2 text-gray-900">@Localizer["VehicleInformationCategories"]</h2>
             <p class="text-gray-600 mb-8 max-w-2xl">
-                Access detailed records and manage all aspects of your vehicle's history
+                @Localizer["VehicleInformationCategoriesDescription"]
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -526,15 +525,14 @@
                         <div class="card-icon">
                             <i data-lucide="wrench" class="w-8 h-8"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Repair History</h3>
+                        <h3 class="text-xl font-bold mb-3">@Localizer["RepairHistory"]</h3>
                         <p class="text-white/90 mb-6 flex-grow">
-                            Complete record of all repairs, maintenance services, and part replacements.
-                            Track dates, costs, service providers, and detailed repair descriptions.
+                            @Localizer["RepairHistoryDescription"]
                         </p>
                         <div class="mt-auto">
                             <a asp-controller="RepairVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
                                class="btn-outline-light inline-flex items-center justify-center w-full">
-                                <span>View Repairs</span>
+                                <span>@Localizer["ViewRepairs"]</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </a>
                         </div>
@@ -547,15 +545,14 @@
                         <div class="card-icon">
                             <i data-lucide="zap" class="w-8 h-8"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Upgrades & Modifications</h3>
+                        <h3 class="text-xl font-bold mb-3">@Localizer["UpgradesModifications"]</h3>
                         <p class="text-white/90 mb-6 flex-grow">
-                            Track all performance upgrades, aesthetic modifications, and feature enhancements.
-                            Document costs, installation dates, and performance improvements.
+                            @Localizer["UpgradesModificationsDescription"]
                         </p>
                         <div class="mt-auto">
                             <a asp-controller="UpgradeVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
                                class="btn-outline-light inline-flex items-center justify-center w-full">
-                                <span>View Upgrades</span>
+                                <span>@Localizer["ViewUpgrades"]</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </a>
                         </div>
@@ -568,15 +565,14 @@
                         <div class="card-icon">
                             <i data-lucide="activity" class="w-8 h-8"></i>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">Diagnostics & Health</h3>
+                        <h3 class="text-xl font-bold mb-3">@Localizer["DiagnosticsHealth"]</h3>
                         <p class="text-white/90 mb-6 flex-grow">
-                            Access comprehensive diagnostic reports, error code history, and vehicle health checks.
-                            Monitor system performance and preventive maintenance schedules.
+                            @Localizer["DiagnosticsHealthDescription"]
                         </p>
                         <div class="mt-auto">
                             <a asp-controller="DiagnosticVehicle" asp-action="Index" asp-route-vehicleIDRoute="@Model.vehicleId"
                                class="btn-outline-light inline-flex items-center justify-center w-full">
-                                <span>View Diagnostics</span>
+                                <span>@Localizer["ViewDiagnostics"]</span>
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </a>
                         </div>
@@ -594,10 +590,10 @@
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
                         <i data-lucide="car" class="w-4 h-4 text-white"></i>
                     </div>
-                    <span class="font-medium text-gray-900">Vehicle Information System</span>
+                    <span class="font-medium text-gray-900">@Localizer["VehicleInformationSystem"]</span>
                 </div>
                 <p class="text-sm text-gray-600">
-                    © 2024 Vehicle Information Hub. All data securely stored and encrypted.
+                    @Localizer["FooterCopyright"]
                 </p>
             </div>
         </div>
