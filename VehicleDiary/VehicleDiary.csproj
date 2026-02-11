@@ -29,8 +29,10 @@
 
 	<ItemGroup>
 	  <Folder Include="Infrastructure\Data\Migrations\" />
+	  <Folder Include="Resources\Areas\Identity\Pages\Account\" />
 	  <Folder Include="Resources\Web\Views\CarUsage\" />
 	  <Folder Include="Resources\Web\Views\AboutUs\" />
+	  <Folder Include="Resources\Web\Views\UpgradeVehicle\" />
 	  <Folder Include="Resources\Web\Views\Shared\" />
 	</ItemGroup>
 

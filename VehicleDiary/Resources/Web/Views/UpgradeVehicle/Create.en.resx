@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- Page Titles -->
+  <data name="Vehicle Service History" xml:space="preserve"><value>Vehicle Service History</value></data>
+  <data name="Add new upgrade record" xml:space="preserve"><value>Add new upgrade record</value></data>
+  
+  <!-- Form Labels -->
+  <data name="Category" xml:space="preserve"><value>Category</value></data>
+  <data name="Select Category" xml:space="preserve"><value>Select Category</value></data>
+  <data name="Vehicle Upgrades" xml:space="preserve"><value>Vehicle Upgrades</value></data>
+  <data name="Type" xml:space="preserve"><value>Type</value></data>
+  <data name="Select Type" xml:space="preserve"><value>Select Type</value></data>
+  <data name="Part Origin" xml:space="preserve"><value>Part Origin</value></data>
+  <data name="Select Part Origin" xml:space="preserve"><value>Select Part Origin</value></data>
+  <data name="Service Part" xml:space="preserve"><value>Service Part</value></data>
+  <data name="BC racing coilovers" xml:space="preserve"><value>BC racing coilovers</value></data>
+  <data name="Part Brand" xml:space="preserve"><value>Part Brand</value></data>
+  <data name="(optional)" xml:space="preserve"><value>(optional)</value></data>
+  <data name="Bosch" xml:space="preserve"><value>Bosch</value></data>
+  <data name="Part Code" xml:space="preserve"><value>Part Code</value></data>
+  <data name="12345ABC" xml:space="preserve"><value>12345ABC</value></data>
+  <data name="Mileage" xml:space="preserve"><value>Mileage</value></data>
+  <data name="158000" xml:space="preserve"><value>158000</value></data>
+  <data name="Date" xml:space="preserve"><value>Date</value></data>
+  <data name="Price" xml:space="preserve"><value>Price</value></data>
+  <data name="Technician/Service" xml:space="preserve"><value>Technician/Service</value></data>
+  <data name="John Doe / Car Repairs" xml:space="preserve"><value>John Doe / Car Repairs</value></data>
+  <data name="Upload File" xml:space="preserve"><value>Upload File</value></data>
+  <data name="(optional, max 5 MB)" xml:space="preserve"><value>(optional, max 5 MB)</value></data>
+  <data name="Allowed formats: PDF, JPG, PNG, DOC, DOCX, TXT" xml:space="preserve"><value>Allowed formats: PDF, JPG, PNG, DOC, DOCX, TXT</value></data>
+  <data name="Notes" xml:space="preserve"><value>Notes</value></data>
+  <data name="Additional notes..." xml:space="preserve"><value>Additional notes...</value></data>
+  <data name="Add Service Record" xml:space="preserve"><value>Add Service Record</value></data>
+  
+  <!-- Validation Messages -->
+  <data name="Please select Category, Type and Part Origin" xml:space="preserve"><value>Please select Category, Type and Part Origin</value></data>
+  <data name="Processing..." xml:space="preserve"><value>Processing...</value></data>
+  <data name="File size" xml:space="preserve"><value>File size</value></data>
+  <data name="exceeds the 5 MB limit." xml:space="preserve"><value>exceeds the 5 MB limit.</value></data>
+  <data name="File type" xml:space="preserve"><value>File type</value></data>
+  <data name="is not allowed." xml:space="preserve"><value>is not allowed.</value></data>
+  <data name="File size exceeds the 5 MB limit. Please choose a smaller file." xml:space="preserve"><value>File size exceeds the 5 MB limit. Please choose a smaller file.</value></data>
+</root>

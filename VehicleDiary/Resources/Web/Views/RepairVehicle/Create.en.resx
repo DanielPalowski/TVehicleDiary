@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Vehicle Service History</value>
+  </data>
+  <data name="CategoryLabel" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="TypeLabel" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="ServiceNameLabel" xml:space="preserve">
+    <value>Service Name</value>
+  </data>
+  <data name="PartLabel" xml:space="preserve">
+    <value>Part</value>
+  </data>
+  <data name="PartBrandLabel" xml:space="preserve">
+    <value>Part Brand</value>
+  </data>
+  <data name="PartCodeLabel" xml:space="preserve">
+    <value>Part Code</value>
+  </data>
+  <data name="MileageLabel" xml:space="preserve">
+    <value>Mileage</value>
+  </data>
+  <data name="DateLabel" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="PriceLabel" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="TechnicianLabel" xml:space="preserve">
+    <value>Technician/Service</value>
+  </data>
+  <data name="UploadFileLabel" xml:space="preserve">
+    <value>Upload File</value>
+  </data>
+  <data name="NotesLabel" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="AddServiceRecordButton" xml:space="preserve">
+    <value>Add Service Record</value>
+  </data>
+  <data name="SelectCategoryPlaceholder" xml:space="preserve">
+    <value>Select Category</value>
+  </data>
+  <data name="SelectTypePlaceholder" xml:space="preserve">
+    <value>Select Type</value>
+  </data>
+  <data name="ServiceNamePlaceholder" xml:space="preserve">
+    <value>Air Leak</value>
+  </data>
+  <data name="PartPlaceholder" xml:space="preserve">
+    <value>Air intake elbow</value>
+  </data>
+  <data name="PartBrandPlaceholder" xml:space="preserve">
+    <value>OEM Brand</value>
+  </data>
+  <data name="PartCodePlaceholder" xml:space="preserve">
+    <value>12345ABC</value>
+  </data>
+  <data name="MileagePlaceholder" xml:space="preserve">
+    <value>158000</value>
+  </data>
+  <data name="TechnicianPlaceholder" xml:space="preserve">
+    <value>John Doe / Car Repairs</value>
+  </data>
+  <data name="NotesPlaceholder" xml:space="preserve">
+    <value>Additional notes...</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="OptionalField" xml:space="preserve">
+    <value>(optional)</value>
+  </data>
+  <data name="VehicleRepairsOption" xml:space="preserve">
+    <value>Vehicle Repairs</value>
+  </data>
+<data name="VehicleUpgrades" xml:space="preserve"><value>Vehicle Upgrades</value></data>
+<data name="Diagnostics" xml:space="preserve"><value>Diagnostics</value></data>
+<data name="Retrofit" xml:space="preserve"><value>Retrofit</value></data>
+<data name="Performance" xml:space="preserve"><value>Performance</value></data>
+<data name="Style" xml:space="preserve"><value>Style</value></data>
+<data name="Interior" xml:space="preserve"><value>Interior</value></data>
+<data name="Accessories" xml:space="preserve"><value>Accessories</value></data>
+<data name="Coding" xml:space="preserve"><value>Coding</value></data>
+<data name="ErrorDiagnostics" xml:space="preserve"><value>Error Diagnostics</value></data>
+<data name="SoftwareUpdate" xml:space="preserve"><value>Software Update</value></data>
+<data name="PleaseSelectCategoryAndType" xml:space="preserve"><value>Please select both a category and type</value></data>
+<data name="Processing" xml:space="preserve"><value>Processing...</value></data>
+<data name="AddServiceRecord" xml:space="preserve"><value>Add Service Record</value></data>
+<data name="FillServiceDetails" xml:space="preserve"><value>Fill in service details for your vehicle</value></data>
+<data name="ServiceFormTip" xml:space="preserve"><value>Keep track of all your vehicle services for better maintenance history.</value></data>
+</root>

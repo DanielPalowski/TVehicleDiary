@@ -1,332 +1,411 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBUpgradeVehicleModelVM
+@inject IViewLocalizer Localizer
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vehicle Diary - Your Digital Garage</title>
-    <link rel="stylesheet" href="~/css/AddingVehicleCreate/style.css" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
-}
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
-}
-
-
 <body>
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="card service-history-card mb-5">
-                    <div class="card-body p-4">
-                        <h2 class="service-history-title mb-4">
-                            <i class="fas fa-tools me-2 service-icon-orange"></i>
-                            <span style="margin-left: 1%;">Vehicle Service History</span>
-                        </h2>
-                        <form asp-action="Create" method="post" enctype="multipart/form-data" id="repairForm">
-                            <input type="hidden" asp-for="VehicleId" />
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+            <div class="flex items-center gap-3">
+                <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
+                <p class="text-green-700">@TempData["SuccessMessage"]</p>
+            </div>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <div class="flex items-center gap-3">
+                <i data-lucide="alert-circle" class="w-5 h-5 text-red-600"></i>
+                <p class="text-red-700">@TempData["ErrorMessage"]</p>
+            </div>
+        </div>
+    }
 
-                            <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
-
-                            <div class="row g-3">
-
-                                <!-- Category -->
-                                <div class="col-md-6">
-                                    <label asp-for="UpgradeVCategory" class="form-label service-form-label">
-                                        <i class="fas fa-list me-1 service-icon-orange"></i>Category
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <select asp-for="UpgradeVCategory" class="form-control service-form-control" id="categorySelect" required>
-                                        <option value="">Select Category</option>
-                                        <option value="Vehicle Upgrades">Vehicle Upgrades</option>
-                                    </select>
-                                    <span asp-validation-for="UpgradeVCategory" class="text-danger small"></span>
-                                </div>
-
-                                <!-- Type -->
-                                <div class="col-md-6">
-                                    <label asp-for="UpgradeVType" class="form-label service-form-label">
-                                        <i class="fas fa-cog me-1 service-icon-orange"></i>Type
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <select asp-for="UpgradeVType" class="form-control service-form-control" id="typeSelect" required disabled>
-                                        <option value="">Select Type</option>
-                                    </select>
-                                    <span asp-validation-for="UpgradeVType" class="text-danger small"></span>
-                                </div>
-
-
-                                <!-- Status -->
-                                <div class="col-md-6">
-                                    <label asp-for="UpgradeVStatus" class="form-label service-form-label">
-                                        <i class="fas fa-cog me-1 service-icon-orange"></i>Part Origin
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <select asp-for="UpgradeVStatus"
-                                            class="form-control service-form-control"
-                                            id="statusSelect"
-                                            required
-                                            disabled>
-                                        <option value="">Select Part Origin</option>
-                                    </select>
-                                    <span asp-validation-for="UpgradeVStatus" class="text-danger small"></span>
-                                </div>
-
-
-                                <!-- Service Name -->
-                                <div class="col-md-6">
-                                    <label asp-for="UpgradeVName" class="form-label service-form-label">
-                                        <i class="fas fa-wrench me-1 service-icon-orange"></i>Service Part
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="text" asp-for="UpgradeVName" class="form-control service-form-control" placeholder="BC racing coilovers" required>
-                                    <span asp-validation-for="UpgradeVName" class="text-danger small"></span>
-                                </div>
-
-                                
-
-                                <!-- Part Brand & Code -->
-                                <div class="col-md-6">
-                                    <label asp-for="UpgradeVPartBrand" class="form-label service-form-label">
-                                        <i class="fas fa-industry me-1 service-icon-orange"></i>Part Brand
-                                        <span class="text-muted small">(optional)</span>
-                                    </label>
-                                    <input type="text" asp-for="UpgradeVPartBrand" class="form-control service-form-control" placeholder="Bosch">
-                                    <span asp-validation-for="UpgradeVPartBrand" class="text-danger small"></span>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <label asp-for="UpgradeVPartCode" class="form-label service-form-label">
-                                        <i class="fas fa-barcode me-1 service-icon-orange"></i>Part Code
-                                        <span class="text-muted small">(optional)</span>
-                                    </label>
-                                    <input type="text" asp-for="UpgradeVPartCode" class="form-control service-form-control" placeholder="12345ABC">
-                                    <span asp-validation-for="UpgradeVPartCode" class="text-danger small"></span>
-                                </div>
-
-                                <!-- Mileage -->
-                                <div class="col-md-4">
-                                    <label asp-for="UpgradeVMileage" class="form-label service-form-label">
-                                        <i class="fas fa-tachometer-alt me-1 service-icon-orange"></i>Mileage
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="number" asp-for="UpgradeVMileage" class="form-control service-form-control" placeholder="158000" required>
-                                    <span asp-validation-for="UpgradeVMileage" class="text-danger small"></span>
-                                </div>
-
-                                <!-- Date -->
-                                <div class="col-md-4">
-                                    <label asp-for="UpgradeVWhen" class="form-label service-form-label">
-                                        <i class="fas fa-calendar me-1 service-icon-orange"></i>Date
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <input type="date" asp-for="UpgradeVWhen" class="form-control service-form-control"
-                                           value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
-                                    <span asp-validation-for="UpgradeVWhen" class="text-danger small"></span>
-                                </div>
-
-                                <!-- Price -->
-                                <div class="col-md-4">
-                                    <label asp-for="UpgradeVPrice" class="form-label service-form-label">
-                                        <i class="fas fa-euro-sign me-1 service-icon-orange"></i>Price
-                                        <span class="text-danger">*</span>
-                                    </label>
-                                    <div class="input-group service-input-group">
-
-                                        <input type="number" step="0.01" asp-for="UpgradeVPrice" class="form-control service-form-control" placeholder="120.50" required>
-                                        <span class="input-group-text">€</span>
-                                    </div>
-                                    <span asp-validation-for="UpgradeVPrice" class="text-danger small"></span>
-                                </div>
-
-                                <!-- Technician -->
-                                <div class="col-md-6">
-                                    <label asp-for="UpgradeVTechnician" class="form-label service-form-label">
-                                        <i class="fas fa-user me-1 service-icon-orange"></i>Technician/Service
-                                        <span class="text-muted small">(optional)</span>
-                                    </label>
-                                    <input type="text" asp-for="UpgradeVTechnician" class="form-control service-form-control" placeholder="John Doe / Car Repairs">
-                                    <span asp-validation-for="UpgradeVTechnician" class="text-danger small"></span>
-                                </div>
-
-                                <!-- File Upload -->
-                                <div class="col-md-6">
-                                    <label asp-for="Upload" class="form-label service-form-label">
-                                        <i class="fas fa-file-upload me-1 service-icon-orange"></i>Upload File
-                                        <span class="text-muted small">(optional, max 5 MB)</span>
-                                    </label>
-                                    <input asp-for="Upload" type="file" class="form-control"
-                                           onchange="validateFile(this)"
-                                           accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.txt" />
-                                    <div class="form-text">Allowed formats: PDF, JPG, PNG, DOC, DOCX, TXT</div>
-                                    <div id="fileSizeWarning" class="text-danger small mt-1" style="display: none;"></div>
-                                    <span asp-validation-for="Upload" class="text-danger small"></span>
-                                </div>
-
-                                <!-- Notes -->
-                                <div class="col-12">
-                                    <label asp-for="UpgradeVNotes" class="form-label service-form-label">
-                                        <i class="fas fa-sticky-note me-1 service-icon-orange"></i>Notes
-                                        <span class="text-muted small">(optional)</span>
-                                    </label>
-                                    <textarea asp-for="UpgradeVNotes" class="form-control service-form-control service-textarea" rows="3" placeholder="Additional notes..."></textarea>
-                                    <span asp-validation-for="UpgradeVNotes" class="text-danger small"></span>
-                                </div>
-
-                                <!-- Submit -->
-                                <div class="col-12 mt-4">
-                                    <button class="btn btn-primary service-submit-btn w-100" type="submit" id="submitButton" >
-                                        <i class="fas fa-plus-circle me-2 service-icon-white"></i>Add Service Record
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
+    <div class="min-h-screen bg-gray-50 py-8">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white p-6">
+                    <div class="flex items-center">
+                        <div class="bg-white/20 p-3 rounded-lg mr-4">
+                            <i data-lucide="wrench" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold">@Localizer["Vehicle Service History"]</h1>
+                            <p class="text-blue-100">@Localizer["Add new upgrade record"]</p>
+                        </div>
                     </div>
+                </div>
+
+                <!-- Form -->
+                <div class="p-6">
+                    <form asp-action="Create" method="post" enctype="multipart/form-data" id="upgradeForm">
+                        <input type="hidden" asp-for="VehicleId" />
+
+                        <div asp-validation-summary="ModelOnly" class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700"></div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Category -->
+                            <div class="space-y-2">
+                                <label asp-for="UpgradeVCategory" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="list" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Category"]
+                                        <span class="text-red-500 ml-1">*</span>
+                                    </div>
+                                </label>
+                                <select asp-for="UpgradeVCategory" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" id="categorySelect" required>
+                                    <option value="">@Localizer["Select Category"]</option>
+                                    <option value="Vehicle Upgrades">@Localizer["Vehicle Upgrades"]</option>
+                                </select>
+                                <span asp-validation-for="UpgradeVCategory" class="text-red-500 text-sm"></span>
+                            </div>
+
+                            <!-- Type -->
+                            <div class="space-y-2">
+                                <label asp-for="UpgradeVType" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="cog" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Type"]
+                                        <span class="text-red-500 ml-1">*</span>
+                                    </div>
+                                </label>
+                                <select asp-for="UpgradeVType" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50" id="typeSelect" required disabled>
+                                    <option value="">@Localizer["Select Type"]</option>
+                                </select>
+                                <span asp-validation-for="UpgradeVType" class="text-red-500 text-sm"></span>
+                            </div>
+
+                            <!-- Part Origin -->
+                            <div class="space-y-2">
+                                <label asp-for="UpgradeVStatus" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="package" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Part Origin"]
+                                        <span class="text-red-500 ml-1">*</span>
+                                    </div>
+                                </label>
+                                <select asp-for="UpgradeVStatus" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50" id="statusSelect" required disabled>
+                                    <option value="">@Localizer["Select Part Origin"]</option>
+                                </select>
+                                <span asp-validation-for="UpgradeVStatus" class="text-red-500 text-sm"></span>
+                            </div>
+
+                            <!-- Service Part -->
+                            <div class="space-y-2">
+                                <label asp-for="UpgradeVName" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="package" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Service Part"]
+                                        <span class="text-red-500 ml-1">*</span>
+                                    </div>
+                                </label>
+                                <input type="text" asp-for="UpgradeVName" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="@Localizer["BC racing coilovers"]" required>
+                                <span asp-validation-for="UpgradeVName" class="text-red-500 text-sm"></span>
+                            </div>
+
+                            <!-- Part Brand -->
+                            <div class="space-y-2">
+                                <label asp-for="UpgradeVPartBrand" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="factory" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Part Brand"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["(optional)"]</span>
+                                    </div>
+                                </label>
+                                <input type="text" asp-for="UpgradeVPartBrand" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="@Localizer["Bosch"]">
+                                <span asp-validation-for="UpgradeVPartBrand" class="text-red-500 text-sm"></span>
+                            </div>
+
+                            <!-- Part Code -->
+                            <div class="space-y-2">
+                                <label asp-for="UpgradeVPartCode" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="barcode" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Part Code"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["(optional)"]</span>
+                                    </div>
+                                </label>
+                                <input type="text" asp-for="UpgradeVPartCode" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="@Localizer["12345ABC"]">
+                                <span asp-validation-for="UpgradeVPartCode" class="text-red-500 text-sm"></span>
+                            </div>
+
+                            <!-- Mileage -->
+                            <div class="space-y-2">
+                                <label asp-for="UpgradeVMileage" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="gauge" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Mileage"]
+                                        <span class="text-red-500 ml-1">*</span>
+                                    </div>
+                                </label>
+                                <input type="number" asp-for="UpgradeVMileage" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="@Localizer["158000"]" required>
+                                <span asp-validation-for="UpgradeVMileage" class="text-red-500 text-sm"></span>
+                            </div>
+
+                            <!-- Date -->
+                            <div class="space-y-2">
+                                <label asp-for="UpgradeVWhen" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="calendar" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Date"]
+                                        <span class="text-red-500 ml-1">*</span>
+                                    </div>
+                                </label>
+                                <input type="date" asp-for="UpgradeVWhen" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
+                                <span asp-validation-for="UpgradeVWhen" class="text-red-500 text-sm"></span>
+                            </div>
+
+                            <!-- Price -->
+                            <div class="space-y-2">
+                                <label asp-for="UpgradeVPrice" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="euro" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Price"]
+                                        <span class="text-red-500 ml-1">*</span>
+                                    </div>
+                                </label>
+                                <div class="relative">
+                                    <input type="number" step="0.01" asp-for="UpgradeVPrice" class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="120.50" required>
+                                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                                        €
+                                    </div>
+                                </div>
+                                <span asp-validation-for="UpgradeVPrice" class="text-red-500 text-sm"></span>
+                            </div>
+
+                            <!-- Technician/Service -->
+                            <div class="space-y-2">
+                                <label asp-for="UpgradeVTechnician" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="user" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Technician/Service"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["(optional)"]</span>
+                                    </div>
+                                </label>
+                                <input type="text" asp-for="UpgradeVTechnician" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="@Localizer["John Doe / Car Repairs"]">
+                                <span asp-validation-for="UpgradeVTechnician" class="text-red-500 text-sm"></span>
+                            </div>
+
+                            <!-- File Upload -->
+                            <div class="space-y-2">
+                                <label asp-for="Upload" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="upload" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Upload File"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["(optional, max 5 MB)"]</span>
+                                    </div>
+                                </label>
+                                <input asp-for="Upload" type="file" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                       onchange="validateFile(this)"
+                                       accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.txt">
+                                <div class="text-gray-500 text-sm mt-1">@Localizer["Allowed formats: PDF, JPG, PNG, DOC, DOCX, TXT"]</div>
+                                <div id="fileSizeWarning" class="text-red-500 text-sm mt-1" style="display: none;"></div>
+                                <span asp-validation-for="Upload" class="text-red-500 text-sm"></span>
+                            </div>
+
+                            <!-- Notes -->
+                            <div class="md:col-span-2 space-y-2">
+                                <label asp-for="UpgradeVNotes" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="sticky-note" class="w-4 h-4 mr-2 text-blue-600"></i>
+                                        @Localizer["Notes"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["(optional)"]</span>
+                                    </div>
+                                </label>
+                                <textarea asp-for="UpgradeVNotes" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" rows="3" placeholder="@Localizer["Additional notes..."]"></textarea>
+                                <span asp-validation-for="UpgradeVNotes" class="text-red-500 text-sm"></span>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="mt-8">
+                            <button class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-semibold py-3.5 px-6 rounded-lg hover:from-blue-700 hover:to-indigo-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center" type="submit" id="submitButton">
+                                <i data-lucide="plus-circle" class="w-5 h-5 mr-2"></i>
+                                @Localizer["Add Service Record"]
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</body>
 
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
 
+        // Data structure mapping categories to types
+        const categoryTypes = {
+            "Vehicle Repairs": ["Engine", "Transmission", "Brakes", "Chassis", "Electrical", "Bodywork", "Air Conditioning"],
+            "Vehicle Upgrades": ["BodyKit","Lights","Suspension","Engine","Performance","Transmission","Aerodynamics","Brakes","Drivetrain","Exterior","Interior","Safety","Utility","Other"],
+            "Diagnostics": ["Coding", "Error Diagnostics", "Software Update","Tuning","Other"]
+        };
 
-<script>
-     // Data structure mapping categories to types
-    const categoryTypes = {
-        "Vehicle Repairs": ["Engine", "Transmission", "Brakes", "Chassis", "Electrical", "Bodywork", "Air Conditioning"],
-        "Vehicle Upgrades": ["BodyKit","Lights","Suspension","Engine","Performance","Transmission","Aerodynamics","Brakes","Drivetrain","Exterior","Interior","Safety","Utility","Other"],
-        "Diagnostics": ["Coding", "Error Diagnostics", "Software Update","Tuning","Other"]
-    };
+        // Part Origin options
+        const partOrigins = [
+            "Aftermarket (New)",
+            "Aftermarket (Used)",
+            "OEM Retrofit"
+        ];
 
-    // Part Origin options
-    const partOrigins = [
-        "Aftermarket (New)",
-        "Aftermarket (Used)",
-        "OEM Retrofit"
-    ];
+        // Get DOM elements
+        const categorySelect = document.getElementById('categorySelect');
+        const typeSelect = document.getElementById('typeSelect');
+        const statusSelect = document.getElementById('statusSelect');
+        const upgradeForm = document.getElementById('upgradeForm');
+        const submitButton = document.getElementById('submitButton');
 
-    // Get DOM elements
-    const categorySelect = document.getElementById('categorySelect');
-    const typeSelect = document.getElementById('typeSelect');
-    const statusSelect = document.getElementById('statusSelect');
-    const repairForm = document.getElementById('repairForm');
-    const submitButton = document.getElementById('submitButton');
+        // Category → Type
+        categorySelect.addEventListener('change', function () {
+            const selectedCategory = this.value;
 
-    // Category → Type
-    categorySelect.addEventListener('change', function () {
-        const selectedCategory = this.value;
+            // Reset Type
+            typeSelect.innerHTML = '<option value="">@Localizer["Select Type"]</option>';
+            typeSelect.disabled = true;
 
-        // Reset Type
-        typeSelect.innerHTML = '<option value="">Select Type</option>';
-        typeSelect.disabled = true;
+            // Reset Status
+            statusSelect.innerHTML = '<option value="">@Localizer["Select Part Origin"]</option>';
+            statusSelect.disabled = true;
 
-        // Reset Status
-        statusSelect.innerHTML = '<option value="">Select Part Origin</option>';
-        statusSelect.disabled = true;
+            if (selectedCategory && categoryTypes[selectedCategory]) {
+                categoryTypes[selectedCategory].forEach(type => {
+                    const option = document.createElement('option');
+                    option.value = type;
+                    option.textContent = type;
+                    typeSelect.appendChild(option);
+                });
 
-        if (selectedCategory && categoryTypes[selectedCategory]) {
-            categoryTypes[selectedCategory].forEach(type => {
-                const option = document.createElement('option');
-                option.value = type;
-                option.textContent = type;
-                typeSelect.appendChild(option);
-            });
-
-            typeSelect.disabled = false;
-        }
-    });
-
-    // Type → Part Origin
-    typeSelect.addEventListener('change', function () {
-
-        statusSelect.innerHTML = '<option value="">Select Part Origin</option>';
-        statusSelect.disabled = true;
-
-        if (this.value) {
-            partOrigins.forEach(origin => {
-                const option = document.createElement('option');
-                option.value = origin;
-                option.textContent = origin;
-                statusSelect.appendChild(option);
-            });
-
-            statusSelect.disabled = false;
-        }
-    });
-
-    // Form validation
-    repairForm.addEventListener('submit', function(e) {
-        if (!categorySelect.value || !typeSelect.value || !statusSelect.value) {
-            e.preventDefault();
-            alert('Please select Category, Type and Part Origin');
-            return;
-        }
-
-        submitButton.innerHTML = '<span class="service-loading"></span> Processing...';
-        submitButton.disabled = true;
-    });
-
-
-    function validateFile(input) {
-        const maxSize = 5 * 1024 * 1024; // 5 MB
-        const fileSizeWarning = document.getElementById('fileSizeWarning');
-
-        if (input.files.length > 0) {
-            const file = input.files[0];
-            const fileSize = file.size;
-
-            if (fileSize > maxSize) {
-                fileSizeWarning.textContent = `File size (${(fileSize / (1024 * 1024)).toFixed(2)} MB) exceeds the 5 MB limit.`;
-                fileSizeWarning.style.display = 'block';
-                fileSizeWarning.style.color = 'red';
-                input.value = ''; // Clear the file input
-            } else {
-                fileSizeWarning.textContent = `File size: ${(fileSize / 1024).toFixed(2)} KB`;
-                fileSizeWarning.style.color = 'green';
-                fileSizeWarning.style.display = 'block';
+                typeSelect.disabled = false;
             }
+        });
 
-            // Validate file extension
-            const allowedExtensions = ['.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx', '.txt'];
-            const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+        // Type → Part Origin
+        typeSelect.addEventListener('change', function () {
 
-            if (!allowedExtensions.includes(fileExtension)) {
-                fileSizeWarning.textContent = `File type ${fileExtension} is not allowed.`;
-                fileSizeWarning.style.display = 'block';
-                fileSizeWarning.style.color = 'red';
-                input.value = '';
+            statusSelect.innerHTML = '<option value="">@Localizer["Select Part Origin"]</option>';
+            statusSelect.disabled = true;
+
+            if (this.value) {
+                partOrigins.forEach(origin => {
+                    const option = document.createElement('option');
+                    option.value = origin;
+                    option.textContent = origin;
+                    statusSelect.appendChild(option);
+                });
+
+                statusSelect.disabled = false;
             }
-        } else {
-            fileSizeWarning.style.display = 'none';
-        }
-    }
+        });
 
-    // Client-side validation before form submission
-    document.getElementById('repairForm').addEventListener('submit', function(e) {
-        const fileInput = document.querySelector('input[type="file"]');
-        const maxSize = 5 * 1024 * 1024;
-
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-
-            if (file.size > maxSize) {
+        // Form validation
+        upgradeForm.addEventListener('submit', function(e) {
+            if (!categorySelect.value || !typeSelect.value || !statusSelect.value) {
                 e.preventDefault();
-                alert('File size exceeds the 5 MB limit. Please choose a smaller file.');
-                return false;
+                alert('@Localizer["Please select Category, Type and Part Origin"]');
+                return;
+            }
+
+            submitButton.innerHTML = '<span class="loading-spinner"></span> @Localizer["Processing..."]';
+            submitButton.disabled = true;
+        });
+
+        function validateFile(input) {
+            const maxSize = 5 * 1024 * 1024; // 5 MB
+            const fileSizeWarning = document.getElementById('fileSizeWarning');
+
+            if (input.files.length > 0) {
+                const file = input.files[0];
+                const fileSize = file.size;
+
+                if (fileSize > maxSize) {
+                    fileSizeWarning.textContent = `@Localizer["File size"] (${(fileSize / (1024 * 1024)).toFixed(2)} MB) @Localizer["exceeds the 5 MB limit."]`;
+                    fileSizeWarning.style.display = 'block';
+                    fileSizeWarning.style.color = 'red';
+                    input.value = ''; // Clear the file input
+                } else {
+                    fileSizeWarning.textContent = `@Localizer["File size"]: ${(fileSize / 1024).toFixed(2)} KB`;
+                    fileSizeWarning.style.color = 'green';
+                    fileSizeWarning.style.display = 'block';
+                }
+
+                // Validate file extension
+                const allowedExtensions = ['.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx', '.txt'];
+                const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+
+                if (!allowedExtensions.includes(fileExtension)) {
+                    fileSizeWarning.textContent = `@Localizer["File type"] ${fileExtension} @Localizer["is not allowed."]`;
+                    fileSizeWarning.style.display = 'block';
+                    fileSizeWarning.style.color = 'red';
+                    input.value = '';
+                }
+            } else {
+                fileSizeWarning.style.display = 'none';
             }
         }
-    });
-</script>
-<style>
-    input:required,
-    select:required,
-    textarea:required {
-        border-left: 4px solid #ef4444; /* červený pruh u povinných polí */
-        padding-left: 0.5rem;
-    }
 
-</style>
+        // Client-side validation before form submission
+        document.getElementById('upgradeForm').addEventListener('submit', function(e) {
+            const fileInput = document.querySelector('input[type="file"]');
+            const maxSize = 5 * 1024 * 1024;
+
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+
+                if (file.size > maxSize) {
+                    e.preventDefault();
+                    alert('@Localizer["File size exceeds the 5 MB limit. Please choose a smaller file."]');
+                    return false;
+                }
+            }
+        });
+
+        // Loading spinner style
+        const style = document.createElement('style');
+        style.textContent = `
+            .loading-spinner {
+                display: inline-block;
+                width: 1rem;
+                height: 1rem;
+                border: 2px solid #ffffff;
+                border-radius: 50%;
+                border-top-color: transparent;
+                animation: spin 0.6s linear infinite;
+                margin-right: 0.5rem;
+            }
+            @@keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+            input:required, select:required, textarea:required {
+                border-left: 4px solid #ef4444;
+                padding-left: calc(1rem - 4px);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

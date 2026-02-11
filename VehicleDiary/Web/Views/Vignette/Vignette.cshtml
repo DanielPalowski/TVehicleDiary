@@ -1,118 +1,329 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBVignetteModelVM
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-xl-6">
-            <div class="card shadow-sm mb-5">
-                <div class="card-body p-4">
-                    <h2 class="card-title mb-4">Vignette Registration</h2>
-                    <form asp-action="Vignette" method="post">
-                        <input type="hidden" asp-for="vehicleId" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vignette Tracking | Vehicle Diary</title>
 
-                        <div class="row g-3">
-                            <!-- Country Select -->
-                            <div class="col-12">
-                                <label asp-for="VignetteCountry" class="form-label">Country</label>
-                                <select asp-for="VignetteCountry" class="form-select">
-                                    @foreach (var entry in ViewBag.Countries)
-                                    {
-                                        <option value="@entry.Name">@entry.Name</option>
-                                    }
-                                </select>
-                                <span asp-validation-for="VignetteCountry" class="text-danger small"></span>
-                            </div>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-                            <!-- Date Inputs -->
-                            <div class="col-md-6">
-                                <label asp-for="VignetteValidFrom" class="form-label">Valid From</label>
-                                <input type="date" asp-for="VignetteValidFrom" class="form-control"
-                                       value="@DateTime.Today.ToString("yyyy-MM-dd")">
-                                <span asp-validation-for="VignetteValidFrom" class="text-danger small"></span>
-                            </div>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-                            <div class="col-md-6">
-                                <label asp-for="VignetteValidTo" class="form-label">Valid To</label>
-                                <input type="date" asp-for="VignetteValidTo" class="form-control"
-                                       value="@DateTime.Today.ToString("yyyy-MM-dd")">
-                                <span asp-validation-for="VignetteValidTo" class="text-danger small"></span>
-                            </div>
-
-                            <!-- Price Input -->
-                            <div class="col-12">
-                                <label asp-for="VignettePrice" class="form-label">Price Paid</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">€</span>
-                                    <input type="text" asp-for="VignettePrice" class="form-control"
-                                           placeholder="Enter amount">
-                                </div>
-                                <span asp-validation-for="VignettePrice" class="text-danger small"></span>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <div class="col-12 mt-4">
-                                <button class="btn btn-primary w-100" type="submit">
-                                    <i class="fas fa-check me-2"></i>Submit Vignette
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vignette': {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-gray-900 to-gray-800 text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <a href="@Url.Action("Index", "Vehicle")" class="flex items-center gap-2 px-3 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    <span class="font-medium">Back</span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-vignette-500 to-blue-500 flex items-center justify-center">
+                        <i data-lucide="tag" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold">Vignette Tracking</h1>
+                        <p class="text-sm text-gray-300">Manage your vehicle's vignettes</p>
+                    </div>
                 </div>
             </div>
+        </div>
+    </header>
 
-            <!-- Vignettes List -->
-            <h3 class="h4 mb-4">Vignette History</h3>
-            <div class="row g-3">
-                @foreach (var entry in Model.VignetteView)
-                {
-                    <div class="col-12" id="oil-@entry.Id">
-                        <div class="card shadow-sm mb-3">
-                            <div class="card-body p-3">
-                                <div class="row align-items-center">
-                                    <div class="col-md-4">
-                                        <div class="d-flex align-items-center">
-                                            <i class="fas fa-tag text-primary me-2"></i>
-                                            <strong>@entry.VignetteCountry</strong>
-                                        </div>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <div class="max-w-6xl mx-auto">
+            <!-- Page Title -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Vignette Tracking</h1>
+                <p class="text-gray-600">Track and manage your vehicle's vignettes</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Form Section -->
+                <div class="space-y-6">
+                    <!-- Form Card -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-lg bg-vignette-100 flex items-center justify-center">
+                                <i data-lucide="plus-circle" class="w-5 h-5 text-vignette-600"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-900">Add Vignette</h2>
+                                <p class="text-sm text-gray-600">Register a new vignette</p>
+                            </div>
+                        </div>
+
+                        <form asp-action="Vignette" method="post" id="vignetteForm">
+                            <input type="hidden" asp-for="vehicleId" />
+
+                            <div class="space-y-4">
+                                <!-- Country -->
+                                <div>
+                                    <label asp-for="VignetteCountry" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Country
+                                    </label>
+                                    <select asp-for="VignetteCountry" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vignette-500 focus:border-vignette-500">
+                                        @if (ViewBag.Countries != null)
+                                        {
+                                            @foreach (var entry in ViewBag.Countries)
+                                            {
+                                                <option value="@entry.Name">@entry.Name</option>
+                                            }
+                                        }
+                                    </select>
+                                    <span asp-validation-for="VignetteCountry" class="text-red-500 text-sm"></span>
+                                </div>
+
+                                <!-- Date Range -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label asp-for="VignetteValidFrom" class="block text-sm font-medium text-gray-700 mb-1">
+                                            Valid From
+                                        </label>
+                                        <input type="date" asp-for="VignetteValidFrom"
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vignette-500 focus:border-vignette-500"
+                                               value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
+                                        <span asp-validation-for="VignetteValidFrom" class="text-red-500 text-sm"></span>
                                     </div>
-                                    <div class="col-md-4 text-muted small">
-                                        @entry.VignetteValidFrom.ToString("d MMM yyyy") -
-                                        @entry.VignetteValidTo.ToString("d MMM yyyy")
+
+                                    <div>
+                                        <label asp-for="VignetteValidTo" class="block text-sm font-medium text-gray-700 mb-1">
+                                            Valid To
+                                        </label>
+                                        <input type="date" asp-for="VignetteValidTo"
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vignette-500 focus:border-vignette-500"
+                                               value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
+                                        <span asp-validation-for="VignetteValidTo" class="text-red-500 text-sm"></span>
                                     </div>
-                                    <div class="col-md-4 text-end">
-                                        <span class="badge bg-success">€@entry.VignettePrice</span>
+                                </div>
+
+                                <!-- Price -->
+                                <div>
+                                    <label asp-for="VignettePrice" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Price (€)
+                                    </label>
+                                    <div class="relative">
+                                        <input type="number" step="0.01" asp-for="VignettePrice"
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vignette-500 focus:border-vignette-500"
+                                               placeholder="60.00" required>
                                     </div>
-                                    <button onclick="deleteVehicle('@entry.Id')" class="btn btn-outline-danger">
-                                        <i class="fas fa-trash-alt me-2"></i>Delete
+                                    <span asp-validation-for="VignettePrice" class="text-red-500 text-sm"></span>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="pt-4">
+                                    <button type="submit"
+                                            class="w-full bg-gradient-to-r from-vignette-600 to-blue-600 text-white font-medium py-3 px-4 rounded-lg hover:from-vignette-700 hover:to-blue-700 transition flex items-center justify-center gap-2">
+                                        <i data-lucide="save" class="w-5 h-5"></i>
+                                        Save Vignette
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                }
+
+                    <!-- Quick Stats -->
+                    @if (Model.VignetteView != null && Model.VignetteView.Any())
+                    {
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Quick Stats</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                                <div class="text-center p-3 bg-vignette-50 rounded-lg">
+                                    <div class="text-2xl font-bold text-vignette-600">@Model.VignetteView.Count()</div>
+                                    <div class="text-sm text-gray-600">Total</div>
+                                </div>
+                                <div class="text-center p-3 bg-vignette-50 rounded-lg">
+                                    <div class="text-2xl font-bold text-vignette-600">€@Model.VignetteView.Sum(o => o.VignettePrice).ToString("F2")</div>
+                                    <div class="text-sm text-gray-600">Total Cost</div>
+                                </div>
+                                <div class="text-center p-3 bg-vignette-50 rounded-lg">
+                                    @{
+                                        var activeVignettes = Model.VignetteView.Where(v => v.VignetteValidTo >= DateTime.Today).Count();
+                                    }
+                                    <div class="text-2xl font-bold text-vignette-600">@activeVignettes</div>
+                                    <div class="text-sm text-gray-600">Active</div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- History Section -->
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-bold text-gray-900">Vignette History</h2>
+                        <span class="text-sm text-gray-600">@(Model.VignetteView?.Count() ?? 0) records</span>
+                    </div>
+
+                    @if (Model.VignetteView != null && Model.VignetteView.Any())
+                    {
+                        <div class="space-y-3">
+                            @foreach (var entry in Model.VignetteView.OrderByDescending(o => o.VignetteValidFrom))
+                            {
+                                <div class="bg-white rounded-lg border border-gray-200 p-4 hover:border-vignette-300 transition" id="vignette-@entry.Id">
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                        <!-- Left: Details -->
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-3 mb-2">
+                                                <div class="w-8 h-8 rounded-lg bg-vignette-100 flex items-center justify-center">
+                                                    <i data-lucide="tag" class="w-4 h-4 text-vignette-600"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center gap-2">
+                                                        <span class="font-bold text-gray-900">@entry.VignetteCountry</span>
+                                                        @if (entry.VignetteValidTo >= DateTime.Today)
+                                                        {
+                                                            <span class="px-2 py-1 bg-green-100 text-green-700 text-xs font-medium rounded-full">
+                                                                Active
+                                                            </span>
+                                                        }
+                                                        else
+                                                        {
+                                                            <span class="px-2 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">
+                                                                Expired
+                                                            </span>
+                                                        }
+                                                    </div>
+                                                    <p class="text-sm text-gray-600 mt-1">
+                                                        @entry.VignetteValidFrom.ToString("d MMM yyyy") - @entry.VignetteValidTo.ToString("d MMM yyyy")
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="flex flex-wrap gap-2">
+                                                <span class="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+                                                    <i data-lucide="calendar" class="w-3 h-3"></i>
+                                                    @((entry.VignetteValidTo - entry.VignetteValidFrom).Days) days
+                                                </span>
+                                                <span class="inline-flex items-center gap-1 px-2 py-1 bg-vignette-100 text-vignette-700 text-sm rounded-full">
+                                                    <i data-lucide="euro" class="w-3 h-3"></i>
+                                                    €@entry.VignettePrice
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Right: Delete Button -->
+                                        <button onclick="deleteVignette('@entry.Id')"
+                                                class="inline-flex items-center gap-2 px-3 py-2 text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition">
+                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                            <span class="text-sm font-medium">Delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="bg-white rounded-xl border-2 border-dashed border-gray-300 p-8 text-center">
+                            <div class="w-12 h-12 rounded-full bg-vignette-100 flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="tag" class="w-6 h-6 text-vignette-600"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">No Vignettes Yet</h3>
+                            <p class="text-gray-600 mb-4">Start tracking your vignettes for highway access</p>
+                            <p class="text-sm text-gray-500">Add your first vignette using the form</p>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </main>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 mt-12">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-vignette-100 flex items-center justify-center">
+                        <i data-lucide="tag" class="w-4 h-4 text-vignette-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-900">Vignette Tracking</span>
+                </div>
+                <p class="text-sm text-gray-600">© 2024 Vehicle Diary</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        function deleteVehicle(ID) {
-            if (confirm("Are you sure you want to delete this?")) {
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Delete function
+        function deleteVignette(id) {
+            if (confirm("Are you sure you want to delete this vignette?")) {
                 $.ajax({
-                    url: "@Url.Action("Delete", "Vignette")/" + ID,
+                    url: "@Url.Action("Delete", "Vignette")/" + id,
                     type: "DELETE",
-                    success: function (result) {
-                        $("#oil-" + ID).remove();
+                    success: function () {
+                        const element = document.getElementById('vignette-' + id);
+                        if (element) {
+                            element.style.opacity = '0';
+                            element.style.transform = 'translateY(-10px)';
+                            setTimeout(() => element.remove(), 300);
+                        }
                     },
-                    error: function (err) {
-                        alert("An error occurred.");
+                    error: function () {
+                        alert("Error deleting record");
                     }
                 });
             }
         }
+
+        // Form validation
+        document.getElementById('vignetteForm')?.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+
+            // Show loading state
+            submitBtn.innerHTML = `
+                <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Saving...
+            `;
+            submitBtn.disabled = true;
+
+            // Re-enable after 5 seconds if submission fails
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 5000);
+        });
+
+        // Format price input
+        document.querySelector('input[name="VignettePrice"]')?.addEventListener('blur', function() {
+            if (this.value && !isNaN(this.value)) {
+                this.value = parseFloat(this.value).toFixed(2);
+            }
+        });
     </script>
-}
+</body>
+</html>

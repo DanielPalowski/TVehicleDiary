@@ -1,228 +1,466 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBUpgradeVehicleModelVM
+@inject IViewLocalizer Localizer
 
 @{
     var MaxUpgradeRecords = 25;
     var UpgradeRecordCount = Model.RepairViews.Count() < MaxUpgradeRecords;
 }
-<div class="container py-4">
-    @if (UpgradeRecordCount)
-    {
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 class="upgrade-history-title">
-                <i class="fas fa-history me-2"></i>Upgrades History
-            </h2>
-            <a asp-controller="UpgradeVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId" class="btn btn-primary btn-add-upgrade">
-                <i class="fas fa-plus-circle me-2"></i>Add New Upgrade
-            </a>
-        </div>
-    }
-    else
-    {
-        <div class="alert-custom alert-limit mb-5">
-            <div class="alert-icon">
-                <i class="fas fa-info-circle"></i>
-            </div>
-            <div class="alert-content">
-                <h4>Vehicle Upgrades Limit Reached</h4>
-                <p>You have reached the maximum limit of 25 upgrades. Remove an upgrade to add a new one.</p>
-            </div>
-        </div>
-    }
 
-    <!-- Filter Section - Initially Closed -->
-    <div class="filter-card mb-4">
-        <div class="filter-header" id="filterToggle">
-            <h3 class="filter-title">
-                <i class="fas fa-filter me-2"></i>Filters
-            </h3>
-            <span class="filter-toggle-icon">
-                <i class="fas fa-chevron-down"></i>
-            </span>
-        </div>
-        <div class="filter-content" id="filterContent" style="display: none;">
-            <div class="row g-3">
-                <div class="col-md-3">
-                    <label class="form-label">Category</label>
-                    <select class="form-control filter-select" id="filterCategory">
-                        <option value="">All Categories</option>
-                        <option value="Vehicle Upgrades">Vehicle Upgrades</option>
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label">Type</label>
-                    <select class="form-control filter-select" id="filterType">
-                        <option value="">All Types</option>
-                        <!-- Options will be populated dynamically based on category -->
-                    </select>
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label">Date Range</label>
-                    <div class="input-group">
-                        <input type="date" class="form-control filter-date" id="filterDateFrom" placeholder="From">
-                        <input type="date" class="form-control filter-date" id="filterDateTo" placeholder="To">
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <label class="form-label">Price Range</label>
-                    <div class="d-flex align-items-center">
-                        <input type="number" class="form-control filter-price" id="filterPriceMin" placeholder="Min" step="0.01">
-                        <span class="mx-2">-</span>
-                        <input type="number" class="form-control filter-price" id="filterPriceMax" placeholder="Max" step="0.01">
-                    </div>
-                </div>
-                <div class="col-12">
-                    <div class="d-flex justify-content-end gap-2">
-                        <button class="btn btn-outline-secondary" id="resetFilters">
-                            <i class="fas fa-redo me-1"></i>Reset Filters
-                        </button>
-                        <button class="btn btn-primary" id="applyFilters">
-                            <i class="fas fa-check me-1"></i>Apply Filters
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!DOCTYPE html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Localizer["Upgrades History"] - VehicleDiary</title>
 
-    <div class="results-count mb-3" id="resultsCount">
-        Showing <span id="filteredCount">@Model.RepairViews.Count()</span> of @Model.RepairViews.Count() upgrade records
-    </div>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    @if (Model.RepairViews != null && Model.RepairViews.Any())
-    {
-        <div class="upgrade-cards-container" id="upgradeCardsContainer">
-            @foreach (var upgrade in Model.RepairViews)
-            {
-                <div class="upgrade-card" id="upgrade-@upgrade.Id"
-                     data-category="@upgrade.UpgradeVCategory"
-                     data-type="@upgrade.UpgradeVType"
-                     data-date="@upgrade.UpgradeVWhen.ToString("yyyy-MM-dd")"
-                     data-price="@upgrade.UpgradeVPrice"
-                     data-mileage="@upgrade.UpgradeVMileage">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-                    <div class="upgrade-card-header">
-                        <div class="upgrade-category-badge">
-                            @upgrade.UpgradeVCategory
-                        </div>
-                        <span class="upgrade-date">@upgrade.UpgradeVWhen.ToString("d MMM yyyy")</span>
-                    </div>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-                    <div class="upgrade-card-body">
-                        <div class="upgrade-type">
-                            <i class="fas fa-cog me-2"></i>@upgrade.UpgradeVType
-                        </div>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                background: 'hsl(0, 0%, 99%)',
+                foreground: 'hsl(222, 47%, 11%)',
+                card: 'hsl(0, 0%, 100%)',
+                'card-foreground': 'hsl(222, 47%, 11%)',
+                primary: 'hsl(221, 83%, 53%)',
+                'primary-foreground': 'hsl(0, 0%, 100%)',
+                secondary: 'hsl(215, 20%, 95%)',
+                'secondary-foreground': 'hsl(222, 47%, 11%)',
+                muted: 'hsl(215, 20%, 96%)',
+                'muted-foreground': 'hsl(215, 16%, 47%)',
+                accent: 'hsl(221, 83%, 53%)',
+                border: 'hsl(215, 20%, 91%)',
+                success: 'hsl(160, 84%, 39%)',
+                warning: 'hsl(38, 92%, 50%)',
+                danger: 'hsl(0, 84%, 60%)',
+              },
+              fontFamily: {
+                heading: ['Space Grotesk', 'sans-serif'],
+                body: ['Inter', 'sans-serif'],
+              },
+              boxShadow: {
+                'soft': '0 4px 24px -2px rgba(30, 41, 59, 0.08)',
+                'elevated': '0 12px 40px -8px rgba(30, 41, 59, 0.12)',
+                'card': '0 8px 24px rgba(149, 157, 165, 0.15)',
+              },
+              animation: {
+                'fade-in': 'fadeIn 0.3s ease-out',
+                'slide-down': 'slideDown 0.3s ease-out',
+              },
+              keyframes: {
+                fadeIn: {
+                  '0%': { opacity: '0' },
+                  '100%': { opacity: '1' },
+                },
+                slideDown: {
+                  '0%': { opacity: '0', transform: 'translateY(-10px)' },
+                  '100%': { opacity: '1', transform: 'translateY(0)' },
+                }
+              }
+            },
+          },
+        }
+    </script>
 
-                        <h4 class="upgrade-name">@upgrade.UpgradeVName</h4>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-                        <!-- Mileage -->
-                        <div class="upgrade-detail-item">
-                            <i class="fas fa-tachometer-alt me-2"></i>Mileage: @upgrade.UpgradeVMileage km
-                        </div>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: hsl(0, 0%, 99%);
+            color: hsl(222, 47%, 11%);
+            -webkit-font-smoothing: antialiased;
+        }
 
-                        <!-- Status -->
-                        @if (!string.IsNullOrEmpty(upgrade.UpgradeVStatus))
-                        {
-                            <div class="upgrade-detail-item">
-                                <i class="fas fa-check-circle me-2"></i>Status: @upgrade.UpgradeVStatus
-                            </div>
-                        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
 
-                        <!-- Part Brand -->
-                        @if (!string.IsNullOrEmpty(upgrade.UpgradeVPartBrand))
-                        {
-                            <div class="upgrade-detail-item">
-                                <i class="fas fa-industry me-2"></i>Part Brand: @upgrade.UpgradeVPartBrand
-                            </div>
-                        }
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, hsl(221, 83%, 53%) 0%, hsl(221, 83%, 43%) 100%);
+            transition: all 0.2s ease;
+        }
 
-                        <!-- Part Code -->
-                        @if (!string.IsNullOrEmpty(upgrade.UpgradeVPartCode))
-                        {
-                            <div class="upgrade-detail-item">
-                                <i class="fas fa-barcode me-2"></i>Part Code: @upgrade.UpgradeVPartCode
-                            </div>
-                        }
-
-                        <!-- Technician -->
-                        @if (!string.IsNullOrEmpty(upgrade.UpgradeVTechnician))
-                        {
-                            <div class="upgrade-detail-item">
-                                <i class="fas fa-user me-2"></i>Technician: @upgrade.UpgradeVTechnician
-                            </div>
-                        }
-
-                        <!-- File Download -->
-                        @if (!string.IsNullOrEmpty(upgrade.FileName))
-                        {
-                            <div class="upgrade-file-download">
-                                <i class="fas fa-paperclip me-2"></i>
-                                <a href="@Url.Action("Download", "UpgradeVehicle", new { id = upgrade.Id })" class="file-download-link" target="_blank">
-                                    @upgrade.FileName
-                                </a>
-                            </div>
-                        }
-
-                        <!-- Notes -->
-                        @if (!string.IsNullOrEmpty(upgrade.UpgradeVNotes))
-                        {
-                            <div class="upgrade-notes">
-                                <i class="fas fa-sticky-note me-2"></i>@upgrade.UpgradeVNotes
-                            </div>
-                        }
-                    </div>
-
-                    <div class="upgrade-card-footer">
-                        @if (upgrade.UpgradeVPrice > 0)
-                        {
-                            <div class="upgrade-price">
-                                €@upgrade.UpgradeVPrice.ToString("N2")
-                            </div>
-                        }
-                        else
-                        {
-                            <div class="upgrade-price no-price">
-                                No Cost
-                            </div>
-                        }
-                        <div class="upgrade-actions">
-                            <button onclick="editUpgrade('@upgrade.Id')" class="btn-edit-upgrade" title="Edit">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            <button onclick="deleteUpgrade('@upgrade.Id')" class="btn-delete-upgrade" title="Delete">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            .btn-primary-gradient:hover {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+                transform: translateY(-2px);
             }
-        </div>
-    }
-    else
-    {
-        <div class="no-upgrades-card">
-            <div class="no-upgrades-icon">
-                <i class="fas fa-bolt"></i>
-            </div>
-            <h3>No Upgrade Records</h3>
-            <p>No upgrade records available for this vehicle.</p>
-            @if (UpgradeRecordCount)
-            {
-                <a asp-controller="UpgradeVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId" class="btn btn-primary btn-add-first-upgrade">
-                    <i class="fas fa-plus-circle me-2"></i>Add First Upgrade
+
+        .glass-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid hsl(215, 20%, 91%);
+        }
+
+        .input-field {
+            transition: all 0.2s ease;
+        }
+
+            .input-field:focus {
+                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+                border-color: hsl(221, 83%, 53%);
+            }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-background via-white to-secondary min-h-screen">
+    <div class="container mx-auto px-4 py-6 sm:py-8 md:py-12">
+        @if (UpgradeRecordCount)
+        {
+            <!-- Header Section -->
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
+                <div class="flex items-center gap-3">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, hsl(221, 83%, 53%), hsl(221, 83%, 43%));">
+                        <i class="fas fa-bolt text-white text-lg"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl sm:text-3xl font-bold text-foreground">@Localizer["Upgrades History"]</h1>
+                        <p class="text-muted-foreground text-sm">Manage your vehicle upgrade records</p>
+                    </div>
+                </div>
+
+                <a asp-controller="UpgradeVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
+                   class="btn-primary-gradient text-white font-semibold px-6 py-3 rounded-xl text-base sm:text-lg transition-all duration-200 shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>@Localizer["Add New Upgrade"]</span>
                 </a>
-            }
-        </div>
-    }
-</div>
+            </div>
+        }
+        else
+        {
+            <!-- Limit Alert -->
+            <div class="glass-card shadow-elevated p-6 mb-8 animate-fade-in" style="background: linear-gradient(135deg, hsl(0, 84%, 97%), hsl(0, 84%, 94%)); border-left: 4px solid hsl(0, 84%, 60%);">
+                <div class="flex items-start gap-4">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: hsl(0, 84%, 60%);">
+                        <i class="fas fa-info-circle text-white text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-foreground mb-2">@Localizer["Vehicle Upgrades Limit Reached"]</h3>
+                        <p class="text-foreground">@Localizer["You have reached the maximum limit of 25 upgrades. Remove an upgrade to add a new one."]</p>
+                    </div>
+                </div>
+            </div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+            <!-- Header without add button -->
+            <div class="flex items-center gap-3 mb-8">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, hsl(221, 83%, 53%), hsl(221, 83%, 43%));">
+                    <i class="fas fa-bolt text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-foreground">@Localizer["Upgrades History"]</h1>
+                    <p class="text-muted-foreground text-sm">Manage your vehicle upgrade records</p>
+                </div>
+            </div>
+        }
+
+        <!-- Filter Section -->
+        <div class="glass-card shadow-card mb-6 sm:mb-8 overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 border-b border-blue-100 cursor-pointer" id="filterToggle">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg flex items-center justify-center" style="background: hsla(221, 83%, 53%, 0.2);">
+                            <i class="fas fa-filter" style="color: hsl(221, 83%, 53%);"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold text-foreground">@Localizer["Filters"]</h3>
+                    </div>
+                    <span class="filter-toggle-icon" style="color: hsl(221, 83%, 53%);">
+                        <i class="fas fa-chevron-down transition-transform duration-300"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="filter-content animate-slide-down" id="filterContent" style="display: none;">
+                <div class="p-5 space-y-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Category Filter -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-foreground">@Localizer["Category"]</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-border bg-white focus:outline-none input-field" id="filterCategory">
+                                <option value="">@Localizer["All Categories"]</option>
+                                <option value="Vehicle Upgrades">@Localizer["Vehicle Upgrades"]</option>
+                            </select>
+                        </div>
+
+                        <!-- Type Filter -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-foreground">@Localizer["Type"]</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-border bg-white focus:outline-none input-field" id="filterType">
+                                <option value="">@Localizer["All Types"]</option>
+                            </select>
+                        </div>
+
+                        <!-- Date Range -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-foreground">@Localizer["Date Range"]</label>
+                            <div class="space-y-2">
+                                <input type="date" class="w-full px-4 py-3 rounded-xl border border-border bg-white focus:outline-none input-field" id="filterDateFrom" placeholder="@Localizer["From"]">
+                                <input type="date" class="w-full px-4 py-3 rounded-xl border border-border bg-white focus:outline-none input-field" id="filterDateTo" placeholder="@Localizer["To"]">
+                            </div>
+                        </div>
+
+                        <!-- Price Range -->
+                        <div class="space-y-2">
+                            <label class="block text-sm font-medium text-foreground">@Localizer["Price Range"]</label>
+                            <div class="flex items-center gap-2">
+                                <input type="number" class="w-full px-4 py-3 rounded-xl border border-border bg-white focus:outline-none input-field" id="filterPriceMin" placeholder="@Localizer["Min"]" step="0.01">
+                                <span class="text-muted-foreground">-</span>
+                                <input type="number" class="w-full px-4 py-3 rounded-xl border border-border bg-white focus:outline-none input-field" id="filterPriceMax" placeholder="@Localizer["Max"]" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Filter Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                        <button class="px-6 py-3 rounded-xl border border-border bg-white hover:bg-secondary transition-colors duration-200 font-medium flex items-center justify-center gap-2 w-full sm:w-auto" id="resetFilters">
+                            <i class="fas fa-redo"></i>
+                            <span>@Localizer["Reset Filters"]</span>
+                        </button>
+                        <button class="btn-primary-gradient text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto" id="applyFilters">
+                            <i class="fas fa-check"></i>
+                            <span>@Localizer["Apply Filters"]</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Count -->
+        <div class="mb-4 sm:mb-6">
+            <div class="text-muted-foreground" id="resultsCount">
+                <span class="font-medium">@Localizer["Showing"] <span id="filteredCount" class="font-bold" style="color: hsl(221, 83%, 53%);">@Model.RepairViews.Count()</span> @Localizer["of"] @Model.RepairViews.Count() @Localizer["upgrade records"]</span>
+            </div>
+        </div>
+
+        <!-- Upgrade History Cards -->
+        @if (Model.RepairViews != null && Model.RepairViews.Any())
+        {
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6" id="upgradeCardsContainer">
+                @foreach (var upgrade in Model.RepairViews)
+                {
+                    <div class="upgrade-card glass-card shadow-card hover:shadow-elevated transition-all duration-300 animate-fade-in"
+                         id="upgrade-@upgrade.Id"
+                         data-category="@upgrade.UpgradeVCategory"
+                         data-type="@upgrade.UpgradeVType"
+                         data-date="@upgrade.UpgradeVWhen.ToString("yyyy-MM-dd")"
+                         data-price="@upgrade.UpgradeVPrice"
+                         data-mileage="@upgrade.UpgradeVMileage">
+
+                        <!-- Card Header -->
+                        <div class="bg-gradient-to-r from-blue-50 to-indigo-50 px-5 py-4 border-b border-blue-100">
+                            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                                <span class="px-3 py-1 rounded-full text-white text-sm font-semibold" style="background: linear-gradient(135deg, hsl(221, 83%, 53%), hsl(221, 83%, 43%));">
+                                    @upgrade.UpgradeVCategory
+                                </span>
+                                <span class="text-muted-foreground text-sm font-medium">
+                                    @upgrade.UpgradeVWhen.ToString("d MMM yyyy")
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-5 space-y-4">
+                            <!-- Type -->
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(221, 83%, 53%, 0.1);">
+                                    <i class="fas fa-cog" style="color: hsl(221, 83%, 53%); font-size: 0.875rem;"></i>
+                                </div>
+                                <span class="font-semibold text-foreground">@upgrade.UpgradeVType</span>
+                            </div>
+
+                            <!-- Upgrade Name -->
+                            <h4 class="text-xl font-bold text-foreground">@upgrade.UpgradeVName</h4>
+
+                            <!-- Details Grid -->
+                            <div class="space-y-3">
+                                <!-- Mileage -->
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(215, 20%, 96%, 1);">
+                                        <i class="fas fa-tachometer-alt text-muted-foreground"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-sm text-muted-foreground">@Localizer["Mileage"]</p>
+                                        <p class="font-medium">@upgrade.UpgradeVMileage km</p>
+                                    </div>
+                                </div>
+
+                                <!-- Status -->
+                                @if (!string.IsNullOrEmpty(upgrade.UpgradeVStatus))
+                                {
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(215, 20%, 96%, 1);">
+                                            <i class="fas fa-check-circle text-muted-foreground"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-muted-foreground">@Localizer["Status"]</p>
+                                            <p class="font-medium">@upgrade.UpgradeVStatus</p>
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- Part Brand -->
+                                @if (!string.IsNullOrEmpty(upgrade.UpgradeVPartBrand))
+                                {
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(215, 20%, 96%, 1);">
+                                            <i class="fas fa-industry text-muted-foreground"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-muted-foreground">@Localizer["Part Brand"]</p>
+                                            <p class="font-medium">@upgrade.UpgradeVPartBrand</p>
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- Part Code -->
+                                @if (!string.IsNullOrEmpty(upgrade.UpgradeVPartCode))
+                                {
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(215, 20%, 96%, 1);">
+                                            <i class="fas fa-barcode text-muted-foreground"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-muted-foreground">@Localizer["Part Code"]</p>
+                                            <p class="font-medium">@upgrade.UpgradeVPartCode</p>
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- Technician -->
+                                @if (!string.IsNullOrEmpty(upgrade.UpgradeVTechnician))
+                                {
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(215, 20%, 96%, 1);">
+                                            <i class="fas fa-user text-muted-foreground"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-sm text-muted-foreground">@Localizer["Technician"]</p>
+                                            <p class="font-medium">@upgrade.UpgradeVTechnician</p>
+                                        </div>
+                                    </div>
+                                }
+
+                                <!-- File Download -->
+                                @if (!string.IsNullOrEmpty(upgrade.FileName))
+                                {
+                                    <div class="flex items-center gap-3 p-3 rounded-lg" style="background: hsla(221, 83%, 53%, 0.05); border-left: 3px solid hsl(221, 83%, 53%);">
+                                        <i class="fas fa-paperclip" style="color: hsl(221, 83%, 53%);"></i>
+                                        <a href="@Url.Action("Download", "UpgradeVehicle", new { id = upgrade.Id })" class="font-medium hover:underline" style="color: hsl(221, 83%, 53%);" target="_blank">
+                                            @upgrade.FileName
+                                        </a>
+                                    </div>
+                                }
+
+                                <!-- Notes -->
+                                @if (!string.IsNullOrEmpty(upgrade.UpgradeVNotes))
+                                {
+                                    <div class="p-3 rounded-lg border border-border">
+                                        <div class="flex items-center gap-2 mb-2">
+                                            <i class="fas fa-sticky-note text-muted-foreground"></i>
+                                            <span class="text-sm font-medium text-muted-foreground">Notes</span>
+                                        </div>
+                                        <p class="text-foreground">@upgrade.UpgradeVNotes</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="px-5 py-4 border-t border-border" style="background: hsl(221, 83%, 97%);">
+                            <div class="flex items-center justify-between">
+                                <!-- Price -->
+                                @if (upgrade.UpgradeVPrice > 0)
+                                {
+                                    <div>
+                                        <span class="text-2xl font-bold" style="color: hsl(160, 84%, 39%);">
+                                            €@upgrade.UpgradeVPrice.ToString("N2")
+                                        </span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="text-muted-foreground font-medium">
+                                        @Localizer["No Cost"]
+                                    </div>
+                                }
+
+                                <!-- Actions -->
+                                <div class="flex items-center gap-2">
+                                    <button onclick="editUpgrade('@upgrade.Id')"
+                                            class="w-10 h-10 rounded-lg border hover:border-primary hover:bg-primary hover:text-white transition-colors duration-200 flex items-center justify-center"
+                                            style="border-color: hsl(221, 83%, 53%); color: hsl(221, 83%, 53%);"
+                                            title="@Localizer["Edit"]">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button onclick="deleteUpgrade('@upgrade.Id')"
+                                            class="w-10 h-10 rounded-lg border hover:border-danger hover:bg-danger hover:text-white transition-colors duration-200 flex items-center justify-center"
+                                            style="border-color: hsl(0, 84%, 60%); color: hsl(0, 84%, 60%);"
+                                            title="@Localizer["Delete"]">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <!-- Empty State -->
+            <div class="glass-card shadow-elevated p-8 sm:p-12 text-center max-w-2xl mx-auto animate-fade-in">
+                <div class="w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6" style="background: hsla(221, 83%, 53%, 0.1);">
+                    <i class="fas fa-bolt text-3xl" style="color: hsl(221, 83%, 53%);"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-foreground mb-3">@Localizer["No Upgrade Records"]</h3>
+                <p class="text-muted-foreground mb-8 max-w-md mx-auto">@Localizer["No upgrade records available for this vehicle."]</p>
+                @if (UpgradeRecordCount)
+                {
+                    <a asp-controller="UpgradeVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
+                       class="btn-primary-gradient text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-200 shadow-lg inline-flex items-center justify-center gap-3">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>@Localizer["Add First Upgrade"]</span>
+                    </a>
+                }
+            </div>
+        }
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-4 right-4 z-50 hidden animate-slide-down">
+        <div class="glass-card shadow-elevated p-4 min-w-[300px] max-w-md">
+            <div class="flex items-center gap-3">
+                <div id="toastIcon" class="w-10 h-10 rounded-full flex items-center justify-center"></div>
+                <div class="flex-1">
+                    <p id="toastMessage" class="font-medium"></p>
+                </div>
+                <button onclick="hideToast()" class="text-muted-foreground hover:text-foreground">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <script>
         function deleteUpgrade(id) {
-            if (confirm("Are you sure you want to delete this upgrade record?")) {
+            if (confirm("@Localizer["Are you sure you want to delete this upgrade record?"]")) {
                 $.ajax({
                     url: "@Url.Action("Delete", "UpgradeVehicle")/" + id,
                     type: "DELETE",
@@ -233,27 +471,49 @@
                         $("#upgrade-" + id).fadeOut(300, function() {
                             $(this).remove();
                             updateResultsCount();
-                            // If no upgrades left, show the empty state
                             if ($(".upgrade-card").length === 0) {
                                 location.reload();
                             }
                         });
-                        showToast('Upgrade record deleted successfully', 'success');
+                        showToast('@Localizer["Upgrade record deleted successfully"]', 'success');
                     },
                     error: function (err) {
                         console.error(err);
-                        showToast('An error occurred while deleting the upgrade record', 'error');
+                        showToast('@Localizer["An error occurred while deleting the upgrade record"]', 'error');
                     }
                 });
             }
         }
 
-        // Edit upgrade record (redirect to edit page)
         function editUpgrade(id) {
             window.location.href = '@Url.Action("Edit", "UpgradeVehicle")/' + id;
         }
 
-        // Filter functionality
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+
+            toastMessage.textContent = message;
+
+            if (type === 'success') {
+                toastIcon.innerHTML = '<i class="fas fa-check-circle text-white"></i>';
+                toastIcon.className = 'w-10 h-10 rounded-full flex items-center justify-center';
+                toastIcon.style.background = 'linear-gradient(135deg, hsl(160, 84%, 39%), hsl(172, 66%, 50%))';
+            } else {
+                toastIcon.innerHTML = '<i class="fas fa-exclamation-circle text-white"></i>';
+                toastIcon.className = 'w-10 h-10 rounded-full flex items-center justify-center';
+                toastIcon.style.background = 'linear-gradient(135deg, hsl(0, 84%, 60%), hsl(0, 72%, 51%))';
+            }
+
+            toast.classList.remove('hidden');
+            setTimeout(hideToast, 5000);
+        }
+
+        function hideToast() {
+            document.getElementById('toast').classList.add('hidden');
+        }
+
         $(document).ready(function() {
             // Toggle filter section
             $('#filterToggle').click(function() {
@@ -269,7 +529,7 @@
             $('#filterCategory').change(function() {
                 const selectedCategory = $(this).val();
                 const typeSelect = $('#filterType');
-                typeSelect.html('<option value="">All Types</option>');
+                typeSelect.html('<option value="">@Localizer["All Types"]</option>');
 
                 if (selectedCategory && categoryTypes[selectedCategory]) {
                     categoryTypes[selectedCategory].forEach(type => {
@@ -359,11 +619,9 @@
                 $('#filteredCount').text(visibleCount);
 
                 if (visibleCount === 0 && totalCount > 0) {
-                    $('#resultsCount').addClass('no-results');
-                    $('#resultsCount').html('<span class="text-danger"><i class="fas fa-exclamation-circle me-1"></i>No records match your filters</span>');
+                    $('#resultsCount').html('<span class="text-danger font-medium"><i class="fas fa-exclamation-circle mr-1"></i>@Localizer["No records match your filters"]</span>');
                 } else {
-                    $('#resultsCount').removeClass('no-results');
-                    $('#resultsCount').html(`Showing <span id="filteredCount">${visibleCount}</span> upgrade records`);
+                    $('#resultsCount').html('<span class="font-medium">@Localizer["Showing"] <span id="filteredCount" class="font-bold" style="color: hsl(221, 83%, 53%);">' + visibleCount + '</span> @Localizer["upgrade records"]</span>');
                 }
             }
 
@@ -371,394 +629,5 @@
             updateResultsCount();
         });
     </script>
-
-    <style>
-        /* Upgrade History Styles - Blue Theme */
-        .upgrade-history-title {
-            font-weight: 700;
-            font-size: 1.8rem;
-            color: #1e293b;
-            display: flex;
-            align-items: center;
-        }
-
-        .btn-add-upgrade, .btn-add-first-upgrade {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            border: none;
-            padding: 0.75rem 1.5rem;
-            font-weight: 600;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
-        }
-
-            .btn-add-upgrade:hover, .btn-add-first-upgrade:hover {
-                background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-                transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(59, 130, 246, 0.35);
-            }
-
-        /* Alert Styles */
-        .alert-custom {
-            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-            border-radius: 16px;
-            padding: 1.5rem;
-            border-left: 5px solid #3b82f6;
-            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
-        }
-
-        .alert-limit {
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            border-left: 5px solid #ef4444;
-            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.15);
-        }
-
-        .alert-icon {
-            font-size: 2rem;
-            color: #3b82f6;
-            margin-bottom: 1rem;
-        }
-
-        .alert-limit .alert-icon {
-            color: #ef4444;
-        }
-
-        .alert-content h4 {
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-        }
-
-        .alert-content p {
-            color: #475569;
-            margin-bottom: 0;
-        }
-
-        /* Filter Styles */
-        .filter-card {
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
-            overflow: hidden;
-            margin-bottom: 1.5rem;
-        }
-
-        .filter-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            cursor: pointer;
-            border-bottom: 1px solid #bfdbfe;
-        }
-
-        .filter-title {
-            font-weight: 600;
-            color: #1e293b;
-            margin: 0;
-            display: flex;
-            align-items: center;
-        }
-
-            .filter-title i {
-                color: #3b82f6;
-            }
-
-        .filter-toggle-icon {
-            color: #3b82f6;
-            transition: transform 0.3s ease;
-        }
-
-        .filter-content {
-            padding: 1.5rem;
-            display: block;
-        }
-
-        .filter-select, .filter-date, .filter-price {
-            border-radius: 10px;
-            padding: 0.75rem;
-            border: 1px solid #e2e8f0;
-            transition: all 0.3s ease;
-        }
-
-            .filter-select:focus, .filter-date:focus, .filter-price:focus {
-                border-color: #3b82f6;
-                box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
-            }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            border: none;
-        }
-
-            .btn-primary:hover {
-                background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            }
-
-        .results-count {
-            font-weight: 500;
-            color: #64748b;
-            padding: 0.5rem 0;
-        }
-
-            .results-count.no-results {
-                color: #ef4444;
-            }
-
-        /* Upgrade Cards Container */
-        .upgrade-cards-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 1.5rem;
-        }
-
-        /* Upgrade Card */
-        .upgrade-card {
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
-            transition: all 0.3s ease;
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-        }
-
-            .upgrade-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 12px 32px rgba(149, 157, 165, 0.2);
-                border-color: #bfdbfe;
-            }
-
-        .upgrade-card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            border-bottom: 1px solid #bfdbfe;
-        }
-
-        .upgrade-category-badge {
-            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-            color: white;
-            padding: 0.35rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .upgrade-date {
-            color: #64748b;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .upgrade-card-body {
-            padding: 1.5rem;
-            flex-grow: 1;
-        }
-
-        .upgrade-type {
-            color: #3b82f6;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
-        }
-
-        .upgrade-name {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: #1e293b;
-            margin-bottom: 1rem;
-        }
-
-        .upgrade-detail-item {
-            display: flex;
-            align-items: center;
-            color: #475569;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-            .upgrade-detail-item i {
-                color: #3b82f6;
-                width: 20px;
-            }
-
-        .upgrade-file-download {
-            display: flex;
-            align-items: center;
-            color: #3b82f6;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-            padding: 0.5rem;
-            background: #eff6ff;
-            border-radius: 8px;
-            border-left: 3px solid #3b82f6;
-        }
-
-        .file-download-link {
-            color: #3b82f6;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-            .file-download-link:hover {
-                color: #1d4ed8;
-                text-decoration: underline;
-            }
-
-        .upgrade-notes {
-            background: #f8fafc;
-            padding: 0.75rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-            border-left: 3px solid #e2e8f0;
-            color: #475569;
-            font-size: 0.9rem;
-        }
-
-        .upgrade-card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            background: #eff6ff;
-            border-top: 1px solid #bfdbfe;
-        }
-
-        .upgrade-price {
-            font-weight: 700;
-            font-size: 1.25rem;
-            color: #059669;
-        }
-
-            .upgrade-price.no-price {
-                color: #94a3b8;
-                font-size: 1rem;
-                font-weight: 600;
-            }
-
-        .upgrade-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .btn-edit-upgrade, .btn-delete-upgrade {
-            background: none;
-            border: 1px solid #3b82f6;
-            color: #3b82f6;
-            padding: 0.5rem;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-        }
-
-            .btn-edit-upgrade:hover {
-                background: #3b82f6;
-                color: white;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(59, 130, 246, 0.2);
-            }
-
-        .btn-delete-upgrade {
-            border-color: #f87171;
-            color: #ef4444;
-        }
-
-            .btn-delete-upgrade:hover {
-                background: #ef4444;
-                color: white;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 8px rgba(239, 68, 68, 0.2);
-            }
-
-        /* No Upgrades Card */
-        .no-upgrades-card {
-            background: #ffffff;
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
-            padding: 3rem 2rem;
-            text-align: center;
-            margin: 2rem 0;
-        }
-
-        .no-upgrades-icon {
-            font-size: 4rem;
-            color: #bfdbfe;
-            margin-bottom: 1.5rem;
-        }
-
-        .no-upgrades-card h3 {
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-        }
-
-        .no-upgrades-card p {
-            color: #64748b;
-            margin-bottom: 2rem;
-        }
-
-        /* Animation for cards */
-        .upgrade-card {
-            animation: fadeInUp 0.5s ease forwards;
-        }
-
-        @@keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive adjustments */
-        @@media (max-width: 768px) {
-            .upgrade-cards-container {
-                grid-template-columns: 1fr;
-            }
-
-            .filter-content .row {
-                flex-direction: column;
-            }
-
-            .filter-header, .upgrade-card-header, .upgrade-card-footer {
-                flex-direction: column;
-                gap: 0.75rem;
-                align-items: flex-start;
-            }
-
-            .d-flex {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .upgrade-history-title {
-                font-size: 1.5rem;
-            }
-
-            .input-group {
-                flex-direction: column;
-            }
-
-                .input-group .form-control {
-                    margin-bottom: 0.5rem;
-                }
-        }
-    </style>
-}
+</body>
+</html>

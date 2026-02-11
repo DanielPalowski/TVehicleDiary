@@ -1,154 +1,345 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBPetrolModelVM
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-xl-6">
-            <div class="card shadow-sm mb-5">
-                <div class="card-body p-4">
-                    <h2 class="card-title mb-4">Fuel Tracking</h2>
-                    <form asp-action="Petrol" method="post">
-                        <input type="hidden" asp-for="vehicleId" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuel Tracking | Vehicle Diary</title>
 
-                        <div class="row g-3">
-                            <!-- Amount & Price -->
-                            <div class="col-md-6">
-                                <label asp-for="PetrolAmount" class="form-label">Fuel Amount (Liters)</label>
-                                <div class="input-group">
-                                    <input type="text" asp-for="PetrolAmount" class="form-control"
-                                           placeholder="e.g. 40">
-                                    <span class="input-group-text">L</span>
-                                </div>
-                                <span asp-validation-for="PetrolAmount" class="text-danger small"></span>
-                            </div>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-                            <div class="col-md-6">
-                                <label asp-for="PetrolPrice" class="form-label">Total Price</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">€</span>
-                                    <input type="text" asp-for="PetrolPrice" class="form-control"
-                                           placeholder="e.g. 500">
-                                </div>
-                                <span asp-validation-for="PetrolPrice" class="text-danger small"></span>
-                            </div>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-                            <!-- Type & Date -->
-                            <div class="col-md-6">
-                                <label asp-for="PetrolType" class="form-label">Fuel Type</label>
-                                <input type="text" asp-for="PetrolType" class="form-control"
-                                       placeholder="e.g. Diesel, 98 Octane">
-                                <span asp-validation-for="PetrolType" class="text-danger small"></span>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label asp-for="PetrolDate" class="form-label">Refuel Date</label>
-                                <input type="date" asp-for="PetrolDate" class="form-control"
-                                       value="@DateTime.Today.ToString("yyyy-MM-dd")">
-                                <span asp-validation-for="PetrolDate" class="text-danger small"></span>
-                            </div>
-
-                            <!-- Mileage -->
-                            <div class="col-12">
-                                <label asp-for="PetrolMileage" class="form-label">Mileage (Optional)</label>
-                                <div class="input-group">
-                                    <input type="text" asp-for="PetrolMileage" class="form-control"
-                                           placeholder="e.g. 157520">
-                                    <span class="input-group-text">km</span>
-                                </div>
-                                <span asp-validation-for="PetrolMileage" class="text-danger small"></span>
-                            </div>
-
-                            <!-- Submit Button -->
-                            <div class="col-12 mt-4">
-                                <button class="btn btn-primary w-100" type="submit">
-                                    <i class="fas fa-gas-pump me-2"></i>Save Refuel
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'petrol': {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-gray-900 to-gray-800 text-white">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <a href="@Url.Action("Index", "Vehicle")" class="flex items-center gap-2 px-3 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
+                    <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    <span class="font-medium">Back</span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-petrol-500 to-green-500 flex items-center justify-center">
+                        <i data-lucide="fuel" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold">Fuel Tracking</h1>
+                        <p class="text-sm text-gray-300">Track your vehicle's fuel consumption</p>
+                    </div>
                 </div>
             </div>
+        </div>
+    </header>
 
-            <!-- Fuel Entries -->
-            <h3 class="h4 mb-4">Refuel History</h3>
-            @if (Model.PetrolViews != null && Model.PetrolViews.Any())
-            {
-                <div class="row g-3">
-                    @foreach (var entry in Model.PetrolViews)
-                    {
-                        <div class="col-12" id="oil-@entry.Id">
-                            <div class="card shadow-sm mb-3">
-                                <div class="card-body p-3">
-                                    <div class="row align-items-center">
-                                        <!-- Date Column -->
-                                        <div class="col-md-3 mb-2 mb-md-0">
-                                            <div class="d-flex align-items-center">
-                                                <i class="fas fa-calendar text-primary me-2"></i>
-                                                <span class="small">@entry.PetrolDate.ToString("d MMM yyyy")</span>
-                                            </div>
-                                        </div>
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-6">
+        <div class="max-w-6xl mx-auto">
+            <!-- Page Title -->
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">Fuel Tracking</h1>
+                <p class="text-gray-600">Track and manage your vehicle's fuel consumption</p>
+            </div>
 
-                                        <!-- Details Column -->
-                                        <div class="col-md-5">
-                                            <div class="d-flex flex-wrap gap-2">
-                                                <span class="badge bg-info">
-                                                    <i class="fas fa-tint me-1"></i>@entry.PetrolType
-                                                </span>
-                                                <span class="badge bg-secondary">
-                                                    <i class="fas fa-chart-line me-1"></i>@entry.PetrolMileage km
-                                                </span>
-                                            </div>
-                                        </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Form Section -->
+                <div class="space-y-6">
+                    <!-- Form Card -->
+                    <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-10 h-10 rounded-lg bg-petrol-100 flex items-center justify-center">
+                                <i data-lucide="plus-circle" class="w-5 h-5 text-petrol-600"></i>
+                            </div>
+                            <div>
+                                <h2 class="text-xl font-bold text-gray-900">Add Fuel Record</h2>
+                                <p class="text-sm text-gray-600">Record a new fuel purchase</p>
+                            </div>
+                        </div>
 
-                                        <!-- Amount/Price Column -->
-                                        <div class="col-md-4 text-end">
-                                            <div class="d-flex flex-column">
-                                                <span class="text-success fw-bold">
-                                                    €@entry.PetrolPrice
-                                                </span>
-                                                <span class="text-muted small">
-                                                    @entry.PetrolAmount L
-                                                </span>
-                                            </div>
+                        <form asp-action="Petrol" method="post" id="petrolForm">
+                            <input type="hidden" asp-for="vehicleId" />
+
+                            <div class="space-y-4">
+                                <!-- Amount & Type -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label asp-for="PetrolAmount" class="block text-sm font-medium text-gray-700 mb-1">
+                                            Fuel Amount (L)
+                                        </label>
+                                        <div class="relative">
+                                            <input type="number" step="0.1" asp-for="PetrolAmount"
+                                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-petrol-500 focus:border-petrol-500"
+                                                   placeholder="40.0" required>
                                         </div>
-                                        <button onclick="deleteVehicle('@entry.Id')" class="btn btn-outline-danger">
-                                            <i class="fas fa-trash-alt me-2"></i>Delete
-                                        </button>
+                                        <span asp-validation-for="PetrolAmount" class="text-red-500 text-sm"></span>
                                     </div>
+
+                                    <div>
+                                        <label asp-for="PetrolType" class="block text-sm font-medium text-gray-700 mb-1">
+                                            Fuel Type
+                                        </label>
+                                        <input type="text" asp-for="PetrolType"
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-petrol-500 focus:border-petrol-500"
+                                               placeholder="Diesel" required>
+                                        <span asp-validation-for="PetrolType" class="text-red-500 text-sm"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Price & Date -->
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label asp-for="PetrolPrice" class="block text-sm font-medium text-gray-700 mb-1">
+                                            Total Price (€)
+                                        </label>
+                                        <div class="relative">
+                                            <input type="number" step="0.01" asp-for="PetrolPrice"
+                                                   class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-petrol-500 focus:border-petrol-500"
+                                                   placeholder="80.00" required>
+                                        </div>
+                                        <span asp-validation-for="PetrolPrice" class="text-red-500 text-sm"></span>
+                                    </div>
+
+                                    <div>
+                                        <label asp-for="PetrolDate" class="block text-sm font-medium text-gray-700 mb-1">
+                                            Refuel Date
+                                        </label>
+                                        <input type="date" asp-for="PetrolDate"
+                                               class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-petrol-500 focus:border-petrol-500"
+                                               value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
+                                        <span asp-validation-for="PetrolDate" class="text-red-500 text-sm"></span>
+                                    </div>
+                                </div>
+
+                                <!-- Mileage -->
+                                <div>
+                                    <label asp-for="PetrolMileage" class="block text-sm font-medium text-gray-700 mb-1">
+                                        Mileage (km)
+                                    </label>
+                                    <input type="number" asp-for="PetrolMileage"
+                                           class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-petrol-500 focus:border-petrol-500"
+                                           placeholder="157520">
+                                    <span asp-validation-for="PetrolMileage" class="text-red-500 text-sm"></span>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="pt-4">
+                                    <button type="submit"
+                                            class="w-full bg-gradient-to-r from-petrol-600 to-green-600 text-white font-medium py-3 px-4 rounded-lg hover:from-petrol-700 hover:to-green-700 transition flex items-center justify-center gap-2">
+                                        <i data-lucide="save" class="w-5 h-5"></i>
+                                        Save Fuel Record
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Quick Stats -->
+                    @if (Model.PetrolViews != null && Model.PetrolViews.Any())
+                    {
+                        var totalCost = Model.PetrolViews.Sum(p => p.PetrolPrice);
+                        var totalLiters = Model.PetrolViews.Sum(p => p.PetrolAmount);
+                        var averagePricePerLiter = totalLiters > 0 ? totalCost / totalLiters : 0;
+
+                        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">Quick Stats</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div class="text-center p-3 bg-petrol-50 rounded-lg">
+                                    <div class="text-2xl font-bold text-petrol-600">@Model.PetrolViews.Count()</div>
+                                    <div class="text-sm text-gray-600">Refuels</div>
+                                </div>
+                                <div class="text-center p-3 bg-petrol-50 rounded-lg">
+                                    <div class="text-2xl font-bold text-petrol-600">€@totalCost.ToString("F2")</div>
+                                    <div class="text-sm text-gray-600">Total Cost</div>
+                                </div>
+                                <div class="text-center p-3 bg-petrol-50 rounded-lg">
+                                    <div class="text-2xl font-bold text-petrol-600">@totalLiters.ToString("F1")L</div>
+                                    <div class="text-sm text-gray-600">Total Liters</div>
+                                </div>
+                                <div class="text-center p-3 bg-petrol-50 rounded-lg">
+                                    <div class="text-2xl font-bold text-petrol-600">€@averagePricePerLiter.ToString("F2")</div>
+                                    <div class="text-sm text-gray-600">Avg/Liter</div>
                                 </div>
                             </div>
                         </div>
                     }
                 </div>
-            }
-            else
-            {
-                <div class="alert alert-info mb-0">
-                    <i class="fas fa-info-circle me-2"></i>No fuel records available
-                </div>
-            }
-        </div>
-    </div>
-</div>
 
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+                <!-- History Section -->
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-xl font-bold text-gray-900">Fuel History</h2>
+                        <span class="text-sm text-gray-600">@(Model.PetrolViews?.Count() ?? 0) records</span>
+                    </div>
+
+                    @if (Model.PetrolViews != null && Model.PetrolViews.Any())
+                    {
+                        <div class="space-y-3">
+                            @foreach (var entry in Model.PetrolViews.OrderByDescending(p => p.PetrolDate))
+                            {
+                                <div class="bg-white rounded-lg border border-gray-200 p-4 hover:border-petrol-300 transition" id="petrol-@entry.Id">
+                                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                        <!-- Left: Details -->
+                                        <div class="flex-1">
+                                            <div class="flex items-center gap-3 mb-2">
+                                                <div class="w-8 h-8 rounded-lg bg-petrol-100 flex items-center justify-center">
+                                                    <i data-lucide="fuel" class="w-4 h-4 text-petrol-600"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="flex items-center gap-2">
+                                                        <span class="font-bold text-gray-900">@entry.PetrolType</span>
+                                                        <span class="px-2 py-1 bg-petrol-100 text-petrol-700 text-xs font-medium rounded-full">
+                                                            @entry.PetrolDate.ToString("d MMM yyyy")
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="flex flex-wrap gap-2">
+                                                <span class="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+                                                    <i data-lucide="droplet" class="w-3 h-3"></i>
+                                                    @entry.PetrolAmount L
+                                                </span>
+                                                @if (entry.PetrolMileage > 0)
+                                                {
+                                                    <span class="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
+                                                        <i data-lucide="gauge" class="w-3 h-3"></i>
+                                                        @entry.PetrolMileage km
+                                                    </span>
+                                                }
+                                                <span class="inline-flex items-center gap-1 px-2 py-1 bg-petrol-100 text-petrol-700 text-sm rounded-full">
+                                                    <i data-lucide="euro" class="w-3 h-3"></i>
+                                                    €@entry.PetrolPrice
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <!-- Right: Delete Button -->
+                                        <button onclick="deletePetrol('@entry.Id')"
+                                                class="inline-flex items-center gap-2 px-3 py-2 text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition">
+                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                            <span class="text-sm font-medium">Delete</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="bg-white rounded-xl border-2 border-dashed border-gray-300 p-8 text-center">
+                            <div class="w-12 h-12 rounded-full bg-petrol-100 flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="fuel" class="w-6 h-6 text-petrol-600"></i>
+                            </div>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">No Fuel Records Yet</h3>
+                            <p class="text-gray-600 mb-4">Start tracking your fuel consumption and costs</p>
+                            <p class="text-sm text-gray-500">Add your first fuel record using the form</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 mt-12">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-petrol-100 flex items-center justify-center">
+                        <i data-lucide="fuel" class="w-4 h-4 text-petrol-600"></i>
+                    </div>
+                    <span class="font-medium text-gray-900">Fuel Tracking</span>
+                </div>
+                <p class="text-sm text-gray-600">© 2024 Vehicle Diary</p>
+            </div>
+        </div>
+    </footer>
+
     <script>
-        function deleteVehicle(ID) {
-            if (confirm("Are you sure you want to delete this?")) {
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Delete function
+        function deletePetrol(id) {
+            if (confirm("Are you sure you want to delete this fuel record?")) {
                 $.ajax({
-                    url: "@Url.Action("Delete", "Petrol")/" + ID,
+                    url: "@Url.Action("Delete", "Petrol")/" + id,
                     type: "DELETE",
-                    success: function (result) {
-                        $("#oil-" + ID).remove();
+                    success: function () {
+                        const element = document.getElementById('petrol-' + id);
+                        if (element) {
+                            element.style.opacity = '0';
+                            element.style.transform = 'translateY(-10px)';
+                            setTimeout(() => element.remove(), 300);
+                        }
                     },
-                    error: function (err) {
-                        alert("An error occurred.");
+                    error: function () {
+                        alert("Error deleting record");
                     }
                 });
             }
         }
+
+        // Form validation
+        document.getElementById('petrolForm')?.addEventListener('submit', function(e) {
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+
+            // Show loading state
+            submitBtn.innerHTML = `
+                <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                Saving...
+            `;
+            submitBtn.disabled = true;
+
+            // Re-enable after 5 seconds if submission fails
+            setTimeout(() => {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }, 5000);
+        });
+
+        // Format inputs
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value && !isNaN(this.value)) {
+                    if (this.name.includes('Price')) {
+                        this.value = parseFloat(this.value).toFixed(2);
+                    } else if (this.name.includes('Amount')) {
+                        this.value = parseFloat(this.value).toFixed(1);
+                    } else if (this.name.includes('Mileage')) {
+                        this.value = parseInt(this.value);
+                    }
+                }
+            });
+        });
     </script>
-}
+</body>
+</html>

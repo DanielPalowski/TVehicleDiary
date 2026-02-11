@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+  
+	<!-- Page Title & Headers -->
+	<data name="DiagnosticRecords" xml:space="preserve">
+		<value>Diagnostické záznamy</value>
+	</data>
+	<data name="VehicleDiagnosticsHistory" xml:space="preserve">
+		<value>Historie diagnostiky vozidla</value>
+	</data>
+	<data name="AddNewDiagnostic" xml:space="preserve">
+		<value>Přidat novou diagnostiku</value>
+	</data>
+	
+	<!-- Statistics -->
+	<data name="TotalDiagnostics" xml:space="preserve">
+		<value>Celkem diagnostik</value>
+	</data>
+	<data name="TotalCost" xml:space="preserve">
+		<value>Celková cena</value>
+	</data>
+	<data name="LastDiagnostic" xml:space="preserve">
+		<value>Poslední diagnostika</value>
+	</data>
+	
+	<!-- Table Headers -->
+	<data name="Date" xml:space="preserve">
+		<value>Datum</value>
+	</data>
+	<data name="Type" xml:space="preserve">
+		<value>Typ</value>
+	</data>
+	<data name="Procedure" xml:space="preserve">
+		<value>Procedura</value>
+	</data>
+	<data name="Tool" xml:space="preserve">
+		<value>Nástroj</value>
+	</data>
+	<data name="Mileage" xml:space="preserve">
+		<value>Najeto km</value>
+	</data>
+	<data name="Cost" xml:space="preserve">
+		<value>Cena</value>
+	</data>
+	<data name="Technician" xml:space="preserve">
+		<value>Technik</value>
+	</data>
+	<data name="Status" xml:space="preserve">
+		<value>Stav</value>
+	</data>
+	<data name="Actions" xml:space="preserve">
+		<value>Akce</value>
+	</data>
+	
+	<!-- Status Values -->
+	<data name="Completed" xml:space="preserve">
+		<value>Dokončeno</value>
+	</data>
+	<data name="InProgress" xml:space="preserve">
+		<value>Probíhá</value>
+	</data>
+	<data name="Pending" xml:space="preserve">
+		<value>Čekající</value>
+	</data>
+	<data name="Failed" xml:space="preserve">
+		<value>Neúspěšné</value>
+	</data>
+	
+	<!-- Action Buttons -->
+	<data name="View" xml:space="preserve">
+		<value>Zobrazit</value>
+	</data>
+	<data name="Edit" xml:space="preserve">
+		<value>Upravit</value>
+	</data>
+	<data name="Delete" xml:space="preserve">
+		<value>Smazat</value>
+	</data>
+	<data name="Download" xml:space="preserve">
+		<value>Stáhnout</value>
+	</data>
+	
+	<!-- Filter & Search -->
+	<data name="SearchPlaceholder" xml:space="preserve">
+		<value>Hledat diagnostiku...</value>
+	</data>
+	<data name="FilterByType" xml:space="preserve">
+		<value>Filtrovat podle typu</value>
+	</data>
+	<data name="FilterByDate" xml:space="preserve">
+		<value>Filtrovat podle data</value>
+	</data>
+	<data name="AllTypes" xml:space="preserve">
+		<value>Všechny typy</value>
+	</data>
+	<data name="ThisMonth" xml:space="preserve">
+		<value>Tento měsíc</value>
+	</data>
+	<data name="Last3Months" xml:space="preserve">
+		<value>Poslední 3 měsíce</value>
+	</data>
+	<data name="ThisYear" xml:space="preserve">
+		<value>Tento rok</value>
+	</data>
+	<data name="AllTime" xml:space="preserve">
+		<value>Celá doba</value>
+	</data>
+	
+	<!-- Empty State -->
+	<data name="NoDiagnosticsFound" xml:space="preserve">
+		<value>Nenalezeny žádné diagnostiky</value>
+	</data>
+	<data name="NoDiagnosticsDescription" xml:space="preserve">
+		<value>Zatím nebyly přidány žádné diagnostické záznamy. Přidejte svou první diagnostiku, abyste začali.</value>
+	</data>
+	<data name="AddFirstDiagnostic" xml:space="preserve">
+		<value>Přidat první diagnostiku</value>
+	</data>
+	
+	<!-- Confirmation Messages -->
+	<data name="DeleteConfirmation" xml:space="preserve">
+		<value>Opravdu chcete smazat tento diagnostický záznam?</value>
+	</data>
+	<data name="DeleteSuccess" xml:space="preserve">
+		<value>Diagnostický záznam úspěšně smazán</value>
+	</data>
+	<data name="DeleteError" xml:space="preserve">
+		<value>Chyba při mazání diagnostického záznamu</value>
+	</data>
+	
+	<!-- Export Options -->
+	<data name="ExportToPDF" xml:space="preserve">
+		<value>Exportovat do PDF</value>
+	</data>
+	<data name="ExportToExcel" xml:space="preserve">
+		<value>Exportovat do Excelu</value>
+	</data>
+	<data name="PrintReport" xml:space="preserve">
+		<value>Tisknout zprávu</value>
+	</data>
+	
+	<!-- Statistics Details -->
+	<data name="MostCommonType" xml:space="preserve">
+		<value>Nejčastější typ</value>
+	</data>
+	<data name="AverageCost" xml:space="preserve">
+		<value>Průměrná cena</value>
+	</data>
+	<data name="DiagnosticsThisYear" xml:space="preserve">
+		<value>Diagnostiky tento rok</value>
+	</data>
+</root>

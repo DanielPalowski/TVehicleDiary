@@ -6,206 +6,389 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - VehicleDiary</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/VehicleDiary.styles.css" asp-append-version="true" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: 'hsl(0, 0%, 99%)',
+                        foreground: 'hsl(222, 47%, 11%)',
+                        card: 'hsl(0, 0%, 100%)',
+                        'card-foreground': 'hsl(222, 47%, 11%)',
+                        primary: 'hsl(160, 84%, 39%)',
+                        'primary-foreground': 'hsl(0, 0%, 100%)',
+                        secondary: 'hsl(215, 20%, 95%)',
+                        'secondary-foreground': 'hsl(222, 47%, 11%)',
+                        muted: 'hsl(215, 20%, 96%)',
+                        'muted-foreground': 'hsl(215, 16%, 47%)',
+                        accent: 'hsl(160, 84%, 39%)',
+                        border: 'hsl(215, 20%, 91%)',
+                    },
+                    fontFamily: {
+                        heading: ['Space Grotesk', 'sans-serif'],
+                        body: ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 24px -2px rgba(30, 41, 59, 0.08)',
+                        'elevated': '0 12px 40px -8px rgba(30, 41, 59, 0.12)',
+                        'glow': '0 0 40px rgba(16, 185, 129, 0.15)',
+                    },
+                },
+            },
+        }
+    </script>
+
+    <style>
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: hsl(222, 47%, 11%);
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Dropdown with no gap */
+        .dropdown-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            margin-top: 8px;
+            min-width: 160px;
+            background: white;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-8px);
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+        }
+
+        .dropdown-container:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Mobile menu */
+        .mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+            .mobile-menu.open {
+                max-height: 500px;
+            }
+
+        /* Main content starts right after navbar */
+        main {
+            min-height: calc(100vh - 64px);
+        }
+    </style>
 </head>
-<body >
-    <header class="sticky-top">
-        <nav class="navbar navbar-expand-md navbar-light bg-white border-bottom border-2 border-light py-3">
-            <div class="container">
-                <!-- Brand with modern typography -->
-                <a class="navbar-brand fw-bold fs-4" asp-area="" asp-controller="Main" asp-action="Index">
-                    <span class="align-middle main-color-txt">@Localizer["BrandName"]</span>
-                </a>
+<body class="bg-background text-foreground min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-card border-b border-border sticky top-0 z-50 shadow-soft">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Left side - Logo -->
+                <div class="flex items-center">
+                    <!-- Logo -->
+                    <a asp-area="" asp-controller="Main" asp-action="Index" class="flex items-center space-x-3 group">
+                        <div class="w-9 h-9 bg-primary rounded-lg flex items-center justify-center group-hover:shadow-glow transition-all duration-300">
+                            <i class="fas fa-car text-primary-foreground"></i>
+                        </div>
+                        <span class="font-heading font-bold text-xl text-foreground">@Localizer["BrandName"]</span>
+                    </a>
 
-                <!-- Responsive Toggler -->
-                <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Navigation Items -->
-                <div class="collapse navbar-collapse" id="mainNav">
+                    <!-- Desktop Navigation (only for authenticated users) -->
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <!-- Authenticated Menu -->
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark px-3 py-2 rounded-3"
-                                   asp-controller="Vehicle"
-                                   asp-action="Index">
-                                    <i class="fas fa-car me-2"></i>@Localizer["MyGarage"]
+                        <div class="hidden md:flex items-center ml-8 space-x-1">
+                            <a asp-controller="Vehicle" asp-action="Index"
+                               class="px-4 py-2 rounded-lg text-sm font-medium text-foreground hover:text-primary hover:bg-secondary transition-colors">
+                                <i class="fas fa-car mr-2"></i>@Localizer["MyGarage"]
+                            </a>
+                            <a asp-controller="AboutUs" asp-action="AboutUs"
+                               class="px-4 py-2 rounded-lg text-sm font-medium text-foreground hover:text-primary hover:bg-secondary transition-colors">
+                                <i class="fas fa-info-circle mr-2"></i>@Localizer["AboutUs"]
+                            </a>
+                        </div>
+                    }
+                </div>
+
+                <!-- Right side - Controls -->
+                <div class="flex items-center space-x-4">
+                    <!-- Language Selector (Desktop) - FIXED HOVER -->
+                    <div class="hidden md:block dropdown-container">
+                        <button class="flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium text-foreground hover:bg-secondary transition-colors">
+                            <i class="fas fa-globe-americas"></i>
+                            <span>@System.Globalization.CultureInfo.CurrentCulture.DisplayName</span>
+                            <i class="fas fa-chevron-down text-xs ml-1"></i>
+                        </button>
+                        <div class="dropdown-content bg-card rounded-lg shadow-elevated border border-border py-2 w-48">
+                            <a asp-controller="Language" asp-action="Index" asp-route-culture="en"
+                               class="flex items-center px-4 py-3 text-foreground hover:bg-secondary hover:text-primary transition-colors">
+                                <div class="w-6 h-6 rounded-full border-2 border-border mr-3 flex items-center justify-center @(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "en" ? "bg-primary border-primary" : "")">
+                                    <span class="text-xs font-bold @(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "en" ? "text-white" : "text-muted-foreground")">EN</span>
+                                </div>
+                                <span>@Localizer["LanguageEnglish"]</span>
+                            </a>
+                            <a asp-controller="Language" asp-action="Index" asp-route-culture="cs"
+                               class="flex items-center px-4 py-3 text-foreground hover:bg-secondary hover:text-primary transition-colors">
+                                <div class="w-6 h-6 rounded-full border-2 border-border mr-3 flex items-center justify-center @(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "cs" ? "bg-primary border-primary" : "")">
+                                    <span class="text-xs font-bold @(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "cs" ? "text-white" : "text-muted-foreground")">CZ</span>
+                                </div>
+                                <span>@Localizer["LanguageCzech"]</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <!-- User dropdown (Desktop) -->
+                        <div class="hidden md:block dropdown-container">
+                            <button class="flex items-center space-x-3 px-4 py-2 rounded-lg hover:bg-secondary transition-colors">
+                                <div class="w-9 h-9 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center text-white text-sm shadow-soft">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <span class="text-sm font-medium text-foreground">@User.Identity.Name</span>
+                                <i class="fas fa-chevron-down text-xs text-muted-foreground"></i>
+                            </button>
+                            <div class="dropdown-content bg-card rounded-lg shadow-elevated border border-border py-2 w-56">
+                                <div class="px-4 py-3 border-b border-border">
+                                    <p class="text-sm font-medium text-foreground">@User.Identity.Name</p>
+                                    <p class="text-xs text-muted-foreground">@Localizer["WelcomeBack"]</p>
+                                </div>
+                                <a asp-area="Identity" asp-page="/Account/Logout"
+                                   class="flex items-center px-4 py-3 text-red-600 hover:bg-red-50 transition-colors">
+                                    <i class="fas fa-sign-out-alt mr-3"></i>
+                                    <span>@Localizer["SignOut"]</span>
                                 </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark px-3 py-2 rounded-3"
-                                   asp-controller="AboutUs"
-                                   asp-action="AboutUs">
-                                    <i class="fas fa-info me-2"></i>@Localizer["AboutUs"]
-                                </a>
-                            </li>
-                        </ul>
-
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark"
-                                   href="#"
-                                   role="button"
-                                   data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <i class="bi bi-globe"></i>
-                                    @System.Globalization.CultureInfo.CurrentCulture.DisplayName
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item"
-                                           asp-controller="Language"
-                                           asp-action="Index"
-                                           asp-route-culture="en">
-                                            @Localizer["LanguageEnglish"]
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item"
-                                           asp-controller="Language"
-                                           asp-action="Index"
-                                           asp-route-culture="cs">
-                                            @Localizer["LanguageCzech"]
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <!-- User Info and Logout -->
-                        <div class="d-flex align-items-center ms-auto">
-                            <!-- User Welcome -->
-                            <div class="user-welcome me-3 d-none d-md-block">
-                                <span class="text-muted small">@Localizer["Hi"]</span>
-                                <span class="fw-semibold text-dark">@User.Identity.Name</span>
-                            </div>
-
-                            <!-- User Avatar Dropdown -->
-                            <div class="dropdown">
-                                <button class="btn p-0 border-0" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <div class="user-avatar d-flex align-items-center">
-                                        <div class="avatar-circle bg-primary text-white d-flex align-items-center justify-content-center">
-                                            <i class="fas fa-user"></i>
-                                        </div>
-                                        <span class="d-md-none ms-2 text-dark">@User.Identity.Name</span>
-                                    </div>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-end shadow border-0 mt-2" aria-labelledby="userDropdown">
-                                    <li class="dropdown-item-text d-md-none">
-                                        <div class="fw-semibold">@User.Identity.Name</div>
-                                        <div class="small text-muted">@Localizer["WelcomeBack"]</div>
-                                    </li>
-                                    <li><hr class="dropdown-divider d-md-none"></li>
-                                    <li>
-                                        <a class="dropdown-item text-danger"
-                                           asp-area="Identity"
-                                           asp-page="/Account/Logout">
-                                            <i class="fas fa-sign-out-alt me-2"></i>@Localizer["SignOut"]
-                                        </a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     }
                     else
                     {
-                        <ul class="navbar-nav me-auto">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark px-3 py-2 rounded-3"
-                                   asp-controller="AboutUs"
-                                   asp-action="AboutUs">
-                                    <i class="fas fa-info me-2"></i>@Localizer["AboutUs"]
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="navbar-nav">
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-dark"
-                                   href="#"
-                                   role="button"
-                                   data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <i class="bi bi-globe"></i>
-                                    @System.Globalization.CultureInfo.CurrentCulture.DisplayName
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item"
-                                           asp-controller="Language"
-                                           asp-action="Index"
-                                           asp-route-culture="en">
-                                            @Localizer["LanguageEnglish"]
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item"
-                                           asp-controller="Language"
-                                           asp-action="Index"
-                                           asp-route-culture="cs">
-                                            @Localizer["LanguageCzech"]
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-
-                        <!-- Guest Menu -->
-                        <ul class="navbar-nav ms-auto">
-                            <li class="nav-item">
-                                <a class="btn fw-bold main-outline-colory px-4 mx-2"
-                                   asp-area="Identity"
-                                   asp-page="/Account/Login">
-                                    @Localizer["SignIn"]
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-primary px-4 shadow-sm"
-                                   asp-area="Identity"
-                                   asp-page="/Account/Register">
-                                    @Localizer["GetStarted"]
-                                </a>
-                            </li>
-                        </ul>
+                        <!-- Guest buttons (Desktop) -->
+                        <div class="hidden md:flex items-center space-x-3">
+                            <a asp-area="Identity" asp-page="/Account/Login"
+                               class="px-5 py-2.5 text-primary font-semibold rounded-lg hover:bg-secondary transition-colors border border-primary/20">
+                                @Localizer["SignIn"]
+                            </a>
+                            <a asp-area="Identity" asp-page="/Account/Register"
+                               class="px-5 py-2.5 bg-primary text-primary-foreground font-semibold rounded-lg hover:shadow-glow transition-all duration-300">
+                                @Localizer["GetStarted"]
+                            </a>
+                        </div>
                     }
+
+                    <!-- Mobile menu button -->
+                    <button id="mobile-menu-button" class="md:hidden text-foreground hover:text-primary p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
 
-    <div>
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden bg-card border-t border-border mobile-menu">
+            <div class="px-4 py-3 space-y-2">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a asp-controller="Vehicle" asp-action="Index"
+                       class="flex items-center px-4 py-3 rounded-lg text-foreground hover:text-primary hover:bg-secondary">
+                        <i class="fas fa-car mr-3 w-5"></i>
+                        <span class="font-medium">@Localizer["MyGarage"]</span>
+                    </a>
+                    <a asp-controller="AboutUs" asp-action="AboutUs"
+                       class="flex items-center px-4 py-3 rounded-lg text-foreground hover:text-primary hover:bg-secondary">
+                        <i class="fas fa-info-circle mr-3 w-5"></i>
+                        <span class="font-medium">@Localizer["AboutUs"]</span>
+                    </a>
 
+                    <!-- User info -->
+                    <div class="px-4 py-3 border-t border-border mt-2">
+                        <p class="text-sm text-muted-foreground">@Localizer["Hi"]</p>
+                        <p class="font-medium text-foreground">@User.Identity.Name</p>
+                    </div>
+
+                    <!-- Language dropdown (Mobile) -->
+                    <div class="px-4 py-3 border-t border-border">
+                        <p class="text-sm text-muted-foreground mb-3">@Localizer["Language"]</p>
+                        <div class="flex space-x-3">
+                            <a asp-controller="Language" asp-action="Index" asp-route-culture="en"
+                               class="flex-1 px-4 py-2 text-sm text-center border rounded-lg @(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "en" ? "bg-primary text-primary-foreground border-primary" : "text-foreground border-border hover:bg-secondary")">
+                                @Localizer["LanguageEnglish"]
+                            </a>
+                            <a asp-controller="Language" asp-action="Index" asp-route-culture="cs"
+                               class="flex-1 px-4 py-2 text-sm text-center border rounded-lg @(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "cs" ? "bg-primary text-primary-foreground border-primary" : "text-foreground border-border hover:bg-secondary")">
+                                @Localizer["LanguageCzech"]
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Logout -->
+                    <a asp-area="Identity" asp-page="/Account/Logout"
+                       class="flex items-center px-4 py-3 mt-2 rounded-lg text-red-600 hover:bg-red-50 border border-red-200">
+                        <i class="fas fa-sign-out-alt mr-3"></i>
+                        <span class="font-medium">@Localizer["SignOut"]</span>
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="AboutUs" asp-action="AboutUs"
+                       class="flex items-center px-4 py-3 rounded-lg text-foreground hover:text-primary hover:bg-secondary">
+                        <i class="fas fa-info-circle mr-3 w-5"></i>
+                        <span class="font-medium">@Localizer["AboutUs"]</span>
+                    </a>
+
+                    <!-- Language dropdown (Mobile) -->
+                    <div class="px-4 py-3 border-t border-border">
+                        <p class="text-sm text-muted-foreground mb-3">@Localizer["Language"]</p>
+                        <div class="flex space-x-3">
+                            <a asp-controller="Language" asp-action="Index" asp-route-culture="en"
+                               class="flex-1 px-4 py-2 text-sm text-center border rounded-lg @(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "en" ? "bg-primary text-primary-foreground border-primary" : "text-foreground border-border hover:bg-secondary")">
+                                @Localizer["LanguageEnglish"]
+                            </a>
+                            <a asp-controller="Language" asp-action="Index" asp-route-culture="cs"
+                               class="flex-1 px-4 py-2 text-sm text-center border rounded-lg @(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName == "cs" ? "bg-primary text-primary-foreground border-primary" : "text-foreground border-border hover:bg-secondary")">
+                                @Localizer["LanguageCzech"]
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Auth buttons -->
+                    <div class="px-4 py-3 border-t border-border space-y-3">
+                        <a asp-area="Identity" asp-page="/Account/Login"
+                           class="block w-full px-4 py-3 text-center text-primary border border-primary/30 rounded-lg hover:bg-secondary font-medium">
+                            @Localizer["SignIn"]
+                        </a>
+                        <a asp-area="Identity" asp-page="/Account/Register"
+                           class="block w-full px-4 py-3 text-center bg-primary text-primary-foreground rounded-lg hover:shadow-glow font-medium">
+                            @Localizer["GetStarted"]
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
     @if (ViewBag.IsFooter == true)
     {
-        <footer class="bg-light border-top text-muted" id="IDFooter">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 text-center">
-                        @Localizer["FooterCopyright"]<br>
-                        <small>@Localizer["FooterTagline"]</small>
+        <footer class="bg-card border-t border-border mt-12">
+            <div class="mx-auto py-8 px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <p class="text-muted-foreground">@Localizer["FooterCopyright"]</p>
+                    <p class="text-sm text-muted-foreground/80 mt-2">@Localizer["FooterTagline"]</p>
+                    <div class="flex items-center justify-center space-x-4 mt-4">
+                        <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="#" class="text-muted-foreground hover:text-primary transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </footer>
     }
 
-    
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const icon = this.querySelector('i');
 
+            mobileMenu.classList.toggle('open');
+            if (mobileMenu.classList.contains('open')) {
+                icon.className = 'fas fa-times text-xl';
+            } else {
+                icon.className = 'fas fa-bars text-xl';
+            }
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', function() {
+                const mobileMenu = document.getElementById('mobile-menu');
+                const button = document.getElementById('mobile-menu-button');
+                const icon = button.querySelector('i');
+
+                mobileMenu.classList.remove('open');
+                icon.className = 'fas fa-bars text-xl';
+            });
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileButton = document.getElementById('mobile-menu-button');
+
+            if (!mobileMenu.contains(event.target) && !mobileButton.contains(event.target)) {
+                mobileMenu.classList.remove('open');
+                const icon = mobileButton.querySelector('i');
+                icon.className = 'fas fa-bars text-xl';
+            }
+        });
+
+        // Fix for dropdown staying open on hover
+        // This allows the dropdown to stay open when moving from button to dropdown menu
+
+                // Keep dropdown open when hovering over it
+                const content = dropdown.querySelector('.dropdown-content');
+                if (content) {
+                    content.addEventListener('mouseenter', function() {
+                        this.style.display = 'block';
+                        this.style.opacity = '1';
+                        this.style.transform = 'translateY(0)';
+                    });
+
+                    content.addEventListener('mouseleave', function() {
+                        this.style.opacity = '0';
+                        this.style.transform = 'translateY(-10px)';
+                        setTimeout(() => {
+                            this.style.display = 'none';
+                        }, 200);
+                    });
+                }
+            });
+        });
+    </script>
+
+    @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

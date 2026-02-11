@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- Page Titles -->
+  <data name="Vehicle Service History" xml:space="preserve"><value>Historie Servisu Vozidla</value></data>
+  <data name="Add new upgrade record" xml:space="preserve"><value>Přidat nový záznam vylepšení</value></data>
+  
+  <!-- Form Labels -->
+  <data name="Category" xml:space="preserve"><value>Kategorie</value></data>
+  <data name="Select Category" xml:space="preserve"><value>Vyberte Kategorii</value></data>
+  <data name="Vehicle Upgrades" xml:space="preserve"><value>Vylepšení Vozidla</value></data>
+  <data name="Type" xml:space="preserve"><value>Typ</value></data>
+  <data name="Select Type" xml:space="preserve"><value>Vyberte Typ</value></data>
+  <data name="Part Origin" xml:space="preserve"><value>Původ Dílu</value></data>
+  <data name="Select Part Origin" xml:space="preserve"><value>Vyberte Původ Dílu</value></data>
+  <data name="Service Part" xml:space="preserve"><value>Servisní Díl</value></data>
+  <data name="BC racing coilovers" xml:space="preserve"><value>BC racing coilovers</value></data>
+  <data name="Part Brand" xml:space="preserve"><value>Značka Dílu</value></data>
+  <data name="(optional)" xml:space="preserve"><value>(volitelné)</value></data>
+  <data name="Bosch" xml:space="preserve"><value>Bosch</value></data>
+  <data name="Part Code" xml:space="preserve"><value>Kód Dílu</value></data>
+  <data name="12345ABC" xml:space="preserve"><value>12345ABC</value></data>
+  <data name="Mileage" xml:space="preserve"><value>Najeto</value></data>
+  <data name="158000" xml:space="preserve"><value>158000</value></data>
+  <data name="Date" xml:space="preserve"><value>Datum</value></data>
+  <data name="Price" xml:space="preserve"><value>Cena</value></data>
+  <data name="Technician/Service" xml:space="preserve"><value>Technik/Servis</value></data>
+  <data name="John Doe / Car Repairs" xml:space="preserve"><value>Jan Novák / Autoopravna</value></data>
+  <data name="Upload File" xml:space="preserve"><value>Nahrát Soubor</value></data>
+  <data name="(optional, max 5 MB)" xml:space="preserve"><value>(volitelné, max 5 MB)</value></data>
+  <data name="Allowed formats: PDF, JPG, PNG, DOC, DOCX, TXT" xml:space="preserve"><value>Povolené formáty: PDF, JPG, PNG, DOC, DOCX, TXT</value></data>
+  <data name="Notes" xml:space="preserve"><value>Poznámky</value></data>
+  <data name="Additional notes..." xml:space="preserve"><value>Další poznámky...</value></data>
+  <data name="Add Service Record" xml:space="preserve"><value>Přidat Servisní Záznam</value></data>
+  
+  <!-- Validation Messages -->
+  <data name="Please select Category, Type and Part Origin" xml:space="preserve"><value>Prosím, vyberte Kategorii, Typ a Původ Dílu</value></data>
+  <data name="Processing..." xml:space="preserve"><value>Zpracování...</value></data>
+  <data name="File size" xml:space="preserve"><value>Velikost souboru</value></data>
+  <data name="exceeds the 5 MB limit." xml:space="preserve"><value>překračuje limit 5 MB.</value></data>
+  <data name="File type" xml:space="preserve"><value>Typ souboru</value></data>
+  <data name="is not allowed." xml:space="preserve"><value>není povolen.</value></data>
+  <data name="File size exceeds the 5 MB limit. Please choose a smaller file." xml:space="preserve"><value>Velikost souboru překračuje limit 5 MB. Vyberte prosím menší soubor.</value></data>
+</root>

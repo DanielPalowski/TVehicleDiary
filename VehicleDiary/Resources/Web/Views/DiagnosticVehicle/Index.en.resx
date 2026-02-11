@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>1.3</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+  
+	<!-- Page Title & Headers -->
+	<data name="DiagnosticRecords" xml:space="preserve">
+		<value>Diagnostic Records</value>
+	</data>
+	<data name="VehicleDiagnosticsHistory" xml:space="preserve">
+		<value>Vehicle Diagnostics History</value>
+	</data>
+	<data name="AddNewDiagnostic" xml:space="preserve">
+		<value>Add New Diagnostic</value>
+	</data>
+	
+	<!-- Statistics -->
+	<data name="TotalDiagnostics" xml:space="preserve">
+		<value>Total Diagnostics</value>
+	</data>
+	<data name="TotalCost" xml:space="preserve">
+		<value>Total Cost</value>
+	</data>
+	<data name="LastDiagnostic" xml:space="preserve">
+		<value>Last Diagnostic</value>
+	</data>
+	
+	<!-- Table Headers -->
+	<data name="Date" xml:space="preserve">
+		<value>Date</value>
+	</data>
+	<data name="Type" xml:space="preserve">
+		<value>Type</value>
+	</data>
+	<data name="Procedure" xml:space="preserve">
+		<value>Procedure</value>
+	</data>
+	<data name="Tool" xml:space="preserve">
+		<value>Tool</value>
+	</data>
+	<data name="Mileage" xml:space="preserve">
+		<value>Mileage</value>
+	</data>
+	<data name="Cost" xml:space="preserve">
+		<value>Cost</value>
+	</data>
+	<data name="Technician" xml:space="preserve">
+		<value>Technician</value>
+	</data>
+	<data name="Status" xml:space="preserve">
+		<value>Status</value>
+	</data>
+	<data name="Actions" xml:space="preserve">
+		<value>Actions</value>
+	</data>
+	
+	<!-- Status Values -->
+	<data name="Completed" xml:space="preserve">
+		<value>Completed</value>
+	</data>
+	<data name="InProgress" xml:space="preserve">
+		<value>In Progress</value>
+	</data>
+	<data name="Pending" xml:space="preserve">
+		<value>Pending</value>
+	</data>
+	<data name="Failed" xml:space="preserve">
+		<value>Failed</value>
+	</data>
+	
+	<!-- Action Buttons -->
+	<data name="View" xml:space="preserve">
+		<value>View</value>
+	</data>
+	<data name="Edit" xml:space="preserve">
+		<value>Edit</value>
+	</data>
+	<data name="Delete" xml:space="preserve">
+		<value>Delete</value>
+	</data>
+	<data name="Download" xml:space="preserve">
+		<value>Download</value>
+	</data>
+	
+	<!-- Filter & Search -->
+	<data name="SearchPlaceholder" xml:space="preserve">
+		<value>Search diagnostics...</value>
+	</data>
+	<data name="FilterByType" xml:space="preserve">
+		<value>Filter by Type</value>
+	</data>
+	<data name="FilterByDate" xml:space="preserve">
+		<value>Filter by Date</value>
+	</data>
+	<data name="AllTypes" xml:space="preserve">
+		<value>All Types</value>
+	</data>
+	<data name="ThisMonth" xml:space="preserve">
+		<value>This Month</value>
+	</data>
+	<data name="Last3Months" xml:space="preserve">
+		<value>Last 3 Months</value>
+	</data>
+	<data name="ThisYear" xml:space="preserve">
+		<value>This Year</value>
+	</data>
+	<data name="AllTime" xml:space="preserve">
+		<value>All Time</value>
+	</data>
+	
+	<!-- Empty State -->
+	<data name="NoDiagnosticsFound" xml:space="preserve">
+		<value>No diagnostics found</value>
+	</data>
+	<data name="NoDiagnosticsDescription" xml:space="preserve">
+		<value>No diagnostic records have been added yet. Add your first diagnostic to get started.</value>
+	</data>
+	<data name="AddFirstDiagnostic" xml:space="preserve">
+		<value>Add First Diagnostic</value>
+	</data>
+	
+	<!-- Confirmation Messages -->
+	<data name="DeleteConfirmation" xml:space="preserve">
+		<value>Are you sure you want to delete this diagnostic record?</value>
+	</data>
+	<data name="DeleteSuccess" xml:space="preserve">
+		<value>Diagnostic record deleted successfully</value>
+	</data>
+	<data name="DeleteError" xml:space="preserve">
+		<value>Error deleting diagnostic record</value>
+	</data>
+	
+	<!-- Export Options -->
+	<data name="ExportToPDF" xml:space="preserve">
+		<value>Export to PDF</value>
+	</data>
+	<data name="ExportToExcel" xml:space="preserve">
+		<value>Export to Excel</value>
+	</data>
+	<data name="PrintReport" xml:space="preserve">
+		<value>Print Report</value>
+	</data>
+	
+	<!-- Statistics Details -->
+	<data name="MostCommonType" xml:space="preserve">
+		<value>Most Common Type</value>
+	</data>
+	<data name="AverageCost" xml:space="preserve">
+		<value>Average Cost</value>
+	</data>
+	<data name="DiagnosticsThisYear" xml:space="preserve">
+		<value>Diagnostics This Year</value>
+	</data>
+</root>

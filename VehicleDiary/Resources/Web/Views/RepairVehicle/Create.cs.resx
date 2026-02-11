@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Historie Servisu Vozidla</value>
+  </data>
+  <data name="CategoryLabel" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
+  <data name="TypeLabel" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="ServiceNameLabel" xml:space="preserve">
+    <value>Název Servisu</value>
+  </data>
+  <data name="PartLabel" xml:space="preserve">
+    <value>Díl</value>
+  </data>
+  <data name="PartBrandLabel" xml:space="preserve">
+    <value>Značka Dílu</value>
+  </data>
+  <data name="PartCodeLabel" xml:space="preserve">
+    <value>Kód Dílu</value>
+  </data>
+  <data name="MileageLabel" xml:space="preserve">
+    <value>Najeto (km)</value>
+  </data>
+  <data name="DateLabel" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="PriceLabel" xml:space="preserve">
+    <value>Cena</value>
+  </data>
+  <data name="TechnicianLabel" xml:space="preserve">
+    <value>Technik/Servis</value>
+  </data>
+  <data name="UploadFileLabel" xml:space="preserve">
+    <value>Nahrát Soubor</value>
+  </data>
+  <data name="NotesLabel" xml:space="preserve">
+    <value>Poznámky</value>
+  </data>
+  <data name="AddServiceRecordButton" xml:space="preserve">
+    <value>Přidat Servisní Záznam</value>
+  </data>
+  <data name="SelectCategoryPlaceholder" xml:space="preserve">
+    <value>Vyberte Kategorii</value>
+  </data>
+  <data name="SelectTypePlaceholder" xml:space="preserve">
+    <value>Vyberte Typ</value>
+  </data>
+  <data name="ServiceNamePlaceholder" xml:space="preserve">
+    <value>Únik Vzduchu</value>
+  </data>
+  <data name="PartPlaceholder" xml:space="preserve">
+    <value>Vzduchový nástavec</value>
+  </data>
+  <data name="PartBrandPlaceholder" xml:space="preserve">
+    <value>OEM Značka</value>
+  </data>
+  <data name="PartCodePlaceholder" xml:space="preserve">
+    <value>12345ABC</value>
+  </data>
+  <data name="MileagePlaceholder" xml:space="preserve">
+    <value>158000</value>
+  </data>
+  <data name="TechnicianPlaceholder" xml:space="preserve">
+    <value>Jan Novák / Autoopravna</value>
+  </data>
+  <data name="NotesPlaceholder" xml:space="preserve">
+    <value>Další poznámky...</value>
+  </data>
+  <data name="RequiredField" xml:space="preserve">
+    <value>*</value>
+  </data>
+  <data name="OptionalField" xml:space="preserve">
+    <value>(volitelné)</value>
+  </data>
+  <data name="VehicleRepairsOption" xml:space="preserve">
+    <value>Opravy Vozidla</value>
+  </data>
+<data name="VehicleUpgrades" xml:space="preserve"><value>Vylepšení Vozidla</value></data>
+<data name="Diagnostics" xml:space="preserve"><value>Diagnostika</value></data>
+<data name="Retrofit" xml:space="preserve"><value>Retrofit</value></data>
+<data name="Performance" xml:space="preserve"><value>Výkon</value></data>
+<data name="Style" xml:space="preserve"><value>Styl</value></data>
+<data name="Interior" xml:space="preserve"><value>Interiér</value></data>
+<data name="Accessories" xml:space="preserve"><value>Příslušenství</value></data>
+<data name="Coding" xml:space="preserve"><value>Kódování</value></data>
+<data name="ErrorDiagnostics" xml:space="preserve"><value>Diagnostika chyb</value></data>
+<data name="SoftwareUpdate" xml:space="preserve"><value>Aktualizace software</value></data>
+<data name="PleaseSelectCategoryAndType" xml:space="preserve"><value>Prosím, vyberte kategorii i typ</value></data>
+<data name="Processing" xml:space="preserve"><value>Zpracování...</value></data>
+<data name="AddServiceRecord" xml:space="preserve"><value>Přidat Servisní Záznam</value></data>
+<data name="FillServiceDetails" xml:space="preserve"><value>Vyplňte servisní údaje pro vaše vozidlo</value></data>
+<data name="ServiceFormTip" xml:space="preserve"><value>Evidujte všechny servisy vašeho vozidla pro lepší historii údržby.</value></data>
+</root>

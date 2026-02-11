@@ -1,243 +1,348 @@
 ﻿@page
 @model RegisterModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = Localizer["RegisterTitle"];
 }
 
-<div class="auth-container">
+<!DOCTYPE html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Localizer["RegisterTitle"]</title>
 
-    <div class="card shadow-lg mx-auto" style="max-width: 800px; border-radius: 1rem;">
-        <div class="card-body p-5">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold mb-2 main-color-txt">Create Your Account</h2>
-                <p class="text-muted">Start managing your vehicle maintenance</p>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                background: 'hsl(0, 0%, 99%)',
+                foreground: 'hsl(222, 47%, 11%)',
+                card: 'hsl(0, 0%, 100%)',
+                'card-foreground': 'hsl(222, 47%, 11%)',
+                primary: 'hsl(160, 84%, 39%)',
+                'primary-foreground': 'hsl(0, 0%, 100%)',
+                secondary: 'hsl(215, 20%, 95%)',
+                'secondary-foreground': 'hsl(222, 47%, 11%)',
+                muted: 'hsl(215, 20%, 96%)',
+                'muted-foreground': 'hsl(215, 16%, 47%)',
+                accent: 'hsl(160, 84%, 39%)',
+                border: 'hsl(215, 20%, 91%)',
+              },
+              fontFamily: {
+                heading: ['Space Grotesk', 'sans-serif'],
+                body: ['Inter', 'sans-serif'],
+              },
+              boxShadow: {
+                'soft': '0 4px 24px -2px rgba(30, 41, 59, 0.08)',
+                'elevated': '0 12px 40px -8px rgba(30, 41, 59, 0.12)',
+              },
+            },
+          },
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: hsl(0, 0%, 99%);
+            color: hsl(222, 47%, 11%);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(172, 66%, 50%) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(172, 66%, 50%) 100%);
+            transition: all 0.2s ease;
+        }
+
+            .btn-primary-gradient:hover {
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+                transform: translateY(-1px);
+            }
+
+        .glass-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid hsl(215, 20%, 91%);
+        }
+
+        .input-field {
+            transition: all 0.2s ease;
+        }
+
+            .input-field:focus {
+                box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1);
+                border-color: hsl(160, 84%, 39%);
+            }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-background via-white to-secondary">
+    <!-- Simple Background -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 right-0 w-1/3 h-1/3 rounded-full opacity-10" style="background: radial-gradient(circle, hsl(160, 84%, 39%), transparent);"></div>
+        <div class="absolute bottom-0 left-0 w-1/3 h-1/3 rounded-full opacity-10" style="background: radial-gradient(circle, hsl(172, 66%, 50%), transparent);"></div>
+    </div>
+
+    <div class="min-h-screen flex flex-col lg:flex-row">
+        <!-- Left Side - Branding -->
+        <div class="lg:w-1/2 bg-gradient-to-br from-foreground to-gray-900 p-8 lg:p-12 flex flex-col justify-between">
+            <div>
+                <a href="/" class="flex items-center gap-3 mb-8 lg:mb-12">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, hsl(160, 84%, 39%), hsl(172, 66%, 50%));">
+                        <i data-lucide="car" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-white">VehicleDiary</span>
+                </a>
+
+                <div class="mt-8 lg:mt-16">
+                    <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6">
+                        @Localizer["CreateAccountTitle"]<br>
+                        <span class="gradient-text">VehicleDiary</span>
+                    </h1>
+                    <p class="text-gray-300 text-lg mb-8 max-w-md">
+                        @Localizer["CreateAccountSubtitle"]
+                    </p>
+
+                    <!-- Features List -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(160, 84%, 39%, 0.2);">
+                                <i data-lucide="shield-check" class="w-4 h-4" style="color: hsl(160, 84%, 39%);"></i>
+                            </div>
+                            <span class="text-gray-300">@Localizer["FeatureCompleteTracking"]</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(160, 84%, 39%, 0.2);">
+                                <i data-lucide="bar-chart" class="w-4 h-4" style="color: hsl(160, 84%, 39%);"></i>
+                            </div>
+                            <span class="text-gray-300">@Localizer["FeatureFuelInsights"]</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(160, 84%, 39%, 0.2);">
+                                <i data-lucide="bell" class="w-4 h-4" style="color: hsl(160, 84%, 39%);"></i>
+                            </div>
+                            <span class="text-gray-300">@Localizer["FeatureSmartReminders"]</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!-- Validation Summary -->
-            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+            <!-- Footer on Left Side -->
+            <div class="mt-8 pt-8 border-t border-white/10">
+                <p class="text-gray-400 text-sm">
+                    @Localizer["Copyright"]
+                </p>
+            </div>
+        </div>
 
-            <div class="row g-4">
-                <div class="col-lg-6">
-                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input asp-for="Input.Email" class="form-control" 
-                                       autocomplete="username" aria-required="true"
-                                       placeholder="name@example.com" />
-                                <label asp-for="Input.Email" class="form-label">
-                                    <i class="fas fa-envelope me-2"></i>Email Address
-                                </label>
+        <!-- Right Side - Register Form -->
+        <div class="lg:w-1/2 p-8 lg:p-12 flex items-center justify-center">
+            <div class="w-full max-w-md">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-foreground mb-2">@Localizer["SignUp"]</h2>
+                    <p class="text-muted-foreground">@Localizer["CreateAccountSubtitle"]</p>
+                </div>
+
+                <!-- Register Card -->
+                <div class="glass-card rounded-2xl p-8 shadow-elevated">
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="space-y-6">
+                        <div asp-validation-summary="ModelOnly" class="text-sm text-red-500 bg-red-50 p-3 rounded-lg" role="alert"></div>
+
+                        <!-- Email Field -->
+                        <div class="space-y-2">
+                            <label asp-for="Input.Email" class="block text-sm font-medium text-foreground">
+                                @Localizer["EmailLabel"]
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i data-lucide="mail" class="w-5 h-5 text-muted-foreground"></i>
+                                </div>
+                                <input asp-for="Input.Email"
+                                       class="pl-10 w-full px-4 py-3 rounded-xl border border-border bg-white focus:outline-none input-field"
+                                       autocomplete="username"
+                                       aria-required="true"
+                                       placeholder="@Localizer["EmailPlaceholder"]" />
                             </div>
-                            <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                            <span asp-validation-for="Input.Email" class="text-sm text-red-500"></span>
                         </div>
 
-                        <div class="mb-3">
-                            <div class="form-floating">
-                                <input asp-for="Input.Password" class="form-control" 
-                                       autocomplete="new-password" aria-required="true"
-                                       placeholder="password" id="password" />
-                                <label asp-for="Input.Password" class="form-label">
-                                    <i class="fas fa-lock me-2"></i>Password
-                                </label>
+                        <!-- Password Field -->
+                        <div class="space-y-2">
+                            <label asp-for="Input.Password" class="block text-sm font-medium text-foreground">
+                                @Localizer["PasswordLabel"]
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i data-lucide="lock" class="w-5 h-5 text-muted-foreground"></i>
+                                </div>
+                                <input asp-for="Input.Password"
+                                       class="pl-10 w-full px-4 py-3 rounded-xl border border-border bg-white focus:outline-none input-field"
+                                       autocomplete="new-password"
+                                       aria-required="true"
+                                       placeholder="@Localizer["PasswordPlaceholder"]" />
                             </div>
-                            <span asp-validation-for="Input.Password" class="text-danger small"></span>
-                            
-                            <!-- Password Requirements -->
-                            <div class="password-requirements mt-2">
-                                <div class="form-text">Password must contain:</div>
-                                <ul class="list-unstyled small mt-1">
-                                    <li id="req-length" class="text-danger"><i class="fas fa-times-circle me-1"></i>At least 6 characters</li>
-                                    <li id="req-uppercase" class="text-danger"><i class="fas fa-times-circle me-1"></i>One uppercase letter</li>
-                                    <li id="req-digit" class="text-danger"><i class="fas fa-times-circle me-1"></i>One number</li>
-                                    <li id="req-special" class="text-danger"><i class="fas fa-times-circle me-1"></i>One special character</li>
+                            <span asp-validation-for="Input.Password" class="text-sm text-red-500"></span>
+
+                            <!-- Simple Password Requirements Text -->
+                            <div class="mt-3">
+                                <p class="text-xs text-muted-foreground mb-1">@Localizer["PasswordRequirements"]:</p>
+                                <ul class="text-xs text-muted-foreground space-y-1 ml-2">
+                                    <li class="flex items-center gap-2">
+                                        <i data-lucide="check" class="w-3 h-3"></i>
+                                        <span>@Localizer["RequirementLength"]</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <i data-lucide="check" class="w-3 h-3"></i>
+                                        <span>@Localizer["RequirementUppercase"]</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <i data-lucide="check" class="w-3 h-3"></i>
+                                        <span>@Localizer["RequirementDigit"]</span>
+                                    </li>
+                                    <li class="flex items-center gap-2">
+                                        <i data-lucide="check" class="w-3 h-3"></i>
+                                        <span>@Localizer["RequirementSpecial"]</span>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
 
-                        <div class="mb-4">
-                            <div class="form-floating">
-                                <input asp-for="Input.ConfirmPassword" class="form-control" 
-                                       autocomplete="new-password" aria-required="true"
-                                       placeholder="password" id="confirmPassword" />
-                                <label asp-for="Input.ConfirmPassword" class="form-label">
-                                    <i class="fas fa-check-circle me-2"></i>Confirm Password
-                                </label>
+                        <!-- Confirm Password Field -->
+                        <div class="space-y-2">
+                            <label asp-for="Input.ConfirmPassword" class="block text-sm font-medium text-foreground">
+                                @Localizer["ConfirmPasswordLabel"]
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i data-lucide="lock" class="w-5 h-5 text-muted-foreground"></i>
+                                </div>
+                                <input asp-for="Input.ConfirmPassword"
+                                       class="pl-10 w-full px-4 py-3 rounded-xl border border-border bg-white focus:outline-none input-field"
+                                       autocomplete="new-password"
+                                       aria-required="true"
+                                       placeholder="@Localizer["ConfirmPasswordPlaceholder"]" />
                             </div>
-                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
-                            <div id="password-match" class="form-text"></div>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-sm text-red-500"></span>
                         </div>
 
+                        <!-- Terms Agreement -->
+                        <div class="flex items-start space-x-3 pt-2">
+                            <input type="checkbox" id="terms" name="terms" required
+                                   class="w-4 h-4 mt-1 rounded border-border focus:ring-0 focus:ring-offset-0"
+                                   style="accent-color: hsl(160, 84%, 39%);" />
+                            <label for="terms" class="text-sm text-muted-foreground">
+                                @Localizer["AgreeTerms1"] <a href="#" class="font-medium hover:underline" style="color: hsl(160, 84%, 39%);">@Localizer["TermsOfService"]</a> @Localizer["And"] <a href="#" class="font-medium hover:underline" style="color: hsl(160, 84%, 39%);">@Localizer["PrivacyPolicy"]</a>
+                            </label>
+                        </div>
+
+                        <!-- Submit Button -->
                         <button id="registerSubmit" type="submit"
-                                class="w-100 btn btn-lg btn-primary py-3 fw-bold">
-                            <span id="submitText">Create Account</span>
-                            <div id="submitSpinner" class="spinner-border spinner-border-sm d-none" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
+                                class="w-full btn-primary-gradient text-white font-semibold px-6 py-3 rounded-xl text-lg transition-all duration-200 shadow-lg flex items-center justify-center gap-2 mt-6">
+                            <i data-lucide="user-plus" class="w-5 h-5"></i>
+                            <span id="submitText">@Localizer["CreateAccountButton"]</span>
                         </button>
+
+                        <!-- Divider -->
+                        @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+                        {
+                            <div class="relative my-6">
+                                <div class="absolute inset-0 flex items-center">
+                                    <div class="w-full border-t border-border"></div>
+                                </div>
+                                <div class="relative flex justify-center text-sm">
+                                    <span class="px-4 bg-white text-muted-foreground">@Localizer["OrSignUpWith"]</span>
+                                </div>
+                            </div>
+
+                            <!-- External Logins -->
+                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                <div class="grid grid-cols-2 gap-3">
+                                    @foreach (var provider in Model.ExternalLogins!)
+                                    {
+                                        <button type="submit"
+                                                class="w-full px-4 py-3 rounded-xl border border-border bg-white hover:bg-secondary transition-colors duration-200 flex items-center justify-center gap-2"
+                                                name="provider"
+                                                value="@provider.Name"
+                                                title="@Localizer["SignUpWith"] @provider.DisplayName">
+                                            @if (provider.Name == "Google")
+                                            {
+                                                <i data-lucide="mail" class="w-5 h-5"></i>
+                                            }
+                                            else if (provider.Name == "Microsoft")
+                                            {
+                                                <i data-lucide="windows" class="w-5 h-5"></i>
+                                            }
+                                            else
+                                            {
+                                                <i data-lucide="user" class="w-5 h-5"></i>
+                                            }
+                                            <span class="text-sm font-medium">@provider.DisplayName</span>
+                                        </button>
+                                    }
+                                </div>
+                            </form>
+                        }
+
+                        <!-- Login Link -->
+                        <div class="text-center pt-4">
+                            <p class="text-muted-foreground">
+                                @Localizer["AlreadyHaveAccount"]
+                                <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl"
+                                   class="font-semibold hover:underline ml-1" style="color: hsl(160, 84%, 39%);">
+                                    @Localizer["SignInHere"]
+                                </a>
+                            </p>
+                        </div>
                     </form>
                 </div>
 
-                <div class="col-lg-6">
-                    @if ((Model.ExternalLogins?.Count ?? 0) > 0)
-                    {
-                        <div class="auth-divider d-flex align-items-center my-4">
-                            <span class="text-muted mx-3">OR</span>
-                        </div>
-
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-                            <div class="d-grid gap-2">
-                                @foreach (var provider in Model.ExternalLogins!)
-                                {
-                                    <button type="submit" class="btn btn-outline-secondary text-start py-2"
-                                            name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
-                                        <i class="fab fa-@provider.Name.ToLower() me-2"></i>
-                                        Continue with @provider.DisplayName
-                                    </button>
-                                }
-                            </div>
-                        </form>
-                    }
-                    else
-                    {
-                        <div class="alert alert-info mt-4">
-                            <i class="fas fa-info-circle me-2"></i>
-                            No external authentication providers configured.
-                        </div>
-                    }
+                <!-- Mobile Footer -->
+                <div class="mt-8 pt-6 border-t border-border lg:hidden">
+                    <p class="text-center text-muted-foreground text-sm">
+                        @Localizer["Copyright"]
+                    </p>
                 </div>
-            </div>
-
-            <div class="text-center mt-4 text-muted">
-                Already have an account?
-                <a asp-page="./Login" class="text-decoration-none fw-semibold main-color-txt">Sign in here</a>
             </div>
         </div>
     </div>
-</div>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    <!-- Minimal JavaScript - Just initialize icons -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const form = document.getElementById('registerForm');
-            const passwordInput = document.getElementById('password');
-            const confirmPasswordInput = document.getElementById('confirmPassword');
-            const passwordMatch = document.getElementById('password-match');
-            const submitBtn = document.getElementById('registerSubmit');
-            const submitText = document.getElementById('submitText');
-            const submitSpinner = document.getElementById('submitSpinner');
-            
-            // Initialize requirement indicators for empty password
-            const initialRequirements = validatePassword('');
-            updateRequirementIndicators(initialRequirements);
-            
-            // Password validation logic
-            function validatePassword(password) {
-                const requirements = {
-                    length: password.length >= 6,
-                    uppercase: /[A-Z]/.test(password),
-                    digit: /\d/.test(password),
-                    special: /[!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password)
-                };
-                
-                return requirements;
-            }
-            
-            // Update requirement indicators
-            function updateRequirementIndicators(requirements) {
-                const reqLength = document.getElementById('req-length');
-                const reqUppercase = document.getElementById('req-uppercase');
-                const reqDigit = document.getElementById('req-digit');
-                const reqSpecial = document.getElementById('req-special');
-                
-                if (reqLength) {
-                    reqLength.className = requirements.length ? 'text-success' : 'text-danger';
-                    reqLength.innerHTML = requirements.length ? 
-                        '<i class="fas fa-check-circle me-1"></i>At least 6 characters' : 
-                        '<i class="fas fa-times-circle me-1"></i>At least 6 characters';
-                }
-                
-                if (reqUppercase) {
-                    reqUppercase.className = requirements.uppercase ? 'text-success' : 'text-danger';
-                    reqUppercase.innerHTML = requirements.uppercase ? 
-                        '<i class="fas fa-check-circle me-1"></i>One uppercase letter' : 
-                        '<i class="fas fa-times-circle me-1"></i>One uppercase letter';
-                }
-                
-                if (reqDigit) {
-                    reqDigit.className = requirements.digit ? 'text-success' : 'text-danger';
-                    reqDigit.innerHTML = requirements.digit ? 
-                        '<i class="fas fa-check-circle me-1"></i>One number' : 
-                        '<i class="fas fa-times-circle me-1"></i>One number';
-                }
-                
-                if (reqSpecial) {
-                    reqSpecial.className = requirements.special ? 'text-success' : 'text-danger';
-                    reqSpecial.innerHTML = requirements.special ? 
-                        '<i class="fas fa-check-circle me-1"></i>One special character' : 
-                        '<i class="fas fa-times-circle me-1"></i>One special character';
-                }
-            }
-            
-            // Check if passwords match
-            function checkPasswordMatch() {
-                if (!confirmPasswordInput.value) {
-                    passwordMatch.innerHTML = '';
-                    return false;
-                }
-                
-                if (passwordInput.value !== confirmPasswordInput.value) {
-                    passwordMatch.className = 'text-danger';
-                    passwordMatch.innerHTML = '<i class="fas fa-times-circle me-1"></i>Passwords do not match';
-                    return false;
-                } else {
-                    passwordMatch.className = 'text-success';
-                    passwordMatch.innerHTML = '<i class="fas fa-check-circle me-1"></i>Passwords match';
-                    return true;
-                }
-            }
-            
-            // Event listeners
-            if (passwordInput) {
-                passwordInput.addEventListener('input', function () {
-                    const requirements = validatePassword(this.value);
-                    updateRequirementIndicators(requirements);
-                    checkPasswordMatch();
-                });
-            }
-            
-            if (confirmPasswordInput) {
-                confirmPasswordInput.addEventListener('input', checkPasswordMatch);
-            }
-            
-            if (form) {
-                form.addEventListener('submit', function (e) {
-                    // Check if form is valid before showing loading state
-                    if (!form.checkValidity()) {
-                        // If form is invalid, don't show loading state
-                        return;
-                    }
-                    
-                    const password = passwordInput.value;
-                    const requirements = validatePassword(password);
-                    const isPasswordValid = requirements.length && requirements.uppercase && 
-                                           requirements.digit && requirements.special;
-                    
-                    if (!isPasswordValid || !checkPasswordMatch()) {
-                        // Prevent form submission if password is invalid
-                        e.preventDefault();
-                        
-                        // Show all validation errors
-                        form.classList.add('was-validated');
-                        return;
-                    }
-                    
-                    // Show loading state only if form is valid
-                    submitText.classList.add('d-none');
-                    submitSpinner.classList.remove('d-none');
-                    submitBtn.disabled = true;
-                });
-            }
-        });
+        // Only initialize Lucide icons - no heavy validation logic
+        lucide.createIcons();
     </script>
-}
+
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>

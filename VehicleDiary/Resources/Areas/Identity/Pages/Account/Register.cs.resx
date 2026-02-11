@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- Page Titles -->
+  <data name="LoginTitle" xml:space="preserve"><value>Přihlášení - VehicleDiary</value></data>
+  <data name="RegisterTitle" xml:space="preserve"><value>Registrace - VehicleDiary</value></data>
+  
+  <!-- Login Page -->
+  <data name="WelcomeBack" xml:space="preserve"><value>Vítejte zpět v</value></data>
+  <data name="ContinueTracking" xml:space="preserve"><value>Pokračujte ve sledování údržby vozidla, spotřeby paliva a nákladů v naší intuitivní platformě.</value></data>
+  <data name="FeatureMaintenance" xml:space="preserve"><value>Sledujte plány údržby</value></data>
+  <data name="FeatureFuel" xml:space="preserve"><value>Monitorujte spotřebu paliva</value></data>
+  <data name="FeatureCosts" xml:space="preserve"><value>Spravujte náklady na opravy</value></data>
+  <data name="SignInTitle" xml:space="preserve"><value>Vítejte zpět</value></data>
+  <data name="SignInSubtitle" xml:space="preserve"><value>Přihlaste se ke svému účtu VehicleDiary</value></data>
+  <data name="EmailLabel" xml:space="preserve"><value>E-mailová adresa</value></data>
+  <data name="EmailPlaceholder" xml:space="preserve"><value>jmeno@priklad.cz</value></data>
+  <data name="PasswordLabel" xml:space="preserve"><value>Heslo</value></data>
+  <data name="PasswordPlaceholder" xml:space="preserve"><value>Zadejte své heslo</value></data>
+  <data name="ForgotPassword" xml:space="preserve"><value>Zapomněli jste heslo?</value></data>
+  <data name="RememberMe" xml:space="preserve"><value>Zapamatovat si mě</value></data>
+  <data name="SignInButton" xml:space="preserve"><value>Přihlásit se</value></data>
+  <data name="OrContinueWith" xml:space="preserve"><value>Nebo pokračujte s</value></data>
+  <data name="LoginWith" xml:space="preserve"><value>Přihlaste se pomocí svého účtu</value></data>
+  <data name="NoAccount" xml:space="preserve"><value>Nemáte účet?</value></data>
+  <data name="SignUpNow" xml:space="preserve"><value>Zaregistrujte se nyní</value></data>
+  <data name="SigningIn" xml:space="preserve"><value>Přihlašování...</value></data>
+  
+  <!-- Register Page -->
+  <data name="CreateAccountTitle" xml:space="preserve"><value>Vytvořte si</value></data>
+  <data name="CreateAccountSubtitle" xml:space="preserve"><value>Začněte sledovat údržbu vozidla, spotřebu paliva a náklady v jedné intuitivní platformě</value></data>
+  <data name="SignUp" xml:space="preserve"><value>Registrace</value></data>
+  <data name="ConfirmPasswordLabel" xml:space="preserve"><value>Potvrďte heslo</value></data>
+  <data name="ConfirmPasswordPlaceholder" xml:space="preserve"><value>Potvrďte své heslo</value></data>
+  <data name="PasswordRequirements" xml:space="preserve"><value>Požadavky na heslo</value></data>
+  <data name="RequirementLength" xml:space="preserve"><value>Alespoň 8 znaků</value></data>
+  <data name="RequirementUppercase" xml:space="preserve"><value>Jedno velké písmeno</value></data>
+  <data name="RequirementDigit" xml:space="preserve"><value>Jedno číslo</value></data>
+  <data name="RequirementSpecial" xml:space="preserve"><value>Jeden speciální znak</value></data>
+  <data name="AgreeTerms1" xml:space="preserve"><value>Souhlasím s</value></data>
+  <data name="TermsOfService" xml:space="preserve"><value>Podmínkami služby</value></data>
+  <data name="And" xml:space="preserve"><value>a</value></data>
+  <data name="PrivacyPolicy" xml:space="preserve"><value>Zásadami ochrany osobních údajů</value></data>
+  <data name="CreateAccountButton" xml:space="preserve"><value>Vytvořit účet</value></data>
+  <data name="AlreadyHaveAccount" xml:space="preserve"><value>Již máte účet?</value></data>
+  <data name="SignInHere" xml:space="preserve"><value>Přihlaste se zde</value></data>
+  <data name="WhyJoin" xml:space="preserve"><value>Proč se přidat k VehicleDiary?</value></data>
+  <data name="FeatureCompleteTracking" xml:space="preserve"><value>Kompletní sledování vozidla</value></data>
+  <data name="FeatureCompleteTrackingDesc" xml:space="preserve"><value>Sledujte údržbu, opravy a náklady na jednom místě</value></data>
+  <data name="FeatureFuelInsights" xml:space="preserve"><value>Přehled spotřeby paliva</value></data>
+  <data name="FeatureFuelInsightsDesc" xml:space="preserve"><value>Sledujte spotřebu paliva a optimalizujte své jízdní návyky</value></data>
+  <data name="FeatureSmartReminders" xml:space="preserve"><value>Chytré připomínky</value></data>
+  <data name="FeatureSmartRemindersDesc" xml:space="preserve"><value>Dostávejte upozornění na nadcházející údržbu a kontroly</value></data>
+  <data name="OrSignUpWith" xml:space="preserve"><value>Nebo se zaregistrujte pomocí</value></data>
+  <data name="SignUpWith" xml:space="preserve"><value>Registrujte se pomocí svého účtu</value></data>
+  <data name="PasswordsNotMatch" xml:space="preserve"><value>Hesla se neshodují</value></data>
+  <data name="PasswordsMatch" xml:space="preserve"><value>Hesla se shodují</value></data>
+  
+  <!-- Shared -->
+  <data name="Copyright" xml:space="preserve"><value>© VehicleDiary. Všechna práva vyhrazena.</value></data>
+</root>

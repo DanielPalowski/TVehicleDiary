@@ -1,421 +1,400 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBDiagnosticVehicleModelVM
+@inject IViewLocalizer Localizer
 
-@if (TempData["SuccessMessage"] != null)
-{
-    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
-}
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+@{
+    Layout = null;
 }
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Diary - Diagnostic Records</title>
 
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-lg-10">
-            <div class="card service-history-card shadow-sm mb-5">
-                <div class="card-body p-4">
-                    <h2 class="service-history-title mb-4">
-                        <i class="fas fa-stethoscope me-2 service-icon-orange"></i>Vehicle Diagnostics
-                    </h2>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+
+<body class="bg-gray-50">
+    <div class="min-h-screen py-8">
+        <div class="max-w-4xl mx-auto px-4">
+            <!-- Success/Error Messages -->
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="check-circle" class="w-5 h-5 text-green-600"></i>
+                        <p class="text-green-700">@TempData["SuccessMessage"]</p>
+                    </div>
+                </div>
+            }
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="alert-circle" class="w-5 h-5 text-red-600"></i>
+                        <p class="text-red-700">@TempData["ErrorMessage"]</p>
+                    </div>
+                </div>
+            }
+
+            <!-- Main Card -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-orange-600 to-amber-700 text-white p-6">
+                    <div class="flex items-center">
+                        <div class="bg-white/20 p-3 rounded-lg mr-4">
+                            <i data-lucide="stethoscope" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-2xl font-bold">@Localizer["VehicleDiagnostics"]</h1>
+                            <p class="text-orange-100">@Localizer["AddDiagnosticRecord"]</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="p-6">
                     <form asp-action="Create" method="post" enctype="multipart/form-data" id="diagnosticForm">
                         <input type="hidden" asp-for="VehicleId" />
 
-                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+                        <div asp-validation-summary="ModelOnly" class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700"></div>
 
-                        <div class="row g-3">
-
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <!-- Category (Fixed) -->
-                            <div class="col-md-6">
-                                <label class="form-label service-form-label">
-                                    <i class="fas fa-list me-1 service-icon-orange"></i>Category
+                            <div class="space-y-2">
+                                <label class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="list" class="w-4 h-4 mr-2 text-orange-600"></i>
+                                        @Localizer["Category"]
+                                        <span class="text-red-500 ml-1">@Localizer["Required"]</span>
+                                    </div>
                                 </label>
-                                <input type="text" class="form-control service-form-control" value="Diagnostics" readonly>
+                                <input type="text" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50" value="Diagnostics" readonly>
                                 <input type="hidden" asp-for="DiagnosticVCategory" value="Diagnostics" />
                             </div>
 
                             <!-- Diagnostic Type -->
-                            <div class="col-md-6">
-                                <label asp-for="DiagnosticVType" class="form-label service-form-label">
-                                    <i class="fas fa-tools me-1 service-icon-orange"></i>Diagnostic Type
-                                    <span class="text-danger">*</span>
+                            <div class="space-y-2">
+                                <label asp-for="DiagnosticVType" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="cog" class="w-4 h-4 mr-2 text-orange-600"></i>
+                                        @Localizer["DiagnosticType"]
+                                        <span class="text-red-500 ml-1">@Localizer["Required"]</span>
+                                    </div>
                                 </label>
-                                <select asp-for="DiagnosticVType" class="form-control service-form-control" id="typeSelect" required>
-                                    <option value="">Select Diagnostic Type</option>
-                                    <option value="Coding">Coding</option>
-                                    <option value="Error Diagnostics">Error Diagnostics</option>
-                                    <option value="Software Update">Software Update</option>
-                                    <option value="Tuning">Tuning</option>
-                                    <option value="Other">Other</option>
+                                <select asp-for="DiagnosticVType" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" id="typeSelect" required>
+                                    <option value="">@Localizer["SelectDiagnosticType"]</option>
+                                    <option value="Coding">@Localizer["Coding"]</option>
+                                    <option value="Error Diagnostics">@Localizer["ErrorDiagnostics"]</option>
+                                    <option value="Software Update">@Localizer["SoftwareUpdate"]</option>
+                                    <option value="Tuning">@Localizer["Tuning"]</option>
+                                    <option value="Other">@Localizer["Other"]</option>
                                 </select>
-                                <span asp-validation-for="DiagnosticVType" class="text-danger small"></span>
+                                <span asp-validation-for="DiagnosticVType" class="text-red-500 text-sm"></span>
                             </div>
 
                             <!-- Conditional Error Fields (Initially Hidden) -->
-                            <div id="errorFieldsSection" class="row g-3 mt-3" style="display: none;">
-                                <div class="col-12">
-                                    <div class="card border-warning bg-warning-subtle">
-                                        <div class="card-body">
-                                            <h6 class="fw-semibold mb-3">
-                                                <i class="fas fa-exclamation-triangle text-warning me-2"></i>
-                                                Error Details
-                                            </h6>
+                            <div id="errorFieldsSection" class="md:col-span-2" style="display: none;">
+                                <div class="border border-amber-200 bg-amber-50 rounded-lg p-4">
+                                    <div class="flex items-center mb-3">
+                                        <i data-lucide="alert-triangle" class="w-5 h-5 text-amber-600 mr-2"></i>
+                                        <h3 class="font-semibold text-gray-700">@Localizer["ErrorDetails"]</h3>
+                                    </div>
 
-                                            <!-- Error Type -->
-                                            <div class="col-md-6 mb-3">
-                                                <label asp-for="DiagnosticVErrorType" class="form-label service-form-label">
-                                                    Error Type
-                                                    <span class="text-muted small">(optional)</span>
-                                                </label>
-                                                <select asp-for="DiagnosticVErrorType"
-                                                        class="form-control border-warning">
-                                                    <option value="">Select Error Type</option>
-                                                    <option value="Engine">Engine</option>
-                                                    <option value="Transmission">Transmission</option>
-                                                    <option value="ABS">ABS/ESP</option>
-                                                    <option value="Airbag">Airbag</option>
-                                                    <option value="Electrical">Electrical</option>
-                                                    <option value="Sensor">Sensor</option>
-                                                    <option value="Communication">Communication</option>
-                                                    <option value="Other">Other</option>
-                                                </select>
-                                            </div>
+                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <!-- Error Type -->
+                                        <div class="space-y-2">
+                                            <label asp-for="DiagnosticVErrorType" class="block text-sm font-medium text-gray-700">
+                                                @Localizer["ErrorType"]
+                                                <span class="text-gray-500 text-sm ml-1">@Localizer["Optional"]</span>
+                                            </label>
+                                            <select asp-for="DiagnosticVErrorType" class="w-full px-4 py-2.5 border border-amber-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500">
+                                                <option value="">@Localizer["SelectErrorType"]</option>
+                                                <option value="Engine">@Localizer["Engine"]</option>
+                                                <option value="Transmission">@Localizer["Transmission"]</option>
+                                                <option value="ABS">@Localizer["ABS"]</option>
+                                                <option value="Airbag">@Localizer["Airbag"]</option>
+                                                <option value="Electrical">@Localizer["Electrical"]</option>
+                                                <option value="Sensor">@Localizer["Sensor"]</option>
+                                                <option value="Communication">@Localizer["Communication"]</option>
+                                                <option value="Other">@Localizer["Other"]</option>
+                                            </select>
+                                        </div>
 
-                                            <!-- Error Code -->
-                                            <div class="col-md-6 mb-3">
-                                                <label asp-for="DiagnosticVErrorCode" class="form-label service-form-label">
-                                                    Error Code
-                                                    <span class="text-muted small">(optional)</span>
-                                                </label>
-                                                <input type="text" asp-for="DiagnosticVErrorCode"
-                                                       class="form-control border-warning"
-                                                       placeholder="e.g., P0300, U1123">
-                                            </div>
+                                        <!-- Error Code -->
+                                        <div class="space-y-2">
+                                            <label asp-for="DiagnosticVErrorCode" class="block text-sm font-medium text-gray-700">
+                                                @Localizer["ErrorCode"]
+                                                <span class="text-gray-500 text-sm ml-1">@Localizer["Optional"]</span>
+                                            </label>
+                                            <input type="text" asp-for="DiagnosticVErrorCode" class="w-full px-4 py-2.5 border border-amber-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" placeholder="e.g., P0300, U1123">
+                                        </div>
 
-                                            <!-- Error Description -->
-                                            <div class="col-12 mb-3">
-                                                <label asp-for="DiagnosticVErrorDis" class="form-label service-form-label">
-                                                    Error Description
-                                                    <span class="text-muted small">(optional)</span>
-                                                </label>
-                                                <textarea asp-for="DiagnosticVErrorDis"
-                                                          class="form-control border-warning"
-                                                          rows="2"
-                                                          placeholder="Describe the error symptoms and findings..."></textarea>
-                                            </div>
+                                        <!-- Error Description -->
+                                        <div class="md:col-span-2 space-y-2">
+                                            <label asp-for="DiagnosticVErrorDis" class="block text-sm font-medium text-gray-700">
+                                                @Localizer["ErrorDescription"]
+                                                <span class="text-gray-500 text-sm ml-1">@Localizer["Optional"]</span>
+                                            </label>
+                                            <textarea asp-for="DiagnosticVErrorDis" class="w-full px-4 py-2.5 border border-amber-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" rows="2" placeholder="@Localizer["DescribeError"]"></textarea>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Diagnostic Tool -->
-                            <div class="col-md-6">
-                                <label asp-for="DiagnosticVDiagnosticType" class="form-label service-form-label">
-                                    <i class="fas fa-laptop-medical me-1 service-icon-orange"></i>Diagnostic Tool
-                                    <span class="text-muted small">(optional)</span>
+                            <div class="space-y-2">
+                                <label asp-for="DiagnosticVDiagnosticType" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="monitor" class="w-4 h-4 mr-2 text-orange-600"></i>
+                                        @Localizer["DiagnosticTool"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["Optional"]</span>
+                                    </div>
                                 </label>
-                                <input type="text" asp-for="DiagnosticVDiagnosticType"
-                                       class="form-control service-form-control"
-                                       placeholder="e.g., VCDS, INPA, Launch X431">
-                                <span asp-validation-for="DiagnosticVDiagnosticType" class="text-danger small"></span>
+                                <input type="text" asp-for="DiagnosticVDiagnosticType" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" placeholder="@Localizer["ToolPlaceholder"]">
+                                <span asp-validation-for="DiagnosticVDiagnosticType" class="text-red-500 text-sm"></span>
                             </div>
 
                             <!-- Procedure Name -->
-                            <div class="col-md-6">
-                                <label asp-for="DiagnosticVName" class="form-label service-form-label">
-                                    <i class="fas fa-clipboard-check me-1 service-icon-orange"></i>Procedure Name
-                                    <span class="text-danger">*</span>
+                            <div class="space-y-2">
+                                <label asp-for="DiagnosticVName" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="clipboard-check" class="w-4 h-4 mr-2 text-orange-600"></i>
+                                        @Localizer["ProcedureName"]
+                                        <span class="text-red-500 ml-1">@Localizer["Required"]</span>
+                                    </div>
                                 </label>
-                                <input type="text" asp-for="DiagnosticVName"
-                                       class="form-control service-form-control"
-                                       placeholder="e.g., Full system scan, ECU coding, Software update" required>
-                                <span asp-validation-for="DiagnosticVName" class="text-danger small"></span>
+                                <input type="text" asp-for="DiagnosticVName" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" placeholder="@Localizer["ProcedurePlaceholder"]" required>
+                                <span asp-validation-for="DiagnosticVName" class="text-red-500 text-sm"></span>
                             </div>
 
                             <!-- Mileage -->
-                            <div class="col-md-4">
-                                <label asp-for="DiagnosticVMileage" class="form-label service-form-label">
-                                    <i class="fas fa-tachometer-alt me-1 service-icon-orange"></i>Mileage
-                                    <span class="text-muted small">(optional)</span>
+                            <div class="space-y-2">
+                                <label asp-for="DiagnosticVMileage" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="gauge" class="w-4 h-4 mr-2 text-orange-600"></i>
+                                        @Localizer["Mileage"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["Optional"]</span>
+                                    </div>
                                 </label>
-                                <input type="number" asp-for="DiagnosticVMileage"
-                                       class="form-control service-form-control"
-                                       placeholder="158000">
-                                <span asp-validation-for="DiagnosticVMileage" class="text-danger small"></span>
+                                <input type="number" asp-for="DiagnosticVMileage" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" placeholder="158000">
+                                <span asp-validation-for="DiagnosticVMileage" class="text-red-500 text-sm"></span>
                             </div>
 
                             <!-- Date -->
-                            <div class="col-md-4">
-                                <label asp-for="DiagnosticVWhen" class="form-label service-form-label">
-                                    <i class="fas fa-calendar me-1 service-icon-orange"></i>Date
-                                    <span class="text-danger">*</span>
+                            <div class="space-y-2">
+                                <label asp-for="DiagnosticVWhen" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="calendar" class="w-4 h-4 mr-2 text-orange-600"></i>
+                                        @Localizer["Date"]
+                                        <span class="text-red-500 ml-1">@Localizer["Required"]</span>
+                                    </div>
                                 </label>
-                                <input type="date" asp-for="DiagnosticVWhen" class="form-control service-form-control"
-                                       value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
-                                <span asp-validation-for="DiagnosticVWhen" class="text-danger small"></span>
+                                <input type="date" asp-for="DiagnosticVWhen" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
+                                <span asp-validation-for="DiagnosticVWhen" class="text-red-500 text-sm"></span>
                             </div>
 
-                            <!-- Price -->
-                            <div class="col-md-4">
-                                <label asp-for="DiagnosticVPrice" class="form-label service-form-label">
-                                    <i class="fas fa-euro-sign me-1 service-icon-orange"></i>Cost
-                                    <span class="text-muted small">(optional)</span>
+                            <!-- Cost -->
+                            <div class="space-y-2">
+                                <label asp-for="DiagnosticVPrice" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="euro" class="w-4 h-4 mr-2 text-orange-600"></i>
+                                        @Localizer["Cost"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["Optional"]</span>
+                                    </div>
                                 </label>
-                                <div class="input-group service-input-group">
-                                    <input type="number" step="0.01" asp-for="DiagnosticVPrice"
-                                           class="form-control service-form-control"
-                                           placeholder="85.00">
-                                    <span class="input-group-text">€</span>
+                                <div class="relative">
+                                    <input type="number" step="0.01" asp-for="DiagnosticVPrice" class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" placeholder="85.00">
+                                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                                        €
+                                    </div>
                                 </div>
-                                <span asp-validation-for="DiagnosticVPrice" class="text-danger small"></span>
+                                <span asp-validation-for="DiagnosticVPrice" class="text-red-500 text-sm"></span>
                             </div>
 
                             <!-- Technician -->
-                            <div class="col-md-6">
-                                <label asp-for="UpgradeVTechnician" class="form-label service-form-label">
-                                    <i class="fas fa-user-md me-1 service-icon-orange"></i>Technician
-                                    <span class="text-muted small">(optional)</span>
+                            <div class="space-y-2">
+                                <label asp-for="UpgradeVTechnician" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="user" class="w-4 h-4 mr-2 text-orange-600"></i>
+                                        @Localizer["Technician"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["Optional"]</span>
+                                    </div>
                                 </label>
-                                <input type="text" asp-for="UpgradeVTechnician"
-                                       class="form-control service-form-control"
-                                       placeholder="John Doe / Diagnostic Center">
-                                <span asp-validation-for="UpgradeVTechnician" class="text-danger small"></span>
+                                <input type="text" asp-for="UpgradeVTechnician" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" placeholder="@Localizer["TechnicianPlaceholder"]">
+                                <span asp-validation-for="UpgradeVTechnician" class="text-red-500 text-sm"></span>
                             </div>
 
                             <!-- File Upload -->
-                            <div class="col-md-6">
-                                <label asp-for="Upload" class="form-label service-form-label">
-                                    <i class="fas fa-file-upload me-1 service-icon-orange"></i>Upload File
-                                    <span class="text-muted small">(optional, max 5 MB)</span>
+                            <div class="space-y-2">
+                                <label asp-for="Upload" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="upload" class="w-4 h-4 mr-2 text-orange-600"></i>
+                                        @Localizer["UploadFile"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["OptionalMax5MB"]</span>
+                                    </div>
                                 </label>
-                                <input asp-for="Upload" type="file" class="form-control"
+                                <input asp-for="Upload" type="file" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100"
                                        onchange="validateFile(this)"
-                                       accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.txt" />
-                                <div class="form-text">Allowed formats: PDF, JPG, PNG, DOC, DOCX, TXT</div>
-                                <div id="fileSizeWarning" class="text-danger small mt-1" style="display: none;"></div>
-                                <span asp-validation-for="Upload" class="text-danger small"></span>
+                                       accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.txt">
+                                <div class="text-gray-500 text-sm mt-1">@Localizer["AllowedFormats"]</div>
+                                <div id="fileSizeWarning" class="text-red-500 text-sm mt-1" style="display: none;"></div>
+                                <span asp-validation-for="Upload" class="text-red-500 text-sm"></span>
                             </div>
 
                             <!-- Notes -->
-                            <div class="col-12">
-                                <label asp-for="DiagnosticVNotes" class="form-label service-form-label">
-                                    <i class="fas fa-sticky-note me-1 service-icon-orange"></i>Additional Notes
-                                    <span class="text-muted small">(optional)</span>
+                            <div class="md:col-span-2 space-y-2">
+                                <label asp-for="DiagnosticVNotes" class="block text-sm font-medium text-gray-700">
+                                    <div class="flex items-center">
+                                        <i data-lucide="sticky-note" class="w-4 h-4 mr-2 text-orange-600"></i>
+                                        @Localizer["AdditionalNotes"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["Optional"]</span>
+                                    </div>
                                 </label>
-                                <textarea asp-for="DiagnosticVNotes"
-                                          class="form-control service-form-control service-textarea"
-                                          rows="3"
-                                          placeholder="Additional notes, observations, or follow-up recommendations..."></textarea>
-                                <span asp-validation-for="DiagnosticVNotes" class="text-danger small"></span>
+                                <textarea asp-for="DiagnosticVNotes" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" rows="3" placeholder="@Localizer["NotesPlaceholder"]"></textarea>
+                                <span asp-validation-for="DiagnosticVNotes" class="text-red-500 text-sm"></span>
                             </div>
+                        </div>
 
-                            <!-- Submit -->
-                            <div class="col-12 mt-4">
-                                <button class="btn btn-primary service-submit-btn w-100" type="submit" id="submitButton">
-                                    <i class="fas fa-plus-circle me-2 service-icon-white"></i>Add Diagnostic Record
-                                </button>
-                            </div>
+                        <!-- Submit Button -->
+                        <div class="mt-8">
+                            <button class="w-full bg-gradient-to-r from-orange-600 to-amber-700 text-white font-semibold py-3.5 px-6 rounded-lg hover:from-orange-700 hover:to-amber-800 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center" type="submit" id="submitButton">
+                                <i data-lucide="plus-circle" class="w-5 h-5 mr-2"></i>
+                                @Localizer["AddDiagnosticRecord"]
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
 
-<script>
-    // Get DOM elements
-    const typeSelect = document.getElementById('typeSelect');
-    const errorFieldsSection = document.getElementById('errorFieldsSection');
-    const diagnosticForm = document.getElementById('diagnosticForm');
-    const submitButton = document.getElementById('submitButton');
+        // Get DOM elements
+        const typeSelect = document.getElementById('typeSelect');
+        const errorFieldsSection = document.getElementById('errorFieldsSection');
+        const diagnosticForm = document.getElementById('diagnosticForm');
+        const submitButton = document.getElementById('submitButton');
 
-    // Toggle error fields based on diagnostic type selection
-    typeSelect.addEventListener('change', function () {
-        const selectedType = this.value;
+        // Toggle error fields based on diagnostic type selection
+        typeSelect.addEventListener('change', function () {
+            const selectedType = this.value;
 
-        if (selectedType === 'Error Diagnostics') {
-            errorFieldsSection.style.display = 'block';
-        } else {
-            errorFieldsSection.style.display = 'none';
-        }
-    });
-
-    // Form submission handler
-    diagnosticForm.addEventListener('submit', function(e) {
-        // Basic validation
-        if (!typeSelect.value) {
-            e.preventDefault();
-            alert('Please select a Diagnostic Type');
-            typeSelect.focus();
-            return;
-        }
-
-        // Show loading state
-        submitButton.innerHTML = '<span class="service-loading"></span> Processing...';
-        submitButton.disabled = true;
-    });
-
-    // File validation function
-    function validateFile(input) {
-        const maxSize = 5 * 1024 * 1024; // 5 MB
-        const fileSizeWarning = document.getElementById('fileSizeWarning');
-
-        if (input.files.length > 0) {
-            const file = input.files[0];
-            const fileSize = file.size;
-
-            if (fileSize > maxSize) {
-                fileSizeWarning.textContent = `File size (${(fileSize / (1024 * 1024)).toFixed(2)} MB) exceeds the 5 MB limit.`;
-                fileSizeWarning.style.display = 'block';
-                fileSizeWarning.style.color = 'red';
-                input.value = ''; // Clear the file input
+            if (selectedType === 'Error Diagnostics') {
+                errorFieldsSection.style.display = 'block';
             } else {
-                fileSizeWarning.textContent = `File size: ${(fileSize / 1024).toFixed(2)} KB`;
-                fileSizeWarning.style.color = 'green';
-                fileSizeWarning.style.display = 'block';
+                errorFieldsSection.style.display = 'none';
             }
+        });
 
-            // Validate file extension
-            const allowedExtensions = ['.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx', '.txt'];
-            const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
-
-            if (!allowedExtensions.includes(fileExtension)) {
-                fileSizeWarning.textContent = `File type ${fileExtension} is not allowed.`;
-                fileSizeWarning.style.display = 'block';
-                fileSizeWarning.style.color = 'red';
-                input.value = '';
-            }
-        } else {
-            fileSizeWarning.style.display = 'none';
-        }
-    }
-
-    // Client-side validation before form submission
-    document.getElementById('diagnosticForm').addEventListener('submit', function(e) {
-        const fileInput = document.querySelector('input[type="file"]');
-        const maxSize = 5 * 1024 * 1024;
-
-        if (fileInput.files.length > 0) {
-            const file = fileInput.files[0];
-
-            if (file.size > maxSize) {
+        // Form submission handler
+        diagnosticForm.addEventListener('submit', function(e) {
+            // Basic validation
+            if (!typeSelect.value) {
                 e.preventDefault();
-                alert('File size exceeds the 5 MB limit. Please choose a smaller file.');
-                return false;
+                alert('@Localizer["PleaseSelectDiagnosticType"]');
+                typeSelect.focus();
+                return;
+            }
+
+            // Show loading state
+            submitButton.innerHTML = '<span class="loading-spinner"></span> @Localizer["Processing"]';
+            submitButton.disabled = true;
+        });
+
+        // File validation function
+        function validateFile(input) {
+            const maxSize = 5 * 1024 * 1024; // 5 MB
+            const fileSizeWarning = document.getElementById('fileSizeWarning');
+
+            if (input.files.length > 0) {
+                const file = input.files[0];
+                const fileSize = file.size;
+
+                if (fileSize > maxSize) {
+                    const fileSizeMB = (fileSize / (1024 * 1024)).toFixed(2);
+                    fileSizeWarning.textContent = `@Localizer["FileSizeExceeds", "${fileSizeMB}"]`;
+                    fileSizeWarning.style.display = 'block';
+                    fileSizeWarning.style.color = 'red';
+                    input.value = ''; // Clear the file input
+                } else {
+                    const fileSizeKB = (fileSize / 1024).toFixed(2);
+                    fileSizeWarning.textContent = `@Localizer["FileSize", "${fileSizeKB}"]`;
+                    fileSizeWarning.style.color = 'green';
+                    fileSizeWarning.style.display = 'block';
+                }
+
+                // Validate file extension
+                const allowedExtensions = ['.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx', '.txt'];
+                const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
+
+                if (!allowedExtensions.includes(fileExtension)) {
+                    fileSizeWarning.textContent = `@Localizer["FileTypeNotAllowed", "${fileExtension}"]`;
+                    fileSizeWarning.style.display = 'block';
+                    fileSizeWarning.style.color = 'red';
+                    input.value = '';
+                }
+            } else {
+                fileSizeWarning.style.display = 'none';
             }
         }
-    });
-</script>
-<style>
-    /* Orange theme for diagnostics */
-    .service-icon-orange {
-        color: #f97316;
-    }
 
-    .service-history-title {
-        font-weight: 700;
-        font-size: 1.8rem;
-        color: #1e293b;
-        display: flex;
-        align-items: center;
-    }
+        // Client-side validation before form submission
+        diagnosticForm.addEventListener('submit', function(e) {
+            const fileInput = document.querySelector('input[type="file"]');
+            const maxSize = 5 * 1024 * 1024;
 
-    .service-form-label {
-        font-weight: 600;
-        color: #475569;
-        margin-bottom: 0.5rem;
-        display: flex;
-        align-items: center;
-    }
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
 
-    .service-form-control {
-        border-radius: 10px;
-        padding: 0.75rem;
-        border: 1px solid #e2e8f0;
-        transition: all 0.3s ease;
-    }
+                if (file.size > maxSize) {
+                    e.preventDefault();
+                    alert('@Localizer["FileSizeExceedsAlert"]');
+                    return false;
+                }
+            }
+        });
 
-        .service-form-control:focus {
-            border-color: #f97316;
-            box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.15);
-            outline: none;
-        }
-
-    .service-input-group .input-group-text {
-        background-color: #fff7ed;
-        border: 1px solid #fed7aa;
-        color: #f97316;
-    }
-
-    .service-textarea {
-        min-height: 100px;
-        resize: vertical;
-    }
-
-    .service-submit-btn {
-        background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-        border: none;
-        padding: 0.875rem;
-        font-weight: 600;
-        border-radius: 10px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 12px rgba(249, 115, 22, 0.25);
-    }
-
-        .service-submit-btn:hover {
-            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(249, 115, 22, 0.35);
-        }
-
-    .service-icon-white {
-        color: white;
-    }
-
-    .service-history-card {
-        background: #ffffff;
-        border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(149, 157, 165, 0.15);
-        border: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    /* Required field indicator */
-    input:required,
-    select:required,
-    textarea:required {
-        border-left: 4px solid #ef4444;
-        padding-left: 0.5rem;
-    }
-
-    /* Loading spinner */
-    .service-loading {
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        border-radius: 50%;
-        border-top-color: white;
-        animation: spin 1s ease-in-out infinite;
-        margin-right: 0.5rem;
-    }
-
-    @@keyframes spin {
-        to {
-            transform: rotate(360deg);
-        }
-    }
-
-    /* Responsive adjustments */
-    @@media (max-width: 768px) {
-        .service-history-title {
-            font-size: 1.5rem;
-        }
-
-        .card-body {
-            padding: 1.5rem !important;
-        }
-    }
-</style>
+        // Loading spinner style
+        const style = document.createElement('style');
+        style.textContent = `
+            .loading-spinner {
+                display: inline-block;
+                width: 1rem;
+                height: 1rem;
+                border: 2px solid #ffffff;
+                border-radius: 50%;
+                border-top-color: transparent;
+                animation: spin 0.6s linear infinite;
+                margin-right: 0.5rem;
+            }
+            @@keyframes spin {
+                to { transform: rotate(360deg); }
+            }
+            input:required, select:required, textarea:required {
+                border-left: 4px solid #ef4444;
+                padding-left: calc(1rem - 4px);
+            }
+            .fixed-category {
+                background-color: #f3f4f6;
+                cursor: not-allowed;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

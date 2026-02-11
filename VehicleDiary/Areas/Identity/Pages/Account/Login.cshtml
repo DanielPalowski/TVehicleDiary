@@ -1,66 +1,320 @@
 ﻿@page
 @model LoginModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
 
 @{
-    ViewData["Title"] = "Log in";
-    ViewBag.Footer = true;
+    ViewData["Title"] = Localizer["LoginTitle"];
 }
 
+<!DOCTYPE html>
+<html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Localizer["LoginTitle"]</title>
 
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<div class="split-container">
-    <div class="login-form">
-        <div class="title-section">
-            <h2>Welcome Back</h2>
-            <p>Sign in to continue</p>
-        </div>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
-        <form id="account" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                background: 'hsl(0, 0%, 99%)',
+                foreground: 'hsl(222, 47%, 11%)',
+                card: 'hsl(0, 0%, 100%)',
+                'card-foreground': 'hsl(222, 47%, 11%)',
+                primary: 'hsl(160, 84%, 39%)',
+                'primary-foreground': 'hsl(0, 0%, 100%)',
+                secondary: 'hsl(215, 20%, 95%)',
+                'secondary-foreground': 'hsl(222, 47%, 11%)',
+                muted: 'hsl(215, 20%, 96%)',
+                'muted-foreground': 'hsl(215, 16%, 47%)',
+                accent: 'hsl(160, 84%, 39%)',
+                border: 'hsl(215, 20%, 91%)',
+              },
+              fontFamily: {
+                heading: ['Space Grotesk', 'sans-serif'],
+                body: ['Inter', 'sans-serif'],
+              },
+              boxShadow: {
+                'soft': '0 4px 24px -2px rgba(30, 41, 59, 0.08)',
+                'elevated': '0 12px 40px -8px rgba(30, 41, 59, 0.12)',
+              },
+            },
+          },
+        }
+    </script>
 
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control"
-                       autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                <label asp-for="Input.Email">Email</label>
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: hsl(0, 0%, 99%);
+            color: hsl(222, 47%, 11%);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(172, 66%, 50%) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .btn-primary-gradient {
+            background: linear-gradient(135deg, hsl(160, 84%, 39%) 0%, hsl(172, 66%, 50%) 100%);
+            transition: all 0.2s ease;
+        }
+
+            .btn-primary-gradient:hover {
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+                transform: translateY(-1px);
+            }
+
+        .glass-card {
+            background: white;
+            border-radius: 16px;
+            border: 1px solid hsl(215, 20%, 91%);
+        }
+
+        .input-field {
+            transition: all 0.2s ease;
+        }
+
+            .input-field:focus {
+                box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.1);
+                border-color: hsl(160, 84%, 39%);
+            }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-background via-white to-secondary">
+    <!-- Background Decorations -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute top-0 right-0 w-1/3 h-1/3 rounded-full opacity-10" style="background: radial-gradient(circle, hsl(160, 84%, 39%), transparent);"></div>
+        <div class="absolute bottom-0 left-0 w-1/3 h-1/3 rounded-full opacity-10" style="background: radial-gradient(circle, hsl(172, 66%, 50%), transparent);"></div>
+    </div>
+
+    <div class="min-h-screen flex flex-col lg:flex-row">
+        <!-- Left Side - Branding -->
+        <div class="lg:w-1/2 bg-gradient-to-br from-foreground to-gray-900 p-8 lg:p-12 flex flex-col justify-between relative overflow-hidden">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 opacity-5">
+                <div class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full" style="background: radial-gradient(circle, hsl(160, 84%, 39%), transparent);"></div>
+                <div class="absolute bottom-1/4 right-1/4 w-48 h-48 rounded-full" style="background: radial-gradient(circle, hsl(172, 66%, 50%), transparent);"></div>
             </div>
 
-            <div class="form-floating mb-4">
-                <input asp-for="Input.Password" class="form-control"
-                       autocomplete="current-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Password</label>
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-
-            <div class="d-flex justify-content-between align-items-center mb-4">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" asp-for="Input.RememberMe" />
-                    <label class="form-check-label" asp-for="Input.RememberMe">
-                        Remember me
-                    </label>
-                </div>
-                <a id="forgot-password" asp-page="./ForgotPassword" class="text-sm">
-                    Forgot password?
+            <div class="relative z-10">
+                <a href="/" class="flex items-center gap-3 mb-8 lg:mb-12">
+                    <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, hsl(160, 84%, 39%), hsl(172, 66%, 50%));">
+                        <i data-lucide="car" class="w-5 h-5 text-white"></i>
+                    </div>
+                    <span class="text-2xl font-bold text-white">VehicleDiary</span>
                 </a>
+
+                <div class="mt-8 lg:mt-16">
+                    <h1 class="text-4xl lg:text-5xl font-bold text-white mb-6">
+                        @Localizer["WelcomeBack"]<br>
+                        <span class="gradient-text">VehicleDiary</span>
+                    </h1>
+                    <p class="text-gray-300 text-lg mb-8 max-w-md">
+                        @Localizer["ContinueTracking"]
+                    </p>
+
+                    <!-- Features List -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(160, 84%, 39%, 0.2);">
+                                <i data-lucide="check" class="w-4 h-4" style="color: hsl(160, 84%, 39%);"></i>
+                            </div>
+                            <span class="text-gray-300">@Localizer["FeatureMaintenance"]</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(160, 84%, 39%, 0.2);">
+                                <i data-lucide="check" class="w-4 h-4" style="color: hsl(160, 84%, 39%);"></i>
+                            </div>
+                            <span class="text-gray-300">@Localizer["FeatureFuel"]</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: hsla(160, 84%, 39%, 0.2);">
+                                <i data-lucide="check" class="w-4 h-4" style="color: hsl(160, 84%, 39%);"></i>
+                            </div>
+                            <span class="text-gray-300">@Localizer["FeatureCosts"]</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <button id="login-submit" type="submit" class="w-100 btn main-color-btn mb-3 py-3 rounded-4 text-white fw-bold">
-                Log in
-            </button>
-
-            <div class="auth-links text-center pt-3">
-                <p class="text-sm">
-                    New here?
-                    <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" class="fw-semibold">
-                        Create account
-                    </a>
+            <!-- Footer on Left Side -->
+            <div class="relative z-10 mt-8 pt-8 border-t border-white/10">
+                <p class="text-gray-400 text-sm">
+                    @Localizer["Copyright"]
                 </p>
             </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-@section Scripts {
+        <!-- Right Side - Login Form -->
+        <div class="lg:w-1/2 p-8 lg:p-12 flex items-center justify-center">
+            <div class="w-full max-w-md">
+                <div class="text-center mb-8">
+                    <h2 class="text-3xl font-bold text-foreground mb-2">@Localizer["SignInTitle"]</h2>
+                    <p class="text-muted-foreground">@Localizer["SignInSubtitle"]</p>
+                </div>
+
+                <!-- Login Card -->
+                <div class="glass-card rounded-2xl p-8 shadow-elevated">
+                    <form id="account" method="post" class="space-y-6">
+                        <div asp-validation-summary="ModelOnly" class="text-sm text-red-500 bg-red-50 p-3 rounded-lg" role="alert"></div>
+
+                        <!-- Email Field -->
+                        <div class="space-y-2">
+                            <label asp-for="Input.Email" class="block text-sm font-medium text-foreground">
+                                @Localizer["EmailLabel"]
+                            </label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i data-lucide="mail" class="w-5 h-5 text-muted-foreground"></i>
+                                </div>
+                                <input asp-for="Input.Email"
+                                       class="pl-10 w-full px-4 py-3 rounded-xl border border-border bg-white focus:outline-none input-field"
+                                       autocomplete="username"
+                                       aria-required="true"
+                                       placeholder="@Localizer["EmailPlaceholder"]" />
+                            </div>
+                            <span asp-validation-for="Input.Email" class="text-sm text-red-500"></span>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <label asp-for="Input.Password" class="block text-sm font-medium text-foreground">
+                                    @Localizer["PasswordLabel"]
+                                </label>
+                                <a id="forgot-password" asp-page="./ForgotPassword" class="text-sm font-medium" style="color: hsl(160, 84%, 39%);">
+                                    @Localizer["ForgotPassword"]
+                                </a>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i data-lucide="lock" class="w-5 h-5 text-muted-foreground"></i>
+                                </div>
+                                <input asp-for="Input.Password"
+                                       class="pl-10 w-full px-4 py-3 rounded-xl border border-border bg-white focus:outline-none input-field"
+                                       autocomplete="current-password"
+                                       aria-required="true"
+                                       placeholder="@Localizer["PasswordPlaceholder"]" />
+                            </div>
+                            <span asp-validation-for="Input.Password" class="text-sm text-red-500"></span>
+                        </div>
+
+                        <!-- Remember Me -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <input type="checkbox" asp-for="Input.RememberMe"
+                                       class="w-4 h-4 rounded border-border focus:ring-0 focus:ring-offset-0"
+                                       style="accent-color: hsl(160, 84%, 39%);" />
+                                <label asp-for="Input.RememberMe" class="ml-2 text-sm text-foreground">
+                                    @Localizer["RememberMe"]
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button id="login-submit" type="submit"
+                                class="w-full btn-primary-gradient text-white font-semibold px-6 py-3 rounded-xl text-lg transition-all duration-200 shadow-lg flex items-center justify-center gap-2">
+                            <i data-lucide="log-in" class="w-5 h-5"></i>
+                            @Localizer["SignInButton"]
+                        </button>
+
+                        <!-- Divider -->
+                        <div class="relative my-6">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-border"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm">
+                                <span class="px-4 bg-white text-muted-foreground">@Localizer["OrContinueWith"]</span>
+                            </div>
+                        </div>
+
+                        <!-- External Logins -->
+                        @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+                        {
+                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                                <div class="grid grid-cols-2 gap-3">
+                                    @foreach (var provider in Model.ExternalLogins!)
+                                    {
+                                        <button type="submit"
+                                                class="w-full px-4 py-3 rounded-xl border border-border bg-white hover:bg-secondary transition-colors duration-200 flex items-center justify-center gap-2"
+                                                name="provider"
+                                                value="@provider.Name"
+                                                title="@Localizer["LoginWith"] @provider.DisplayName">
+                                            @if (provider.Name == "Google")
+                                            {
+                                                <i data-lucide="mail" class="w-5 h-5"></i>
+                                            }
+                                            else if (provider.Name == "Microsoft")
+                                            {
+                                                <i data-lucide="windows" class="w-5 h-5"></i>
+                                            }
+                                            else
+                                            {
+                                                <i data-lucide="user" class="w-5 h-5"></i>
+                                            }
+                                            <span class="text-sm font-medium">@provider.DisplayName</span>
+                                        </button>
+                                    }
+                                </div>
+                            </form>
+                        }
+
+                        <!-- Sign Up Link -->
+                        <div class="text-center pt-4">
+                            <p class="text-muted-foreground">
+                                @Localizer["NoAccount"]
+                                <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl"
+                                   class="font-semibold hover:underline ml-1" style="color: hsl(160, 84%, 39%);">
+                                    @Localizer["SignUpNow"]
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Mobile Footer -->
+                <div class="mt-8 pt-6 border-t border-border lg:hidden">
+                    <p class="text-center text-muted-foreground text-sm">
+                        @Localizer["Copyright"]
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Minimal JavaScript - Just initialize icons -->
+    <script>
+        // Only initialize Lucide icons - no heavy validation logic
+        lucide.createIcons();
+    </script>
+
     <partial name="_ValidationScriptsPartial" />
-}
+</body>
+</html>
