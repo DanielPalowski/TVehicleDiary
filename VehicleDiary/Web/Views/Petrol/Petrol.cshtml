@@ -1,12 +1,13 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBPetrolModelVM
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fuel Tracking | Vehicle Diary</title>
+    <title>@Localizer["PageTitle"]</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,15 +45,15 @@
             <div class="flex items-center justify-between py-4">
                 <a href="@Url.Action("Index", "Vehicle")" class="flex items-center gap-2 px-3 py-2 bg-white/10 rounded-lg hover:bg-white/20 transition">
                     <i data-lucide="arrow-left" class="w-5 h-5"></i>
-                    <span class="font-medium">Back</span>
+                    <span class="font-medium">@Localizer["BackButton"]</span>
                 </a>
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-petrol-500 to-green-500 flex items-center justify-center">
                         <i data-lucide="fuel" class="w-5 h-5"></i>
                     </div>
                     <div>
-                        <h1 class="font-bold">Fuel Tracking</h1>
-                        <p class="text-sm text-gray-300">Track your vehicle's fuel consumption</p>
+                        <h1 class="font-bold">@Localizer["HeaderTitle"]</h1>
+                        <p class="text-sm text-gray-300">@Localizer["HeaderSubtitle"]</p>
                     </div>
                 </div>
             </div>
@@ -64,8 +65,8 @@
         <div class="max-w-6xl mx-auto">
             <!-- Page Title -->
             <div class="mb-8">
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">Fuel Tracking</h1>
-                <p class="text-gray-600">Track and manage your vehicle's fuel consumption</p>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">@Localizer["MainHeading"]</h1>
+                <p class="text-gray-600">@Localizer["MainSubheading"]</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -78,8 +79,8 @@
                                 <i data-lucide="plus-circle" class="w-5 h-5 text-petrol-600"></i>
                             </div>
                             <div>
-                                <h2 class="text-xl font-bold text-gray-900">Add Fuel Record</h2>
-                                <p class="text-sm text-gray-600">Record a new fuel purchase</p>
+                                <h2 class="text-xl font-bold text-gray-900">@Localizer["AddFuelRecordHeading"]</h2>
+                                <p class="text-sm text-gray-600">@Localizer["AddFuelRecordSubheading"]</p>
                             </div>
                         </div>
 
@@ -91,23 +92,23 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label asp-for="PetrolAmount" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Fuel Amount (L)
+                                            @Localizer["LabelFuelAmount"]
                                         </label>
                                         <div class="relative">
                                             <input type="number" step="0.1" asp-for="PetrolAmount"
                                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-petrol-500 focus:border-petrol-500"
-                                                   placeholder="40.0" required>
+                                                   placeholder="@Localizer["PlaceholderFuelAmount"]" required>
                                         </div>
                                         <span asp-validation-for="PetrolAmount" class="text-red-500 text-sm"></span>
                                     </div>
 
                                     <div>
                                         <label asp-for="PetrolType" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Fuel Type
+                                            @Localizer["LabelFuelType"]
                                         </label>
                                         <input type="text" asp-for="PetrolType"
                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-petrol-500 focus:border-petrol-500"
-                                               placeholder="Diesel" required>
+                                               placeholder="@Localizer["PlaceholderFuelType"]" required>
                                         <span asp-validation-for="PetrolType" class="text-red-500 text-sm"></span>
                                     </div>
                                 </div>
@@ -116,19 +117,19 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div>
                                         <label asp-for="PetrolPrice" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Total Price (€)
+                                            @Localizer["LabelTotalPrice"]
                                         </label>
                                         <div class="relative">
                                             <input type="number" step="0.01" asp-for="PetrolPrice"
                                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-petrol-500 focus:border-petrol-500"
-                                                   placeholder="80.00" required>
+                                                   placeholder="@Localizer["PlaceholderTotalPrice"]" required>
                                         </div>
                                         <span asp-validation-for="PetrolPrice" class="text-red-500 text-sm"></span>
                                     </div>
 
                                     <div>
                                         <label asp-for="PetrolDate" class="block text-sm font-medium text-gray-700 mb-1">
-                                            Refuel Date
+                                            @Localizer["LabelRefuelDate"]
                                         </label>
                                         <input type="date" asp-for="PetrolDate"
                                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-petrol-500 focus:border-petrol-500"
@@ -140,11 +141,11 @@
                                 <!-- Mileage -->
                                 <div>
                                     <label asp-for="PetrolMileage" class="block text-sm font-medium text-gray-700 mb-1">
-                                        Mileage (km)
+                                        @Localizer["LabelMileage"]
                                     </label>
                                     <input type="number" asp-for="PetrolMileage"
                                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-petrol-500 focus:border-petrol-500"
-                                           placeholder="157520">
+                                           placeholder="@Localizer["PlaceholderMileage"]">
                                     <span asp-validation-for="PetrolMileage" class="text-red-500 text-sm"></span>
                                 </div>
 
@@ -153,7 +154,7 @@
                                     <button type="submit"
                                             class="w-full bg-gradient-to-r from-petrol-600 to-green-600 text-white font-medium py-3 px-4 rounded-lg hover:from-petrol-700 hover:to-green-700 transition flex items-center justify-center gap-2">
                                         <i data-lucide="save" class="w-5 h-5"></i>
-                                        Save Fuel Record
+                                        @Localizer["SaveFuelRecordButton"]
                                     </button>
                                 </div>
                             </div>
@@ -168,23 +169,23 @@
                         var averagePricePerLiter = totalLiters > 0 ? totalCost / totalLiters : 0;
 
                         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-                            <h3 class="text-lg font-bold text-gray-900 mb-4">Quick Stats</h3>
+                            <h3 class="text-lg font-bold text-gray-900 mb-4">@Localizer["QuickStatsTitle"]</h3>
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <div class="text-center p-3 bg-petrol-50 rounded-lg">
                                     <div class="text-2xl font-bold text-petrol-600">@Model.PetrolViews.Count()</div>
-                                    <div class="text-sm text-gray-600">Refuels</div>
+                                    <div class="text-sm text-gray-600">@Localizer["StatRefuels"]</div>
                                 </div>
                                 <div class="text-center p-3 bg-petrol-50 rounded-lg">
                                     <div class="text-2xl font-bold text-petrol-600">€@totalCost.ToString("F2")</div>
-                                    <div class="text-sm text-gray-600">Total Cost</div>
+                                    <div class="text-sm text-gray-600">@Localizer["StatTotalCost"]</div>
                                 </div>
                                 <div class="text-center p-3 bg-petrol-50 rounded-lg">
                                     <div class="text-2xl font-bold text-petrol-600">@totalLiters.ToString("F1")L</div>
-                                    <div class="text-sm text-gray-600">Total Liters</div>
+                                    <div class="text-sm text-gray-600">@Localizer["StatTotalLiters"]</div>
                                 </div>
                                 <div class="text-center p-3 bg-petrol-50 rounded-lg">
                                     <div class="text-2xl font-bold text-petrol-600">€@averagePricePerLiter.ToString("F2")</div>
-                                    <div class="text-sm text-gray-600">Avg/Liter</div>
+                                    <div class="text-sm text-gray-600">@Localizer["StatAvgPerLiter"]</div>
                                 </div>
                             </div>
                         </div>
@@ -194,8 +195,8 @@
                 <!-- History Section -->
                 <div class="space-y-6">
                     <div class="flex items-center justify-between">
-                        <h2 class="text-xl font-bold text-gray-900">Fuel History</h2>
-                        <span class="text-sm text-gray-600">@(Model.PetrolViews?.Count() ?? 0) records</span>
+                        <h2 class="text-xl font-bold text-gray-900">@Localizer["HistoryTitle"]</h2>
+                        <span class="text-sm text-gray-600">@Localizer["RecordsCount", Model.PetrolViews?.Count() ?? 0]</span>
                     </div>
 
                     @if (Model.PetrolViews != null && Model.PetrolViews.Any())
@@ -224,13 +225,13 @@
                                             <div class="flex flex-wrap gap-2">
                                                 <span class="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
                                                     <i data-lucide="droplet" class="w-3 h-3"></i>
-                                                    @entry.PetrolAmount L
+                                                    @Localizer["UnitLiters", entry.PetrolAmount]
                                                 </span>
                                                 @if (entry.PetrolMileage > 0)
                                                 {
                                                     <span class="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
                                                         <i data-lucide="gauge" class="w-3 h-3"></i>
-                                                        @entry.PetrolMileage km
+                                                        @Localizer["UnitKilometers", entry.PetrolMileage]
                                                     </span>
                                                 }
                                                 <span class="inline-flex items-center gap-1 px-2 py-1 bg-petrol-100 text-petrol-700 text-sm rounded-full">
@@ -244,7 +245,7 @@
                                         <button onclick="deletePetrol('@entry.Id')"
                                                 class="inline-flex items-center gap-2 px-3 py-2 text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition">
                                             <i data-lucide="trash-2" class="w-4 h-4"></i>
-                                            <span class="text-sm font-medium">Delete</span>
+                                            <span class="text-sm font-medium">@Localizer["DeleteButton"]</span>
                                         </button>
                                     </div>
                                 </div>
@@ -257,9 +258,9 @@
                             <div class="w-12 h-12 rounded-full bg-petrol-100 flex items-center justify-center mx-auto mb-4">
                                 <i data-lucide="fuel" class="w-6 h-6 text-petrol-600"></i>
                             </div>
-                            <h3 class="text-lg font-medium text-gray-900 mb-2">No Fuel Records Yet</h3>
-                            <p class="text-gray-600 mb-4">Start tracking your fuel consumption and costs</p>
-                            <p class="text-sm text-gray-500">Add your first fuel record using the form</p>
+                            <h3 class="text-lg font-medium text-gray-900 mb-2">@Localizer["EmptyStateTitle"]</h3>
+                            <p class="text-gray-600 mb-4">@Localizer["EmptyStateMessage"]</p>
+                            <p class="text-sm text-gray-500">@Localizer["EmptyStateHint"]</p>
                         </div>
                     }
                 </div>
@@ -275,20 +276,25 @@
                     <div class="w-8 h-8 rounded-lg bg-petrol-100 flex items-center justify-center">
                         <i data-lucide="fuel" class="w-4 h-4 text-petrol-600"></i>
                     </div>
-                    <span class="font-medium text-gray-900">Fuel Tracking</span>
+                    <span class="font-medium text-gray-900">@Localizer["FooterBrandName"]</span>
                 </div>
-                <p class="text-sm text-gray-600">© 2024 Vehicle Diary</p>
+                <p class="text-sm text-gray-600">@Localizer["FooterCopyright", DateTime.Now.Year]</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Localized strings for JavaScript
+        const deleteConfirmMessage = '@Localizer["ConfirmDelete"]';
+        const deleteErrorMessage = '@Localizer["ErrorDelete"]';
+        const savingButtonText = '@Localizer["SavingButtonText"]';
+
         // Initialize Lucide icons
         lucide.createIcons();
 
         // Delete function
         function deletePetrol(id) {
-            if (confirm("Are you sure you want to delete this fuel record?")) {
+            if (confirm(deleteConfirmMessage)) {
                 $.ajax({
                     url: "@Url.Action("Delete", "Petrol")/" + id,
                     type: "DELETE",
@@ -301,7 +307,7 @@
                         }
                     },
                     error: function () {
-                        alert("Error deleting record");
+                        alert(deleteErrorMessage);
                     }
                 });
             }
@@ -310,18 +316,18 @@
         // Form validation
         document.getElementById('petrolForm')?.addEventListener('submit', function(e) {
             const submitBtn = this.querySelector('button[type="submit"]');
-            const originalText = submitBtn.innerHTML;
+            const originalContent = submitBtn.innerHTML;
 
             // Show loading state
             submitBtn.innerHTML = `
                 <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                Saving...
+                ${savingButtonText}
             `;
             submitBtn.disabled = true;
 
             // Re-enable after 5 seconds if submission fails
             setTimeout(() => {
-                submitBtn.innerHTML = originalText;
+                submitBtn.innerHTML = originalContent;
                 submitBtn.disabled = false;
             }, 5000);
         });

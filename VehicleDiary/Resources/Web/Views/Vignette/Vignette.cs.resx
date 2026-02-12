@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BackButton" xml:space="preserve">
+    <value>Zpět</value>
+    <comment>Back navigation button text</comment>
+  </data>
+  <data name="HeaderTitle" xml:space="preserve">
+    <value>Sledování dálničních známek</value>
+    <comment>Header title for Vignette Tracking page</comment>
+  </data>
+  <data name="HeaderSubtitle" xml:space="preserve">
+    <value>Spravujte dálniční známky svého vozidla</value>
+    <comment>Header subtitle</comment>
+  </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Sledování dálničních známek | Vehicle Diary</value>
+    <comment>Browser title</comment>
+  </data>
+  <data name="MainHeading" xml:space="preserve">
+    <value>Sledování dálničních známek</value>
+    <comment>Main page heading</comment>
+  </data>
+  <data name="MainSubheading" xml:space="preserve">
+    <value>Sledujte a spravujte dálniční známky svého vozidla</value>
+    <comment>Main page subheading</comment>
+  </data>
+  <data name="AddVignetteHeading" xml:space="preserve">
+    <value>Přidat dálniční známku</value>
+    <comment>Add vignette form heading</comment>
+  </data>
+  <data name="AddVignetteSubheading" xml:space="preserve">
+    <value>Registrovat novou dálniční známku</value>
+    <comment>Add vignette form subheading</comment>
+  </data>
+  <data name="LabelCountry" xml:space="preserve">
+    <value>Země</value>
+    <comment>Country select label</comment>
+  </data>
+  <data name="LabelValidFrom" xml:space="preserve">
+    <value>Platná od</value>
+    <comment>Vignette valid from date label</comment>
+  </data>
+  <data name="LabelValidTo" xml:space="preserve">
+    <value>Platná do</value>
+    <comment>Vignette valid to date label</comment>
+  </data>
+  <data name="LabelPrice" xml:space="preserve">
+    <value>Cena (€)</value>
+    <comment>Vignette price label with Euro symbol</comment>
+  </data>
+  <data name="PricePlaceholder" xml:space="preserve">
+    <value>60,00</value>
+    <comment>Placeholder for vignette price input (Czech decimal comma)</comment>
+  </data>
+  <data name="SaveVignetteButton" xml:space="preserve">
+    <value>Uložit dálniční známku</value>
+    <comment>Save vignette button text</comment>
+  </data>
+  <data name="QuickStatsTitle" xml:space="preserve">
+    <value>Rychlé statistiky</value>
+    <comment>Quick statistics section title</comment>
+  </data>
+  <data name="StatTotal" xml:space="preserve">
+    <value>Celkem</value>
+    <comment>Total count of vignettes</comment>
+  </data>
+  <data name="StatTotalCost" xml:space="preserve">
+    <value>Celkové náklady</value>
+    <comment>Total cost of vignettes</comment>
+  </data>
+  <data name="StatActive" xml:space="preserve">
+    <value>Aktivní</value>
+    <comment>Number of active vignettes</comment>
+  </data>
+  <data name="VignetteHistoryTitle" xml:space="preserve">
+    <value>Historie dálničních známek</value>
+    <comment>Vignette history section title</comment>
+  </data>
+  <data name="RecordsCount" xml:space="preserve">
+    <value>{0} záznamů</value>
+    <comment>Number of vignette records, {0} is the count (plural form)</comment>
+  </data>
+  <data name="StatusActive" xml:space="preserve">
+    <value>Aktivní</value>
+    <comment>Status badge for active vignette</comment>
+  </data>
+  <data name="StatusExpired" xml:space="preserve">
+    <value>Expirováno</value>
+    <comment>Status badge for expired vignette</comment>
+  </data>
+  <data name="DeleteButton" xml:space="preserve">
+    <value>Smazat</value>
+    <comment>Delete vignette button text</comment>
+  </data>
+  <data name="DaysLabel" xml:space="preserve">
+    <value>{0} dní</value>
+    <comment>Number of days vignette is valid, {0} is the count (plural form)</comment>
+  </data>
+  <data name="EmptyStateTitle" xml:space="preserve">
+    <value>Zatím žádné dálniční známky</value>
+    <comment>Empty state heading</comment>
+  </data>
+  <data name="EmptyStateMessage" xml:space="preserve">
+    <value>Začněte sledovat své dálniční známky pro přístup na dálnice</value>
+    <comment>Empty state message</comment>
+  </data>
+  <data name="EmptyStateHint" xml:space="preserve">
+    <value>Přidejte svou první dálniční známku pomocí formuláře</value>
+    <comment>Empty state hint</comment>
+  </data>
+  <data name="FooterCopyright" xml:space="preserve">
+    <value>© {0} Vehicle Diary</value>
+    <comment>Footer copyright, {0} is current year</comment>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Opravdu chcete smazat tuto dálniční známku?</value>
+    <comment>Confirmation dialog when deleting vignette</comment>
+  </data>
+  <data name="ErrorDelete" xml:space="preserve">
+    <value>Chyba při mazání záznamu</value>
+    <comment>Error message when delete fails</comment>
+  </data>
+  <data name="SavingButtonText" xml:space="preserve">
+    <value>Ukládám...</value>
+    <comment>Loading state text for save button</comment>
+  </data>
+</root>

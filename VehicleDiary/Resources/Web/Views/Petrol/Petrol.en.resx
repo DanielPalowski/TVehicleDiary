@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <!-- Navigation -->
+  <data name="BackButton" xml:space="preserve">
+    <value>Back</value>
+    <comment>Back navigation button text</comment>
+  </data>
+  <!-- Header -->
+  <data name="HeaderTitle" xml:space="preserve">
+    <value>Fuel Tracking</value>
+    <comment>Header title</comment>
+  </data>
+  <data name="HeaderSubtitle" xml:space="preserve">
+    <value>Track your vehicle's fuel consumption</value>
+    <comment>Header subtitle</comment>
+  </data>
+  <!-- Page metadata -->
+  <data name="PageTitle" xml:space="preserve">
+    <value>Fuel Tracking | Vehicle Diary</value>
+    <comment>Browser title</comment>
+  </data>
+  <!-- Main heading -->
+  <data name="MainHeading" xml:space="preserve">
+    <value>Fuel Tracking</value>
+    <comment>Main page heading</comment>
+  </data>
+  <data name="MainSubheading" xml:space="preserve">
+    <value>Track and manage your vehicle's fuel consumption</value>
+    <comment>Main page subheading</comment>
+  </data>
+  <!-- Add fuel record form -->
+  <data name="AddFuelRecordHeading" xml:space="preserve">
+    <value>Add Fuel Record</value>
+    <comment>Form heading</comment>
+  </data>
+  <data name="AddFuelRecordSubheading" xml:space="preserve">
+    <value>Record a new fuel purchase</value>
+    <comment>Form subheading</comment>
+  </data>
+  <!-- Form labels -->
+  <data name="LabelFuelAmount" xml:space="preserve">
+    <value>Fuel Amount (L)</value>
+    <comment>Fuel amount label with liters</comment>
+  </data>
+  <data name="LabelFuelType" xml:space="preserve">
+    <value>Fuel Type</value>
+    <comment>Fuel type label</comment>
+  </data>
+  <data name="LabelTotalPrice" xml:space="preserve">
+    <value>Total Price (€)</value>
+    <comment>Total price label with Euro symbol</comment>
+  </data>
+  <data name="LabelRefuelDate" xml:space="preserve">
+    <value>Refuel Date</value>
+    <comment>Date of refueling label</comment>
+  </data>
+  <data name="LabelMileage" xml:space="preserve">
+    <value>Mileage (km)</value>
+    <comment>Mileage label with kilometers</comment>
+  </data>
+  <!-- Placeholders -->
+  <data name="PlaceholderFuelAmount" xml:space="preserve">
+    <value>40.0</value>
+    <comment>Placeholder for fuel amount in liters</comment>
+  </data>
+  <data name="PlaceholderFuelType" xml:space="preserve">
+    <value>Diesel</value>
+    <comment>Placeholder for fuel type</comment>
+  </data>
+  <data name="PlaceholderTotalPrice" xml:space="preserve">
+    <value>80.00</value>
+    <comment>Placeholder for total price</comment>
+  </data>
+  <data name="PlaceholderMileage" xml:space="preserve">
+    <value>157520</value>
+    <comment>Placeholder for mileage in km</comment>
+  </data>
+  <!-- Submit button -->
+  <data name="SaveFuelRecordButton" xml:space="preserve">
+    <value>Save Fuel Record</value>
+    <comment>Save button text</comment>
+  </data>
+  <!-- Quick stats -->
+  <data name="QuickStatsTitle" xml:space="preserve">
+    <value>Quick Stats</value>
+    <comment>Quick statistics section title</comment>
+  </data>
+  <data name="StatRefuels" xml:space="preserve">
+    <value>Refuels</value>
+    <comment>Number of refueling events</comment>
+  </data>
+  <data name="StatTotalCost" xml:space="preserve">
+    <value>Total Cost</value>
+    <comment>Total cost of fuel</comment>
+  </data>
+  <data name="StatTotalLiters" xml:space="preserve">
+    <value>Total Liters</value>
+    <comment>Total liters of fuel</comment>
+  </data>
+  <data name="StatAvgPerLiter" xml:space="preserve">
+    <value>Avg/Liter</value>
+    <comment>Average price per liter</comment>
+  </data>
+  <!-- History section -->
+  <data name="HistoryTitle" xml:space="preserve">
+    <value>Fuel History</value>
+    <comment>History section title</comment>
+  </data>
+  <data name="RecordsCount" xml:space="preserve">
+    <value>{0} records</value>
+    <comment>Number of records, {0} is the count</comment>
+  </data>
+  <!-- Units and formats -->
+  <data name="UnitLiters" xml:space="preserve">
+    <value>{0} L</value>
+    <comment>Liters unit format, {0} is the amount</comment>
+  </data>
+  <data name="UnitKilometers" xml:space="preserve">
+    <value>{0} km</value>
+    <comment>Kilometers unit format, {0} is the distance</comment>
+  </data>
+  <!-- Delete button and confirmations -->
+  <data name="DeleteButton" xml:space="preserve">
+    <value>Delete</value>
+    <comment>Delete button text</comment>
+  </data>
+  <data name="ConfirmDelete" xml:space="preserve">
+    <value>Are you sure you want to delete this fuel record?</value>
+    <comment>Confirmation dialog when deleting</comment>
+  </data>
+  <data name="ErrorDelete" xml:space="preserve">
+    <value>Error deleting record</value>
+    <comment>Error message when delete fails</comment>
+  </data>
+  <!-- Saving button loading state -->
+  <data name="SavingButtonText" xml:space="preserve">
+    <value>Saving...</value>
+    <comment>Loading state text for save button</comment>
+  </data>
+  <!-- Empty state -->
+  <data name="EmptyStateTitle" xml:space="preserve">
+    <value>No Fuel Records Yet</value>
+    <comment>Empty state heading</comment>
+  </data>
+  <data name="EmptyStateMessage" xml:space="preserve">
+    <value>Start tracking your fuel consumption and costs</value>
+    <comment>Empty state message</comment>
+  </data>
+  <data name="EmptyStateHint" xml:space="preserve">
+    <value>Add your first fuel record using the form</value>
+    <comment>Empty state hint</comment>
+  </data>
+  <!-- Footer -->
+  <data name="FooterBrandName" xml:space="preserve">
+    <value>Fuel Tracking</value>
+    <comment>Brand name in footer</comment>
+  </data>
+  <data name="FooterCopyright" xml:space="preserve">
+    <value>© {0} Vehicle Diary</value>
+    <comment>Footer copyright, {0} is current year</comment>
+  </data>
+</root>
