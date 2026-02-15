@@ -9,15 +9,21 @@ namespace VehicleDiary.Core.Entities
         [Key]
         public Guid Id { get; set; }
         [Required]
+        [MaxLength(100)]
         public float OilAmount { get; set; }
         [Required]
+        [MaxLength(100)]
         public DateTime OilDate { get; set; }
         [Required]
+        [MaxLength(100)]
         public string OilType { get; set; }
         [Required]
+        [MaxLength(100)]
         public int OilMileage { get; set; }
         [Required]
+        [MaxLength(100)]
         public float OilPrice { get; set; }
+        [MaxLength(500)]
         public string? OilDescription { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         [Required]

@@ -9,14 +9,20 @@ namespace VehicleDiary.Core.Entities
         [Key]
         public Guid id { get; set; }
         [Required]
+        [MaxLength(100)]
         public DateTime PetrolDate { get; set; }
         [Required]
+        [MaxLength(100)]
         public string PetrolType { get; set; }
+        [MaxLength(100)]
         public int? PetrolMileage { get; set; }
         [Required]
+        [MaxLength(100)]
         public float PetrolPrice { get; set; }
         [Required]
+        [MaxLength(100)]
         public float PetrolAmount { get; set; }
+        [MaxLength(100)]
         public float? PetrolPricePerLiter { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         [Required]

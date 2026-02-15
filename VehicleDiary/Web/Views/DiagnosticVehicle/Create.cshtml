@@ -180,15 +180,20 @@
                             </div>
 
                             <!-- Mileage -->
+                            <!-- Mileage -->
                             <div class="space-y-2">
                                 <label asp-for="DiagnosticVMileage" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="gauge" class="w-4 h-4 mr-2 text-orange-600"></i>
                                         @Localizer["Mileage"]
-                                        <span class="text-gray-500 text-sm ml-1">@Localizer["Optional"]</span>
+                                        <span class="text-red-500 ml-1">@Localizer["Required"]</span>   <!-- ✅ Changed from Optional to Required -->
                                     </div>
                                 </label>
-                                <input type="number" asp-for="DiagnosticVMileage" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" placeholder="158000">
+                                <input type="number"
+                                       asp-for="DiagnosticVMileage"
+                                       class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                                       placeholder="158000"
+                                       required>   <!-- ✅ Added required attribute -->
                                 <span asp-validation-for="DiagnosticVMileage" class="text-red-500 text-sm"></span>
                             </div>
 
@@ -206,20 +211,41 @@
                             </div>
 
                             <!-- Cost -->
+                            <!-- Price -->
                             <div class="space-y-2">
+                                <style>
+                                    /* Hide number input spinners */
+                                    input[type=number].no-spinner::-webkit-outer-spin-button,
+                                    input[type=number].no-spinner::-webkit-inner-spin-button {
+                                        -webkit-appearance: none;
+                                        margin: 0;
+                                    }
+
+                                    input[type=number].no-spinner {
+                                        -moz-appearance: textfield;
+                                    }
+                                </style>
+
                                 <label asp-for="DiagnosticVPrice" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="euro" class="w-4 h-4 mr-2 text-orange-600"></i>
-                                        @Localizer["Cost"]
-                                        <span class="text-gray-500 text-sm ml-1">@Localizer["Optional"]</span>
+                                        @Localizer["Price"]
+                                        <span class="text-red-500 ml-1">*</span>
                                     </div>
                                 </label>
+
                                 <div class="relative">
-                                    <input type="number" step="0.01" asp-for="DiagnosticVPrice" class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500" placeholder="85.00">
-                                    <div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">
+                                    <input type="number"
+                                           step="0.01"
+                                           asp-for="DiagnosticVPrice"
+                                           class="no-spinner w-full pl-4 pr-10 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+                                           placeholder="120.50"
+                                           required>
+                                    <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500">
                                         €
                                     </div>
                                 </div>
+
                                 <span asp-validation-for="DiagnosticVPrice" class="text-red-500 text-sm"></span>
                             </div>
 

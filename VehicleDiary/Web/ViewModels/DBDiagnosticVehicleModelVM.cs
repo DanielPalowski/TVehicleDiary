@@ -22,6 +22,7 @@ namespace VehicleDiary.Web.ViewModels
         public string? DiagnosticVErrorDis { get; set; }
         [Display(Name = "Diagnostic Tool")]
         public string? DiagnosticVDiagnosticType { get; set; }
+        [Required]
         [Display(Name = "Mileage")]
         public int? DiagnosticVMileage { get; set; }
         [Required]
@@ -39,7 +40,7 @@ namespace VehicleDiary.Web.ViewModels
         public string? ContentType { get; set; }
         public byte[]? Data { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
-        public IFormFile Upload { get; set; }
+        public IFormFile? Upload { get; set; }
 
 
         [Required]

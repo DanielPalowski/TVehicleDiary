@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- PAGE META -->
+  <data name="PageTitle" xml:space="preserve">
+    <value>VehicleDiary · Obchodní podmínky (2026)</value>
+  </data>
+  <data name="EffectiveLabel" xml:space="preserve">
+    <value>účinnost:</value>
+  </data>
+  <data name="VersionLabel" xml:space="preserve">
+    <value>ver</value>
+  </data>
+  <data name="Brand2026" xml:space="preserve">
+    <value>2026</value>
+  </data>
+
+  <!-- HEADINGS -->
+  <data name="MainHeading" xml:space="preserve">
+    <value>OBCHODNÍ PODMÍNKY</value>
+  </data>
+  <data name="SubHeading" xml:space="preserve">
+    <value>POUŽÍVÁNÍM PŘIJÍMÁTE – ČTĚTE PEČLIVĚ</value>
+  </data>
+
+  <!-- WAIVER BOX (FULL HTML) -->
+  <data name="WaiverBox" xml:space="preserve">
+    <value>&lt;div class=&quot;flex items-start gap-3&quot;&gt;&lt;span class=&quot;text-red-700 text-2xl font-bold&quot;&gt;⚠️&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;font-black text-red-800 text-lg&quot;&gt;VZDÁVÁTE SE SOUDU S POROTOU A HROMADNÝCH ŽALOB&lt;/span&gt;&lt;p class=&quot;text-sm text-red-900 mt-1 font-medium&quot;&gt;Tyto podmínky obsahují rozhodčí doložku, zřeknutí se hromadných žalob a extrémní omezení odpovědnosti – včetně &lt;span class=&quot;underline decoration-red-700 decoration-2&quot;&gt;úplného vyloučení odpovědnosti za odcizená, uniklá, napadená, hacknutá nebo ztracená data&lt;/span&gt;. Používáním VehicleDiary souhlasíte se všemi zde uvedenými podmínkami.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</value>
+  </data>
+
+  <!-- SECTIONS 1–11 (TITLES + CONTENT) -->
+  <data name="Section1_Title" xml:space="preserve">
+    <value>1. ÚČET A PŘIHLAŠOVACÍ ÚDAJE – VAŠE ODPOVĚDNOST</value>
+  </data>
+  <data name="Section1_Content" xml:space="preserve">
+    <value>Jste výhradně odpovědní za veškerou činnost pod svým účtem VehicleDiary, včetně všech údajů o vozidle, úprav, servisních záznamů, inventáře dílů a výpočtů investic. &lt;span class=&quot;font-semibold bg-yellow-100 px-1&quot;&gt;Neodpovídáme za neoprávněný přístup&lt;/span&gt; vzniklý kompromitovanými hesly, phishingem, credential stuffingem nebo vaším selháním při zavedení odpovídajících bezpečnostních opatření. Pokud sdílíte své přihlašovací údaje, přebíráte veškeré riziko.</value>
+  </data>
+
+  <data name="Section2_Title" xml:space="preserve">
+    <value>2. ÚDAJE O VOZIDLECH A OBSAH</value>
+  </data>
+  <data name="Section2_Content" xml:space="preserve">
+    <value>Ponecháváte si plné vlastnictví všech informací o vozidle, fotografií, VIN, účtenek a ocenění („Obsah uživatele“). Odesláním Obsahu uživatele udělujete společnosti VehicleDiary trvalou, neodvolatelnou, celosvětovou, bezplatnou licenci k ukládání, zálohování, zpracování a zobrazování těchto dat výhradně za účelem poskytování a zlepšování Služby. &lt;span class=&quot;font-medium&quot;&gt;Nenárokujeme si vlastnictví, ale opravňujete nás k přenosu a ukládání vašich dat na globálních serverech a infrastruktuře třetích stran.&lt;/span&gt;</value>
+  </data>
+
+  <data name="Section3_Title" xml:space="preserve">
+    <value>3. ŽÁDNÁ ODPOVĚDNOST ZA KRÁDEŽ, ZTRÁTU NEBO ÚNIK DAT</value>
+  </data>
+  <data name="Section3_Content" xml:space="preserve">
+    <value>&lt;div class=&quot;bg-gray-50 p-5 rounded-xl border border-red-200 legal-highlight&quot;&gt;&lt;p class=&quot;font-mono text-xs text-gray-500 mb-2&quot;&gt;// ÚPLNÉ VYLOUČENÍ ODPOVĚDNOSTI – „UKRADENÁ“ DATA, HACKY, ÚNIKY, RANSOMWARE, HROZBY ZE STRANY ZAMĚSTNANCŮ&lt;/p&gt;&lt;p class=&quot;text-base font-semibold text-gray-900 mb-1&quot;&gt;3.1 PŘEBÍRÁTE VŠECHNA BEZPEČNOSTNÍ RIZIKA.&lt;/p&gt;&lt;p class=&quot;text-base pl-2&quot;&gt;Společnost VehicleDiary používá komerčně přiměřená fyzická a elektronická zabezpečení; nicméně &lt;span class=&quot;font-bold underline decoration-red-500&quot;&gt;žádný způsob přenosu ani ukládání dat není 100% bezpečný.&lt;/span&gt; Nezaručujeme, že naše bezpečnostní opatření zabrání neoprávněnému přístupu, krádeži, ztrátě, poškození nebo zničení vašeho Obsahu uživatele či jiných dat. Uznáváte, že i přes naše úsilí může dojít k narušení, hackingu, ransomwaru, pochybení zasvěcených osob a dalším škodlivým událostem.&lt;/p&gt;&lt;p class=&quot;text-base font-semibold text-gray-900 mt-4 mb-1&quot;&gt;3.2 VÝSLOVNÉ ZŘEKNUTÍ SE ODPOVĚDNOSTI ZA NARUŠENÍ / KRÁDEŽ.&lt;/p&gt;&lt;p class=&quot;text-base pl-2&quot;&gt;V nejvyšším rozsahu povoleném právními předpisy, VehicleDiary, její přidružené společnosti, vedoucí pracovníci, ředitelé, zaměstnanci a zástupci &lt;span class=&quot;font-black uppercase&quot;&gt;nejsou odpovědni&lt;/span&gt; za jakýkoli neoprávněný přístup, použití, zveřejnění, změnu, ztrátu nebo zničení Obsahu uživatele či jiných dat, bez ohledu na příčinu (včetně nedbalosti, hrubé nedbalosti nebo úmyslného pochybení našich pracovníků či dodavatelů). &lt;span class=&quot;underline decoration-red-500 decoration-2&quot;&gt;Neodvolatelně se vzdáváte&lt;/span&gt; jakýchkoli nároků vůči nám vyplývajících z dat, která jsou „ukradena“, odcizena, hacknuta, vyzrazena, exfiltrována nebo jinak kompromitována.&lt;/p&gt;&lt;p class=&quot;text-xs text-gray-600 mt-3 italic&quot;&gt;⸻ Toto ustanovení trvá i po ukončení vašeho účtu nebo těchto Podmínek.&lt;/p&gt;&lt;/div&gt;</value>
+  </data>
+
+  <data name="Section4_Title" xml:space="preserve">
+    <value>4. VÝPOČTY INVESTIC – „JAK STOJÍ“</value>
+  </data>
+  <data name="Section4_Content" xml:space="preserve">
+    <value>VehicleDiary poskytuje automatizované nástroje k odhadu celkové investice do vozidla na základě vámi zadaných údajů. &lt;span class=&quot;font-bold&quot;&gt;Nezaručujeme přesnost, úplnost ani spolehlivost&lt;/span&gt; žádných výpočtů, odpisových křivek, tržních ocenění nebo odhadů nákladů. Číselné údaje slouží pouze pro informační účely a nelze je použít pro pojištění, daně, financování nebo právní rozhodnutí. Nesete veškeré riziko spojené se spoléháním se na tyto výpočty.</value>
+  </data>
+
+  <data name="Section5_Title" xml:space="preserve">
+    <value>5. ŽÁDNÉ ZÁRUKY – SLUŽBA „JAK STOJÍ“</value>
+  </data>
+  <data name="Section5_Content" xml:space="preserve">
+    <value>SLUŽBA JE POSKYTOVÁNA „TAK, JAK JE“ A „JAK JE K DISPOZICI“ BEZ JAKÝCHKOLI ZÁRUK, VÝSLOVNÝCH ČI ODVOZENÝCH, VČETNĚ, ALE NEJEN, ODVOZENÝCH ZÁRUK PRODEJNOSTI, VHODNOSTI PRO URČITÝ ÚČEL, VLASTNICKÉHO PRÁVA, NEPORUŠOVÁNÍ PRÁV NEBO BEZPEČNOSTI. VehicleDiary nezaručuje, že Služba bude nepřerušovaná, bez chyb nebo bez virů či jiných škodlivých součástí. Některé právní řády neumožňují vyloučení odvozených záruk, proto se na vás tato vyloučení nemusí vztahovat.</value>
+  </data>
+
+  <data name="Section6_Title" xml:space="preserve">
+    <value>6. OMEZENÍ ODPOVĚDNOSTI – NIC K ZÍSKÁNÍ</value>
+  </data>
+  <data name="Section6_Content" xml:space="preserve">
+    <value>V nejvyšším rozsahu povoleném právními předpisy v žádném případě VehicleDiary ani její přidružené strany neodpovídají za (i) jakékoli nepřímé, náhodné, zvláštní, následné, trestné nebo exemplární škody, (ii) jakoukoli ztrátu dat, užití, dobré vůle, zisku nebo investice, ani (iii) jakékoli náklady na náhradní služby, &lt;span class=&quot;font-semibold&quot;&gt;a to i v případě, že byli upozorněni na možnost takových škod&lt;/span&gt;. Naše celková odpovědnost vůči vám za jakýkoli nárok vyplývající z těchto Podmínek nebo Služby nebo v souvislosti s nimi nepřesáhne vyšší z částky 10,00 USD nebo částky, kterou jste nám zaplatili v dvanácti měsících předcházejících nároku. &lt;span class=&quot;bg-gray-100 px-1&quot;&gt;Toto omezení se vztahuje na všechny právní důvody, včetně smlouvy, deliktu, nedbalosti, objektivní odpovědnosti a zákonných nároků.&lt;/span&gt;</value>
+  </data>
+
+  <data name="Section7_Title" xml:space="preserve">
+    <value>7. ODŠKODNĚNÍ – CHRÁNÍTE NÁS</value>
+  </data>
+  <data name="Section7_Content" xml:space="preserve">
+    <value>Souhlasíte, že budete odškodňovat, bránit a chránit VehicleDiary, její mateřské, dceřiné a přidružené společnosti, vedoucí pracovníky, ředitele, zaměstnance a zástupce před všemi nároky, závazky, škodami, ztrátami, náklady a výdaji (včetně přiměřených odměn advokátům) vyplývajícími nebo souvisejícími s (a) vaším obsahem uživatele, (b) vaším užíváním Služby, (c) vaším porušením těchto Podmínek nebo (d) jakýmkoli skutečným nebo tvrzeným porušením práv třetích stran. &lt;span class=&quot;font-medium&quot;&gt;Vyhrazujeme si právo převzít výhradní obhajobu a kontrolu nad jakoukoli záležitostí podléhající odškodnění z vaší strany, a to na vaše náklady.&lt;/span&gt;</value>
+  </data>
+
+  <data name="Section8_Title" xml:space="preserve">
+    <value>8. ZÁVAZNÁ ROZHODČÍ DOLOŽKA A ZŘEKNUTÍ SE HROMADNÝCH ŽALOB</value>
+  </data>
+  <data name="Section8_Content" xml:space="preserve">
+    <value>Jakýkoli spor, nárok nebo kontroverze vyplývající z těchto Podmínek nebo Služby nebo v souvislosti s nimi budou řešeny &lt;span class=&quot;font-bold&quot;&gt;závazným individuálním rozhodčím řízením&lt;/span&gt; vedeným Americkou rozhodčí asociací podle jejích spotřebitelských rozhodčích pravidel. Rozhodčí řízení se koná v okrese našeho hlavního místa podnikání nebo na dálku po vzájemné dohodě. &lt;span class=&quot;font-bold uppercase bg-red-100 px-1&quot;&gt;SOUHLASÍTE, ŽE MŮŽETE UPLATŇOVAT NÁROKY POUZE VE SVÉ VLASTNÍ INDIVIDUÁLNÍ KAPACITĚ, A NIKOLI JAKO ŽALOBCE NEBO ČLEN SKUPINY V JAKÉMKOLI ÚDAJNÉM HROMADNÉM, SPOLEČNÉM NEBO SOUKROMÉM GENERÁLNÍM ADVOKÁTNÍM ŘÍZENÍ.&lt;/span&gt; Pokud bude toto zřeknutí se hromadných žalob považováno za nevynutitelné, bude celá rozhodčí doložka neplatná.</value>
+  </data>
+
+  <data name="Section9_Title" xml:space="preserve">
+    <value>9. ROZHODNÉ PRÁVO A MÍSTNÍ PŘÍSLUŠNOST</value>
+  </data>
+  <data name="Section9_Content" xml:space="preserve">
+    <value>Tyto Podmínky se řídí právem státu Delaware, bez ohledu na jeho kolizní právní předpisy. S výhradou výše uvedené rozhodčí doložky souhlasíte s výlučnou pravomocí a příslušností státních a federálních soudů se sídlem ve Wilmingtonu, Delaware, pro veškeré spory, které nepodléhají rozhodčímu řízení.</value>
+  </data>
+
+  <data name="Section10_Title" xml:space="preserve">
+    <value>10. ZMĚNY A AKTUALIZACE</value>
+  </data>
+  <data name="Section10_Content" xml:space="preserve">
+    <value>Tyto Podmínky můžeme čas od času revidovat. Nejaktuálnější verze bude vždy zveřejněna na této stránce s aktualizovaným datem „účinnosti“. Pokud budete Službu nadále používat poté, co revize nabydou účinnosti, souhlasíte s tím, že budete vázáni revidovanými Podmínkami. Pokud nesouhlasíte, musíte Službu okamžitě přestat používat.</value>
+  </data>
+
+  <data name="Section11_Title" xml:space="preserve">
+    <value>11. TRVÁNÍ A ODDĚLITELNOST</value>
+  </data>
+  <data name="Section11_Content" xml:space="preserve">
+    <value>Veškerá ustanovení těchto Podmínek, která by ze své povahy měla trvat i po ukončení, trvají i nadále, včetně, ale nejen, ustanovení o vlastnictví, vyloučení záruk, odškodnění a omezení odpovědnosti. Pokud bude některé ustanovení považováno za neplatné nebo nevynutitelné, zbývající ustanovení zůstávají v plné platnosti a účinnosti.</value>
+  </data>
+
+  <!-- FINAL ACKNOWLEDGMENT -->
+  <data name="AcknowledgmentBox" xml:space="preserve">
+    <value>&lt;p class=&quot;font-bold flex items-center gap-2 text-base&quot;&gt;📌 POUŽÍVÁNÍM VEHICLEDIARY POTVRZUJETE, ŽE JSTE SI PŘEČETLI, POROZUMĚLI JSTE A SOUHLASÍTE S TĚMITO PODMÍNKAMI — &lt;span class=&quot;italic&quot;&gt;VČETNĚ ÚPLNÉHO VYLOUČENÍ ODPOVĚDNOSTI ZA ODCIZENÁ DATA A ZÁVAZNÉ ROZHODČÍ DOLOŽKY.&lt;/span&gt;&lt;/p&gt;&lt;p class=&quot;text-xs text-indigo-800 mt-2 font-mono&quot;&gt;VehicleDiary 2026 · Všechna práva vyhrazena · Žádná bezpečnost dat není absolutní; přebíráte veškeré riziko.&lt;/p&gt;</value>
+  </data>
+
+  <!-- FOOTER -->
+  <data name="FooterText" xml:space="preserve">
+    <value>VehicleDiary™ – sledovač investic do vozidla. Toto je právně závazná smlouva. Neoprávněný přístup nebo krádež dat zůstávají vaší výhradní odpovědností. Poslední revize: 15. ledna 2026.</value>
+  </data>
+
+  <!-- LANGUAGE SWITCHER -->
+  <data name="LangEn" xml:space="preserve">
+    <value>EN</value>
+  </data>
+  <data name="LangCs" xml:space="preserve">
+    <value>ČESKY</value>
+  </data>
+</root>

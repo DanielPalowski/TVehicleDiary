@@ -9,14 +9,19 @@ namespace VehicleDiary.Core.Entities
         [Key]
         public Guid Id { get; set; }
         [Required]
+        [MaxLength(100)]
         public float TirePrice { get; set; }
         [Required]
+        [MaxLength(100)]
         public int TireAmount { get; set; }
         [Required]
+        [MaxLength(100)]
         public string TireBrand { get; set; }
         [Required]
+        [MaxLength(100)]
         public int TireType { get; set; }
         [Required]
+        [MaxLength(100)]
         public string TireSize { get; set; }
         [Required]
         public DateTime TireDate { get; set; }

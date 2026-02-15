@@ -31,6 +31,11 @@ namespace VehicleDiary.Web.Controllers.Usage
         [HttpPost]
         public async Task<IActionResult> Tires(DBTiresModelVM dBTiresModelVM)
         {
+            int countedTires = await _service.CountingTires(dBTiresModelVM.VehicleId);
+            if(countedTires >= 20)
+            {
+                return StatusCode(429);
+            }
             if (ModelState.IsValid)
             {
                 var entity = _mapper.Map<TireDto>(dBTiresModelVM);

@@ -9,5 +9,6 @@ namespace VehicleDiary.Core.Interfaces.Services
         Task<IEnumerable<PetrolDto>>? GetAllPetrolModelsAsync(Guid vehicleIDRoute);
         Task AddingPetrolAsync(PetrolDto petrolDto);
         Task RemovingAsync(Guid Id);
+        Task<int> CountingPetrol(Guid vehicleId);
     }
 }

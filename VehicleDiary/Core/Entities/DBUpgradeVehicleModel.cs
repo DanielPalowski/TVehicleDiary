@@ -33,12 +33,15 @@ namespace VehicleDiary.Core.Entities
         [Required]
         [MaxLength(20)]
         public float UpgradeVPrice { get; set; }
-
+        [MaxLength(500)]
         public string? UpgradeVNotes { get; set; }
+        [MaxLength(100)]
 
         public string? UpgradeVTechnician { get; set; }
+        [MaxLength(100)]
 
         public string? UpgradeVPartBrand { get; set; }
+        [MaxLength(100)]
 
         public string? UpgradeVPartCode { get; set; }
 

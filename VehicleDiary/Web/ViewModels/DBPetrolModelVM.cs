@@ -13,9 +13,10 @@ namespace VehicleDiary.Web.ViewModels
         public string PetrolType { get; set; }
         public int? PetrolMileage { get; set; }
         [Required]
-        public int PetrolPrice { get; set; }
+        public float PetrolPrice { get; set; }
+
         [Required]
-        public int PetrolAmount { get; set; }
+        public float PetrolAmount { get; set; }
         [Required]
         public Guid vehicleId { get; set; }
         public IEnumerable<DBPetrolModelVM>? PetrolViews { get; set;}

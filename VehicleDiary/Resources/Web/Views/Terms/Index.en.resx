@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- PAGE META -->
+  <data name="PageTitle" xml:space="preserve">
+    <value>VehicleDiary · Terms of Service (2026)</value>
+  </data>
+  <data name="EffectiveLabel" xml:space="preserve">
+    <value>effective:</value>
+  </data>
+  <data name="VersionLabel" xml:space="preserve">
+    <value>ver</value>
+  </data>
+  <data name="Brand2026" xml:space="preserve">
+    <value>2026</value>
+  </data>
+
+  <!-- HEADINGS -->
+  <data name="MainHeading" xml:space="preserve">
+    <value>TERMS OF SERVICE</value>
+  </data>
+  <data name="SubHeading" xml:space="preserve">
+    <value>YOUR USE CONSTITUTES ACCEPTANCE – READ CAREFULLY</value>
+  </data>
+
+  <!-- WAIVER BOX (FULL HTML) -->
+  <data name="WaiverBox" xml:space="preserve">
+    <value>&lt;div class=&quot;flex items-start gap-3&quot;&gt;&lt;span class=&quot;text-red-700 text-2xl font-bold&quot;&gt;⚠️&lt;/span&gt;&lt;div&gt;&lt;span class=&quot;font-black text-red-800 text-lg&quot;&gt;YOU WAIVE JURY TRIAL &amp;amp; CLASS ACTIONS&lt;/span&gt;&lt;p class=&quot;text-sm text-red-900 mt-1 font-medium&quot;&gt;These Terms contain a binding arbitration agreement, class action waiver, and extreme limitations on liability — including &lt;span class=&quot;underline decoration-red-700 decoration-2&quot;&gt;complete disclaimer of responsibility for stolen, leaked, breached, hacked, or lost data&lt;/span&gt;. By using VehicleDiary you agree to all terms herein.&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;</value>
+  </data>
+
+  <!-- SECTIONS 1–11 (TITLES + CONTENT) -->
+  <data name="Section1_Title" xml:space="preserve">
+    <value>1. ACCOUNT &amp; CREDENTIALS – YOUR LIABILITY</value>
+  </data>
+  <data name="Section1_Content" xml:space="preserve">
+    <value>You are solely responsible for all activity under your VehicleDiary account, including any vehicle data, modifications, service records, parts inventory, and investment calculations. &lt;span class=&quot;font-semibold bg-yellow-100 px-1&quot;&gt;We are not liable for unauthorized access&lt;/span&gt; resulting from compromised passwords, phishing, credential stuffing, or your failure to implement adequate security measures. If you share your login, you assume all risk.</value>
+  </data>
+
+  <data name="Section2_Title" xml:space="preserve">
+    <value>2. VEHICLE DATA &amp; CONTENT</value>
+  </data>
+  <data name="Section2_Content" xml:space="preserve">
+    <value>You retain full ownership of all vehicle information, photos, VINs, receipts, and valuations (“User Content”). By submitting User Content, you grant VehicleDiary a perpetual, irrevocable, worldwide, royalty‑free license to store, backup, process, and display such data solely to provide and improve the Service. &lt;span class=&quot;font-medium&quot;&gt;We do not claim ownership, but you authorize us to transmit and store your data across global servers and third‑party infrastructure.&lt;/span&gt;</value>
+  </data>
+
+  <data name="Section3_Title" xml:space="preserve">
+    <value>3. NO LIABILITY FOR DATA THEFT, LOSS, OR BREACH</value>
+  </data>
+  <data name="Section3_Content" xml:space="preserve">
+    <value>&lt;div class=&quot;bg-gray-50 p-5 rounded-xl border border-red-200 legal-highlight&quot;&gt;&lt;p class=&quot;font-mono text-xs text-gray-500 mb-2&quot;&gt;// COMPLETE DISCLAIMER – “STOLED” DATA, HACKS, LEAKS, RANSOMWARE, INSIDER THREATS&lt;/p&gt;&lt;p class=&quot;text-base font-semibold text-gray-900 mb-1&quot;&gt;3.1 YOU ASSUME ALL SECURITY RISKS.&lt;/p&gt;&lt;p class=&quot;text-base pl-2&quot;&gt;VehicleDiary uses commercially reasonable physical and electronic safeguards; however, &lt;span class=&quot;font-bold underline decoration-red-500&quot;&gt;no method of transmission or storage is 100% secure.&lt;/span&gt; We do not guarantee that our security measures will prevent unauthorized access, theft, loss, corruption, or destruction of your User Content or any other data. You acknowledge that breaches, hacking, ransomware, insider misconduct, and other malicious events may occur despite our efforts.&lt;/p&gt;&lt;p class=&quot;text-base font-semibold text-gray-900 mt-4 mb-1&quot;&gt;3.2 EXPRESS WAIVER FOR BREACH / THEFT.&lt;/p&gt;&lt;p class=&quot;text-base pl-2&quot;&gt;To the maximum extent permitted by law, VehicleDiary, its affiliates, officers, directors, employees, and agents &lt;span class=&quot;font-black uppercase&quot;&gt;shall not be liable&lt;/span&gt; for any unauthorized access to, use of, disclosure, alteration, loss, or destruction of User Content or other data, regardless of the cause (including negligence, gross negligence, or willful misconduct of our personnel or contractors). You &lt;span class=&quot;underline decoration-red-500 decoration-2&quot;&gt;irrevocably waive&lt;/span&gt; any claims against us arising from data that is “stoled,” stolen, hacked, leaked, exfiltrated, or otherwise compromised.&lt;/p&gt;&lt;p class=&quot;text-xs text-gray-600 mt-3 italic&quot;&gt;⸻ This provision survives termination of your account or these Terms.&lt;/p&gt;&lt;/div&gt;</value>
+  </data>
+
+  <data name="Section4_Title" xml:space="preserve">
+    <value>4. INVESTMENT CALCULATIONS – “AS IS”</value>
+  </data>
+  <data name="Section4_Content" xml:space="preserve">
+    <value>VehicleDiary provides automated tools to estimate total vehicle investment based on data you enter. &lt;span class=&quot;font-bold&quot;&gt;We do not warrant accuracy, completeness, or reliability&lt;/span&gt; of any calculation, depreciation curve, market valuation, or cost projection. Figures are for informational purposes only and should not be used for insurance, tax, financing, or legal decisions. You bear all risk of relying on such calculations.</value>
+  </data>
+
+  <data name="Section5_Title" xml:space="preserve">
+    <value>5. NO WARRANTIES – SERVICE “AS IS”</value>
+  </data>
+  <data name="Section5_Content" xml:space="preserve">
+    <value>THE SERVICE IS PROVIDED “AS IS” AND “AS AVAILABLE” WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON‑INFRINGEMENT, OR SECURITY. VehicleDiary does not warrant that the Service will be uninterrupted, error‑free, or free of viruses or other harmful components. Some jurisdictions do not allow the disclaimer of implied warranties, so such disclaimers may not apply to you.</value>
+  </data>
+
+  <data name="Section6_Title" xml:space="preserve">
+    <value>6. LIMITATION OF LIABILITY – NOTHING RECOVERABLE</value>
+  </data>
+  <data name="Section6_Content" xml:space="preserve">
+    <value>To the fullest extent permitted by law, in no event shall VehicleDiary or its related parties be liable for (i) any indirect, incidental, special, consequential, punitive, or exemplary damages, (ii) any loss of data, use, goodwill, profits, or investment, or (iii) any costs of substitute services, &lt;span class=&quot;font-semibold&quot;&gt;even if advised of the possibility of such damages&lt;/span&gt;. Our aggregate liability to you for any claim arising from or relating to these Terms or the Service shall not exceed the greater of $10.00 USD or the amount you paid us in the twelve months preceding the claim. &lt;span class=&quot;bg-gray-100 px-1&quot;&gt;This cap applies to all causes of action, including contract, tort, negligence, strict liability, and statutory claims.&lt;/span&gt;</value>
+  </data>
+
+  <data name="Section7_Title" xml:space="preserve">
+    <value>7. INDEMNITY – YOU DEFEND &amp; HOLD HARMLESS</value>
+  </data>
+  <data name="Section7_Content" xml:space="preserve">
+    <value>You agree to indemnify, defend, and hold harmless VehicleDiary, its parents, subsidiaries, affiliates, officers, directors, employees, and agents from and against all claims, liabilities, damages, losses, costs, and expenses (including reasonable attorneys’ fees) arising out of or relating to (a) your User Content, (b) your use of the Service, (c) your violation of these Terms, or (d) any actual or alleged infringement of any third‑party rights. &lt;span class=&quot;font-medium&quot;&gt;We reserve the right to assume exclusive defense and control of any matter subject to indemnification by you, at your expense.&lt;/span&gt;</value>
+  </data>
+
+  <data name="Section8_Title" xml:space="preserve">
+    <value>8. BINDING ARBITRATION &amp; CLASS ACTION WAIVER</value>
+  </data>
+  <data name="Section8_Content" xml:space="preserve">
+    <value>Any dispute, claim, or controversy arising out of or relating to these Terms or the Service shall be resolved by &lt;span class=&quot;font-bold&quot;&gt;binding individual arbitration&lt;/span&gt; administered by the American Arbitration Association under its Consumer Arbitration Rules. The arbitration shall be held in the county of our principal place of business, or remotely by mutual consent. &lt;span class=&quot;font-bold uppercase bg-red-100 px-1&quot;&gt;YOU AGREE THAT YOU MAY BRING CLAIMS ONLY IN YOUR INDIVIDUAL CAPACITY AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS, REPRESENTATIVE, OR PRIVATE ATTORNEY GENERAL PROCEEDING.&lt;/span&gt; If this class action waiver is deemed unenforceable, the entire arbitration agreement shall be null and void.</value>
+  </data>
+
+  <data name="Section9_Title" xml:space="preserve">
+    <value>9. GOVERNING LAW &amp; VENUE</value>
+  </data>
+  <data name="Section9_Content" xml:space="preserve">
+    <value>These Terms shall be governed by the laws of the State of Delaware, without regard to its conflict of laws principles. Subject to the arbitration agreement above, you consent to the exclusive jurisdiction and venue of the state and federal courts located in Wilmington, Delaware, for any non‑arbitrable disputes.</value>
+  </data>
+
+  <data name="Section10_Title" xml:space="preserve">
+    <value>10. MODIFICATIONS &amp; UPDATES</value>
+  </data>
+  <data name="Section10_Content" xml:space="preserve">
+    <value>We may revise these Terms from time to time. The most current version will always be posted on this page with an updated “effective” date. By continuing to access or use the Service after revisions become effective, you agree to be bound by the revised Terms. If you do not agree, you must stop using the Service immediately.</value>
+  </data>
+
+  <data name="Section11_Title" xml:space="preserve">
+    <value>11. SURVIVAL &amp; SEVERABILITY</value>
+  </data>
+  <data name="Section11_Content" xml:space="preserve">
+    <value>All provisions of these Terms that by their nature should survive termination shall survive, including but not limited to ownership provisions, warranty disclaimers, indemnity, and limitations of liability. If any provision is held invalid or unenforceable, the remaining provisions shall remain in full force and effect.</value>
+  </data>
+
+  <!-- FINAL ACKNOWLEDGMENT -->
+  <data name="AcknowledgmentBox" xml:space="preserve">
+    <value>&lt;p class=&quot;font-bold flex items-center gap-2 text-base&quot;&gt;📌 BY USING VEHICLEDIARY YOU ACKNOWLEDGE THAT YOU HAVE READ, UNDERSTOOD, AND AGREE TO BE BOUND BY THESE TERMS — &lt;span class=&quot;italic&quot;&gt;INCLUDING THE COMPLETE DISCLAIMER OF LIABILITY FOR STOLEN DATA AND THE BINDING ARBITRATION PROVISION.&lt;/span&gt;&lt;/p&gt;&lt;p class=&quot;text-xs text-indigo-800 mt-2 font-mono&quot;&gt;VehicleDiary 2026 · All rights reserved · No data security is absolute; you assume all risk.&lt;/p&gt;</value>
+  </data>
+
+  <!-- FOOTER -->
+  <data name="FooterText" xml:space="preserve">
+    <value>VehicleDiary™ – vehicle investment tracker. This is a legally binding agreement. Unauthorized access or data theft remains your sole responsibility. Last revised: January 15, 2026.</value>
+  </data>
+
+  <!-- LANGUAGE SWITCHER -->
+  <data name="LangEn" xml:space="preserve">
+    <value>EN</value>
+  </data>
+  <data name="LangCs" xml:space="preserve">
+    <value>ČESKY</value>
+  </data>
+</root>

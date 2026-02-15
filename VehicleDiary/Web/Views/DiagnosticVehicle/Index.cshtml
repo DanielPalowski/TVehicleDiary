@@ -2,6 +2,12 @@
 @model DBDiagnosticVehicleModelVM
 @inject IViewLocalizer Localizer
 
+@{
+    var diagnosticCount = Model.RepairViews?.Count() ?? 0;
+    const int maxDiagnostics = 20;              
+    var canAddNew = diagnosticCount < maxDiagnostics;
+}
+
 <!DOCTYPE html>
 <html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
 <head>
@@ -116,6 +122,7 @@
 <body class="bg-gradient-to-br from-background via-white to-secondary min-h-screen">
     <div class="container mx-auto px-4 py-6 sm:py-8 md:py-12">
         <!-- Header Section -->
+      
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
             <div class="flex items-center gap-3">
                 <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, hsl(24, 95%, 53%), hsl(24, 95%, 43%));">
@@ -126,12 +133,21 @@
                     <p class="text-muted-foreground text-sm">Manage your vehicle diagnostic records</p>
                 </div>
             </div>
-
-            <a asp-controller="DiagnosticVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
-               class="btn-primary-gradient text-white font-semibold px-6 py-3 rounded-xl text-base sm:text-lg transition-all duration-200 shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto">
-                <i class="fas fa-plus-circle"></i>
-                <span>@Localizer["Add New Diagnostic"]</span>
-            </a>
+            @if (canAddNew)
+            {
+                <a asp-controller="DiagnosticVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
+                   class="btn-primary-gradient text-white font-semibold px-6 py-3 rounded-xl text-base sm:text-lg transition-all duration-200 shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>@Localizer["Add New Diagnostic"]</span>
+                </a>
+            }
+            else
+            {
+                <p class="text-danger font-medium px-4 py-2 rounded-lg border border-danger/20 bg-danger/10">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    @diagnosticCount / @maxDiagnostics
+                </p>
+            }
         </div>
 
         <!-- Filter Section -->
@@ -388,12 +404,6 @@
 
                                 <!-- Actions -->
                                 <div class="flex items-center gap-2">
-                                    <button onclick="editDiagnostic('@diagnostic.ID')"
-                                            class="w-10 h-10 rounded-lg border hover:border-primary hover:bg-primary hover:text-white transition-colors duration-200 flex items-center justify-center"
-                                            style="border-color: hsl(24, 95%, 53%); color: hsl(24, 95%, 53%);"
-                                            title="@Localizer["Edit"]">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
                                     <button onclick="deleteDiagnostic('@diagnostic.ID')"
                                             class="w-10 h-10 rounded-lg border hover:border-danger hover:bg-danger hover:text-white transition-colors duration-200 flex items-center justify-center"
                                             style="border-color: hsl(0, 84%, 60%); color: hsl(0, 84%, 60%);"

@@ -46,11 +46,11 @@ namespace VehicleDiary.Web.Controllers.Repairs
         [RequestFormLimits(MultipartBodyLengthLimit = IFileSizeMax.MAX_FILE_SIZE)]
         public async Task<IActionResult> Create(DBRepairVehicleModelVM model)
         {
-            /*var MaxRapairCount = await _repairVehicleService.CountingAsync(model.VehicleId);
-            if (MaxRapairCount >= 25)
+            var countedRepairs = await _repairVehicleService.CountingRepairs(model.VehicleId);
+            if (countedRepairs >= 20)
             {
-                ModelState.AddModelError("MaxRepair","You have reached the maximum limit of 25 repair");
-            }*/
+                return StatusCode(429);
+            }
             if (model.Upload != null && model.Upload.Length > IFileSizeMax.MAX_FILE_SIZE)
             {
                 ModelState.AddModelError("Upload", $"File size exceeds the maximum limit of 5 MB.");

@@ -23,13 +23,13 @@ namespace VehicleDiary.Core.Entities
 
 
 
-        [Required]
+
         [MaxLength(100)]
         public string? DiagnosticVErrorCode { get; set; }
-        [Required]
+
         [MaxLength(100)]
         public string? DiagnosticVErrorDis { get; set; }
-        [Required]
+
         [MaxLength(100)]
         public string? DiagnosticVDiagnosticType { get; set; }
 
@@ -43,12 +43,13 @@ namespace VehicleDiary.Core.Entities
 
 
 
-        [Required]
         [MaxLength(20)]
         public float? DiagnosticVPrice { get; set; }
 
+        [MaxLength(500)]
         public string? DiagnosticVNotes { get; set; }
 
+        [MaxLength(40)]
         public string? UpgradeVTechnician { get; set; }
 
 

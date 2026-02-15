@@ -3,8 +3,9 @@
 @inject IViewLocalizer Localizer
 
 @{
-    var MaxUpgradeRecords = 25;
-    var UpgradeRecordCount = Model.RepairViews.Count() < MaxUpgradeRecords;
+    var diagnosticCount = Model.RepairViews?.Count() ?? 0;
+    const int maxDiagnostics = 20;
+    var canAddNew = diagnosticCount < maxDiagnostics;
 }
 
 <!DOCTYPE html>
@@ -120,53 +121,33 @@
 </head>
 <body class="bg-gradient-to-br from-background via-white to-secondary min-h-screen">
     <div class="container mx-auto px-4 py-6 sm:py-8 md:py-12">
-        @if (UpgradeRecordCount)
-        {
-            <!-- Header Section -->
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, hsl(221, 83%, 53%), hsl(221, 83%, 43%));">
-                        <i class="fas fa-bolt text-white text-lg"></i>
-                    </div>
-                    <div>
-                        <h1 class="text-2xl sm:text-3xl font-bold text-foreground">@Localizer["Upgrades History"]</h1>
-                        <p class="text-muted-foreground text-sm">Manage your vehicle upgrade records</p>
-                    </div>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6 sm:mb-8">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, hsl(221, 83%, 53%) 0%, hsl(221, 83%, 43%) 100%);">
+                    <i class="fas fa-history text-white text-lg"></i>
                 </div>
-
-                <a asp-controller="UpgradeVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
-                   class="btn-primary-gradient text-white font-semibold px-6 py-3 rounded-xl text-base sm:text-lg transition-all duration-200 shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto">
-                    <i class="fas fa-plus-circle"></i>
-                    <span>@Localizer["Add New Upgrade"]</span>
-                </a>
+                <div>
+                    <h1 class="text-2xl sm:text-3xl font-bold text-foreground">@Localizer["UpgradeHistory"]</h1>
+                    <p class="text-muted-foreground text-sm">Manage your vehicle service records</p>
+                </div>
             </div>
+
+        @if (canAddNew)
+        {
+            <a asp-controller="UpgradeVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
+               class="btn-primary-gradient text-white font-semibold px-6 py-3 rounded-xl text-base sm:text-lg transition-all duration-200 shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto">
+                <i class="fas fa-plus-circle"></i>
+                <span>@Localizer["Add New Upgrade"]</span>
+            </a>
         }
         else
         {
-            <!-- Limit Alert -->
-            <div class="glass-card shadow-elevated p-6 mb-8 animate-fade-in" style="background: linear-gradient(135deg, hsl(0, 84%, 97%), hsl(0, 84%, 94%)); border-left: 4px solid hsl(0, 84%, 60%);">
-                <div class="flex items-start gap-4">
-                    <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: hsl(0, 84%, 60%);">
-                        <i class="fas fa-info-circle text-white text-xl"></i>
-                    </div>
-                    <div class="flex-1">
-                        <h3 class="text-xl font-bold text-foreground mb-2">@Localizer["Vehicle Upgrades Limit Reached"]</h3>
-                        <p class="text-foreground">@Localizer["You have reached the maximum limit of 25 upgrades. Remove an upgrade to add a new one."]</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Header without add button -->
-            <div class="flex items-center gap-3 mb-8">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, hsl(221, 83%, 53%), hsl(221, 83%, 43%));">
-                    <i class="fas fa-bolt text-white text-lg"></i>
-                </div>
-                <div>
-                    <h1 class="text-2xl sm:text-3xl font-bold text-foreground">@Localizer["Upgrades History"]</h1>
-                    <p class="text-muted-foreground text-sm">Manage your vehicle upgrade records</p>
-                </div>
-            </div>
+            <p class="text-danger font-medium px-4 py-2 rounded-lg border border-danger/20 bg-danger/10">
+                <i class="fas fa-exclamation-triangle mr-2"></i>
+                @diagnosticCount / @maxDiagnostics
+            </p>
         }
+        </div>
 
         <!-- Filter Section -->
         <div class="glass-card shadow-card mb-6 sm:mb-8 overflow-hidden">
@@ -400,12 +381,6 @@
 
                                 <!-- Actions -->
                                 <div class="flex items-center gap-2">
-                                    <button onclick="editUpgrade('@upgrade.Id')"
-                                            class="w-10 h-10 rounded-lg border hover:border-primary hover:bg-primary hover:text-white transition-colors duration-200 flex items-center justify-center"
-                                            style="border-color: hsl(221, 83%, 53%); color: hsl(221, 83%, 53%);"
-                                            title="@Localizer["Edit"]">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
                                     <button onclick="deleteUpgrade('@upgrade.Id')"
                                             class="w-10 h-10 rounded-lg border hover:border-danger hover:bg-danger hover:text-white transition-colors duration-200 flex items-center justify-center"
                                             style="border-color: hsl(0, 84%, 60%); color: hsl(0, 84%, 60%);"
@@ -428,14 +403,11 @@
                 </div>
                 <h3 class="text-2xl font-bold text-foreground mb-3">@Localizer["No Upgrade Records"]</h3>
                 <p class="text-muted-foreground mb-8 max-w-md mx-auto">@Localizer["No upgrade records available for this vehicle."]</p>
-                @if (UpgradeRecordCount)
-                {
                     <a asp-controller="UpgradeVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
                        class="btn-primary-gradient text-white font-semibold px-8 py-4 rounded-xl text-lg transition-all duration-200 shadow-lg inline-flex items-center justify-center gap-3">
                         <i class="fas fa-plus-circle"></i>
                         <span>@Localizer["Add First Upgrade"]</span>
                     </a>
-                }
             </div>
         }
     </div>

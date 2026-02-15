@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- Page Title -->
+  <data name="Title" xml:space="preserve">
+    <value>Log out - VehicleDiary</value>
+  </data>
+
+  <!-- Authenticated State -->
+  <data name="ReadyToLeave" xml:space="preserve">
+    <value>Ready to leave?</value>
+  </data>
+  <data name="ConfirmLogout" xml:space="preserve">
+    <value>Confirm below to log out of your account</value>
+  </data>
+  <data name="LogoutButton" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="ChangedMind" xml:space="preserve">
+    <value>Changed your mind?</value>
+  </data>
+
+  <!-- Logged Out State -->
+  <data name="SignedOut" xml:space="preserve">
+    <value>Signed Out</value>
+  </data>
+  <data name="LoggedOutSuccessfully" xml:space="preserve">
+    <value>You have successfully logged out</value>
+  </data>
+  <data name="NowLoggedOut" xml:space="preserve">
+    <value>You are now logged out</value>
+  </data>
+
+  <!-- Navigation -->
+  <data name="BackToHome" xml:space="preserve">
+    <value>Back to Home</value>
+  </data>
+</root>

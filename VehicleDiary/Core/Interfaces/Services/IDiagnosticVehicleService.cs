@@ -10,5 +10,6 @@ namespace VehicleDiary.Core.Interfaces.Services
         Task RemovingAsync(Guid Id);
         Task UploadingAsync(DiagnosticVehicleDto repairDto);
         Task<FileContentResult> DownloadingAsync(Guid id);
+        Task<int> CountingDiagnostic(Guid VehicleId);
     }
 }

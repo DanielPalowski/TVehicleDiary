@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VehicleDiary - Your Vehicle Management Solution</title>
+    <title>VehicleDiary</title>
     <meta name="description" content="Track maintenance, repairs, fuel consumption, and costs in one intuitive platform.">
 
     
@@ -149,6 +149,44 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+
+        }
+
+        @@media (max-width: 380px) {
+            body
+
+        {
+            overflow-x: hidden;
+        }
+
+        .container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+
+        h1.text-6xl {
+            font-size: 2.5rem !important; /* 40px */
+            line-height: 1.2 !important;
+        }
+
+        .hero-subtitle,
+        p.text-lg.sm:text-xl {
+            font-size: 1rem !important;
+        }
+
+        .btn-primary-gradient,
+        a[href="#features"].border-2 {
+            padding-left: 1.5rem !important;
+            padding-right: 1.5rem !important;
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
+            font-size: 0.95rem !important;
+        }
+
+        .flex-col.sm:flex-row {
+            gap: 0.75rem !important;
+        }
+
         }
 
     </style>
@@ -175,7 +213,7 @@
                         @Localizer["HeroSubtitle"]
                     </p>
                     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <a href="#" class="btn-primary-gradient text-white font-semibold px-8 py-4 rounded-2xl text-lg inline-flex items-center justify-center gap-3 transition-all duration-300 shadow-lg">
+                        <a asp-controller="Vehicle" asp-action="Index" class="btn-primary-gradient text-white font-semibold px-8 py-4 rounded-2xl text-lg inline-flex items-center justify-center gap-3 transition-all duration-300 shadow-lg">
                             <i data-lucide="car" class="w-6 h-6"></i>
                             @Localizer["HeroPrimaryAction"]
                             <i data-lucide="arrow-right" class="w-5 h-5"></i>

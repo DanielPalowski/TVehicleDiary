@@ -8,5 +8,6 @@ namespace VehicleDiary.Core.Interfaces.Services
         Task<IEnumerable<TireDto>>? GetAllTiresAsync(Guid vehicleIDRoute);
         Task AddingNewTiresAsync(TireDto tireDto);
         Task RemovingAsync(Guid Id);
+        Task<int> CountingTires(Guid vehicleId);
     }
 }

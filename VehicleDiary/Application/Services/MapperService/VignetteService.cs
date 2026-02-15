@@ -36,6 +36,10 @@ namespace VehicleDiary.Application.Services.MapperService
         {
             await _repositoryCrud.DeleteAsync(Id);
         }
+		public async Task<int> CountingVignettes(Guid VehicleId)
+		{
+			return await _repositoryCrud.CountingDb(VehicleId);
+		}
 
     }
 }

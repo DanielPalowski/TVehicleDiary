@@ -1,0 +1,143 @@
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+
+@{
+    // Use .Value to get the plain string for the <title>
+    ViewData["Title"] = Localizer["PageTitle"].Value;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(145deg, #f5f7fa 0%, #e6ecf1 100%);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .tos-card {
+            box-shadow: 0 25px 40px -12px rgba(0,0,0,0.12);
+            border: 1px solid rgba(255,255,255,0.5);
+            backdrop-filter: blur(2px);
+        }
+    </style>
+</head>
+<body class="antialiased text-gray-800">
+
+    <div class="min-h-screen flex items-center justify-center p-4 sm:p-6">
+        <div class="tos-card w-full max-w-4xl bg-white/98 rounded-3xl p-6 md:p-10 border border-white/60">
+
+            <!-- Brand & effective date -->
+            <div class="flex flex-wrap justify-between items-center border-b border-gray-200 pb-5 mb-6">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-black tracking-tight text-gray-900">VEHICLEDIARY</span>
+                    <span class="bg-indigo-50 text-indigo-800 text-xs font-semibold px-3 py-1.5 rounded-full uppercase tracking-wider">
+                        @Localizer["Brand2026"]
+                    </span>
+                </div>
+                <span class="text-xs font-mono bg-gray-100 px-3 py-2 rounded-md text-gray-700">
+                    @Localizer["EffectiveLabel"] 2026‑01‑15 · @Localizer["VersionLabel"] 2026.2
+                </span>
+            </div>
+
+            <!-- Main headings -->
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight mb-3">
+                @Localizer["MainHeading"]
+            </h1>
+            <p class="text-sm uppercase tracking-wider text-indigo-700 font-medium border-b border-indigo-200 pb-3 mb-6">
+                @Localizer["SubHeading"]
+            </p>
+
+            <!-- Waiver box – contains HTML, but LocalizedHtmlString renders it raw -->
+            <div class="bg-red-50 border-l-8 border-red-600 p-5 mb-8 rounded-r-xl shadow-sm">
+                @Localizer["WaiverBox"]
+            </div>
+
+            <!-- SECTIONS 1–11 -->
+            <div class="space-y-6 text-gray-800 divide-y divide-gray-100">
+
+                <!-- Section 1 -->
+                <div class="pt-2">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["Section1_Title"]</h2>
+                    <div class="text-base pl-2">@Localizer["Section1_Content"]</div>
+                </div>
+
+                <!-- Section 2 -->
+                <div class="pt-5">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["Section2_Title"]</h2>
+                    <div class="text-base pl-2">@Localizer["Section2_Content"]</div>
+                </div>
+
+                <!-- Section 3 – full HTML block -->
+                <div class="pt-5">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["Section3_Title"]</h2>
+                    <div class="text-base">@Localizer["Section3_Content"]</div>
+                </div>
+
+                <!-- Section 4 -->
+                <div class="pt-5">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["Section4_Title"]</h2>
+                    <div class="text-base pl-2">@Localizer["Section4_Content"]</div>
+                </div>
+
+                <!-- Section 5 -->
+                <div class="pt-5">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["Section5_Title"]</h2>
+                    <div class="text-base pl-2">@Localizer["Section5_Content"]</div>
+                </div>
+
+                <!-- Section 6 -->
+                <div class="pt-5">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["Section6_Title"]</h2>
+                    <div class="text-base pl-2">@Localizer["Section6_Content"]</div>
+                </div>
+
+                <!-- Section 7 -->
+                <div class="pt-5">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["Section7_Title"]</h2>
+                    <div class="text-base pl-2">@Localizer["Section7_Content"]</div>
+                </div>
+
+                <!-- Section 8 -->
+                <div class="pt-5">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["Section8_Title"]</h2>
+                    <div class="text-base pl-2">@Localizer["Section8_Content"]</div>
+                </div>
+
+                <!-- Section 9 -->
+                <div class="pt-5">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["Section9_Title"]</h2>
+                    <div class="text-base pl-2">@Localizer["Section9_Content"]</div>
+                </div>
+
+                <!-- Section 10 -->
+                <div class="pt-5">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["Section10_Title"]</h2>
+                    <div class="text-base pl-2">@Localizer["Section10_Content"]</div>
+                </div>
+
+                <!-- Section 11 -->
+                <div class="pt-5">
+                    <h2 class="text-xl font-bold text-gray-900 mb-2">@Localizer["Section11_Title"]</h2>
+                    <div class="text-base pl-2">@Localizer["Section11_Content"]</div>
+                </div>
+            </div>
+
+            <!-- Final acknowledgment – HTML content -->
+            <div class="mt-10 p-5 bg-indigo-50 rounded-xl border border-indigo-200 text-sm text-indigo-900">
+                @Localizer["AcknowledgmentBox"]
+            </div>
+
+            <!-- Footer -->
+            <div class="border-t border-gray-200 mt-6 pt-4 text-center text-gray-400 text-xs">
+                @Localizer["FooterText"]
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

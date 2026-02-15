@@ -69,7 +69,7 @@ namespace VehicleDiary.Infrastructure.Repositories
         }
         public async Task<int> CalculatingTotalServices()
         {
-            return await _context.DBRepairVehicleSet.CountAsync();
+            return await _context.DBRepairVehicleSet.CountAsync() + await _context.DBDiagnosticVehicleSet.CountAsync() + await _context.DBUpgradeVehicleSet.CountAsync();
         }
         public async Task<List<DBVehicleModel>> GetVehiclesWithTotalCostAsync(string userId)
         {

@@ -31,18 +31,25 @@ namespace VehicleDiary.Web.Controllers.Usage
         [HttpPost]
         public async Task<IActionResult> Petrol(DBPetrolModelVM dBPetrolModelVM)
         {
+            int countedPetrol = await _petrolService.CountingPetrol(dBPetrolModelVM.vehicleId);
+            if(countedPetrol >= 20) 
+            {
+                return StatusCode(429);
+            }
             if (ModelState.IsValid)
             {
                var entity = _mapper.Map<PetrolDto>(dBPetrolModelVM);
                await _petrolService.AddingPetrolAsync(entity);
                 return RedirectToAction("Index", "CarUsage", new { vehicleIDRoute = dBPetrolModelVM.vehicleId });
             }
+            var entities = await _petrolService.GetAllPetrolModelsAsync(dBPetrolModelVM.vehicleId);
+            dBPetrolModelVM.PetrolViews = _mapper.Map<IEnumerable<DBPetrolModelVM>>(entities);
             return View(dBPetrolModelVM);
         }
         [HttpDelete]
-        public async Task<IActionResult> Delete(Guid Id)
+        public async Task<IActionResult> Delete(Guid id)   
         {
-            await _petrolService.RemovingAsync(Id);
+            await _petrolService.RemovingAsync(id);       
             return Ok();
         }
 

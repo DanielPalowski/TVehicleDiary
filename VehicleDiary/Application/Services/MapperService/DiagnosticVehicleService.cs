@@ -28,6 +28,10 @@ namespace VehicleDiary.Application.Services.MapperService
             var entity = await _repositoryViews.GetDBByVehicle(vehicleIDRoute);
             return _mapper.Map<IEnumerable<DiagnosticVehicleDto>>(entity);
         }
+        public async Task<int> CountingDiagnostic(Guid VehicleId)
+        {
+            return await _repositoryCrud.CountingDb(VehicleId);
+        }
 
         public async Task<Guid> AddingRepairAsync(DiagnosticVehicleDto repairDto)
         {

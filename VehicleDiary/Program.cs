@@ -95,13 +95,11 @@ namespace VehicleDiary
             //Services
             builder.Services.AddScoped<CountryService>();
             builder.Services.AddScoped<IVehicleService, VehicleService>();
-            builder.Services.AddScoped<IRepairService, RepairService>();
             builder.Services.AddScoped<IVignetteService, VignetteService>();
             builder.Services.AddScoped<IOilService, OilService>();
             builder.Services.AddScoped<IPetrolService, PetrolService>();
             builder.Services.AddScoped<ITireService, TireService>();
             builder.Services.AddScoped<ICarUsageService, CarUsageService>();
-            builder.Services.AddScoped<IRepairService, RepairService>();
             builder.Services.AddScoped<IRepairVehicleService, RepairVehicleService>();
             builder.Services.AddScoped<IUpgradeVehicleService, UpgradeVehicleService>();
             builder.Services.AddScoped<IDiagnosticVehicleService, DiagnosticVehicleService>();

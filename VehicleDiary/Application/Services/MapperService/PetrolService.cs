@@ -31,5 +31,9 @@ namespace VehicleDiary.Application.Services.MapperService
         {
             await _repositoryCrud.DeleteAsync(Id);
         }
+        public async Task<int> CountingPetrol(Guid vehicleId)
+        {
+            return await _repositoryCrud.CountingDb(vehicleId);
+        }
     }
 }

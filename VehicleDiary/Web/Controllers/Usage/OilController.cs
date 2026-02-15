@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using VehicleDiary.Application.DTOs;
 using VehicleDiary.Application.Services;
 using VehicleDiary.Application.Services.MapperService;
@@ -32,6 +33,11 @@ namespace VehicleDiary.Web.Controllers.Usage
         [HttpPost]
         public async Task<IActionResult> Oil(DBOilModelVM dBOilModelVM)
         {
+            var countedOil = await _oilService.CountingOils(dBOilModelVM.VehicleId);
+            if(countedOil >= 20)
+            {
+                return StatusCode(429);
+            }
             if (ModelState.IsValid)
             {
                 var entity = _mapper.Map<OilDto>(dBOilModelVM);

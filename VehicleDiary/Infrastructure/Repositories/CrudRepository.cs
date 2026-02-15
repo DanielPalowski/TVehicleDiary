@@ -22,6 +22,10 @@ namespace VehicleDiary.Infrastructure.Repositories
             await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
         }
+        public async Task<int> CountingDb(Guid vehicleID)
+        {
+            return await _context.Set<T>().Where(find => EF.Property<Guid>(find,"VehicleId") == vehicleID).CountAsync();
+        }
 
         public async Task DeleteAsync(Guid vehicleID)
         {

@@ -36,6 +36,11 @@ namespace VehicleDiary.Web.Controllers.Usage
         [HttpPost]
         public async Task<IActionResult> Vignette(DBVignetteModelVM dBVignetteModelVM)
         {
+            int countedVignette = await _vignetteService.CountingVignettes(dBVignetteModelVM.vehicleId);
+            if(countedVignette >= 20)
+            {
+                return StatusCode(429);
+            }
             if (ModelState.IsValid)
             {
                 var entity = _mapper.Map<VignetteDto>(dBVignetteModelVM);

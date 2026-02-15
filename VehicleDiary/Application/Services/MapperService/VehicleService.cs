@@ -40,7 +40,6 @@ namespace VehicleDiary.Application.Services.MapperService
         public async Task DeleteVehicleAsync(Guid vehicleID)
         {
             await _repositoryCrud.DeleteAsync(vehicleID);
-            await _repositoryVehicle.TryRemoveByIdAsync(_context.DBRepairsSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBOilSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBPetrolSet, vehicleID);
             await _repositoryVehicle.TryRemoveByIdAsync(_context.DBTiresSet, vehicleID);

@@ -5,7 +5,23 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - VehicleDiary</title>
+    <title>VehicleDiary</title>
+    <meta name="description" content="VehicleDiary - A place where you can keep all your information about your vehicle in one place ! Repairs, Upgrades, Diagnostic, Tires, Usage, and much more." />
+
+    <meta name="keywords" content="
+        vehicle diary,
+        car diary,
+        vehicle maintenance log,
+        car expense tracker,
+        vehicle investment tracker,
+        car modification tracker,
+        car upgrade log,
+        track car repairs,
+        car cost calculator,
+        vehicle expense manager,
+        digital vehicle logbook,
+        car build tracker
+    " />
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -328,63 +344,57 @@
 
     <!-- Scripts -->
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const icon = this.querySelector('i');
-
-            mobileMenu.classList.toggle('open');
-            if (mobileMenu.classList.contains('open')) {
-                icon.className = 'fas fa-times text-xl';
-            } else {
-                icon.className = 'fas fa-bars text-xl';
-            }
-        });
-
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', function() {
-                const mobileMenu = document.getElementById('mobile-menu');
-                const button = document.getElementById('mobile-menu-button');
-                const icon = button.querySelector('i');
-
-                mobileMenu.classList.remove('open');
-                icon.className = 'fas fa-bars text-xl';
-            });
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const mobileMenu = document.getElementById('mobile-menu');
+        document.addEventListener('DOMContentLoaded', function() {
+            // ---------- MOBILE MENU TOGGLE ----------
             const mobileButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
 
-            if (!mobileMenu.contains(event.target) && !mobileButton.contains(event.target)) {
-                mobileMenu.classList.remove('open');
-                const icon = mobileButton.querySelector('i');
-                icon.className = 'fas fa-bars text-xl';
+            if (mobileButton && mobileMenu) {
+                // Toggle menu on button click
+                mobileButton.addEventListener('click', function(e) {
+                    e.stopPropagation(); // prevent immediate closing by outside-click handler
+                    mobileMenu.classList.toggle('open');
+                    const icon = this.querySelector('i');
+                    icon.className = mobileMenu.classList.contains('open')
+                        ? 'fas fa-times text-xl'
+                        : 'fas fa-bars text-xl';
+                });
+
+                // Close menu when a link inside it is clicked
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('open');
+                        const icon = mobileButton.querySelector('i');
+                        icon.className = 'fas fa-bars text-xl';
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!mobileMenu.contains(event.target) && !mobileButton.contains(event.target)) {
+                        mobileMenu.classList.remove('open');
+                        const icon = mobileButton.querySelector('i');
+                        icon.className = 'fas fa-bars text-xl';
+                    }
+                });
             }
-        });
 
-        // Fix for dropdown staying open on hover
-        // This allows the dropdown to stay open when moving from button to dropdown menu
+            // ---------- DROPDOWN HOVER (DESKTOP) ----------
+            document.querySelectorAll('.dropdown-container').forEach(container => {
+                const dropdown = container.querySelector('.dropdown-content');
+                if (!dropdown) return;
 
-                // Keep dropdown open when hovering over it
-                const content = dropdown.querySelector('.dropdown-content');
-                if (content) {
-                    content.addEventListener('mouseenter', function() {
-                        this.style.display = 'block';
-                        this.style.opacity = '1';
-                        this.style.transform = 'translateY(0)';
-                    });
+                container.addEventListener('mouseenter', function() {
+                    dropdown.style.opacity = '1';
+                    dropdown.style.visibility = 'visible';
+                    dropdown.style.transform = 'translateY(0)';
+                });
 
-                    content.addEventListener('mouseleave', function() {
-                        this.style.opacity = '0';
-                        this.style.transform = 'translateY(-10px)';
-                        setTimeout(() => {
-                            this.style.display = 'none';
-                        }, 200);
-                    });
-                }
+                container.addEventListener('mouseleave', function() {
+                    dropdown.style.opacity = '0';
+                    dropdown.style.visibility = 'hidden';
+                    dropdown.style.transform = 'translateY(-8px)';
+                });
             });
         });
     </script>

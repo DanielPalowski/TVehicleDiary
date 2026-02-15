@@ -9,5 +9,7 @@ namespace VehicleDiary.Core.Interfaces.Services
         Task AddingVignetteAsync(VignetteDto vignette);
         Task RemovingAsync(Guid Id);
 
+        Task<int> CountingVignettes(Guid VehicleId);
+
     }
 }

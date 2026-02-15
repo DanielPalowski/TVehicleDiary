@@ -2,6 +2,13 @@
 @inject IViewLocalizer Localizer
 @model DBRepairVehicleModelVM
 
+
+@{
+    var diagnosticCount = Model.RepairViews?.Count() ?? 0;
+    const int maxDiagnostics = 20;
+    var canAddNew = diagnosticCount < maxDiagnostics;
+}
+
 <!DOCTYPE html>
 <html lang="@System.Globalization.CultureInfo.CurrentUICulture.Name">
 <head>
@@ -161,11 +168,21 @@
                 </div>
             </div>
 
-            <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
-               class="btn-primary-gradient text-white font-semibold px-6 py-3 rounded-xl text-base sm:text-lg transition-all duration-200 shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto">
-                <i class="fas fa-plus-circle"></i>
-                <span>@Localizer["AddNewService"]</span>
-            </a>
+            @if (canAddNew)
+            {
+                <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
+                   class="btn-primary-gradient text-white font-semibold px-6 py-3 rounded-xl text-base sm:text-lg transition-all duration-200 shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>@Localizer["Add New Repair"]</span>
+                </a>
+            }
+            else
+            {
+                <p class="text-danger font-medium px-4 py-2 rounded-lg border border-danger/20 bg-danger/10">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    @diagnosticCount / @maxDiagnostics
+                </p>
+            }
         </div>
 
         <!-- Filter Section -->
@@ -405,12 +422,6 @@
 
                                 <!-- Actions -->
                                 <div class="flex items-center gap-2">
-                                    <button onclick="editRepair('@repair.Id')"
-                                            class="w-10 h-10 rounded-lg border hover:border-success hover:bg-success hover:text-white transition-colors duration-200 flex items-center justify-center"
-                                            style="border-color: hsl(160, 84%, 39%); color: hsl(160, 84%, 39%);"
-                                            title="@Localizer["Edit"]">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
                                     <button onclick="deleteRepair('@repair.Id')"
                                             class="w-10 h-10 rounded-lg border hover:border-danger hover:bg-danger hover:text-white transition-colors duration-200 flex items-center justify-center"
                                             style="border-color: hsl(0, 84%, 60%); color: hsl(0, 84%, 60%);"

@@ -10,6 +10,7 @@ namespace VehicleDiary.Core.Interfaces.Repositories
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(Guid vehicleID);
+        Task<int> CountingDb(Guid vehicleID);
 
     }
 }

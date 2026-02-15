@@ -2,6 +2,11 @@
 @model DBTiresModelVM
 @using VehicleDiary.Core.Constants
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+@{
+    var tireCount = Model.TireViews.Count();
+    const int maxCount = 20;
+    bool canAdd = tireCount < maxCount;
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -201,11 +206,21 @@
 
                                 <!-- Submit Button -->
                                 <div class="pt-4">
-                                    <button type="submit"
-                                            class="w-full bg-gradient-to-r from-tire-600 to-purple-600 text-white font-medium py-3 px-4 rounded-lg hover:from-tire-700 hover:to-purple-700 transition flex items-center justify-center gap-2">
-                                        <i data-lucide="save" class="w-5 h-5"></i>
-                                        @Localizer["SaveTireChangeButton"]
-                                    </button>
+                                    @if(canAdd)
+                                    {
+                                        <button type="submit"
+                                                class="w-full bg-gradient-to-r from-tire-600 to-purple-600 text-white font-medium py-3 px-4 rounded-lg hover:from-tire-700 hover:to-purple-700 transition flex items-center justify-center gap-2">
+                                            <i data-lucide="save" class="w-5 h-5"></i>
+                                            @Localizer["SaveTireChangeButton"]
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-danger font-medium px-4 py-2 rounded-lg border border-danger/20 bg-danger/10" style="background-color: rgba(255,10,20,0.6)">
+                                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                                            @tireCount / @maxCount
+                                        </p>
+                                    }
                                 </div>
                             </div>
                         </form>
@@ -289,9 +304,10 @@
                                                 </span>
                                                 @if (entry.TireType != null)
                                                 {
+                                                    var tireTypeEnum = (TireTypesEnum)entry.TireType;
                                                     <span class="inline-flex items-center gap-1 px-2 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
                                                         <i data-lucide="circle-dashed" class="w-3 h-3"></i>
-                                                        @Localizer[$"TireType_{entry.TireType}"]
+                                                        @Localizer[$"TireType_{tireTypeEnum}"]
                                                     </span>
                                                 }
                                                 @if (!string.IsNullOrEmpty(entry.TireShopWhereBought))
@@ -364,22 +380,29 @@
         lucide.createIcons();
 
         // Delete function
-        function deleteTire(id) {
+                     function deleteTire(id) {
             if (confirm(deleteConfirmMessage)) {
-                $.ajax({
-                    url: "@Url.Action("Delete", "Tires")/" + id,
-                    type: "DELETE",
-                    success: function () {
+                fetch(`@Url.Action("Delete", "Tire")/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'   // optional, but matches Index
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
                         const element = document.getElementById('tire-' + id);
                         if (element) {
+                            element.style.transition = 'all 0.3s ease';
                             element.style.opacity = '0';
                             element.style.transform = 'translateY(-10px)';
                             setTimeout(() => element.remove(), 300);
                         }
-                    },
-                    error: function () {
-                        alert(deleteErrorMessage);
+                    } else {
+                        throw new Error('Delete failed');
                     }
+                })
+                .catch(error => {
+                    alert(deleteErrorMessage);
                 });
             }
         }

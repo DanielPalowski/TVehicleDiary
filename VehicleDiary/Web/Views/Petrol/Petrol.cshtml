@@ -1,10 +1,20 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBPetrolModelVM
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+@{
+    var petrolCount = Model.PetrolViews?.Count();
+    const int maxCount = 20;
+    bool canAdd = petrolCount < maxCount;
+}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    @inject Microsoft.AspNetCore.Antiforgery.IAntiforgery Xsrf
+    @{
+        var token = Xsrf.GetAndStoreTokens(Context).RequestToken;
+    }
+    <meta name="csrf-token" content="@token" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@Localizer["PageTitle"]</title>
@@ -148,14 +158,23 @@
                                            placeholder="@Localizer["PlaceholderMileage"]">
                                     <span asp-validation-for="PetrolMileage" class="text-red-500 text-sm"></span>
                                 </div>
-
-                                <!-- Submit Button -->
                                 <div class="pt-4">
+                                <!-- Submit Button -->
+                                @if(canAdd)
+                                {
                                     <button type="submit"
                                             class="w-full bg-gradient-to-r from-petrol-600 to-green-600 text-white font-medium py-3 px-4 rounded-lg hover:from-petrol-700 hover:to-green-700 transition flex items-center justify-center gap-2">
                                         <i data-lucide="save" class="w-5 h-5"></i>
                                         @Localizer["SaveFuelRecordButton"]
-                                    </button>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-danger font-medium px-4 py-2 rounded-lg border border-danger/20 bg-danger/10" style="background-color: rgba(255,10,20,0.6)">
+                                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                                            @petrolCount / @maxCount
+                                        </p>
+                                    }
                                 </div>
                             </div>
                         </form>
@@ -293,22 +312,29 @@
         lucide.createIcons();
 
         // Delete function
-        function deletePetrol(id) {
+                 function deletePetrol(id) {
             if (confirm(deleteConfirmMessage)) {
-                $.ajax({
-                    url: "@Url.Action("Delete", "Petrol")/" + id,
-                    type: "DELETE",
-                    success: function () {
+                fetch(`@Url.Action("Delete", "Petrol")/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'   // optional, but matches Index
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
                         const element = document.getElementById('petrol-' + id);
                         if (element) {
+                            element.style.transition = 'all 0.3s ease';
                             element.style.opacity = '0';
                             element.style.transform = 'translateY(-10px)';
                             setTimeout(() => element.remove(), 300);
                         }
-                    },
-                    error: function () {
-                        alert(deleteErrorMessage);
+                    } else {
+                        throw new Error('Delete failed');
                     }
+                })
+                .catch(error => {
+                    alert(deleteErrorMessage);
                 });
             }
         }

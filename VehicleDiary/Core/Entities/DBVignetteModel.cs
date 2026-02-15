@@ -10,12 +10,16 @@ namespace VehicleDiary.Core.Entities
         [Key]
         public Guid ID { get; set; }
         [Required]
+        [MaxLength(100)]
         public string VignetteCountry { get; set; }
         [Required]
+        [MaxLength(100)]
         public DateTime VignetteValidFrom { get; set; }
         [Required]
+        [MaxLength(100)]
         public DateTime VignetteValidTo { get; set; }
         [Required]
+        [MaxLength(100)]
         public float VignettePrice { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
         [Required]

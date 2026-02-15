@@ -17,25 +17,31 @@ namespace VehicleDiary.Core.Entities
         public string RepairVType { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string RepairVName { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string RepairVPart { get; set; }
         [Required]
+        [MaxLength(100)]
         public int RepairVMileage { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public DateTime RepairVWhen { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public float RepairVPrice { get; set; }
 
+        [MaxLength(500)]
         public string? ReapairVNotes { get; set; }
-
+        [MaxLength(100)]
         public string? RepairVTechnician { get; set; }
-
+        [MaxLength(100)]
         public string? RepairVPartBrand { get; set; }
-
+        [MaxLength(100)]
         public string? RepairVPartCode { get; set; }
 
         public string? FileName { get; set; }

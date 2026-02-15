@@ -1,6 +1,12 @@
 ﻿@using VehicleDiary.Web.ViewModels
 @model DBOilModelVM
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
+@{
+    var oilCount = Model.OilViews.Count();
+    const int maxCount = 20;
+    bool canAdd = oilCount < maxCount;
+}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -162,11 +168,21 @@
 
                                 <!-- Submit Button -->
                                 <div class="pt-4">
-                                    <button type="submit"
-                                            class="w-full bg-gradient-to-r from-oil-600 to-orange-600 text-white font-medium py-3 px-4 rounded-lg hover:from-oil-700 hover:to-orange-700 transition flex items-center justify-center gap-2">
-                                        <i data-lucide="save" class="w-5 h-5"></i>
-                                        @Localizer["SaveOilChangeButton"]
-                                    </button>
+                                    @if(canAdd)
+                                    {
+                                        <button type="submit"
+                                                class="w-full bg-gradient-to-r from-oil-600 to-orange-600 text-white font-medium py-3 px-4 rounded-lg hover:from-oil-700 hover:to-orange-700 transition flex items-center justify-center gap-2">
+                                            <i data-lucide="save" class="w-5 h-5"></i>
+                                            @Localizer["SaveOilChangeButton"]
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-danger font-medium px-4 py-2 rounded-lg border border-danger/20 bg-danger/10" style="background-color: rgba(255,10,20,0.6)">
+                                            <i class="fas fa-exclamation-triangle mr-2"></i>
+                                            @oilCount / @maxCount
+                                        </p>
+                                    }
                                 </div>
                             </div>
                         </form>
@@ -301,22 +317,29 @@
         lucide.createIcons();
 
         // Delete function
-        function deleteOilChange(id) {
+                         function deleteOilChange(id) {
             if (confirm(deleteConfirmMessage)) {
-                $.ajax({
-                    url: "@Url.Action("Delete", "Oil")/" + id,
-                    type: "DELETE",
-                    success: function () {
+                fetch(`@Url.Action("Delete", "Oil")/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'   // optional, but matches Index
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
                         const element = document.getElementById('oil-' + id);
                         if (element) {
+                            element.style.transition = 'all 0.3s ease';
                             element.style.opacity = '0';
                             element.style.transform = 'translateY(-10px)';
                             setTimeout(() => element.remove(), 300);
                         }
-                    },
-                    error: function () {
-                        alert(deleteErrorMessage);
+                    } else {
+                        throw new Error('Delete failed');
                     }
+                })
+                .catch(error => {
+                    alert(deleteErrorMessage);
                 });
             }
         }
