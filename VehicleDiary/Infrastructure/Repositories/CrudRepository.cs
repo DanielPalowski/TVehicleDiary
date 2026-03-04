@@ -67,9 +67,9 @@ namespace VehicleDiary.Infrastructure.Repositories
                 _context.Set<T>().Update(entity);
                 await _context.SaveChangesAsync();
             }
-            catch
+            catch (DbUpdateConcurrencyException)
             {
-                throw new KeyNotFoundException();
+                throw new KeyNotFoundException("Entity not found or has been deleted.");
             }
         }
 

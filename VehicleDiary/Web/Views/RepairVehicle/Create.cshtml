@@ -54,8 +54,8 @@
                             <i data-lucide="wrench" class="w-6 h-6"></i>
                         </div>
                         <div>
-                            <h1 class="text-2xl font-bold">@Localizer["Vehicle Service History"]</h1>
-                            <p class="text-green-100">@Localizer["Add new repair record"]</p>
+                            <h1 class="text-2xl font-bold">@Localizer["PageTitle"]</h1>
+                            <p class="text-green-100">@Localizer["FillServiceDetails"]</p>
                         </div>
                     </div>
                 </div>
@@ -73,13 +73,14 @@
                                 <label asp-for="RepairVCategory" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="list" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Category"]
-                                        <span class="text-red-500 ml-1">*</span>
+                                        @Localizer["CategoryLabel"]
+                                        <span class="text-red-500 ml-1">@Localizer["RequiredField"]</span>
                                     </div>
                                 </label>
                                 <select asp-for="RepairVCategory" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" id="categorySelect" required>
-                                    <option value="">@Localizer["Select Category"]</option>
-                                    <option value="Vehicle Repairs">@Localizer["Vehicle Repairs"]</option>
+                                    <option value="">@Localizer["SelectCategoryPlaceholder"]</option>
+                                    <option value="Vehicle Repairs">@Localizer["VehicleRepairsOption"]</option>
+                                    <!-- Additional categories from RESX can be added here if needed -->
                                 </select>
                                 <span asp-validation-for="RepairVCategory" class="text-red-500 text-sm"></span>
                             </div>
@@ -89,12 +90,12 @@
                                 <label asp-for="RepairVType" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="cog" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Type"]
-                                        <span class="text-red-500 ml-1">*</span>
+                                        @Localizer["TypeLabel"]
+                                        <span class="text-red-500 ml-1">@Localizer["RequiredField"]</span>
                                     </div>
                                 </label>
                                 <select asp-for="RepairVType" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-gray-50" id="typeSelect" required disabled>
-                                    <option value="">@Localizer["Select Type"]</option>
+                                    <option value="">@Localizer["SelectTypePlaceholder"]</option>
                                 </select>
                                 <span asp-validation-for="RepairVType" class="text-red-500 text-sm"></span>
                             </div>
@@ -104,11 +105,11 @@
                                 <label asp-for="RepairVName" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="clipboard-check" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Service Name"]
-                                        <span class="text-red-500 ml-1">*</span>
+                                        @Localizer["ServiceNameLabel"]
+                                        <span class="text-red-500 ml-1">@Localizer["RequiredField"]</span>
                                     </div>
                                 </label>
-                                <input type="text" asp-for="RepairVName" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["e.g., Engine overhaul, Brake replacement"]" required>
+                                <input type="text" asp-for="RepairVName" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["ServiceNamePlaceholder"]" required>
                                 <span asp-validation-for="RepairVName" class="text-red-500 text-sm"></span>
                             </div>
 
@@ -117,11 +118,11 @@
                                 <label asp-for="RepairVPart" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="package" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Part"]
-                                        <span class="text-red-500 ml-1">*</span>
+                                        @Localizer["PartLabel"]
+                                        <span class="text-red-500 ml-1">@Localizer["RequiredField"]</span>
                                     </div>
                                 </label>
-                                <input type="text" asp-for="RepairVPart" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["e.g., Brake pads, Alternator"]" required>
+                                <input type="text" asp-for="RepairVPart" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["PartPlaceholder"]" required>
                                 <span asp-validation-for="RepairVPart" class="text-red-500 text-sm"></span>
                             </div>
 
@@ -130,11 +131,11 @@
                                 <label asp-for="RepairVPartBrand" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="factory" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Part Brand"]
-                                        <span class="text-gray-500 text-sm ml-1">@Localizer["(optional)"]</span>
+                                        @Localizer["PartBrandLabel"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["OptionalField"]</span>
                                     </div>
                                 </label>
-                                <input type="text" asp-for="RepairVPartBrand" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["e.g., Bosch, Brembo"]">
+                                <input type="text" asp-for="RepairVPartBrand" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["PartBrandPlaceholder"]">
                                 <span asp-validation-for="RepairVPartBrand" class="text-red-500 text-sm"></span>
                             </div>
 
@@ -143,11 +144,11 @@
                                 <label asp-for="RepairVPartCode" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="barcode" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Part Code"]
-                                        <span class="text-gray-500 text-sm ml-1">@Localizer["(optional)"]</span>
+                                        @Localizer["PartCodeLabel"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["OptionalField"]</span>
                                     </div>
                                 </label>
-                                <input type="text" asp-for="RepairVPartCode" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["e.g., 098756, 12345ABC"]">
+                                <input type="text" asp-for="RepairVPartCode" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["PartCodePlaceholder"]">
                                 <span asp-validation-for="RepairVPartCode" class="text-red-500 text-sm"></span>
                             </div>
 
@@ -156,11 +157,11 @@
                                 <label asp-for="RepairVMileage" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="gauge" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Mileage"]
-                                        <span class="text-red-500 ml-1">*</span>
+                                        @Localizer["MileageLabel"]
+                                        <span class="text-red-500 ml-1">@Localizer["RequiredField"]</span>
                                     </div>
                                 </label>
-                                <input type="number" asp-for="RepairVMileage" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["158000"]" required>
+                                <input type="number" asp-for="RepairVMileage" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["MileagePlaceholder"]" required>
                                 <span asp-validation-for="RepairVMileage" class="text-red-500 text-sm"></span>
                             </div>
 
@@ -169,15 +170,14 @@
                                 <label asp-for="RepairVWhen" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="calendar" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Date"]
-                                        <span class="text-red-500 ml-1">*</span>
+                                        @Localizer["DateLabel"]
+                                        <span class="text-red-500 ml-1">@Localizer["RequiredField"]</span>
                                     </div>
                                 </label>
                                 <input type="date" asp-for="RepairVWhen" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" value="@DateTime.Today.ToString("yyyy-MM-dd")" required>
                                 <span asp-validation-for="RepairVWhen" class="text-red-500 text-sm"></span>
                             </div>
 
-                            <!-- Price -->
                             <!-- Price -->
                             <div class="space-y-2">
                                 <style>
@@ -196,8 +196,8 @@
                                 <label asp-for="RepairVPrice" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="euro" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Price"]
-                                        <span class="text-red-500 ml-1">*</span>
+                                        @Localizer["PriceLabel"]
+                                        <span class="text-red-500 ml-1">@Localizer["RequiredField"]</span>
                                     </div>
                                 </label>
 
@@ -221,11 +221,11 @@
                                 <label asp-for="RepairVTechnician" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="user" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Technician/Service"]
-                                        <span class="text-gray-500 text-sm ml-1">@Localizer["(optional)"]</span>
+                                        @Localizer["TechnicianLabel"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["OptionalField"]</span>
                                     </div>
                                 </label>
-                                <input type="text" asp-for="RepairVTechnician" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["John Doe / Car Repairs"]">
+                                <input type="text" asp-for="RepairVTechnician" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" placeholder="@Localizer["TechnicianPlaceholder"]">
                                 <span asp-validation-for="RepairVTechnician" class="text-red-500 text-sm"></span>
                             </div>
 
@@ -234,14 +234,14 @@
                                 <label asp-for="Upload" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="upload" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Upload File"]
-                                        <span class="text-gray-500 text-sm ml-1">@Localizer["(optional, max 5 MB)"]</span>
+                                        @Localizer["UploadFileLabel"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["OptionalField"]</span>
                                     </div>
                                 </label>
                                 <input asp-for="Upload" type="file" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-green-50 file:text-green-700 hover:file:bg-green-100"
                                        onchange="validateFile(this)"
                                        accept=".pdf,.jpg,.jpeg,.png,.doc,.docx,.txt">
-                                <div class="text-gray-500 text-sm mt-1">@Localizer["Allowed formats: PDF, JPG, PNG, DOC, DOCX, TXT"]</div>
+                                <div class="text-gray-500 text-sm mt-1">@Localizer["AllowedFormats"]</div>
                                 <div id="fileSizeWarning" class="text-red-500 text-sm mt-1" style="display: none;"></div>
                                 <span asp-validation-for="Upload" class="text-red-500 text-sm"></span>
                             </div>
@@ -251,11 +251,11 @@
                                 <label asp-for="ReapairVNotes" class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
                                         <i data-lucide="sticky-note" class="w-4 h-4 mr-2 text-green-600"></i>
-                                        @Localizer["Notes"]
-                                        <span class="text-gray-500 text-sm ml-1">@Localizer["(optional)"]</span>
+                                        @Localizer["NotesLabel"]
+                                        <span class="text-gray-500 text-sm ml-1">@Localizer["OptionalField"]</span>
                                     </div>
                                 </label>
-                                <textarea asp-for="ReapairVNotes" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" rows="3" placeholder="@Localizer["Additional notes..."]"></textarea>
+                                <textarea asp-for="ReapairVNotes" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" rows="3" placeholder="@Localizer["NotesPlaceholder"]"></textarea>
                                 <span asp-validation-for="ReapairVNotes" class="text-red-500 text-sm"></span>
                             </div>
                         </div>
@@ -264,7 +264,7 @@
                         <div class="mt-8">
                             <button class="w-full bg-gradient-to-r from-green-600 to-emerald-700 text-white font-semibold py-3.5 px-6 rounded-lg hover:from-green-700 hover:to-emerald-800 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all duration-200 flex items-center justify-center" type="submit" id="submitButton">
                                 <i data-lucide="plus-circle" class="w-5 h-5 mr-2"></i>
-                                @Localizer["Add Service Record"]
+                                @Localizer["AddServiceRecordButton"]
                             </button>
                         </div>
                     </form>
@@ -277,11 +277,9 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
-        // Data structure mapping categories to types
+        // Data structure mapping categories to types (keep the English strings as keys)
         const categoryTypes = {
-            "Vehicle Repairs": ["Engine", "Transmission", "Brakes", "Chassis", "Electrical", "Bodywork", "Air Conditioning"],
-            "Vehicle Upgrades": ["BodyKit","Lights","Suspension","Engine","Performance","Transmission","Aerodynamics","Brakes","Drivetrain","Exterior","Interior","Safety","Utility","Other"],
-            "Diagnostics": ["Coding", "Error Diagnostics", "Software Update","Tuning","Other"]
+            "Vehicle Repairs": ["Engine", "Transmission", "Brakes", "Chassis", "Electrical", "Bodywork", "Air Conditioning"]
         };
 
         // Get DOM elements
@@ -295,14 +293,14 @@
             const selectedCategory = this.value;
 
             // Reset Type
-            typeSelect.innerHTML = '<option value="">@Localizer["Select Type"]</option>';
+            typeSelect.innerHTML = '<option value="">@Localizer["SelectTypePlaceholder"]</option>';
             typeSelect.disabled = true;
 
             if (selectedCategory && categoryTypes[selectedCategory]) {
                 categoryTypes[selectedCategory].forEach(type => {
                     const option = document.createElement('option');
                     option.value = type;
-                    option.textContent = type;
+                    option.textContent = type; // Types remain in English; could be localized later if needed
                     typeSelect.appendChild(option);
                 });
 
@@ -314,11 +312,11 @@
         repairForm.addEventListener('submit', function(e) {
             if (!categorySelect.value || !typeSelect.value) {
                 e.preventDefault();
-                alert('@Localizer["Please select Category and Type"]');
+                alert('@Localizer["PleaseSelectCategoryAndType"]');
                 return;
             }
 
-            submitButton.innerHTML = '<span class="loading-spinner"></span> @Localizer["Processing..."]';
+            submitButton.innerHTML = '<span class="loading-spinner"></span> @Localizer["Processing"]';
             submitButton.disabled = true;
         });
 
@@ -331,12 +329,12 @@
                 const fileSize = file.size;
 
                 if (fileSize > maxSize) {
-                    fileSizeWarning.textContent = `@Localizer["File size"] (${(fileSize / (1024 * 1024)).toFixed(2)} MB) @Localizer["exceeds the 5 MB limit."]`;
+                    fileSizeWarning.textContent = '@Localizer["FileSizeExceeds"]';
                     fileSizeWarning.style.display = 'block';
                     fileSizeWarning.style.color = 'red';
                     input.value = ''; // Clear the file input
                 } else {
-                    fileSizeWarning.textContent = `@Localizer["File size"]: ${(fileSize / 1024).toFixed(2)} KB`;
+                    fileSizeWarning.textContent = '@Localizer["FileSize"]' + ': ' + (fileSize / 1024).toFixed(2) + ' KB';
                     fileSizeWarning.style.color = 'green';
                     fileSizeWarning.style.display = 'block';
                 }
@@ -346,7 +344,7 @@
                 const fileExtension = '.' + file.name.split('.').pop().toLowerCase();
 
                 if (!allowedExtensions.includes(fileExtension)) {
-                    fileSizeWarning.textContent = `@Localizer["File type"] ${fileExtension} @Localizer["is not allowed."]`;
+                    fileSizeWarning.textContent = '@Localizer["FileTypeNotAllowed"]';
                     fileSizeWarning.style.display = 'block';
                     fileSizeWarning.style.color = 'red';
                     input.value = '';
@@ -366,7 +364,7 @@
 
                 if (file.size > maxSize) {
                     e.preventDefault();
-                    alert('@Localizer["File size exceeds the 5 MB limit. Please choose a smaller file."]');
+                    alert('@Localizer["FileSizeExceedsAlert"]');
                     return false;
                 }
             }

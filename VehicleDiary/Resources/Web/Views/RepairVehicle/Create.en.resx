@@ -1,5 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  
+  <!-- Data entries (unchanged) -->
   <data name="PageTitle" xml:space="preserve">
     <value>Vehicle Service History</value>
   </data>
@@ -78,19 +138,19 @@
   <data name="VehicleRepairsOption" xml:space="preserve">
     <value>Vehicle Repairs</value>
   </data>
-<data name="VehicleUpgrades" xml:space="preserve"><value>Vehicle Upgrades</value></data>
-<data name="Diagnostics" xml:space="preserve"><value>Diagnostics</value></data>
-<data name="Retrofit" xml:space="preserve"><value>Retrofit</value></data>
-<data name="Performance" xml:space="preserve"><value>Performance</value></data>
-<data name="Style" xml:space="preserve"><value>Style</value></data>
-<data name="Interior" xml:space="preserve"><value>Interior</value></data>
-<data name="Accessories" xml:space="preserve"><value>Accessories</value></data>
-<data name="Coding" xml:space="preserve"><value>Coding</value></data>
-<data name="ErrorDiagnostics" xml:space="preserve"><value>Error Diagnostics</value></data>
-<data name="SoftwareUpdate" xml:space="preserve"><value>Software Update</value></data>
-<data name="PleaseSelectCategoryAndType" xml:space="preserve"><value>Please select both a category and type</value></data>
-<data name="Processing" xml:space="preserve"><value>Processing...</value></data>
-<data name="AddServiceRecord" xml:space="preserve"><value>Add Service Record</value></data>
-<data name="FillServiceDetails" xml:space="preserve"><value>Fill in service details for your vehicle</value></data>
-<data name="ServiceFormTip" xml:space="preserve"><value>Keep track of all your vehicle services for better maintenance history.</value></data>
+  <data name="VehicleUpgrades" xml:space="preserve"><value>Vehicle Upgrades</value></data>
+  <data name="Diagnostics" xml:space="preserve"><value>Diagnostics</value></data>
+  <data name="Retrofit" xml:space="preserve"><value>Retrofit</value></data>
+  <data name="Performance" xml:space="preserve"><value>Performance</value></data>
+  <data name="Style" xml:space="preserve"><value>Style</value></data>
+  <data name="Interior" xml:space="preserve"><value>Interior</value></data>
+  <data name="Accessories" xml:space="preserve"><value>Accessories</value></data>
+  <data name="Coding" xml:space="preserve"><value>Coding</value></data>
+  <data name="ErrorDiagnostics" xml:space="preserve"><value>Error Diagnostics</value></data>
+  <data name="SoftwareUpdate" xml:space="preserve"><value>Software Update</value></data>
+  <data name="PleaseSelectCategoryAndType" xml:space="preserve"><value>Please select both a category and type</value></data>
+  <data name="Processing" xml:space="preserve"><value>Processing...</value></data>
+  <data name="AddServiceRecord" xml:space="preserve"><value>Add Service Record</value></data>
+  <data name="FillServiceDetails" xml:space="preserve"><value>Fill in service details for your vehicle</value></data>
+  <data name="ServiceFormTip" xml:space="preserve"><value>Keep track of all your vehicle services for better maintenance history.</value></data>
 </root>

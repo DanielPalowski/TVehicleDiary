@@ -32,6 +32,19 @@ namespace VehicleDiary.Application.Services.MapperService
             var entity = _mapper.Map<DBVehicleModel>(vehicleDto);
             await _repositoryCrud.AddAsync(entity);
         }
+        public async Task EditVehicleAsync(VehicleDto vehicleDto)
+        {
+            var existingEntity = await _context.DBVehiclesSet
+        .FirstOrDefaultAsync(v => v.Id == vehicleDto.Id
+                               && v.UserId == vehicleDto.UserId);
+
+            if (existingEntity == null)
+                throw new KeyNotFoundException("Vehicle not found.");
+
+            _mapper.Map(vehicleDto, existingEntity);
+
+            await _context.SaveChangesAsync();
+        }
         public async Task<IEnumerable<VehicleDto>> GettingVehiclesAsync(string userID)
         {
             var entities = await _repositoryVehicle.GetDBByIDForUserAsync(userID);
@@ -53,6 +66,12 @@ namespace VehicleDiary.Application.Services.MapperService
         {
             var count = await _context.DBVehiclesSet.CountAsync(x => x.UserId == userID.ToString());
             return count;
+        }
+        public async Task<VehicleDto?> GetVehicleByIdAndUserAsync(Guid id, string userId)
+        {
+            var vehicle = await _context.DBVehiclesSet
+                .FirstOrDefaultAsync(v => v.Id == id && v.UserId == userId);
+            return _mapper.Map<VehicleDto>(vehicle);
         }
         public async Task<List<DBVehicleModel>> GetVehiclesWithTotalCostAsync(string userId)
         {

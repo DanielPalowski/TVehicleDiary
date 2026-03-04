@@ -10,9 +10,15 @@
         public string? Insurence { get; set; }
         public string? VIN { get; set; }
         public string? License_plate { get; set; }
+        public string? STK { get; set; }
         public string? Description { get; set; }
         public float? RepairCost { get; set; }
         public DateTime? Bought { get; set; }
-        
+
+        public string? STKFormatted =>
+        !string.IsNullOrEmpty(STK)
+            ? DateTime.ParseExact(STK, "yyyy-MM", System.Globalization.CultureInfo.InvariantCulture).ToString("MMM yyyy")
+            : null;
+
     }
 }

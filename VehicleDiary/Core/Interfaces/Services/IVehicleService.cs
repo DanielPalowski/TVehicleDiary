@@ -6,6 +6,7 @@ namespace VehicleDiary.Core.Interfaces.Services
     public interface IVehicleService
     {
         Task AddVehicleAsync(VehicleDto vehicleDto);
+        Task EditVehicleAsync(VehicleDto vehicleDto);
         Task<IEnumerable<VehicleDto>> GettingVehiclesAsync(string userID);
         Task DeleteVehicleAsync(Guid vehicleID);
         Task<int> CountingVehiclesAsync(string userID);
@@ -13,6 +14,7 @@ namespace VehicleDiary.Core.Interfaces.Services
         Task<int> GetTotalNumberOfCars();
         Task<int> GetTotalNumberOfUsers();
         Task<int> GetTotalNumberOfServices();
+        Task<VehicleDto?> GetVehicleByIdAndUserAsync(Guid id, string userId);
 
     }
 }

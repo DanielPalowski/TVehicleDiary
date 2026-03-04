@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Vehicles | VehicleDiary</title>
-
+    <link rel="stylesheet" href="~/css/Vehicle/css.css" />
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -27,272 +27,7 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        :root {
-            --primary: #10b981;
-            --primary-dark: #059669;
-            --primary-light: #d1fae5;
-            --secondary: #3b82f6;
-            --secondary-dark: #2563eb;
-            --secondary-light: #dbeafe;
-            --background: #f8fafc;
-            --card: #ffffff;
-            --text: #0f172a;
-            --text-secondary: #64748b;
-            --border: #e2e8f0;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --success: #10b981;
-        }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background: var(--background);
-            color: var(--text);
-            min-height: 100vh;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        /* Header with gradient */
-        .header-gradient {
-            background: linear-gradient(135deg, hsl(222, 47%, 11%) 0%, hsl(215, 28%, 17%) 100%);
-        }
-
-        /* Vehicle counter badge */
-        .vehicle-counter {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* Vehicle card styles */
-        .vehicle-card {
-            background: var(--card);
-            border-radius: 1.5rem;
-            border: 1px solid var(--border);
-            overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-            .vehicle-card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-            }
-
-        /* Insurance badge */
-        .insurance-badge {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        /* Blue action button */
-        .action-btn-blue {
-            background: var(--secondary);
-            color: white;
-            border: none;
-            padding: 0.75rem 1rem;
-            border-radius: 0.75rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: all 0.2s ease;
-            width: 100%;
-        }
-
-            .action-btn-blue:hover {
-                background: var(--secondary-dark);
-                transform: translateY(-1px);
-            }
-
-        /* Other action buttons */
-        .action-btn-primary {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.75rem 1rem;
-            border-radius: 0.75rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: all 0.2s ease;
-            width: 100%;
-        }
-
-            .action-btn-primary:hover {
-                background: var(--primary-dark);
-                transform: translateY(-1px);
-            }
-
-        .action-btn-secondary {
-            background: var(--background);
-            color: var(--text);
-            border: 1px solid var(--border);
-            padding: 0.75rem 1rem;
-            border-radius: 0.75rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: all 0.2s ease;
-            width: 100%;
-        }
-
-            .action-btn-secondary:hover {
-                background: #f1f5f9;
-                transform: translateY(-1px);
-            }
-
-        .action-btn-danger {
-            background: rgba(239, 68, 68, 0.1);
-            color: var(--danger);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            padding: 0.75rem 1rem;
-            border-radius: 0.75rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: all 0.2s ease;
-            width: 100%;
-        }
-
-            .action-btn-danger:hover {
-                background: rgba(239, 68, 68, 0.15);
-                transform: translateY(-1px);
-            }
-
-        /* Insurance container */
-        .insurance-container {
-            background: var(--primary-light);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            border-radius: 1rem;
-            padding: 1rem;
-            margin-top: 1rem;
-        }
-
-        /* Welcome message */
-        .welcome-message {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
-            border: 1px solid rgba(16, 185, 129, 0.1);
-            border-radius: 1.5rem;
-            backdrop-filter: blur(10px);
-        }
-
-        /* Floating action button */
-        .fab {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
-            z-index: 1000;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-            .fab:hover {
-                transform: scale(1.1);
-                box-shadow: 0 15px 30px rgba(16, 185, 129, 0.4);
-            }
-
-        /* Empty state */
-        .empty-state {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem 1rem;
-            text-align: center;
-        }
-
-        /* Animation */
-        @@keyframes slideIn {
-            from
-
-        {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        }
-
-        .slide-in {
-            animation: slideIn 0.3s ease-out;
-        }
-
-        /* Mobile optimizations */
-        @@media (max-width: 640px) {
-            .container
-
-        {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-
-        button, a {
-            min-height: 44px;
-            min-width: 44px;
-        }
-
-        .vehicle-image {
-            height: 160px;
-        }
-
-        .fab {
-            bottom: 1.5rem;
-            right: 1.5rem;
-        }
-
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 4px;
-        }
-
-            ::-webkit-scrollbar-thumb:hover {
-                background: #94a3b8;
-            }
     </style>
 </head>
 <body class="min-h-screen">
@@ -509,6 +244,14 @@
                                 </div>
                             </div>
                         }
+                        @if (!string.IsNullOrEmpty(entry.STKFormatted))
+                        {
+                            <div class="mt-3 flex items-center gap-2 text-sm bg-gray-50 border border-gray-200 rounded-lg p-3">
+                                <i data-lucide="calendar-clock" class="w-4 h-4 text-amber-600"></i>
+                                <span class="font-medium text-gray-700">@Localizer["STKExpiresLabel"]:</span>
+                                <span class="text-gray-900">@entry.STKFormatted</span>
+                            </div>
+                        }
 
                         <!-- Repair Costs -->
                         <div class="mt-6 mb-4">
@@ -517,11 +260,11 @@
                                     <i data-lucide="wrench" class="w-4 h-4 text-red-500"></i>
                                     <span class="text-sm font-medium">@Localizer["TotalRepairCosts"]</span>
                                 </div>
-                                <span class="font-bold text-gray-900">€@entry.RepairCost?.ToString("N2")</span>
+                                <span class="font-bold text-gray-900">@Localizer["Currency"] @entry.RepairCost?.ToString("N2")</span>
                             </div>
                             <div class="relative pt-1">
                                 <div class="overflow-hidden h-2 text-xs flex rounded-full bg-gray-100">
-                                    <div style="width: @((Math.Min((entry.RepairCost ?? 0) / 2000 * 100, 100)).ToString("0"))%"
+                                    <div style="width: @((Math.Min((entry.RepairCost ?? 0) / 10000 * 100, 100)).ToString("0"))%"
                                          class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r from-red-400 to-red-500">
                                     </div>
                                 </div>
@@ -534,6 +277,8 @@
 
                         <!-- Action Buttons -->
                         <div class="space-y-3 mt-6">
+                            
+
                             <a asp-controller="Repair" asp-action="Index"
                                asp-route-vehicleIDRoute="@entry.Id"
                                class="action-btn-primary">
@@ -547,6 +292,11 @@
                                class="action-btn-blue">
                                 <i data-lucide="bar-chart-3" class="w-4 h-4"></i>
                                 <span>@Localizer["UsageStatsButton"]</span>
+                            </a>
+                            <a asp-controller="Vehicle" asp-action="Edit" asp-route-id="@entry.Id"
+                               class="action-btn-editcolor">
+                                <i data-lucide="edit-2" class="w-4 h-4"></i>
+                                <span>@Localizer["EditVehicleButton"]</span>
                             </a>
 
                             <button onclick="showDeleteConfirmation('@entry.Id', '@entry.Name @entry.Model')"
@@ -713,116 +463,6 @@
                 btn.disabled = false;
                 hideDeleteModal();
             });
-        });
-
-        // Update vehicle counter
-        function updateVehicleCounter(change) {
-            const counterElements = document.querySelectorAll('.vehicle-counter span, .text-xl.font-bold');
-            const progressBar = document.querySelector('.bg-green-400');
-
-            counterElements.forEach(el => {
-                if (el.classList.contains('text-xl')) {
-                    const current = parseInt(el.textContent);
-                    el.textContent = current + change;
-                } else {
-                    const match = el.textContent.match(/(\d+)\/3/);
-                    if (match) {
-                        const current = parseInt(match[1]);
-                        el.textContent = `${current + change}/3`;
-                    }
-                }
-            });
-
-            // Update progress bar
-            if (progressBar) {
-                const currentCount = parseInt(document.querySelector('.text-xl.font-bold').textContent);
-                const percentage = (currentCount / 3) * 100;
-                progressBar.style.width = `${percentage}%`;
-            }
-        }
-
-        // Show notification
-        function showNotification(message, type) {
-            const template = document.getElementById('notificationTemplate');
-            const notification = template.content.cloneNode(true);
-            const notificationDiv = notification.querySelector('div');
-
-            // Style based on type
-            if (type === 'success') {
-                notificationDiv.classList.add('bg-green-500', 'text-white');
-                notificationDiv.querySelector('i').setAttribute('data-lucide', 'check-circle');
-            } else {
-                notificationDiv.classList.add('bg-red-500', 'text-white');
-                notificationDiv.querySelector('i').setAttribute('data-lucide', 'alert-circle');
-            }
-
-            notificationDiv.querySelector('.notification-message').textContent = message;
-
-            document.body.appendChild(notificationDiv);
-
-            // Animate in
-            setTimeout(() => {
-                notificationDiv.classList.remove('opacity-0', '-translate-y-2');
-                notificationDiv.classList.add('opacity-100', 'translate-y-0');
-            }, 10);
-
-            // Remove after 3 seconds
-            setTimeout(() => {
-                notificationDiv.classList.remove('opacity-100', 'translate-y-0');
-                notificationDiv.classList.add('opacity-0', '-translate-y-2');
-                setTimeout(() => notificationDiv.remove(), 300);
-            }, 3000);
-
-            // Initialize icon in new element
-            lucide.createIcons();
-        }
-
-        // Add hover effect to cards on desktop
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialize animations
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            // Observe vehicle cards
-            document.querySelectorAll('.vehicle-card').forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-                observer.observe(card);
-            });
-
-            // Add click animation to buttons
-            document.querySelectorAll('.action-btn-primary, .action-btn-blue, .action-btn-secondary, .action-btn-danger').forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    if (!this.getAttribute('href') && !this.getAttribute('onclick')) {
-                        return;
-                    }
-                    this.style.transform = 'scale(0.98)';
-                    setTimeout(() => {
-                        this.style.transform = '';
-                    }, 150);
-                });
-            });
-        });
-
-        // Close modal on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                hideDeleteModal();
-            }
-        });
-
-        // Close modal when clicking outside
-        document.getElementById('deleteModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                hideDeleteModal();
-            }
         });
     </script>
 </body>

@@ -181,10 +181,10 @@
     <value>Celkové náklady na opravy</value>
   </data>
   <data name="RepairCostMin" xml:space="preserve">
-    <value>€0</value>
+    <value>0 Kč</value>
   </data>
   <data name="RepairCostMax" xml:space="preserve">
-    <value>€2000+</value>
+    <value>10 000+ Kč</value>
   </data>
   <data name="Unknown" xml:space="preserve">
     <value>Neznámé</value>
@@ -218,5 +218,14 @@
   </data>
   <data name="RemoveButton" xml:space="preserve">
     <value>Odstranit</value>
+  </data>
+  <data name="STKExpiresLabel" xml:space="preserve">
+    <value>Vypršení STK</value>
+  </data>
+  <data name="EditVehicleButton" xml:space="preserve">
+    <value>Upravit vozidlo</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Kč</value>
   </data>
 </root>

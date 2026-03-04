@@ -105,6 +105,10 @@ namespace VehicleDiary
             builder.Services.AddScoped<IDiagnosticVehicleService, DiagnosticVehicleService>();
             builder.Services.AddScoped<IRepairHUBCount, RepairHUBCount>();
 
+            //Email SMTP
+            builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+
             //Mapper
             builder.Services.AddAutoMapper(typeof(Program));
 

@@ -30,6 +30,7 @@ namespace VehicleDiary.Core.Entities
         public string? Insurence { get; set; }
         public DateTime? Bought { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
+        public DateTime? EmailSendDate { get; set; }
         public float? RepairCost { get; set; }
         [Required]
         public string UserId { get; set; }

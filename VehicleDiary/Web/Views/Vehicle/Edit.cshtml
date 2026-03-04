@@ -1,4 +1,4 @@
-﻿@model VehicleDiary.Web.ViewModels.DBVehicleModelVM
+@model VehicleDiary.Web.ViewModels.DBVehicleModelVM
 @inject IViewLocalizer Localizer
 @{
     Layout = null;
@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Vehicle | VehicleDiary</title>
+    <title>Edit Vehicle | VehicleDiary</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -53,14 +53,11 @@
         }
 
         @@media (min-width: 768px) {
-            .container
-
-        {
-            max-width: 32rem;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
+            .container {
+                max-width: 32rem;
+                margin: 0 auto;
+                padding: 2rem;
+            }
         }
 
         .form-card {
@@ -82,12 +79,9 @@
         }
 
         @@media (min-width: 768px) {
-            .form-body
-
-        {
-            padding: 2rem;
-        }
-
+            .form-body {
+                padding: 2rem;
+            }
         }
 
         .form-group {
@@ -172,27 +166,23 @@
                 background: #e2e8f0;
             }
 
-        /* Mobile optimizations */
         @@media (max-width: 640px) {
-            body
+            body {
+                padding: 0;
+            }
 
-        {
-            padding: 0;
-        }
+            .form-input {
+                padding: 1rem;
+                font-size: 16px;
+            }
 
-        .form-input {
-            padding: 1rem;
-            font-size: 16px;
-        }
+            .form-body {
+                padding: 1rem;
+            }
 
-        .form-body {
-            padding: 1rem;
-        }
-
-        .form-header {
-            padding: 1rem;
-        }
-
+            .form-header {
+                padding: 1rem;
+            }
         }
 
         .grid-2 {
@@ -202,12 +192,9 @@
         }
 
         @@media (min-width: 640px) {
-            .grid-2
-
-        {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
+            .grid-2 {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .required::after {
@@ -228,7 +215,6 @@
                 color: #94a3b8;
             }
 
-        /* Remove spinner from number inputs */
         input[type="number"]::-webkit-inner-spin-button,
         input[type="number"]::-webkit-outer-spin-button {
             -webkit-appearance: none;
@@ -252,7 +238,7 @@
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center">
                         <i data-lucide="car" class="w-4 h-4 text-white"></i>
                     </div>
-                    <span class="font-bold text-sm">@Localizer["AddVehicle"]</span>
+                    <span class="font-bold text-sm">@Localizer["EditVehicle"]</span>
                 </div>
             </div>
         </div>
@@ -265,18 +251,19 @@
             <div class="form-header">
                 <div class="flex items-center gap-3">
                     <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
-                        <i data-lucide="car" class="w-6 h-6 text-white"></i>
+                        <i data-lucide="edit-2" class="w-6 h-6 text-white"></i>
                     </div>
                     <div>
-                        <h1 class="text-xl font-bold mb-1">@Localizer["AddNewVehicle"]</h1>
-                        <p class="text-white/80 text-sm">@Localizer["FillVehicleDetails"]</p>
+                        <h1 class="text-xl font-bold mb-1">@Model.Name @Model.Model</h1>
+                        <p class="text-white/80 text-sm">@Localizer["UpdateVehicleDetails"]</p>
                     </div>
                 </div>
             </div>
 
             <!-- Form Body -->
             <div class="form-body">
-                <form id="vehicleForm" asp-action="Create" method="post">
+                <form id="vehicleForm" asp-action="Edit" method="post">
+                    <input type="hidden" asp-for="Id" />
 
                     <!-- Brand & Model -->
                     <div class="grid-2 mb-4">
@@ -354,7 +341,6 @@
                         <div class="form-group">
                             <label asp-for="Bought" class="form-label">@Localizer["PurchaseDate"]</label>
                             <input type="date" asp-for="Bought" class="form-input"
-                                   value="@DateTime.Today.ToString("yyyy-MM-dd")"
                                    max="@DateTime.Today.ToString("yyyy-MM-dd")">
                             <span asp-validation-for="Bought" class="error-message"></span>
                         </div>
@@ -362,9 +348,7 @@
 
                     <div class="form-group mb-4">
                         <label asp-for="STK" class="form-label">@Localizer["STKExpiration"]</label>
-                        <input type="month" asp-for="STK" class="form-input"
-                               value="@(Model?.STK ?? DateTime.Now.ToString("yyyy-MM"))"
-                               min="@DateTime.Now.ToString("yyyy-MM")">
+                        <input type="month" asp-for="STK" class="form-input">
                         <span asp-validation-for="STK" class="error-message"></span>
                         <p class="text-xs text-gray-500 mt-1">@Localizer["STKHelpText"]</p>
                     </div>
@@ -378,28 +362,14 @@
                         <span asp-validation-for="Description" class="error-message"></span>
                     </div>
 
-
-
                     <!-- Submit Button -->
                     <div class="form-group">
                         <button type="submit" class="submit-btn">
-                            <i data-lucide="car" class="w-5 h-5"></i>
-                            @Localizer["AddVehicleButton"]
+                            <i data-lucide="save" class="w-5 h-5"></i>
+                            @Localizer["SaveChanges"]
                         </button>
                     </div>
                 </form>
-
-                <!-- Form Tips -->
-                <div class="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                    <div class="flex items-start gap-3">
-                        <i data-lucide="info" class="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5"></i>
-                        <div>
-                            <p class="text-sm text-blue-700">
-                                <span class="font-medium">@Localizer["Tip"]:</span> @Localizer["FormTip"]
-                            </p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
@@ -418,10 +388,8 @@
     </div>
 
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
 
-        // Simple form validation
         const form = document.getElementById('vehicleForm');
         const errorToast = document.getElementById('errorToast');
         const errorMessage = document.getElementById('errorMessage');
@@ -431,7 +399,6 @@
             errorToast.classList.remove('hidden');
             errorToast.classList.add('flex');
 
-            // Auto-hide after 5 seconds
             setTimeout(() => {
                 hideError();
             }, 5000);
@@ -442,7 +409,6 @@
             errorToast.classList.add('hidden');
         }
 
-        // Real-time validation
         form.querySelectorAll('input, textarea').forEach(input => {
             input.addEventListener('blur', function() {
                 if (this.hasAttribute('required') && !this.value.trim()) {
@@ -457,7 +423,6 @@
             });
         });
 
-        // VIN length validation
         const vinInput = form.querySelector('input[name="VIN"]');
         if (vinInput) {
             vinInput.addEventListener('blur', function() {
@@ -468,7 +433,6 @@
             });
         }
 
-        // Year validation
         const yearInput = form.querySelector('input[name="MadeYear"]');
         if (yearInput) {
             yearInput.addEventListener('blur', function() {
@@ -481,11 +445,9 @@
             });
         }
 
-        // Prevent form submission if there are errors
         form.addEventListener('submit', function(e) {
             let hasErrors = false;
 
-            // Check required fields
             const requiredFields = form.querySelectorAll('[required]');
             requiredFields.forEach(field => {
                 if (!field.value.trim()) {
@@ -494,14 +456,12 @@
                 }
             });
 
-            // Check VIN length if provided
             if (vinInput.value.length > 0 && vinInput.value.length !== 17) {
                 vinInput.classList.add('error');
                 showError('VIN must be exactly 17 characters');
                 hasErrors = true;
             }
 
-            // Check year range
             if (yearInput.value) {
                 const year = parseInt(yearInput.value);
                 const currentYear = new Date().getFullYear();
@@ -514,7 +474,6 @@
 
             if (hasErrors) {
                 e.preventDefault();
-                // Scroll to first error
                 const firstError = form.querySelector('.error');
                 if (firstError) {
                     firstError.scrollIntoView({
@@ -525,33 +484,19 @@
             }
         });
 
-        // Format license plate input
         const licensePlateInput = form.querySelector('input[name="License_plate"]');
         if (licensePlateInput) {
             licensePlateInput.addEventListener('input', function(e) {
-                // Remove special characters except letters and numbers
                 this.value = this.value.replace(/[^A-Z0-9]/gi, '');
             });
         }
 
-        // Format VIN input
         if (vinInput) {
             vinInput.addEventListener('input', function(e) {
-                // Remove spaces and special characters
                 this.value = this.value.replace(/[^A-Z0-9]/gi, '');
             });
         }
 
-        // Handle date input display
-        const dateInput = form.querySelector('input[type="date"]');
-        if (dateInput) {
-            // Set default value to today if empty
-            if (!dateInput.value) {
-                dateInput.value = new Date().toISOString().split('T')[0];
-            }
-        }
-
-        // Prevent number input scroll
         const numberInputs = form.querySelectorAll('input[type="number"]');
         numberInputs.forEach(input => {
             input.addEventListener('wheel', function(e) {
@@ -559,10 +504,8 @@
             });
         });
 
-        // Focus management for mobile
         form.querySelectorAll('input, textarea').forEach((input, index) => {
             input.addEventListener('focus', function() {
-                // On mobile, ensure input is visible
                 if (window.innerWidth < 768) {
                     setTimeout(() => {
                         this.scrollIntoView({
@@ -574,26 +517,25 @@
             });
         });
 
-        // Show validation errors from server
         @if (ViewData.ModelState.ErrorCount > 0)
         {
-                <text>
-                document.addEventListener('DOMContentLoaded', function() {
-                    @foreach (var key in ViewData.ModelState.Keys)
+            <text>
+            document.addEventListener('DOMContentLoaded', function() {
+                @foreach (var key in ViewData.ModelState.Keys)
+                {
+                    @foreach (var error in ViewData.ModelState[key].Errors)
                     {
-                            @foreach (var error in ViewData.ModelState[key].Errors)
-                            {
-                                    <text>
-                                    showError('@error.ErrorMessage');
-                                    const input = document.querySelector('[name="@key"]');
-                                    if (input) {
-                                        input.classList.add('error');
-                                    }
-                                    </text>
-                            }
+                        <text>
+                        showError('@error.ErrorMessage');
+                        const input = document.querySelector('[name="@key"]');
+                        if (input) {
+                            input.classList.add('error');
+                        }
+                        </text>
                     }
-                });
-                </text>
+                }
+            });
+            </text>
         }
     </script>
 </body>

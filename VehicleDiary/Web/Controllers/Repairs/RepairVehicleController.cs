@@ -22,12 +22,14 @@ namespace VehicleDiary.Web.Controllers.Repairs
             _repairVehicleService = repairVehicleService;
             _mapper = mapper;
             _repairRepository = repairRepository;
+
         }
 
         public async Task<IActionResult> Index([FromQuery] Guid vehicleIDRoute)
         {
             var repairs = await _repairVehicleService.GettingRepairViewAsync(vehicleIDRoute);
             var repairViews = _mapper.Map<IEnumerable<DBRepairVehicleModelVM>>(repairs);
+
             var model = new DBRepairVehicleModelVM
             {
                 VehicleId = vehicleIDRoute,
@@ -58,6 +60,7 @@ namespace VehicleDiary.Web.Controllers.Repairs
 
             if (ModelState.IsValid)
             {
+
                 var repairDto = _mapper.Map<RepairVehicleDto>(model);
                 await _repairVehicleService.AddingRepairAsync(repairDto);
                 return RedirectToAction("Index", new { vehicleIDRoute = model.VehicleId });

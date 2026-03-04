@@ -173,7 +173,7 @@
                 <a asp-controller="RepairVehicle" asp-action="Create" asp-route-vehicleIDRoute="@Model.VehicleId"
                    class="btn-primary-gradient text-white font-semibold px-6 py-3 rounded-xl text-base sm:text-lg transition-all duration-200 shadow-lg flex items-center justify-center gap-2 w-full sm:w-auto">
                     <i class="fas fa-plus-circle"></i>
-                    <span>@Localizer["Add New Repair"]</span>
+                    <span>@Localizer["AddNewService"]</span>
                 </a>
             }
             else
@@ -409,7 +409,7 @@
                                 {
                                     <div>
                                         <span class="text-2xl font-bold" style="color: hsl(160, 84%, 39%);">
-                                            €@repair.RepairVPrice.ToString("N2")
+                                            @Localizer["currency"] @repair.RepairVPrice.ToString("N2")
                                         </span>
                                     </div>
                                 }

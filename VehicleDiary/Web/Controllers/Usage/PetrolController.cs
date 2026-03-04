@@ -32,7 +32,7 @@ namespace VehicleDiary.Web.Controllers.Usage
         public async Task<IActionResult> Petrol(DBPetrolModelVM dBPetrolModelVM)
         {
             int countedPetrol = await _petrolService.CountingPetrol(dBPetrolModelVM.vehicleId);
-            if(countedPetrol >= 20) 
+            if(countedPetrol >= 40) 
             {
                 return StatusCode(429);
             }

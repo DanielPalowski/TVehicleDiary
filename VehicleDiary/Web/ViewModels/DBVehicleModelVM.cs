@@ -6,6 +6,8 @@ namespace VehicleDiary.Web.ViewModels
 {
     public class DBVehicleModelVM
     {
+        public Guid Id { get; set; }
+
         [Required(ErrorMessage = "Brand is required !")]
         [MaxLength(30), MinLength(2),]
         public string Name { get; set; }
@@ -29,11 +31,11 @@ namespace VehicleDiary.Web.ViewModels
         [Required(ErrorMessage = "VIN is required !")]
         [MaxLength(20), MinLength(2)]
         public string? VIN { get; set; }
+        public string? STK { get; set; }
 
         [Required(ErrorMessage = "Horsepower is required !")]
         public int Power { get; set; }
 
-        [Required(ErrorMessage = "Insurence is required !")]
         [MaxLength(30), MinLength(2)]
         public string? Insurence { get; set; }
         public DateTime? Bought { get; set; }

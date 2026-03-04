@@ -15,6 +15,8 @@ namespace VehicleDiary.Core.Entities
         [MaxLength(100)]
         public string PetrolType { get; set; }
         [MaxLength(100)]
+        public string? PetrolFueLType { get; set; }
+        [MaxLength(100)]
         public int? PetrolMileage { get; set; }
         [Required]
         [MaxLength(100)]
