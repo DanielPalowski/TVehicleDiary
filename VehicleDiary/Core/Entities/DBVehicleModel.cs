@@ -19,7 +19,7 @@ namespace VehicleDiary.Core.Entities
         [MaxLength(4)]
         public int MadeYear { get; set; }
         [MaxLength(10)]
-        public string? STK { get; set; }
+        public DateTime? STK { get; set; }
         [MaxLength(10)]
         public string? License_plate { get; set; }
         [MaxLength(20)]

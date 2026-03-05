@@ -117,12 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <!-- Navigation -->
   <data name="BackButton" xml:space="preserve">
     <value>Zpět</value>
     <comment>Back navigation button text</comment>
   </data>
-  <!-- Header -->
   <data name="HeaderTitle" xml:space="preserve">
     <value>Péče o pneumatiky</value>
     <comment>Header title</comment>
@@ -131,12 +129,10 @@
     <value>Správa pneumatik vašeho vozidla</value>
     <comment>Header subtitle</comment>
   </data>
-  <!-- Page metadata -->
   <data name="PageTitle" xml:space="preserve">
     <value>Péče o pneumatiky | Vehicle Diary</value>
     <comment>Browser title</comment>
   </data>
-  <!-- Main heading -->
   <data name="MainHeading" xml:space="preserve">
     <value>Péče o pneumatiky</value>
     <comment>Main page heading</comment>
@@ -145,7 +141,6 @@
     <value>Sledujte a spravujte výměny pneumatik vašeho vozidla</value>
     <comment>Main page subheading</comment>
   </data>
-  <!-- Add tire change form -->
   <data name="AddTireChangeHeading" xml:space="preserve">
     <value>Přidat výměnu pneumatik</value>
     <comment>Form heading</comment>
@@ -154,9 +149,8 @@
     <value>Zaznamenat novou výměnu pneumatik</value>
     <comment>Form subheading</comment>
   </data>
-  <!-- Form labels -->
   <data name="LabelSetPrice" xml:space="preserve">
-    <value>Cena sady (€)</value>
+    <value>Cena sady (Kč)</value>
     <comment>Price for the set of tires</comment>
   </data>
   <data name="LabelTireSize" xml:space="preserve">
@@ -180,7 +174,7 @@
     <comment>Date of tire change</comment>
   </data>
   <data name="LabelInstallPrice" xml:space="preserve">
-    <value>Cena montáže (€)</value>
+    <value>Cena montáže (Kč)</value>
     <comment>Price for tire installation</comment>
   </data>
   <data name="LabelShop" xml:space="preserve">
@@ -191,7 +185,6 @@
     <value>Poznámky (volitelné)</value>
     <comment>Additional notes field label</comment>
   </data>
-  <!-- Placeholders -->
   <data name="PlaceholderSetPrice" xml:space="preserve">
     <value>1200,00</value>
     <comment>Placeholder for tire set price (Czech decimal comma)</comment>
@@ -224,12 +217,10 @@
     <value>Další poznámky...</value>
     <comment>Placeholder for notes field</comment>
   </data>
-  <!-- Submit button -->
   <data name="SaveTireChangeButton" xml:space="preserve">
     <value>Uložit výměnu pneumatik</value>
     <comment>Save button text</comment>
   </data>
-  <!-- Quick stats -->
   <data name="QuickStatsTitle" xml:space="preserve">
     <value>Rychlé statistiky</value>
     <comment>Quick statistics section title</comment>
@@ -250,7 +241,6 @@
     <value>Průměr/pneu</value>
     <comment>Average cost per tire</comment>
   </data>
-  <!-- History section -->
   <data name="HistoryTitle" xml:space="preserve">
     <value>Historie výměn pneumatik</value>
     <comment>History section title</comment>
@@ -259,17 +249,14 @@
     <value>{0} záznamů</value>
     <comment>Number of records, {0} is the count (plural form)</comment>
   </data>
-  <!-- Tire amount abbreviation -->
   <data name="TireAmountFormat" xml:space="preserve">
     <value>{0} ks</value>
     <comment>Format for tire quantity, {0} is the number (Czech abbreviation)</comment>
   </data>
-  <!-- Price breakdown for installation -->
   <data name="PriceBreakdown" xml:space="preserve">
     <value>(€{0} + €{1})</value>
     <comment>Format for tire price + installation price (same format as English)</comment>
   </data>
-  <!-- Tire type enum values -->
   <data name="TireType_Summer" xml:space="preserve">
     <value>Letní</value>
     <comment>Tire type: Summer</comment>
@@ -290,7 +277,6 @@
     <value>Jiný</value>
     <comment>Tire type: Other</comment>
   </data>
-  <!-- Delete button and confirmations -->
   <data name="DeleteButton" xml:space="preserve">
     <value>Smazat</value>
     <comment>Delete button text</comment>
@@ -303,12 +289,10 @@
     <value>Chyba při mazání záznamu</value>
     <comment>Error message when delete fails</comment>
   </data>
-  <!-- Saving button loading state -->
   <data name="SavingButtonText" xml:space="preserve">
     <value>Ukládám...</value>
     <comment>Loading state text for save button</comment>
   </data>
-  <!-- Empty state -->
   <data name="EmptyStateTitle" xml:space="preserve">
     <value>Zatím žádné výměny pneumatik</value>
     <comment>Empty state heading</comment>
@@ -321,7 +305,6 @@
     <value>Přidejte svou první výměnu pneumatik pomocí formuláře</value>
     <comment>Empty state hint</comment>
   </data>
-  <!-- Footer -->
   <data name="FooterBrandName" xml:space="preserve">
     <value>Péče o pneumatiky</value>
     <comment>Brand name in footer</comment>
@@ -329,5 +312,8 @@
   <data name="FooterCopyright" xml:space="preserve">
     <value>© {0} Vehicle Diary</value>
     <comment>Footer copyright, {0} is current year</comment>
+  </data>
+  <data name="currency" xml:space="preserve">
+    <value>Kč</value>
   </data>
 </root>

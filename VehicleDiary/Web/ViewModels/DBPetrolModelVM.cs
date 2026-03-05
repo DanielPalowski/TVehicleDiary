@@ -11,6 +11,7 @@ namespace VehicleDiary.Web.ViewModels
         public DateTime PetrolDate { get; set; }
         [Required]
         public string PetrolType { get; set; }
+        public string? PetrolFueLType { get; set; }
         public int? PetrolMileage { get; set; }
         [Required]
         public float PetrolPrice { get; set; }

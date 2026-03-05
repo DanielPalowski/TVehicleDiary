@@ -117,12 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <!-- Navigation -->
   <data name="BackButton" xml:space="preserve">
     <value>Back</value>
     <comment>Back navigation button text</comment>
   </data>
-  <!-- Header -->
   <data name="HeaderTitle" xml:space="preserve">
     <value>Tire Maintenance</value>
     <comment>Header title</comment>
@@ -131,12 +129,10 @@
     <value>Manage your vehicle's tires</value>
     <comment>Header subtitle</comment>
   </data>
-  <!-- Page metadata -->
   <data name="PageTitle" xml:space="preserve">
     <value>Tire Maintenance | Vehicle Diary</value>
     <comment>Browser title</comment>
   </data>
-  <!-- Main heading -->
   <data name="MainHeading" xml:space="preserve">
     <value>Tire Maintenance</value>
     <comment>Main page heading</comment>
@@ -145,7 +141,6 @@
     <value>Track and manage your vehicle's tire changes</value>
     <comment>Main page subheading</comment>
   </data>
-  <!-- Add tire change form -->
   <data name="AddTireChangeHeading" xml:space="preserve">
     <value>Add Tire Change</value>
     <comment>Form heading</comment>
@@ -154,7 +149,6 @@
     <value>Record a new tire change</value>
     <comment>Form subheading</comment>
   </data>
-  <!-- Form labels -->
   <data name="LabelSetPrice" xml:space="preserve">
     <value>Set Price (€)</value>
     <comment>Price for the set of tires</comment>
@@ -191,7 +185,6 @@
     <value>Notes (Optional)</value>
     <comment>Additional notes field label</comment>
   </data>
-  <!-- Placeholders -->
   <data name="PlaceholderSetPrice" xml:space="preserve">
     <value>1200.00</value>
     <comment>Placeholder for tire set price</comment>
@@ -224,12 +217,10 @@
     <value>Any additional notes...</value>
     <comment>Placeholder for notes field</comment>
   </data>
-  <!-- Submit button -->
   <data name="SaveTireChangeButton" xml:space="preserve">
     <value>Save Tire Change</value>
     <comment>Save button text</comment>
   </data>
-  <!-- Quick stats -->
   <data name="QuickStatsTitle" xml:space="preserve">
     <value>Quick Stats</value>
     <comment>Quick statistics section title</comment>
@@ -250,7 +241,6 @@
     <value>Avg/Tire</value>
     <comment>Average cost per tire</comment>
   </data>
-  <!-- History section -->
   <data name="HistoryTitle" xml:space="preserve">
     <value>Tire Change History</value>
     <comment>History section title</comment>
@@ -259,17 +249,14 @@
     <value>{0} records</value>
     <comment>Number of records, {0} is the count</comment>
   </data>
-  <!-- Tire amount abbreviation -->
   <data name="TireAmountFormat" xml:space="preserve">
     <value>{0} pcs</value>
     <comment>Format for tire quantity, {0} is the number</comment>
   </data>
-  <!-- Price breakdown for installation -->
   <data name="PriceBreakdown" xml:space="preserve">
     <value>(€{0} + €{1})</value>
     <comment>Format for tire price + installation price</comment>
   </data>
-  <!-- Tire type enum values -->
   <data name="TireType_Summer" xml:space="preserve">
     <value>Summer</value>
     <comment>Tire type: Summer</comment>
@@ -290,7 +277,6 @@
     <value>Other</value>
     <comment>Tire type: Other</comment>
   </data>
-  <!-- Delete button and confirmations -->
   <data name="DeleteButton" xml:space="preserve">
     <value>Delete</value>
     <comment>Delete button text</comment>
@@ -303,12 +289,10 @@
     <value>Error deleting record</value>
     <comment>Error message when delete fails</comment>
   </data>
-  <!-- Saving button loading state -->
   <data name="SavingButtonText" xml:space="preserve">
     <value>Saving...</value>
     <comment>Loading state text for save button</comment>
   </data>
-  <!-- Empty state -->
   <data name="EmptyStateTitle" xml:space="preserve">
     <value>No Tire Changes Yet</value>
     <comment>Empty state heading</comment>
@@ -321,7 +305,6 @@
     <value>Add your first tire change using the form</value>
     <comment>Empty state hint</comment>
   </data>
-  <!-- Footer -->
   <data name="FooterBrandName" xml:space="preserve">
     <value>Tire Maintenance</value>
     <comment>Brand name in footer</comment>
@@ -329,5 +312,8 @@
   <data name="FooterCopyright" xml:space="preserve">
     <value>© {0} Vehicle Diary</value>
     <comment>Footer copyright, {0} is current year</comment>
+  </data>
+  <data name="currency" xml:space="preserve">
+    <value>€</value>
   </data>
 </root>

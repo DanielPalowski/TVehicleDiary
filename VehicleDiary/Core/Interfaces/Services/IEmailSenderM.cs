@@ -1,6 +1,6 @@
 ﻿namespace VehicleDiary.Core.Interfaces.Services
 {
-    public interface IEmailSender
+    public interface IEmailSenderM
     {
         Task SendEmailAsync(string email, string subject, string body);
     }

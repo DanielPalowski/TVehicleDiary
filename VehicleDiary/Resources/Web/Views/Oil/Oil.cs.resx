@@ -117,12 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <!-- Navigation -->
   <data name="BackButton" xml:space="preserve">
     <value>Zpět</value>
     <comment>Back navigation button text</comment>
   </data>
-  <!-- Header -->
   <data name="HeaderTitle" xml:space="preserve">
     <value>Sledování výměny oleje</value>
     <comment>Header title</comment>
@@ -131,12 +129,10 @@
     <value>Správa údržby oleje vašeho vozidla</value>
     <comment>Header subtitle</comment>
   </data>
-  <!-- Page metadata -->
   <data name="PageTitle" xml:space="preserve">
     <value>Sledování výměny oleje | Vehicle Diary</value>
     <comment>Browser title</comment>
   </data>
-  <!-- Main heading -->
   <data name="MainHeading" xml:space="preserve">
     <value>Sledování výměny oleje</value>
     <comment>Main page heading</comment>
@@ -145,7 +141,6 @@
     <value>Sledujte a spravujte výměny oleje vašeho vozidla</value>
     <comment>Main page subheading</comment>
   </data>
-  <!-- Add oil change form -->
   <data name="AddOilChangeHeading" xml:space="preserve">
     <value>Přidat výměnu oleje</value>
     <comment>Form heading</comment>
@@ -154,7 +149,6 @@
     <value>Zaznamenat novou výměnu oleje</value>
     <comment>Form subheading</comment>
   </data>
-  <!-- Form labels -->
   <data name="LabelOilAmount" xml:space="preserve">
     <value>Množství oleje (L)</value>
     <comment>Oil amount label with liters</comment>
@@ -164,7 +158,7 @@
     <comment>Oil type label</comment>
   </data>
   <data name="LabelTotalPrice" xml:space="preserve">
-    <value>Celková cena (€)</value>
+    <value>Celková cena (Kč)</value>
     <comment>Total price label with Euro symbol</comment>
   </data>
   <data name="LabelChangeDate" xml:space="preserve">
@@ -179,7 +173,6 @@
     <value>Poznámky (volitelné)</value>
     <comment>Notes field label</comment>
   </data>
-  <!-- Placeholders -->
   <data name="PlaceholderOilAmount" xml:space="preserve">
     <value>6,5</value>
     <comment>Placeholder for oil amount in liters (Czech decimal comma)</comment>
@@ -200,12 +193,10 @@
     <value>Další poznámky...</value>
     <comment>Placeholder for notes field</comment>
   </data>
-  <!-- Submit button -->
   <data name="SaveOilChangeButton" xml:space="preserve">
     <value>Uložit výměnu oleje</value>
     <comment>Save button text</comment>
   </data>
-  <!-- Quick stats -->
   <data name="QuickStatsTitle" xml:space="preserve">
     <value>Rychlé statistiky</value>
     <comment>Quick statistics section title</comment>
@@ -226,7 +217,6 @@
     <value>První</value>
     <comment>Date of first oil change</comment>
   </data>
-  <!-- History section -->
   <data name="HistoryTitle" xml:space="preserve">
     <value>Historie výměn oleje</value>
     <comment>History section title</comment>
@@ -235,7 +225,6 @@
     <value>{0} záznamů</value>
     <comment>Number of records, {0} is the count (plural form)</comment>
   </data>
-  <!-- Units and formats -->
   <data name="UnitLiters" xml:space="preserve">
     <value>{0} L</value>
     <comment>Liters unit format, {0} is the amount</comment>
@@ -248,7 +237,6 @@
     <value>MMM yyyy</value>
     <comment>Date format for month and year – same as English, but Czech date formatting will be applied automatically</comment>
   </data>
-  <!-- Delete button and confirmations -->
   <data name="DeleteButton" xml:space="preserve">
     <value>Smazat</value>
     <comment>Delete button text</comment>
@@ -261,12 +249,10 @@
     <value>Chyba při mazání záznamu</value>
     <comment>Error message when delete fails</comment>
   </data>
-  <!-- Saving button loading state -->
   <data name="SavingButtonText" xml:space="preserve">
     <value>Ukládám...</value>
     <comment>Loading state text for save button</comment>
   </data>
-  <!-- Empty state -->
   <data name="EmptyStateTitle" xml:space="preserve">
     <value>Zatím žádné výměny oleje</value>
     <comment>Empty state heading</comment>
@@ -279,7 +265,6 @@
     <value>Přidejte svou první výměnu oleje pomocí formuláře</value>
     <comment>Empty state hint</comment>
   </data>
-  <!-- Footer -->
   <data name="FooterBrandName" xml:space="preserve">
     <value>Sledování výměny oleje</value>
     <comment>Brand name in footer</comment>
@@ -287,5 +272,8 @@
   <data name="FooterCopyright" xml:space="preserve">
     <value>© {0} Vehicle Diary</value>
     <comment>Footer copyright, {0} is current year</comment>
+  </data>
+  <data name="currency" xml:space="preserve">
+    <value>Kč</value>
   </data>
 </root>

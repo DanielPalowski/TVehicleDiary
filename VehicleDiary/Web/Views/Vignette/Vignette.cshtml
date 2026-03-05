@@ -179,7 +179,7 @@
                                     <div class="text-sm text-gray-600">@Localizer["StatTotal"]</div>
                                 </div>
                                 <div class="text-center p-3 bg-vignette-50 rounded-lg">
-                                    <div class="text-2xl font-bold text-vignette-600">€@Model.VignetteView.Sum(o => o.VignettePrice).ToString("F2")</div>
+                                    <div class="text-2xl font-bold text-vignette-600">@Localizer["currency"] @Model.VignetteView.Sum(o => o.VignettePrice).ToString("F2")</div>
                                     <div class="text-sm text-gray-600">@Localizer["StatTotalCost"]</div>
                                 </div>
                                 <div class="text-center p-3 bg-vignette-50 rounded-lg">
@@ -242,8 +242,7 @@
                                                     @Localizer["DaysLabel", (entry.VignetteValidTo - entry.VignetteValidFrom).Days]
                                                 </span>
                                                 <span class="inline-flex items-center gap-1 px-2 py-1 bg-vignette-100 text-vignette-700 text-sm rounded-full">
-                                                    <i data-lucide="euro" class="w-3 h-3"></i>
-                                                    €@entry.VignettePrice
+                                                   @Localizer["currency"] @entry.VignettePrice
                                                 </span>
                                             </div>
                                         </div>
@@ -327,24 +326,6 @@
             }
         }
 
-        // Form validation
-        document.getElementById('vignetteForm')?.addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalContent = submitBtn.innerHTML;
-
-            // Show loading state
-            submitBtn.innerHTML = `
-                <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                ${savingButtonText}
-            `;
-            submitBtn.disabled = true;
-
-            // Re-enable after 5 seconds if submission fails
-            setTimeout(() => {
-                submitBtn.innerHTML = originalContent;
-                submitBtn.disabled = false;
-            }, 5000);
-        });
 
         // Format price input
         document.querySelector('input[name="VignettePrice"]')?.addEventListener('blur', function() {

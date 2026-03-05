@@ -10,6 +10,7 @@ namespace VehicleDiary.Application.DTOs
 		public DateTime VignetteValidFrom { get; set; }
 		public DateTime VignetteValidTo { get; set; }
 		public float VignettePrice { get; set; }
-		public Guid vehicleId { get; set; }
+        public DateTime? EmailSend { get; set; }
+        public Guid vehicleId { get; set; }
 	}
 }

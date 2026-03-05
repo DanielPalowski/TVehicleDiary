@@ -199,7 +199,7 @@
                                     <div class="text-sm text-gray-600">@Localizer["StatTotal"]</div>
                                 </div>
                                 <div class="text-center p-3 bg-oil-50 rounded-lg">
-                                    <div class="text-2xl font-bold text-oil-600">€@Model.OilViews.Sum(o => o.OilPrice).ToString("F2")</div>
+                                    <div class="text-2xl font-bold text-oil-600">@Localizer["currency"] Model.OilViews.Sum(o => o.OilPrice).ToString("F2")</div>
                                     <div class="text-sm text-gray-600">@Localizer["StatTotalCost"]</div>
                                 </div>
                                 <div class="text-center p-3 bg-oil-50 rounded-lg">
@@ -259,8 +259,7 @@
                                                     @Localizer["UnitKilometers", entry.OilMileage]
                                                 </span>
                                                 <span class="inline-flex items-center gap-1 px-2 py-1 bg-oil-100 text-oil-700 text-sm rounded-full">
-                                                    <i data-lucide="euro" class="w-3 h-3"></i>
-                                                    €@entry.OilPrice
+                                                    @Localizer["currency"] @entry.OilPrice
                                                 </span>
                                             </div>
                                         </div>
@@ -344,24 +343,7 @@
             }
         }
 
-        // Form validation
-        document.getElementById('oilForm')?.addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalContent = submitBtn.innerHTML;
 
-            // Show loading state
-            submitBtn.innerHTML = `
-                <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                ${savingButtonText}
-            `;
-            submitBtn.disabled = true;
-
-            // Re-enable after 5 seconds if submission fails
-            setTimeout(() => {
-                submitBtn.innerHTML = originalContent;
-                submitBtn.disabled = false;
-            }, 5000);
-        });
 
         // Format inputs
         document.querySelectorAll('input[type="number"]').forEach(input => {

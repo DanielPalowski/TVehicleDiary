@@ -5,7 +5,7 @@ using VehicleDiary.Core.Interfaces.Services;
 
 namespace VehicleDiary.Application.Services.MapperService
 {
-    public class EmailSender : IEmailSender
+    public class EmailSenderM : IEmailSenderM
     {
         public Task SendEmailAsync(string email, string subject, string message)
         {

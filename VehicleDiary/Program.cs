@@ -91,6 +91,7 @@ namespace VehicleDiary
             builder.Services.AddScoped(typeof(IRepositoryViews<>), typeof(ViewsRepository<>));
             builder.Services.AddScoped<IRepositoryCarUsage, CarUsageRepository>();
             builder.Services.AddScoped(typeof(IRepositoryFile<>), typeof(FileRepository<>));
+            builder.Services.AddTransient<IEmailRepository, EmailRepository>();
 
             //Services
             builder.Services.AddScoped<CountryService>();
@@ -106,7 +107,7 @@ namespace VehicleDiary
             builder.Services.AddScoped<IRepairHUBCount, RepairHUBCount>();
 
             //Email SMTP
-            builder.Services.AddTransient<IEmailSender, EmailSender>();
+            builder.Services.AddTransient<IEmailSenderM, EmailSenderM>();
 
 
             //Mapper

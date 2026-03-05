@@ -508,7 +508,7 @@
                                 </div>
                                 <div class="data-item">
                                     <span class="data-label">@Localizer["Price"]</span>
-                                    <span class="data-value data-price">€@Model.LatestVignetteUsage.VignettePrice</span>
+                                    <span class="data-value data-price">@Localizer["currency"] @Model.LatestVignetteUsage.VignettePrice</span>
                                 </div>
                             </div>
                         }
@@ -554,7 +554,7 @@
                                 </div>
                                 <div class="data-item">
                                     <span class="data-label">@Localizer["Price"]</span>
-                                    <span class="data-value data-price">€@Model.LatestPetrolUsage.PetrolPrice</span>
+                                    <span class="data-value data-price">@Localizer["currency"] @Model.LatestPetrolUsage.PetrolPrice</span>
                                 </div>
                             </div>
                         }
@@ -600,7 +600,7 @@
                                 </div>
                                 <div class="data-item">
                                     <span class="data-label">@Localizer["Price"]</span>
-                                    <span class="data-value data-price">€@Model.LatestOilUsage.OilPrice</span>
+                                    <span class="data-value data-price">@Localizer["currency"] @Model.LatestOilUsage.OilPrice</span>
                                 </div>
                             </div>
                         }
@@ -646,7 +646,7 @@
                                 </div>
                                 <div class="data-item">
                                     <span class="data-label">@Localizer["Price"]</span>
-                                    <span class="data-value data-price">€@Model.LatestTireUsage.TirePrice</span>
+                                    <span class="data-value data-price">@Localizer["currency"] @Model.LatestTireUsage.TirePrice</span>
                                 </div>
                             </div>
                         }
@@ -766,18 +766,6 @@
                 });
             });
 
-            // Format currency values
-            const priceElements = document.querySelectorAll('.data-price');
-            priceElements.forEach(element => {
-                const price = element.textContent.replace('€', '');
-                if (price) {
-                    const formattedPrice = parseFloat(price).toLocaleString('en-US', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2
-                    });
-                    element.textContent = `€${formattedPrice}`;
-                }
-            });
 
             // Handle empty state buttons
             const emptyStateButtons = document.querySelectorAll('.btn-outline-light');

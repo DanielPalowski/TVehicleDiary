@@ -1,10 +1,13 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using VehicleDiary.Application.DTOs;
 using VehicleDiary.Application.Services;
 using VehicleDiary.Application.Services.MapperService;
 using VehicleDiary.Core.Entities;
 using VehicleDiary.Core.Interfaces.Services;
+using VehicleDiary.Infrastructure.Data;
 using VehicleDiary.Web.ViewModels;
 
 namespace VehicleDiary.Web.Controllers.Usage
@@ -14,6 +17,7 @@ namespace VehicleDiary.Web.Controllers.Usage
         private readonly CountryService _countryService;
         private readonly IVignetteService _vignetteService;
         private readonly IMapper _mapper;
+
         public VignetteController(CountryService countryService, IVignetteService vignetteService, IMapper mapper)
         {
             _countryService = countryService;
@@ -24,6 +28,7 @@ namespace VehicleDiary.Web.Controllers.Usage
         {
             var entity = await _vignetteService.GettingVignetteAsync(vehicleIDRoute);
             var repairs = _mapper.Map<IEnumerable<DBVignetteModelVM>>(entity);
+            await _vignetteService.SendingVignetteEmail(vehicleIDRoute, User);
 
             ViewBag.Countries = _countryService.GetCountries();
             var model = new DBVignetteModelVM
@@ -36,6 +41,7 @@ namespace VehicleDiary.Web.Controllers.Usage
         [HttpPost]
         public async Task<IActionResult> Vignette(DBVignetteModelVM dBVignetteModelVM)
         {
+            
             int countedVignette = await _vignetteService.CountingVignettes(dBVignetteModelVM.vehicleId);
             if(countedVignette >= 20)
             {

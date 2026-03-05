@@ -117,12 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <!-- Navigation -->
   <data name="BackButton" xml:space="preserve">
     <value>Back</value>
     <comment>Back navigation button text</comment>
   </data>
-  <!-- Header -->
   <data name="HeaderTitle" xml:space="preserve">
     <value>Fuel Tracking</value>
     <comment>Header title</comment>
@@ -131,12 +129,10 @@
     <value>Track your vehicle's fuel consumption</value>
     <comment>Header subtitle</comment>
   </data>
-  <!-- Page metadata -->
   <data name="PageTitle" xml:space="preserve">
     <value>Fuel Tracking | Vehicle Diary</value>
     <comment>Browser title</comment>
   </data>
-  <!-- Main heading -->
   <data name="MainHeading" xml:space="preserve">
     <value>Fuel Tracking</value>
     <comment>Main page heading</comment>
@@ -145,7 +141,6 @@
     <value>Track and manage your vehicle's fuel consumption</value>
     <comment>Main page subheading</comment>
   </data>
-  <!-- Add fuel record form -->
   <data name="AddFuelRecordHeading" xml:space="preserve">
     <value>Add Fuel Record</value>
     <comment>Form heading</comment>
@@ -154,7 +149,6 @@
     <value>Record a new fuel purchase</value>
     <comment>Form subheading</comment>
   </data>
-  <!-- Form labels -->
   <data name="LabelFuelAmount" xml:space="preserve">
     <value>Fuel Amount (L)</value>
     <comment>Fuel amount label with liters</comment>
@@ -175,7 +169,6 @@
     <value>Mileage (km)</value>
     <comment>Mileage label with kilometers</comment>
   </data>
-  <!-- Placeholders -->
   <data name="PlaceholderFuelAmount" xml:space="preserve">
     <value>40.0</value>
     <comment>Placeholder for fuel amount in liters</comment>
@@ -192,12 +185,10 @@
     <value>157520</value>
     <comment>Placeholder for mileage in km</comment>
   </data>
-  <!-- Submit button -->
   <data name="SaveFuelRecordButton" xml:space="preserve">
     <value>Save Fuel Record</value>
     <comment>Save button text</comment>
   </data>
-  <!-- Quick stats -->
   <data name="QuickStatsTitle" xml:space="preserve">
     <value>Quick Stats</value>
     <comment>Quick statistics section title</comment>
@@ -218,7 +209,6 @@
     <value>Avg/Liter</value>
     <comment>Average price per liter</comment>
   </data>
-  <!-- History section -->
   <data name="HistoryTitle" xml:space="preserve">
     <value>Fuel History</value>
     <comment>History section title</comment>
@@ -227,7 +217,6 @@
     <value>{0} records</value>
     <comment>Number of records, {0} is the count</comment>
   </data>
-  <!-- Units and formats -->
   <data name="UnitLiters" xml:space="preserve">
     <value>{0} L</value>
     <comment>Liters unit format, {0} is the amount</comment>
@@ -236,7 +225,6 @@
     <value>{0} km</value>
     <comment>Kilometers unit format, {0} is the distance</comment>
   </data>
-  <!-- Delete button and confirmations -->
   <data name="DeleteButton" xml:space="preserve">
     <value>Delete</value>
     <comment>Delete button text</comment>
@@ -249,12 +237,10 @@
     <value>Error deleting record</value>
     <comment>Error message when delete fails</comment>
   </data>
-  <!-- Saving button loading state -->
   <data name="SavingButtonText" xml:space="preserve">
     <value>Saving...</value>
     <comment>Loading state text for save button</comment>
   </data>
-  <!-- Empty state -->
   <data name="EmptyStateTitle" xml:space="preserve">
     <value>No Fuel Records Yet</value>
     <comment>Empty state heading</comment>
@@ -267,7 +253,6 @@
     <value>Add your first fuel record using the form</value>
     <comment>Empty state hint</comment>
   </data>
-  <!-- Footer -->
   <data name="FooterBrandName" xml:space="preserve">
     <value>Fuel Tracking</value>
     <comment>Brand name in footer</comment>
@@ -275,5 +260,14 @@
   <data name="FooterCopyright" xml:space="preserve">
     <value>© {0} Vehicle Diary</value>
     <comment>Footer copyright, {0} is current year</comment>
+  </data>
+  <data name="LabelFuelTypeSec" xml:space="preserve">
+    <value>Octane</value>
+  </data>
+  <data name="PlaceholderFuelTypeSec" xml:space="preserve">
+    <value>VPower 95</value>
+  </data>
+  <data name="currency" xml:space="preserve">
+    <value>€</value>
   </data>
 </root>

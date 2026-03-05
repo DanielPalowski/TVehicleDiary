@@ -7,6 +7,7 @@ namespace VehicleDiary.Application.DTOs
         public Guid Id { get; set; }
         public string PetrolDate { get; set; }
         public string PetrolType { get; set; }
+        public string? PetrolFueLType { get; set; }
         public int? PetrolMileage { get; set; }
         public int PetrolPrice { get; set; }
         public int PetrolAmount { get; set; }

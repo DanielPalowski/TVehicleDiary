@@ -303,6 +303,7 @@
                             <label asp-for="License_plate" class="form-label required">@Localizer["LicensePlate"]</label>
                             <input type="text" asp-for="License_plate" class="form-input"
                                    placeholder="@Localizer["LicensePlatePlaceholder"]"
+                                   maxlength="10"
                                    required
                                    oninput="this.value = this.value.toUpperCase()">
                             <span asp-validation-for="License_plate" class="error-message"></span>
@@ -362,9 +363,9 @@
 
                     <div class="form-group mb-4">
                         <label asp-for="STK" class="form-label">@Localizer["STKExpiration"]</label>
-                        <input type="month" asp-for="STK" class="form-input"
-                               value="@(Model?.STK ?? DateTime.Now.ToString("yyyy-MM"))"
-                               min="@DateTime.Now.ToString("yyyy-MM")">
+                        <input type="date" asp-for="STK" class="form-input"
+                               value="@DateTime.Today.ToString("yyyy-MM")"
+                               max="@DateTime.Today.ToString("yyyy-MM")">
                         <span asp-validation-for="STK" class="error-message"></span>
                         <p class="text-xs text-gray-500 mt-1">@Localizer["STKHelpText"]</p>
                     </div>
@@ -421,143 +422,7 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
-        // Simple form validation
-        const form = document.getElementById('vehicleForm');
-        const errorToast = document.getElementById('errorToast');
-        const errorMessage = document.getElementById('errorMessage');
-
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorToast.classList.remove('hidden');
-            errorToast.classList.add('flex');
-
-            // Auto-hide after 5 seconds
-            setTimeout(() => {
-                hideError();
-            }, 5000);
-        }
-
-        function hideError() {
-            errorToast.classList.remove('flex');
-            errorToast.classList.add('hidden');
-        }
-
-        // Real-time validation
-        form.querySelectorAll('input, textarea').forEach(input => {
-            input.addEventListener('blur', function() {
-                if (this.hasAttribute('required') && !this.value.trim()) {
-                    this.classList.add('error');
-                } else {
-                    this.classList.remove('error');
-                }
-            });
-
-            input.addEventListener('input', function() {
-                this.classList.remove('error');
-            });
-        });
-
-        // VIN length validation
-        const vinInput = form.querySelector('input[name="VIN"]');
-        if (vinInput) {
-            vinInput.addEventListener('blur', function() {
-                if (this.value.length > 0 && this.value.length !== 17) {
-                    showError('VIN must be exactly 17 characters');
-                    this.classList.add('error');
-                }
-            });
-        }
-
-        // Year validation
-        const yearInput = form.querySelector('input[name="MadeYear"]');
-        if (yearInput) {
-            yearInput.addEventListener('blur', function() {
-                const year = parseInt(this.value);
-                const currentYear = new Date().getFullYear();
-                if (year < 1900 || year > currentYear) {
-                    showError(`Year must be between 1900 and ${currentYear}`);
-                    this.classList.add('error');
-                }
-            });
-        }
-
-        // Prevent form submission if there are errors
-        form.addEventListener('submit', function(e) {
-            let hasErrors = false;
-
-            // Check required fields
-            const requiredFields = form.querySelectorAll('[required]');
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.classList.add('error');
-                    hasErrors = true;
-                }
-            });
-
-            // Check VIN length if provided
-            if (vinInput.value.length > 0 && vinInput.value.length !== 17) {
-                vinInput.classList.add('error');
-                showError('VIN must be exactly 17 characters');
-                hasErrors = true;
-            }
-
-            // Check year range
-            if (yearInput.value) {
-                const year = parseInt(yearInput.value);
-                const currentYear = new Date().getFullYear();
-                if (year < 1900 || year > currentYear) {
-                    yearInput.classList.add('error');
-                    showError(`Year must be between 1900 and ${currentYear}`);
-                    hasErrors = true;
-                }
-            }
-
-            if (hasErrors) {
-                e.preventDefault();
-                // Scroll to first error
-                const firstError = form.querySelector('.error');
-                if (firstError) {
-                    firstError.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'center'
-                    });
-                }
-            }
-        });
-
-        // Format license plate input
-        const licensePlateInput = form.querySelector('input[name="License_plate"]');
-        if (licensePlateInput) {
-            licensePlateInput.addEventListener('input', function(e) {
-                // Remove special characters except letters and numbers
-                this.value = this.value.replace(/[^A-Z0-9]/gi, '');
-            });
-        }
-
-        // Format VIN input
-        if (vinInput) {
-            vinInput.addEventListener('input', function(e) {
-                // Remove spaces and special characters
-                this.value = this.value.replace(/[^A-Z0-9]/gi, '');
-            });
-        }
-
-        // Handle date input display
-        const dateInput = form.querySelector('input[type="date"]');
-        if (dateInput) {
-            // Set default value to today if empty
-            if (!dateInput.value) {
-                dateInput.value = new Date().toISOString().split('T')[0];
-            }
-        }
-
-        // Prevent number input scroll
-        const numberInputs = form.querySelectorAll('input[type="number"]');
-        numberInputs.forEach(input => {
-            input.addEventListener('wheel', function(e) {
-                e.preventDefault();
-            });
-        });
+       
 
         // Focus management for mobile
         form.querySelectorAll('input, textarea').forEach((input, index) => {

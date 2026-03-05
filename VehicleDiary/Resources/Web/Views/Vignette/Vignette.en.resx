@@ -241,4 +241,7 @@
     <value>Saving...</value>
     <comment>Loading state text for save button</comment>
   </data>
+  <data name="currency" xml:space="preserve">
+    <value>€</value>
+  </data>
 </root>

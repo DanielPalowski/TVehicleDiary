@@ -162,7 +162,7 @@
     <comment>Vignette valid to date label</comment>
   </data>
   <data name="LabelPrice" xml:space="preserve">
-    <value>Cena (€)</value>
+    <value>Cena (Kč)</value>
     <comment>Vignette price label with Euro symbol</comment>
   </data>
   <data name="PricePlaceholder" xml:space="preserve">
@@ -240,5 +240,8 @@
   <data name="SavingButtonText" xml:space="preserve">
     <value>Ukládám...</value>
     <comment>Loading state text for save button</comment>
+  </data>
+  <data name="currency" xml:space="preserve">
+    <value>Kč</value>
   </data>
 </root>

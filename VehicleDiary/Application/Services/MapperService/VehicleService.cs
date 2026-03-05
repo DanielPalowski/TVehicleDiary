@@ -13,6 +13,7 @@ namespace VehicleDiary.Application.Services.MapperService
     {
         private readonly IRepositoryCrud<DBVehicleModel> _repositoryCrud;
         private readonly IRepositoryVehicle _repositoryVehicle;
+        private readonly IEmailRepository _emailRepository;
         private readonly IMapper _mapper;
         private readonly AppDbContext _context;
 
@@ -20,17 +21,23 @@ namespace VehicleDiary.Application.Services.MapperService
             IRepositoryCrud<DBVehicleModel> repository,
             IMapper mapper,
             IRepositoryVehicle repositoryVehicle,
-            AppDbContext context)
+            AppDbContext context,
+            IEmailRepository emailRepository)
         {
             _repositoryCrud = repository;
             _mapper = mapper;
             _repositoryVehicle = repositoryVehicle;
             _context = context;
+            _emailRepository = emailRepository;
         }
         public async Task AddVehicleAsync(VehicleDto vehicleDto)
         {
             var entity = _mapper.Map<DBVehicleModel>(vehicleDto);
             await _repositoryCrud.AddAsync(entity);
+        }
+        public async Task SendingEmailAsync(ClaimsPrincipal User)
+        {
+            await _emailRepository.EmailVehicleSender(User);
         }
         public async Task EditVehicleAsync(VehicleDto vehicleDto)
         {

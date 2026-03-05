@@ -1,4 +1,5 @@
-﻿using VehicleDiary.Application.DTOs;
+﻿using System.Security.Claims;
+using VehicleDiary.Application.DTOs;
 using VehicleDiary.Core.Entities;
 
 namespace VehicleDiary.Core.Interfaces.Services
@@ -7,6 +8,7 @@ namespace VehicleDiary.Core.Interfaces.Services
     {
         Task AddVehicleAsync(VehicleDto vehicleDto);
         Task EditVehicleAsync(VehicleDto vehicleDto);
+        Task SendingEmailAsync(ClaimsPrincipal User);
         Task<IEnumerable<VehicleDto>> GettingVehiclesAsync(string userID);
         Task DeleteVehicleAsync(Guid vehicleID);
         Task<int> CountingVehiclesAsync(string userID);

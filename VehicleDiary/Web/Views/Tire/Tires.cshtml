@@ -240,7 +240,7 @@
                                     <div class="text-sm text-gray-600">@Localizer["StatChanges"]</div>
                                 </div>
                                 <div class="text-center p-3 bg-tire-50 rounded-lg">
-                                    <div class="text-2xl font-bold text-tire-600">€@totalCost.ToString()</div>
+                                    <div class="text-2xl font-bold text-tire-600">@Localizer["currency"] @totalCost.ToString()</div>
                                     <div class="text-sm text-gray-600">@Localizer["StatTotalCost"]</div>
                                 </div>
                                 <div class="text-center p-3 bg-tire-50 rounded-lg">
@@ -251,7 +251,7 @@
                                     @{
                                         var avgPrice = totalTires > 0 ? totalCost / totalTires : 0;
                                     }
-                                    <div class="text-2xl font-bold text-tire-600">€@avgPrice.ToString()</div>
+                                    <div class="text-2xl font-bold text-tire-600">@Localizer["currency"] @avgPrice.ToString()</div>
                                     <div class="text-sm text-gray-600">@Localizer["StatAvgPerTire"]</div>
                                 </div>
                             </div>
@@ -318,8 +318,7 @@
                                                     </span>
                                                 }
                                                 <span class="inline-flex items-center gap-1 px-2 py-1 bg-tire-100 text-tire-700 text-sm rounded-full">
-                                                    <i data-lucide="euro" class="w-3 h-3"></i>
-                                                    €@(entry.TirePrice + entry.TireChangedPrice)
+                                                    @Localizer["currency"] @(entry.TirePrice + entry.TireChangedPrice)
                                                     @if (entry.TireChangedPrice > 0)
                                                     {
                                                         <span class="text-xs">@Localizer["PriceBreakdown", entry.TirePrice, entry.TireChangedPrice]</span>
@@ -407,24 +406,6 @@
             }
         }
 
-        // Form validation
-        document.getElementById('tireForm')?.addEventListener('submit', function(e) {
-            const submitBtn = this.querySelector('button[type="submit"]');
-            const originalContent = submitBtn.innerHTML;
-
-            // Show loading state
-            submitBtn.innerHTML = `
-                <div class="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                ${savingButtonText}
-            `;
-            submitBtn.disabled = true;
-
-            // Re-enable after 5 seconds if submission fails
-            setTimeout(() => {
-                submitBtn.innerHTML = originalContent;
-                submitBtn.disabled = false;
-            }, 5000);
-        });
 
         // Format inputs
         document.querySelectorAll('input[type="number"]').forEach(input => {

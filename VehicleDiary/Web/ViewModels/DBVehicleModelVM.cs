@@ -31,7 +31,7 @@ namespace VehicleDiary.Web.ViewModels
         [Required(ErrorMessage = "VIN is required !")]
         [MaxLength(20), MinLength(2)]
         public string? VIN { get; set; }
-        public string? STK { get; set; }
+        public DateTime? STK { get; set; }
 
         [Required(ErrorMessage = "Horsepower is required !")]
         public int Power { get; set; }

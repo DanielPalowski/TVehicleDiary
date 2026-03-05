@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Security.Claims;
+using AutoMapper;
 using VehicleDiary.Application.DTOs;
 using VehicleDiary.Core.Entities;
 using VehicleDiary.Core.Interfaces.Repositories;
@@ -12,15 +13,22 @@ namespace VehicleDiary.Application.Services.MapperService
 		private readonly IRepositoryVehicle _repositoryVehicle;
 		private readonly IRepositoryViews<DBVignetteModel> _repositoryViews;
 		private readonly IRepositoryCrud<DBVignetteModel> _repositoryCrud;
+		private readonly IEmailRepository _emailRepository;
 		public VignetteService(IMapper mapper,
 			IRepositoryVehicle repositoryVehicle,
 			IRepositoryViews<DBVignetteModel> repositoryViews,
-			IRepositoryCrud<DBVignetteModel> repositoryCrud)
+			IRepositoryCrud<DBVignetteModel> repositoryCrud,
+			IEmailRepository emailRepository)
 		{
 			_mapper = mapper;
 			_repositoryVehicle = repositoryVehicle;
 			_repositoryViews = repositoryViews;
 			_repositoryCrud = repositoryCrud;
+			_emailRepository = emailRepository;
+		}
+		public async Task SendingVignetteEmail(Guid vehicleIDRoute, ClaimsPrincipal User)
+		{
+			await _emailRepository.EmailVignetteSender(vehicleIDRoute,User);
 		}
 		public async Task<IEnumerable<VignetteDto>>? GettingVignetteAsync(Guid vehicleIDRoute)
 		{

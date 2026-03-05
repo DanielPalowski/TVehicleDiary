@@ -17,6 +17,7 @@ namespace VehicleDiary.Web.ViewModels
         public DateTime VignetteValidTo { get; set; }
         [Required]
         public float VignettePrice { get; set; }
+        public DateTime? EmailSend { get; set; }
         [Required]
         public Guid vehicleId { get; set; }
 		public IEnumerable<DBVignetteModelVM>? VignetteView { get; set; }

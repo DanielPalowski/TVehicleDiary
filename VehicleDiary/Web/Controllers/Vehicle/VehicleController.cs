@@ -15,52 +15,22 @@ namespace VehicleDiary.Web.Controllers.Vehicle
         private readonly IMapper _mapper;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IVehicleService _vehicleService;
-        private readonly AppDbContext _context;
-        private readonly IEmailSender _emailSender;
-        public VehicleController(UserManager<IdentityUser> userManager, IVehicleService vehicleService, IMapper mapper, AppDbContext context, IEmailSender emailSender)
+        public VehicleController(UserManager<IdentityUser> userManager, IVehicleService vehicleService, IMapper mapper)
         {
             _userManager = userManager;
             _vehicleService = vehicleService;
             _mapper = mapper;
-            _context = context;
-            _emailSender = emailSender;
 
         }
         public async Task<IActionResult> Index()
         {
-
-
             var user = _userManager.GetUserId(User);
 
             // Get vehicles WITH RepairCost filled
             var vehicles = await _vehicleService.GetVehiclesWithTotalCostAsync(user);
-            var mailto = "daniel.palowski@email.cz";
-            var subject = "Hello world test";
-            var message = "Hello world testicek";
 
-
-            var vehiclesSTK = _context.DBVehiclesSet
-                .Where(find => !string.IsNullOrEmpty(find.STK) &&
-                !find.EmailSendDate.HasValue)
-                .ToList();
-            if (vehiclesSTK.Count > 0)
-            {
-                foreach (var car in vehiclesSTK)
-                {
-                    string stringCar = car.STK;
-                    string strippedYearCar = stringCar.Split('-')[0];
-                    string strippedMonthCar = stringCar.Split('-')[1];
-                    int carYear = int.Parse(strippedYearCar);
-                    int carMonth = int.Parse(strippedMonthCar);
-                    if ((DateTime.Now.Year == carYear && carMonth - 1 == DateTime.Now.Month) || (carMonth == 1 && carYear - 1 == DateTime.Now.Year))
-                    {
-                        car.EmailSendDate = DateTime.Now;
-                        await _emailSender.SendEmailAsync(mailto, subject, message);
-                    }
-                    _context.SaveChanges();
-
-                }
-            }
+            await _vehicleService.SendingEmailAsync(User);
+   
 
             // Map THAT list
             var returnView = _mapper.Map<IEnumerable<DBVehicleViewVM>>(vehicles);

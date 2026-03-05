@@ -18,6 +18,7 @@ namespace VehicleDiary.Core.Entities
         [Required]
         [MaxLength(100)]
         public DateTime VignetteValidTo { get; set; }
+        public DateTime? EmailSend { get; set; }
         [Required]
         [MaxLength(100)]
         public float VignettePrice { get; set; }
