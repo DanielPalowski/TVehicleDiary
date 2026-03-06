@@ -27,7 +27,7 @@ namespace VehicleDiary
 
             builder.Services.AddLocalization(options =>
             {
-                options.ResourcesPath = "Resources";
+                options.ResourcesPath = "Web/Resources";
             });
 
             //New view engine
