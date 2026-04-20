@@ -225,4 +225,46 @@
   <data name="currency" xml:space="preserve">
     <value>Kč</value>
   </data>
+  <data name="Aerodynamics" xml:space="preserve">
+    <value>Aerodynamika</value>
+  </data>
+  <data name="Bodywork" xml:space="preserve">
+    <value>Plechařina</value>
+  </data>
+  <data name="Brakes" xml:space="preserve">
+    <value>Brzdy</value>
+  </data>
+  <data name="Chassis" xml:space="preserve">
+    <value>Karoserie</value>
+  </data>
+  <data name="Drivetrain" xml:space="preserve">
+    <value>Hnací ústrojí</value>
+  </data>
+  <data name="Electrical" xml:space="preserve">
+    <value>Elektřina</value>
+  </data>
+  <data name="Engine" xml:space="preserve">
+    <value>Motor</value>
+  </data>
+  <data name="Interior" xml:space="preserve">
+    <value>Interiér</value>
+  </data>
+  <data name="Lights" xml:space="preserve">
+    <value>Světla</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Ostatní</value>
+  </data>
+  <data name="Performance" xml:space="preserve">
+    <value>Výkon</value>
+  </data>
+  <data name="Suspension" xml:space="preserve">
+    <value>Podvozek</value>
+  </data>
+  <data name="Transmission" xml:space="preserve">
+    <value>Převodovka</value>
+  </data>
+  <data name="Utility" xml:space="preserve">
+    <value>Užitnost</value>
+  </data>
 </root>

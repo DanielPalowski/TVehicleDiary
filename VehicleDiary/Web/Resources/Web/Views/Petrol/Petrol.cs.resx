@@ -270,4 +270,7 @@
   <data name="currency" xml:space="preserve">
     <value>Kč</value>
   </data>
+  <data name="StatAvgConsumption" xml:space="preserve">
+    <value>Průměrná spotřeba</value>
+  </data>
 </root>

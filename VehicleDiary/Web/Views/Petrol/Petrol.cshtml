@@ -3,7 +3,7 @@
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer Localizer
 @{
     var petrolCount = Model.PetrolViews?.Count();
-    const int maxCount = 40;
+    const int maxCount = 300;
     bool canAdd = petrolCount < maxCount;
 }
 
@@ -192,13 +192,39 @@
                     <!-- Quick Stats -->
                     @if (Model.PetrolViews != null && Model.PetrolViews.Any())
                     {
+                        double? totalLitersForConsumption = 0;
+                        double? totalKm = 0;
+
+                        var ordered = Model.PetrolViews
+                        .OrderBy(p => p.PetrolMileage)
+                        .ToList();
+
+                        for (int i = 1; i < ordered.Count; i++)
+                        {
+                            var prev = ordered[i - 1];
+                            var curr = ordered[i];
+
+                            var km = curr.PetrolMileage - prev.PetrolMileage;
+                            var liters = curr.PetrolAmount;
+
+                            if (km > 0)
+                            {
+                                totalKm += km;
+                                totalLitersForConsumption += liters;
+                            }
+                        }
+
+                        double? avgConsumption = totalKm > 0
+                        ? (totalLitersForConsumption / totalKm) * 100
+                        : 0;
                         var totalCost = Model.PetrolViews.Sum(p => p.PetrolPrice);
                         var totalLiters = Model.PetrolViews.Sum(p => p.PetrolAmount);
                         var averagePricePerLiter = totalLiters > 0 ? totalCost / totalLiters : 0;
+                        
 
                         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
                             <h3 class="text-lg font-bold text-gray-900 mb-4">@Localizer["QuickStatsTitle"]</h3>
-                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
                                 <div class="text-center p-3 bg-petrol-50 rounded-lg">
                                     <div class="text-2xl font-bold text-petrol-600">@Model.PetrolViews.Count()</div>
                                     <div class="text-sm text-gray-600">@Localizer["StatRefuels"]</div>
@@ -214,6 +240,14 @@
                                 <div class="text-center p-3 bg-petrol-50 rounded-lg">
                                     <div class="text-2xl font-bold text-petrol-600">@Localizer["currency"] @averagePricePerLiter.ToString("F2")</div>
                                     <div class="text-sm text-gray-600">@Localizer["StatAvgPerLiter"]</div>
+                                </div>
+                                <div class="text-center p-3 bg-petrol-50 rounded-lg">
+                                    <div class="text-2xl font-bold text-petrol-600">
+                                        @(avgConsumption.HasValue ? avgConsumption.Value.ToString("F2") + " L/100km" : "-")
+                                    </div>
+                                    <div class="text-sm text-gray-600">
+                                        @Localizer["StatAvgConsumption"]
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -296,20 +330,7 @@
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-gray-200 mt-12">
-        <div class="container mx-auto px-4 py-6">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 rounded-lg bg-petrol-100 flex items-center justify-center">
-                        <i data-lucide="fuel" class="w-4 h-4 text-petrol-600"></i>
-                    </div>
-                    <span class="font-medium text-gray-900">@Localizer["FooterBrandName"]</span>
-                </div>
-                <p class="text-sm text-gray-600">@Localizer["FooterCopyright", DateTime.Now.Year]</p>
-            </div>
-        </div>
-    </footer>
+
 
     <script>
         // Localized strings for JavaScript

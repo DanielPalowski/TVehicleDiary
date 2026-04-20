@@ -225,4 +225,46 @@
   <data name="currency" xml:space="preserve">
     <value>€</value>
   </data>
+  <data name="Aerodynamics" xml:space="preserve">
+    <value>Aerodynamics</value>
+  </data>
+  <data name="Bodywork" xml:space="preserve">
+    <value>Bodywork</value>
+  </data>
+  <data name="Brakes" xml:space="preserve">
+    <value>Brakes</value>
+  </data>
+  <data name="Chassis" xml:space="preserve">
+    <value>Chassis</value>
+  </data>
+  <data name="Drivetrain" xml:space="preserve">
+    <value>Drivetrain</value>
+  </data>
+  <data name="Electrical" xml:space="preserve">
+    <value>Electrical</value>
+  </data>
+  <data name="Engine" xml:space="preserve">
+    <value>Engine</value>
+  </data>
+  <data name="Interior" xml:space="preserve">
+    <value>Interior</value>
+  </data>
+  <data name="Lights" xml:space="preserve">
+    <value>Lights</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Performance" xml:space="preserve">
+    <value>Performance</value>
+  </data>
+  <data name="Suspension" xml:space="preserve">
+    <value>Suspension</value>
+  </data>
+  <data name="Transmission" xml:space="preserve">
+    <value>Transmission</value>
+  </data>
+  <data name="Utility" xml:space="preserve">
+    <value>Utility</value>
+  </data>
 </root>

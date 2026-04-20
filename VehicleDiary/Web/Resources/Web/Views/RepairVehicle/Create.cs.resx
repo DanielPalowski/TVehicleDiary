@@ -243,4 +243,31 @@
   <data name="currency" xml:space="preserve">
     <value>Kč</value>
   </data>
+  <data name="Air Conditioning" xml:space="preserve">
+    <value>Klimatizace</value>
+  </data>
+  <data name="Bodywork" xml:space="preserve">
+    <value>Plechařina</value>
+  </data>
+  <data name="Brakes" xml:space="preserve">
+    <value>Brzdy</value>
+  </data>
+  <data name="Chassis" xml:space="preserve">
+    <value>Karoserie</value>
+  </data>
+  <data name="Electrical" xml:space="preserve">
+    <value>Elektřina</value>
+  </data>
+  <data name="Engine" xml:space="preserve">
+    <value>Motor</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Ostatní</value>
+  </data>
+  <data name="Suspension" xml:space="preserve">
+    <value>Podvozek</value>
+  </data>
+  <data name="Transmission" xml:space="preserve">
+    <value>Převodovka</value>
+  </data>
 </root>

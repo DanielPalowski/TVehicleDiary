@@ -154,6 +154,15 @@
                             </a>
                         </div>
                     }
+                    else
+                    {
+                        <div class="hidden md:flex items-center ml-8 space-x-1">
+                            <a asp-controller="AboutUs" asp-action="AboutUs"
+                               class="px-4 py-2 rounded-lg text-sm font-medium text-foreground hover:text-primary hover:bg-secondary transition-colors">
+                                <i class="fas fa-info-circle mr-2"></i>@Localizer["AboutUs"]
+                            </a>
+                        </div>
+                    }
                 </div>
 
                 <!-- Right side - Controls -->
@@ -209,6 +218,7 @@
                     }
                     else
                     {
+
                         <!-- Guest buttons (Desktop) -->
                         <div class="hidden md:flex items-center space-x-3">
                             <a asp-area="Identity" asp-page="/Account/Login"

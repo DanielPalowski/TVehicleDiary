@@ -734,7 +734,7 @@
                     <span class="font-medium text-gray-900">@Localizer["VehicleUsageDashboardFooter"]</span>
                 </div>
                 <p class="text-sm text-gray-600">
-                    @Localizer["FooterCopyright"]
+                    © @DateTime.Now.Year VehicleDiary. All rights reserved.
                 </p>
             </div>
         </div>
@@ -747,17 +747,7 @@
         // Add animation to cards on load
         document.addEventListener('DOMContentLoaded', function() {
             // Animate card entrance
-            const cards = document.querySelectorAll('.usage-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-
-                setTimeout(() => {
-                    card.style.transition = 'all 0.5s ease-out';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, 100 + (index * 100));
-            });
+            
 
             // Add hover effects
             cards.forEach(card => {
@@ -800,18 +790,6 @@
                 backButton.style.color = '#0f172a';
             }
 
-            // Animate action buttons
-            const actionButtons = document.querySelectorAll('.action-btn');
-            actionButtons.forEach((button, index) => {
-                button.style.opacity = '0';
-                button.style.transform = 'translateY(10px)';
-
-                setTimeout(() => {
-                    button.style.transition = 'all 0.4s ease-out';
-                    button.style.opacity = '1';
-                    button.style.transform = 'translateY(0)';
-                }, 300 + (index * 100));
-            });
         });
 
         // Handle responsive behavior

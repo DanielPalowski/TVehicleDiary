@@ -68,22 +68,19 @@
                         <div asp-validation-summary="ModelOnly" class="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700"></div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Category -->
+                            <!-- Category  -->
                             <div class="space-y-2">
-                                <label asp-for="RepairVCategory" class="block text-sm font-medium text-gray-700">
+                                <label class="block text-sm font-medium text-gray-700">
                                     <div class="flex items-center">
-                                        <i data-lucide="list" class="w-4 h-4 mr-2 text-green-600"></i>
+                                        <i data-lucide="list" class="w-4 h-4 mr-2 text-orange-600"></i>
                                         @Localizer["CategoryLabel"]
                                         <span class="text-red-500 ml-1">@Localizer["RequiredField"]</span>
                                     </div>
                                 </label>
-                                <select asp-for="RepairVCategory" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500" id="categorySelect" required>
-                                    <option value="">@Localizer["SelectCategoryPlaceholder"]</option>
-                                    <option value="Vehicle Repairs">@Localizer["VehicleRepairsOption"]</option>
-                                    <!-- Additional categories from RESX can be added here if needed -->
-                                </select>
-                                <span asp-validation-for="RepairVCategory" class="text-red-500 text-sm"></span>
+                                <input type="text" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg bg-gray-50" value="Repairs" readonly>
+                                <input type="hidden" asp-for="RepairVCategory" value="Repairs" />
                             </div>
+
 
                             <!-- Type -->
                             <div class="space-y-2">
@@ -94,11 +91,21 @@
                                         <span class="text-red-500 ml-1">@Localizer["RequiredField"]</span>
                                     </div>
                                 </label>
-                                <select asp-for="RepairVType" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-gray-50" id="typeSelect" required disabled>
-                                    <option value="">@Localizer["SelectTypePlaceholder"]</option>
+                                <select asp-for="RepairVType" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 bg-gray-50" id="typeSelect" required>
+                                    <option value="Engine">@Localizer["Engine"]</option>
+                                    <option value="Transmission">@Localizer["Transmission"]</option>
+                                    <option value="Brakes">@Localizer["Brakes"]</option>
+                                    <option value="Suspension">@Localizer["Suspension"]</option>
+                                    <option value="Chassis">@Localizer["Chassis"]</option>
+                                    <option value="Electrical">@Localizer["Electrical"]</option>
+                                    <option value="Bodywork">@Localizer["Bodywork"]</option>
+                                    <option value="Air Conditioning">@Localizer["Air Conditioning"]</option>
+                                    <option value="Interior">@Localizer["Interior"]</option>
+                                    <option value="Other">@Localizer["Other"]</option>
                                 </select>
                                 <span asp-validation-for="RepairVType" class="text-red-500 text-sm"></span>
                             </div>
+
 
                             <!-- Service Name -->
                             <div class="space-y-2">
@@ -181,7 +188,7 @@
                             <!-- Price -->
                             <div class="space-y-2">
                                 <style>
-                                    /* Hide number input spinners */
+                                    
                                     input[type=number].no-spinner::-webkit-outer-spin-button,
                                     input[type=number].no-spinner::-webkit-inner-spin-button {
                                         -webkit-appearance: none;
@@ -277,7 +284,7 @@
         // Initialize Lucide icons
         lucide.createIcons();
 
-        // Data structure mapping categories to types (keep the English strings as keys)
+        // Data structure mapping categories to types 
         const categoryTypes = {
             "Vehicle Repairs": ["Engine", "Transmission", "Brakes", "Chassis", "Electrical", "Bodywork", "Air Conditioning"]
         };
@@ -288,38 +295,10 @@
         const repairForm = document.getElementById('repairForm');
         const submitButton = document.getElementById('submitButton');
 
-        // Category → Type
-        categorySelect.addEventListener('change', function () {
-            const selectedCategory = this.value;
+        
 
-            // Reset Type
-            typeSelect.innerHTML = '<option value="">@Localizer["SelectTypePlaceholder"]</option>';
-            typeSelect.disabled = true;
 
-            if (selectedCategory && categoryTypes[selectedCategory]) {
-                categoryTypes[selectedCategory].forEach(type => {
-                    const option = document.createElement('option');
-                    option.value = type;
-                    option.textContent = type; // Types remain in English; could be localized later if needed
-                    typeSelect.appendChild(option);
-                });
-
-                typeSelect.disabled = false;
-            }
-        });
-
-        // Form validation
-        repairForm.addEventListener('submit', function(e) {
-            if (!categorySelect.value || !typeSelect.value) {
-                e.preventDefault();
-                alert('@Localizer["PleaseSelectCategoryAndType"]');
-                return;
-            }
-
-            submitButton.innerHTML = '<span class="loading-spinner"></span> @Localizer["Processing"]';
-            submitButton.disabled = true;
-        });
-
+        // File val
         function validateFile(input) {
             const maxSize = 5 * 1024 * 1024; // 5 MB
             const fileSizeWarning = document.getElementById('fileSizeWarning');
@@ -370,28 +349,7 @@
             }
         });
 
-        // Loading spinner style
-        const style = document.createElement('style');
-        style.textContent = `
-            .loading-spinner {
-                display: inline-block;
-                width: 1rem;
-                height: 1rem;
-                border: 2px solid #ffffff;
-                border-radius: 50%;
-                border-top-color: transparent;
-                animation: spin 0.6s linear infinite;
-                margin-right: 0.5rem;
-            }
-            @@keyframes spin {
-                to { transform: rotate(360deg); }
-            }
-            input:required, select:required, textarea:required {
-                border-left: 4px solid #ef4444;
-                padding-left: calc(1rem - 4px);
-            }
-        `;
-        document.head.appendChild(style);
+       
     </script>
 </body>
 </html>

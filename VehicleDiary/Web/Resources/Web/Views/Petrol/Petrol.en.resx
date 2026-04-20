@@ -270,4 +270,7 @@
   <data name="currency" xml:space="preserve">
     <value>€</value>
   </data>
+  <data name="StatAvgConsumption" xml:space="preserve">
+    <value>Avg. Consumption</value>
+  </data>
 </root>
